@@ -1,0 +1,58 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next",
+    "format": "npx prettier --write . --ignore-path .gitignore",
+    "lint": "next lint --ignore-path .gitignore",
+    "lint:fix": "npm run format && npm run lint -- --fix",
+    "start": "next start",
+    "type-check": "tsc --noEmit"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "dependencies": {
+    "@google-cloud/recaptcha-enterprise": "^5.13.0",
+    "@headlessui/react": "^2.1.9",
+    "@portabletext/react": "3.0.11",
+    "@sanity/client": "6.12.3",
+    "@sanity/demo": "1.0.2",
+    "@sanity/image-url": "^1.1.0",
+    "@sanity/vision": "^4.9.0",
+    "@tailwindcss/typography": "0.5.10",
+    "@vercel/analytics": "^1.4.1",
+    "axios": "^1.7.9",
+    "caniuse-lite": "^1.0.30001667",
+    "gsap": "^3.12.5",
+    "next": "^14.2.14",
+    "next-sanity": "5.5.11",
+    "nodemailer": "^6.9.16",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-google-recaptcha": "^3.1.0",
+    "react-horizontal-scrolling-menu": "^8.2.0",
+    "react-icons": "^5.3.0",
+    "sanity": "^3.99.0",
+    "sanity-plugin-iframe-pane": "^4.0.0",
+    "styled-components": "6.1.8"
+  },
+  "devDependencies": {
+    "@types/react": "18.2.55",
+    "@types/react-google-recaptcha": "^2.1.9",
+    "autoprefixer": "^10.4.17",
+    "eslint": "8.56.0",
+    "eslint-config-next": "^14.2.14",
+    "eslint-plugin-simple-import-sort": "10.0.0",
+    "postcss": "^8.4.35",
+    "prettier": "3.2.5",
+    "prettier-plugin-packagejson": "2.4.10",
+    "prettier-plugin-tailwindcss": "0.5.11",
+    "tailwindcss": "^3.4.1",
+    "typescript": "5.3.3"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}
