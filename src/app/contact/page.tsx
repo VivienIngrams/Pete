@@ -12,7 +12,8 @@ export default function ContactPage() {
         <h1 className="text-2xl xl:text-3xl  w-full text-left font-cinzel py-4">
           {language === 'fr' ? 'Contact' : 'Contact'}
         </h1>
-        <ContactForm language={language} />
+        Contact form
+        {/* <ContactForm language={language} /> */}
       </div>
     </div>
   );
