@@ -20,10 +20,7 @@ const NavMenu = () => {
       en: 'Galleries',
       fr: 'Galeries',
     },
-    videos: {
-      en: 'Videos',
-      fr: 'Vidéos',
-    },
+  
     bio: {
       en: 'About',
       fr: 'Bio',
@@ -39,23 +36,21 @@ const NavMenu = () => {
   }
 
   return (
-    <nav className="absolute md:w-[80%] md:ml-[10%] z-50 text-black font-medium tracking-tight">
+    <nav className="absolute h-screen md:w-[20%] md:mx-8 md:my-24 z-50 text-black font-medium tracking-tight">
       <div
         className={`w-full flex items-start justify-start md:justify-center ${isHomePage ? 'hidden' : 'xl:text-lg tracking-wide'}`}
       >
-        <div className="flex items-center md:-ml-12">
+        <div className="flex items-center ">
           <div className="hidden md:block">
-            <div className="flex items-baseline">
-              <Link href="/posts" className="hover:text-gray-500 px-3">
+            <div className="flex flex-col items-baseline space-y-8">
+              <h1 className='my-6'>Peter Lippmann</h1>
+              <Link href="/posts" className="hover:text-gray-500 ">
                 {menuItems.posts[language] || menuItems.posts.en}
               </Link>
-              <Link href="/videos" className="hover:text-gray-500 px-3">
-                {menuItems.videos[language] || menuItems.videos.en}
-              </Link>
-              <Link href="/bio" className="hover:text-gray-500 px-3">
+                          <Link href="/bio" className="hover:text-gray-500 ">
                 {menuItems.bio[language] || menuItems.bio.en}
               </Link>
-              <Link href="/contact" className="hover:text-gray-500 px-3">
+              <Link href="/contact" className="hover:text-gray-500 ">
                 {menuItems.contact[language] || menuItems.contact.en}
               </Link>
             </div>
@@ -158,9 +153,7 @@ const NavMenu = () => {
           <Link href="/posts" className="block px-3 py-1">
             {menuItems.posts[language] || menuItems.posts.en}
           </Link>
-          <Link href="/videos" className="block px-3 py-1">
-            {menuItems.videos[language] || menuItems.videos.en}
-          </Link>
+      
           <Link href="/bio" className="block px-3 py-1">
             {menuItems.bio[language] || menuItems.bio.en}
           </Link>

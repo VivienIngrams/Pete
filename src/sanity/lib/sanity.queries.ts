@@ -163,34 +163,4 @@ export async function getBioPage(client: SanityClient, options = {}) {
   return bioPage
 }
 
-export type Video = {
-title: string
-videoId: string
-}
 
-// GROQ query to fetch videos
-const videosQuery = groq`
-  *[_type == "videoPage"][0] {
-    title,
-    "videos": videos[] {
-      title,
-      videoId
-    }
-  }
-`
-
-
-  // Function to fetch videos
-  export async function getVideos(
-    client: SanityClient,
-    options = {}
-  ): Promise<Video[]> {
-    try {
-      const result = await client.fetch(videosQuery, options)
-      return result.videos || []
-    } catch (error) {
-      console.error('Error fetching videos:', error)
-      throw error
-    }
-  }
-  

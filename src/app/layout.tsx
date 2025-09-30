@@ -5,8 +5,8 @@ import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Arsenal, Cinzel, Montserrat } from 'next/font/google'
+import NavMenu from './components/NavMenu'
 
-import Container from './components/Container'
 import { LanguageProvider } from './components/context/LanguageProvider'
 
 const arsenal = Arsenal({
@@ -45,10 +45,10 @@ export default function RootLayout({
     >
       <body className="h-full bg-white font-cinzel">
         <LanguageProvider>
-          <Container>
+        <NavMenu/>
             {children}
             <Analytics />
-          </Container>
+         
         </LanguageProvider>
       </body>
     </html>

@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import NavMenu from './NavMenu'
+
 import Socials from './Socials'
 import { useLanguage } from './context/LanguageProvider'
 
@@ -51,7 +51,7 @@ export default function Footer({
         </Link>
       </div>
 
-      <NavMenu />
+     
 
       {/* Social Icons */}
       <div className="z-50">
