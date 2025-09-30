@@ -77,7 +77,7 @@ const Bio = async () => {
       <div className="xl:h-[75vh] pt-12 xl:grid xl:grid-cols-2 bg-white text-gray-500 xl:mx-[10vw]">
         <div className="flex flex-col items-center justify-start xl:justify-center">
           <div className="relative flex flex-col items-center xl:justify-start h-[300px]  w-[200px] m-6">
-            {imageUrl && (
+            {/* {imageUrl && (
               <Image
                 src={imageUrl}
                 alt="Biography Portrait"
@@ -85,75 +85,10 @@ const Bio = async () => {
                 fill
                 sizes="30vw"
               />
-            )}
+            )} */}
           </div>
-          <div className=" flex flex-col justify-center  xl:text-center max-w-[800px] px-6 xl:px-16">
-            {/* Render Biography Text 1 using PortableText */}
-            <div>
-              {currentContent.biographyText.map((block, index) => (
-                <div key={index} className="mb-2 ">
-                  <PortableText value={[block]} />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="xl:h-[88vh] flex flex-col justify-center  text-left max-w-[800px] p-6 xl:p-12 ">
-          {/* Render Biography Text 2 using PortableText */}
-          <div>
-            {currentContent.biographyText2.map((block, index) => (
-              <div key={index} className="mb-2 ">
-                <PortableText value={[block]} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="xl:h-[15vh] flex justify-center items-end text-center">
-        <BsChevronDoubleDown className="text-2xl" />
-      </div>
-
-      {/* Content Sections */}
-      <div className="mt-12 2xl:mt-24 xl:col-span-2 text-left px-6 pb-16 xl:pb-24 xl:mx-auto xl:max-w-5xl">
-        {currentContent.artisticTraining?.length > 0 && (
-          <div>
-            <h2 className="text-xl xl:text-2xl font-bold mb-6">
-              {titles.artisticTraining}
-            </h2>
-            <ul>
-              {currentContent.artisticTraining.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {currentContent.organizer?.length > 0 && (
-          <div className="mt-8">
-            <h2 className="text-xl xl:text-2xl font-bold mb-6">
-              {titles.organizer}
-            </h2>
-            <ul>
-              {currentContent.organizer.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {currentContent.exhibitions?.length > 0 && (
-          <div className="mt-8">
-            <h2 className="text-xl xl:text-2xl font-bold mb-6">
-              {titles.exhibitions}
-            </h2>
-            <ul>
-              {currentContent.exhibitions.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        )}
+       
+       </div>
       </div>
     </div>
   )
