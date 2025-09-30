@@ -29,8 +29,8 @@ const cinzel = Cinzel({
 })
 
 export const metadata: Metadata = {
-  title: 'Joël Bardeau',
-  description: 'Artiste Auteur',
+  title: 'Peter Lippmann',
+  description: 'Photographer',
 }
 
 export default function RootLayout({
