@@ -1,11 +1,11 @@
 import { cookies } from 'next/headers'; // For reading cookies
 
 import ImageGallery from '~/app/components/ImageGallery';
-import MobileImageGallery from '~/app/components/MobileImageGallery';
 
 import { readToken } from '~/sanity/lib/sanity.api';
 import { getClient } from '~/sanity/lib/sanity.client';
 import {  getPosts, type Post } from '~/sanity/lib/sanity.queries';
+import NavMenu from '../components/NavMenu' 
 
 export default async function PostsPage() {
   const client = getClient({ token: readToken });
@@ -23,7 +23,7 @@ export default async function PostsPage() {
 
   return (
  <>
-      
+      <NavMenu/>
     <div className="h-full xl:min-h-[80vh] pb-20 font-cinzel font-bold bg-white max-w-full pt-40 xl:pt-16">
 
       {/* {sortedPosts.map((post) => (
