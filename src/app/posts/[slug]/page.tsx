@@ -29,7 +29,7 @@ export default async function PostPage({
   }
 
   // Fetch related posts from the same section
-  const posts: Post[] = await getPosts(client, post.section, language, {
+  const posts: Post[] = await getPosts(client, language, {
     next: { revalidate: 60 },
   });
 

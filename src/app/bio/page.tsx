@@ -1,12 +1,15 @@
-import { cookies } from 'next/headers'
-import Image from 'next/image'
-import { BsChevronDoubleDown } from 'react-icons/bs'
-import React from 'react'
-import { getClient } from '~/sanity/lib/sanity.client'
-import { readToken } from '~/sanity/lib/sanity.api'
-import { getBioPage } from '~/sanity/lib/sanity.queries'
 import { PortableText } from '@portabletext/react'
 import { PortableTextBlock } from '@portabletext/types'
+import { cookies } from 'next/headers'
+import Image from 'next/image'
+import React from 'react'
+import { BsChevronDoubleDown } from 'react-icons/bs'
+
+import { readToken } from '~/sanity/lib/sanity.api'
+import { getClient } from '~/sanity/lib/sanity.client'
+import { getBioPage } from '~/sanity/lib/sanity.queries'
+
+import NavMenu from '../components/NavMenu'
 
 interface BiographyContent {
   biographyText: PortableTextBlock[] // Ensure this is an array of PortableTextBlocks
@@ -72,12 +75,11 @@ const Bio = async () => {
   }
 
   return (
+    <>
+      <NavMenu />
     <div>
       {/* Header Section */}
-      <div className="xl:h-[75vh] pt-12 xl:grid xl:grid-cols-2 bg-white text-gray-500 xl:mx-[10vw]">
-        <div className="flex flex-col items-center justify-start xl:justify-center">
-          <div className="relative flex flex-col items-center xl:justify-start h-[300px]  w-[200px] m-6">
-            {/* {imageUrl && (
+        {/* {imageUrl && (
               <Image
                 src={imageUrl}
                 alt="Biography Portrait"
@@ -86,11 +88,9 @@ const Bio = async () => {
                 sizes="30vw"
               />
             )} */}
-          </div>
-       
-       </div>
-      </div>
+      
     </div>
+    </>
   )
 }
 

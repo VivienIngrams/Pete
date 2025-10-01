@@ -4,23 +4,14 @@ import './globals.css'
 
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
-import { Arsenal, Cinzel, Montserrat } from 'next/font/google'
+import {  Cinzel, Montserrat } from 'next/font/google'
 
 
 import { LanguageProvider } from './components/context/LanguageProvider'
 
-const arsenal = Arsenal({
-  variable: '--font-family-arsenal',
-  weight: ['400', '700'],
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
-})
-const montserrat = Montserrat({
-  variable: '--font-family-montserrat',
-  weight: ['200', '300', '400', '500', '600', '700'],
-  style: ['normal'],
-  subsets: ['latin'],
-})
+
+
+
 const cinzel = Cinzel({
   variable: '--font-family-cinzel',
   weight: ['800', '500', '400', '700', '900'],
@@ -41,7 +32,7 @@ export default function RootLayout({
   return (
     <html
       lang="en" // Default to 'en' initially; language will be dynamically set in client-side code
-      className={`${montserrat.variable} ${arsenal.variable} ${cinzel.variable}`}
+      className={` ${cinzel.variable}`}
     >
       <body className="h-full bg-white font-cinzel">
         <LanguageProvider>

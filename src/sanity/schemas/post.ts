@@ -2,7 +2,7 @@ import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'post',
-  title: 'Projets',
+  title: 'Projects',
   type: 'document',
   fields: [
     defineField({
@@ -28,45 +28,10 @@ export default defineType({
       },
     }),
     {
-      name: 'section',
-      title: 'Sur quelle page veux-tu rajouter ce projet?',
-      type: 'string',
+      name: 'mainImage',
+      type: 'image',
       options: {
-        list: [
-          { title: 'Page principale Galeries', value: 'gallery' },
-          { title: 'Collaborations', value: 'collaborations' },
-          { title: 'Projets actuels', value: 'projets-actuels' },
-      
-        ],
-        layout: 'radio', 
-      },
-      initialValue: 'gallery', 
-    },
-    {
-      name: 'mainImages',
-      type: 'array',
-      title: 'Images (2 à 5) pour représenter le projet (dans Galéries/Collaborations/Projets Actuels) ',
-      of: [
-        {
-          type: 'image',
-          options: {
-            hotspot: true,
-          },
-        },
-      ],
-    },
-    {
-      name: 'layout',
-      title: 'Format image pour page principale',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Carré', value: 'square' },
-          { title: 'Portrait', value: 'portrait' },
-          { title: 'Paysage', value: 'landscape' },
-          { title: 'Panorama', value: 'panorama' },
-        ],
-        layout: 'radio', // Radio button selection
+        hotspot: true,
       },
     },
     defineField({
@@ -92,13 +57,7 @@ export default defineType({
         },
       ],
     },
-    {
-      name: 'subtitles',
-      title: 'Sous-titres',
-      type: 'array',
-      of: [{ type: 'string' }], // Array of strings
-      description: 'Optional subtitles for images. Each subtitle corresponds to an image in the same order.',
-    },
+  
   ],
   preview: {
     select: {

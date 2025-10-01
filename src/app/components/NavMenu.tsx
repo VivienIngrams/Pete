@@ -17,8 +17,8 @@ const NavMenu = () => {
  
   const menuItems = {
     posts: {
-      en: 'Galleries',
-      fr: 'Galeries',
+      en: 'Photography',
+      fr: 'Photographie',
     },
   
     bio: {
@@ -36,7 +36,7 @@ const NavMenu = () => {
   }
 
   return (
-    <nav className="absolute h-screen md:w-[20%] md:mx-8 md:my-24 z-50 text-black font-medium tracking-tight">
+    <nav className="absolute h-screen md:w-[15%] md:mx-8 md:my-24 z-50 text-black font-medium tracking-tight">
       <div
         className={`w-full flex items-start justify-start md:justify-center ${isHomePage ? 'hidden' : 'xl:text-lg tracking-wide'}`}
       >

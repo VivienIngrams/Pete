@@ -6,8 +6,8 @@ import { sanityFetch } from './sanity.client'
 
 
 // GROQ query to fetch posts by section
-const postsBySectionQuery = (section: string) => groq`
-*[_type == "post" && section == $section ]  {
+const postsQuery = () => groq`
+*[_type == "post" ]  {
   _id,
   _createdAt,
   title,
@@ -15,21 +15,19 @@ const postsBySectionQuery = (section: string) => groq`
   slug,
   excerpt,
   excerpt_en,
-  subtitles,
-  mainImages,
+  mainImage,
   layout
 }`
 
 export async function getPosts(
   client: SanityClient,
-  section: 'gallery' | 'projets-actuels' | 'collaborations',
-  language: 'en' | 'fr' | string = 'fr',
+    language: 'en' | 'fr' | string = 'fr',
   options = {}
 ): Promise<Post[]> {
   try {
     const posts = await sanityFetch<Post[]>({
-      query: postsBySectionQuery(section),
-      qParams: { section, ...options },
+      query: postsQuery(),
+      qParams: { ...options },
     });
 
     const languagePosts = posts.map((post) => ({
@@ -52,11 +50,9 @@ export const postBySlugQuery = groq`
     title,
     title_en,
     slug,
-    section,
-    excerpt,
+       excerpt,
     excerpt_en,
-    subtitles,
-    images[] {
+        images[] {
       ...,
       "aspectRatio": asset->metadata.dimensions.aspectRatio
     }
@@ -103,14 +99,11 @@ export type Post = {
   _publishedAt: string
   slug: { current: string }
   _createdAt: string
-  mainImages: any[] 
+  mainImage: any 
   title: string
   title_en?: string
-  subtitles?: string[]
-  excerpt?: PortableTextBlock[]
+    excerpt?: PortableTextBlock[]
   excerpt_en?: PortableTextBlock[]
-  section?: 'gallery' | 'projets-actuels' | 'collaborations'
-  layout: 'portrait' | 'square' | 'landscape'
   images?: any[]
 }
 
