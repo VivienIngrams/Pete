@@ -10,7 +10,7 @@ module.exports = {
     extend: {
       
       fontFamily: {
-        cinzel: ['var(--font-family-cinzel)'],
+        cormorant: ['var(--font-family-cormorant)'],
         arsenal: ['var(--font-family-arsenal)'],
         montserrat: ['var(--font-family-montserrat)'],
       },

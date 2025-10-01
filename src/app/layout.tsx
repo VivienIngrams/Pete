@@ -4,7 +4,7 @@ import './globals.css'
 
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
-import {  Cinzel, Montserrat } from 'next/font/google'
+import {  Cormorant_Unicase } from 'next/font/google'
 
 
 import { LanguageProvider } from './components/context/LanguageProvider'
@@ -12,9 +12,9 @@ import { LanguageProvider } from './components/context/LanguageProvider'
 
 
 
-const cinzel = Cinzel({
-  variable: '--font-family-cinzel',
-  weight: ['800', '500', '400', '700', '900'],
+const cormorant = Cormorant_Unicase({
+  variable: '--font-family-cormorant',
+  weight: [ '400',],
   style: ['normal'],
   subsets: ['latin'],
 })
@@ -32,9 +32,9 @@ export default function RootLayout({
   return (
     <html
       lang="en" // Default to 'en' initially; language will be dynamically set in client-side code
-      className={` ${cinzel.variable}`}
+      className={` ${cormorant.variable}`}
     >
-      <body className="h-full bg-white font-cinzel">
+      <body className="h-full bg-white font-cormorant">
         <LanguageProvider>
        
             {children}

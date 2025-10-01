@@ -2,73 +2,22 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+
 
 import { urlForImage } from '~/sanity/lib/sanity.image'
 
 interface ImageGalleryProps {
   images: any[]
-  layout: string
+
   slug: string
   title: string
 }
 
-const ImageGallery = ({ images, layout, slug, title }: ImageGalleryProps) => {
-  const [dimensions, setDimensions] = useState<
-    { width: number; height: number; container: number }[]
-  >([])
-
-  const getHeightByLayout = (width: number, layout: string) => {
-    switch (layout) {
-      case 'portrait':
-        return width * (4 / 3) // 4:3 aspect ratio
-      case 'landscape':
-        return width * (9 / 12)
-      case 'panorama':
-        return width * (9 / 18) // 16:9 aspect ratio
-      case 'square':
-      default:
-        return width // 1:1 aspect ratio
-    }
-  }
-
-  useEffect(() => {
-    const calculateDimensions = () => {
-      const windowWidth = window.innerWidth
-      const numberOfImages = images.length
-      const containerWidth = windowWidth - 420 // Padding
-      const marginsWidth = (numberOfImages - 1) * 112 // Total margins between images
-
-      const imageWidth = (containerWidth - marginsWidth) / numberOfImages
-
-      const newDimensions = images.map(() => {
-        const width = imageWidth
-        const height = getHeightByLayout(width, layout)
-        return { width, height, container: containerWidth } // Subtract margins from container
-      })
-
-      setDimensions(newDimensions)
-    }
-
-    calculateDimensions()
-    window.addEventListener('resize', calculateDimensions)
-
-    return () => {
-      window.removeEventListener('resize', calculateDimensions)
-    }
-  }, [images, layout])
-
-  if (dimensions.length === 0) {
-    return null // or a loading spinner
-  }
-
+const ImageGallery = ({ images, slug, title }: ImageGalleryProps) => {
   return (
     <div className="mx-auto max-w-full">
       {/* Title Section with custom middle line */}
-      <div
-        className=" mt-24 mx-auto relative"
-        style={{ width: `${dimensions[0].container}px` }}
-      >
+      <div className=" mt-24 mx-auto relative">
         <Link href={`/posts/${slug}`}>
           <div className="relative text-center ">
             {/* White Line Spanning Full Width */}
@@ -85,13 +34,7 @@ const ImageGallery = ({ images, layout, slug, title }: ImageGalleryProps) => {
       <div className="flex justify-center space-x-28 mb-4 max-w-full">
         {images.map((image, index) => (
           <Link key={index} href={`/posts/${slug}`}>
-            <div
-             
-              style={{ position: "relative",
-                width: `${dimensions[index].width}px`,
-                height: `${dimensions[index].height}px`,
-              }}
-            >
+            <div>
               <Image
                 src={urlForImage(image).url() as string}
                 alt={image.alt || title}
@@ -104,11 +47,8 @@ const ImageGallery = ({ images, layout, slug, title }: ImageGalleryProps) => {
           </Link>
         ))}
       </div>
-
-      
     </div>
   )
 }
 
 export default ImageGallery
-

@@ -14,13 +14,12 @@ const NavMenu = () => {
 
   const { language } = useLanguage()
 
- 
   const menuItems = {
     posts: {
       en: 'Photography',
       fr: 'Photographie',
     },
-  
+
     bio: {
       en: 'About',
       fr: 'Bio',
@@ -37,132 +36,96 @@ const NavMenu = () => {
 
   return (
     <nav className="absolute h-screen md:w-[15%] md:mx-8 md:my-24 z-50 text-black font-medium tracking-tight">
+      {/* Desktop menu */}
       <div
         className={`w-full flex items-start justify-start md:justify-center ${isHomePage ? 'hidden' : 'xl:text-lg tracking-wide'}`}
       >
         <div className="flex items-center ">
           <div className="hidden md:block">
             <div className="flex flex-col items-baseline space-y-8">
-              <h1 className='my-6'>Peter Lippmann</h1>
-              <Link href="/posts" className="hover:text-gray-500 ">
+              <Link href="/">
+                <h1 className="my-6">Peter Lippmann</h1>
+              </Link>
+              <Link href="/posts" className="hover:text-gray-500">
                 {menuItems.posts[language] || menuItems.posts.en}
               </Link>
-                          <Link href="/bio" className="hover:text-gray-500 ">
+              <Link href="/bio" className="hover:text-gray-500">
                 {menuItems.bio[language] || menuItems.bio.en}
               </Link>
-              <Link href="/contact" className="hover:text-gray-500 ">
+              <Link href="/contact" className="hover:text-gray-500">
                 {menuItems.contact[language] || menuItems.contact.en}
               </Link>
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="-mr-2 flex md:hidden">
+      {/* Mobile header (fixed) */}
+      <div className="md:hidden fixed top-0 left-0 w-full bg-white  z-50">
+        <div className="flex items-center justify-between p-4">
+          {/* Site title in mobile header */}
+          <Link href="/">
+            <h1 className="text-lg font-semibold">Peter Lippmann</h1>
+          </Link>
+          {/* Hamburger button */}
           <button
             onClick={toggleMenu}
             type="button"
-            className="inline-flex"
+            className="inline-flex items-center justify-center p-2"
             aria-controls="mobile-menu"
-            aria-expanded="false"
+            aria-expanded={isOpen}
           >
             <span className="sr-only">Open main menu</span>
             {isOpen ? (
+              // X icon
               <svg
-                className="block h-6 w-6 mt-24 -mb-24 -ml-4"
+                className="h-6 w-6"
                 viewBox="0 0 24 24"
-                fill="white"
-                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
-                <path
-                  d="M19 5L4.99998 19M5.00001 5L19 19"
-                  stroke="#9ca3af"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></path>
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             ) : (
+              // Hamburger icon
               <svg
-                className="h-16 w-16 -m-4"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-                width="184px"
-                height="184px"
-                viewBox="0 0 100.00 100.00"
-                enableBackground="new 0 0 100 100"
-                xmlSpace="preserve"
-                fill="#9ca3af"
-                stroke="#9ca3af"
+                className="h-6 w-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
-                <path
-                  fill="white"
-                  stroke="#9ca3af"
-                  strokeWidth="2.1"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M33.791,33.604c4.528-4.528,10.462-6.791,16.396-6.791c5.934,0,11.868,2.264,16.396,6.791c4.527,4.527,6.79,10.459,6.791,16.392 c0.001,5.936-2.263,11.872-6.791,16.4c-9.055,9.055-23.737,9.055-32.792,0S24.736,42.659,33.791,33.604z"
-                ></path>
-                <line
-                  fill="white"
-                  stroke="#9ca3af"
-                  strokeWidth="2.1"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  x1="58.187"
-                  y1="50"
-                  x2="42.187"
-                  y2="50"
-                ></line>
-                <line
-                  fill="white"
-                  stroke="#9ca3af"
-                  strokeWidth="2.1"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  x1="58.187"
-                  y1="42"
-                  x2="42.187"
-                  y2="42"
-                ></line>
-                <line
-                  fill="white"
-                  stroke="#9ca3af"
-                  strokeWidth="2.1"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  x1="58.187"
-                  y1="58"
-                  x2="42.187"
-                  y2="58"
-                ></line>
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
               </svg>
             )}
           </button>
         </div>
       </div>
 
+      {/* Mobile dropdown menu */}
       <div
-        className={`${
-          isOpen ? 'block bg-gradient-to-b from-transparent via-white to-white w-screen pt-24 -ml-4' : 'hidden'
-        } md:hidden`}
+        className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-white mt-16 w-screen`} // push down below header
         id="mobile-menu"
         onClick={toggleMenu}
       >
-        <div className="text-black px-2 pt-2 pb-3 space-y-1 text-md sm:px-3">
-          <Link href="/posts" className="block px-3 py-1">
+        <div className="px-4 py-3 space-y-2 text-black text-md">
+          <Link href="/posts" className="block px-2 py-1">
             {menuItems.posts[language] || menuItems.posts.en}
           </Link>
-      
-          <Link href="/bio" className="block px-3 py-1">
+          <Link href="/bio" className="block px-2 py-1">
             {menuItems.bio[language] || menuItems.bio.en}
           </Link>
-          <Link href="/contact" className="block px-3 py-1">
+          <Link href="/contact" className="block px-2 py-1">
             {menuItems.contact[language] || menuItems.contact.en}
           </Link>
-          <div className="px-3">
-            <LanguageSwitcher />
-          </div>
         </div>
       </div>
     </nav>

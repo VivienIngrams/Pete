@@ -17,12 +17,11 @@ export default async function PostsPage() {
   const posts: Post[] = await getPosts(client, language, {
     next: { revalidate: 600 },
   })
-  console.log('posts', posts)
 
   return (
     <>
       <NavMenu />
-      <div className="h-full md:ml-[20%] md:m-[3%] xl:min-h-[80vh] pb-20 font-cinzel font-bold bg-white max-w-full ">
+      <div className="h-full md:ml-[20%] pt-16 md:pt-0 md:m-[3%] xl:min-h-[80vh] pb-20 font-cormorant font-bold bg-white max-w-full ">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-0 border border-white">
           {posts.map((post) => (
             <div
@@ -40,7 +39,7 @@ export default async function PostsPage() {
               )}
               <Link
                 href={`/project/${post.slug.current}`}
-                className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-black text-xl text-center"
+                className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-black text-xl md:text-2xl text-center"
               >
                 {post.title}
               </Link>

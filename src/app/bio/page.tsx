@@ -77,7 +77,7 @@ const Bio = async () => {
   return (
     <>
       <NavMenu />
-    <div>
+      <div className="h-full md:ml-[20%] md:m-[3%] xl:min-h-[80vh] pb-20 font-cormorant font-bold bg-white max-w-full ">
       {/* Header Section */}
         {/* {imageUrl && (
               <Image
