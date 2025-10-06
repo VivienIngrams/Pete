@@ -1,0 +1,89 @@
+'use client'
+
+import Image from 'next/image'
+import { ChevronLeft, ChevronRight, X } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import type { Post } from '~/sanity/lib/sanity.queries'
+import { urlForImage } from '~/sanity/lib/sanity.image'
+
+type Props = {
+  post: Post
+  language: string
+  currentIndex: number
+  setCurrentIndex: React.Dispatch<React.SetStateAction<number>>
+}
+
+export default function DesktopSlideshow({
+  post,
+  language,
+  currentIndex,
+  setCurrentIndex,
+}: Props) {
+  const router = useRouter()
+  const current = post.images?.[currentIndex]
+  if (!current) return <p>No images found.</p>
+
+  const currentTitle =
+    language === 'en' ? current.title_en || current.title_fr : current.title_fr
+  const currentExcerpt =
+    language === 'en'
+      ? current.excerpt_en || current.excerpt_fr
+      : current.excerpt_fr
+
+  const handlePrev = () =>
+    setCurrentIndex((prev) => (prev === 0 ? post.images!.length - 1 : prev - 1))
+  const handleNext = () =>
+    setCurrentIndex((prev) =>
+      prev === post.images.length - 1 ? 0 : prev + 1
+    )
+  const handleClose = () => {
+    if (document.referrer.includes('/posts')) {
+      router.back()
+    } else {
+      router.push(`/posts#${post.slug.current}`)
+    }
+  }
+
+  return (
+    <div className="relative w-full h-screen bg-[#edece0] flex items-center py-4 justify-center">
+      {current.image && (
+        <Image
+          src={urlForImage(current.image).url() || ''}
+          alt={currentTitle || post.title}
+          width={1600}
+          height={1200}
+          className="w-auto h-full object-contain"
+          priority
+        />
+      )}
+      <button
+        onClick={handleClose}
+        className="absolute font-instrument top-1 right-2 z-50 hover:font-bold p-3 rounded-full"
+      >
+        close
+      </button>
+
+      {currentIndex > 0 && (
+        <button
+          onClick={handlePrev}
+          className="absolute left-0 top-1/2 -translate-y-1/2 hover:bg-black/10 p-2 rounded-full z-50"
+        >
+          <ChevronLeft className="w-12 h-12" />
+        </button>
+      )}
+      {currentIndex < post.images.length - 1 && (
+        <button
+          onClick={handleNext}
+          className="absolute right-0 top-1/2 -translate-y-1/2 hover:bg-black/10 p-2 rounded-full z-50"
+        >
+          <ChevronRight className="w-12 h-12" />
+        </button>
+      )}
+
+      <div className="absolute bottom-6 right-6 text-right bg-[#edece0]/50 max-w-sm">
+        {currentTitle && <h1 className="text-2xl md:text-3xl font-bold">{currentTitle}</h1>}
+        {currentExcerpt && <p className="mt-2 text-xs font-instrument">{currentExcerpt}</p>}
+      </div>
+    </div>
+  )
+}
