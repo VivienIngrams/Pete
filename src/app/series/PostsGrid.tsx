@@ -97,3 +97,4 @@ export default function PostsGrid({ posts, language = 'fr' }: Props) {
     </div>
   )
 }
+
