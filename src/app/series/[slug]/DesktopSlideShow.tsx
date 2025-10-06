@@ -37,10 +37,10 @@ export default function DesktopSlideshow({
       prev === post.images.length - 1 ? 0 : prev + 1
     )
   const handleClose = () => {
-    if (document.referrer.includes('/posts')) {
+    if (document.referrer.includes('/series')) {
       router.back()
     } else {
-      router.push(`/posts#${post.slug.current}`)
+      router.push(`/series#${post.slug.current}`)
     }
   }
 
@@ -80,7 +80,7 @@ export default function DesktopSlideshow({
         </button>
       )}
 
-      <div className="absolute bottom-6 right-6 text-right bg-[#edece0]/50 max-w-sm">
+      <div className="absolute bottom-6 right-6 text-right max-w-sm">
         {currentTitle && <h1 className="text-2xl md:text-3xl font-bold">{currentTitle}</h1>}
         {currentExcerpt && <p className="mt-2 text-xs font-instrument">{currentExcerpt}</p>}
       </div>

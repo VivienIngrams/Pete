@@ -40,10 +40,10 @@ const localizedContentSchema = {
 
 export default defineType({
   name: 'bioContent',
-  title: 'Biographie',
+  title: 'About Page',
   type: 'document',
   fields: [
-    { name: 'title', title: 'Titre', type: 'string' },
+    { name: 'title', title: 'Title', type: 'string' },
     {
       name: 'image',
       title: 'Image',

@@ -18,7 +18,7 @@ const ImageGallery = ({ images, slug, title }: ImageGalleryProps) => {
     <div className="mx-auto max-w-full">
       {/* Title Section with custom middle line */}
       <div className=" mt-24 mx-auto relative">
-        <Link href={`/posts/${slug}`}>
+        <Link href={`/series/${slug}`}>
           <div className="relative text-center ">
             {/* White Line Spanning Full Width */}
             <span className="absolute left-0 right-0 bottom-1/2 transform translate-y-2px bg-gray-400  h-[1px] z-5"></span>
@@ -33,7 +33,7 @@ const ImageGallery = ({ images, slug, title }: ImageGalleryProps) => {
       {/* Image Gallery */}
       <div className="flex justify-center space-x-28 mb-4 max-w-full">
         {images.map((image, index) => (
-          <Link key={index} href={`/posts/${slug}`}>
+          <Link key={index} href={`/series/${slug}`}>
             <div>
               <Image
                 src={urlForImage(image).url() as string}

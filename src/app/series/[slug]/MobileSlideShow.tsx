@@ -52,10 +52,10 @@ export default function MobileSlideshow({
     setCurrentIndex((prev) => (prev === post.images.length - 1 ? 0 : prev + 1))
 
   const handleClose = () => {
-    if (document.referrer.includes('/posts')) {
+    if (document.referrer.includes('/series')) {
       router.back()
     } else {
-      router.push(`/posts#${post.slug.current}`)
+      router.push(`/series#${post.slug.current}`)
     }
   }
 

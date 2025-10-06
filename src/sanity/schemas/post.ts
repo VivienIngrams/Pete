@@ -2,7 +2,7 @@ import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'post',
-  title: 'Projects',
+  title: 'Series',
   type: 'document',
   fields: [
     defineField({
@@ -19,7 +19,7 @@ export default defineType({
     }),
     defineField({
       name: 'slug',
-      title: 'Cliquez sur le bouton Generate',
+      title: 'Click on "Generate"',
       type: 'slug',
       validation: (Rule) => Rule.required(),
       options: {
@@ -47,7 +47,7 @@ export default defineType({
     {
       name: 'images',
       type: 'array',
-      title: 'Toutes les images du projet',
+      title: 'All photos from the series',
       of: [
         {
           type: 'object',

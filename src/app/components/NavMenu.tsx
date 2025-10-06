@@ -46,7 +46,7 @@ const NavMenu = () => {
               <Link href="/">
                 <h1 className="my-6">Peter Lippmann</h1>
               </Link>
-              <Link href="/posts" className="hover:text-gray-500">
+              <Link href="/series" className="hover:text-gray-500">
                 {menuItems.posts[language] || menuItems.posts.en}
               </Link>
               <Link href="/bio" className="hover:text-gray-500">
@@ -117,7 +117,7 @@ const NavMenu = () => {
         onClick={toggleMenu}
       >
         <div className="px-4 py-3 space-y-2 text-black text-md">
-          <Link href="/posts" className="block px-2 py-1">
+          <Link href="/series" className="block px-2 py-1">
             {menuItems.posts[language] || menuItems.posts.en}
           </Link>
           <Link href="/bio" className="block px-2 py-1">

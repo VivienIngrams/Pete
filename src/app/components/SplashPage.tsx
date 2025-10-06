@@ -27,7 +27,7 @@ export default function SplashPage({ mainImage }: SplashPageProps) {
     }, 3800)
 
     // Navigate after fade-out completes
-    const navigate = setTimeout(() => router.push('/posts'), 4800)
+    const navigate = setTimeout(() => router.push('/series'), 4800)
 
     return () => {
       clearTimeout(bgFadeIn)
@@ -38,7 +38,7 @@ export default function SplashPage({ mainImage }: SplashPageProps) {
   }, [router])
 
   const handleClick = () => {
-    router.push('/posts')
+    router.push('/series')
   }
 
   return (
@@ -61,13 +61,16 @@ export default function SplashPage({ mainImage }: SplashPageProps) {
         />
       </div>
 
+       {/* White semi-transparent overlay */}
+       <div className="absolute inset-0 bg-[#edece0]/15" />
+
+
       {/* Title */}
       <h1
-        className={`absolute text-gray-300 tracking-tight text-2xl xl:text-7xl transition-opacity duration-[1500ms] ${
+        className={`absolute text-black tracking-tight text-2xl xl:text-7xl top-[5vh] left-[50vw] -translate-x-1/2 transition-opacity duration-[1500ms] ${
           titleVisible ? 'opacity-100' : 'opacity-0'
         }`}
-        style={{ bottom: '3%', left: '50%', transform: 'translateX(-50%)' }}
-      >
+              >
         Peter Lippmann
       </h1>
     </div>

@@ -48,7 +48,7 @@ export default function PostsGrid({ posts }: Props) {
                 md:group-hover:opacity-100 md:pointer-events-auto`}
             >
               <Link
-                href={`/posts/${post.slug.current}`}
+                href={`/series/${post.slug.current}`}
                 className="text-black text-xl md:text-2xl font-bold underline-offset-2 underline transition-transform duration-200
                   md:hover:scale-105"
                 onClick={(e) => e.stopPropagation()} // prevent toggling overlay on title click
