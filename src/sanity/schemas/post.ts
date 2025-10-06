@@ -50,13 +50,48 @@ export default defineType({
       title: 'Toutes les images du projet',
       of: [
         {
-          type: 'image',
-          options: {
-            hotspot: true,
+          type: 'object',
+          fields: [
+            {
+              name: 'image',
+              type: 'image',
+              title: 'Image',
+              options: { hotspot: true },
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'title_fr',
+              type: 'string',
+              title: 'Titre (Français)',
+            },
+            {
+              name: 'title_en',
+              type: 'string',
+              title: 'Title (English)',
+            },
+            {
+              name: 'excerpt_fr',
+              type: 'text',
+              title: 'Texte (Français)',
+              rows: 3,
+            },
+            {
+              name: 'excerpt_en',
+              type: 'text',
+              title: 'Text (English)',
+              rows: 3,
+            },
+          ],
+          preview: {
+            select: {
+              title: 'title_fr',
+              media: 'image',
+            },
           },
         },
       ],
-    },
+    }
+    
   
   ],
   preview: {

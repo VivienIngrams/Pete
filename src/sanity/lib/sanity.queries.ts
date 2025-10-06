@@ -92,19 +92,25 @@ export async function getPost(
 export const postSlugsQuery = groq`
 *[_type == "post" && defined(slug.current)][].slug.current
 `
-
 export type Post = {
   _type: 'post'
   _id: string
   _publishedAt: string
   slug: { current: string }
   _createdAt: string
-  mainImage: any 
+  mainImage: any
   title: string
   title_en?: string
-    excerpt?: PortableTextBlock[]
+  excerpt?: PortableTextBlock[]
   excerpt_en?: PortableTextBlock[]
-  images?: any[]
+  images?: {
+    _key: string
+    image: any
+    title_fr?: string
+    title_en?: string
+    excerpt_fr?: string
+    excerpt_en?: string
+  }[]
 }
 
 // Query to fetch the home page data
