@@ -35,16 +35,16 @@ const NavMenu = () => {
   }
 
   return (
-    <nav className="fixed h-screen md:w-[18%] md:mx-8 md:my-24 z-50  font-medium tracking-tight">
+    <nav className="fixed h-screen md:w-[18%] md:ml-8 md:my-20 z-50  font-medium tracking-tight">
       {/* Desktop menu */}
       <div
-        className={`w-full flex items-start justify-start  ${isHomePage ? 'hidden' : 'xl:text-lg tracking-wide'}`}
+        className={`w-full flex items-start justify-start  ${isHomePage ? 'hidden' : '2xl:text-lg'}`}
       >
         <div className="flex items-center ">
           <div className="hidden md:block">
-            <div className="flex flex-col items-baseline space-y-8">
+            <div className="flex flex-col items-baseline space-y-6">
               <Link href="/">
-                <h1 className="my-6">Peter Lippmann</h1>
+                <h1 className="font-bold my-4">Peter Lippmann</h1>
               </Link>
               <Link href="/series" className="hover:text-gray-500">
                 {menuItems.posts[language] || menuItems.posts.en}
