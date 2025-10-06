@@ -16,8 +16,8 @@ const NavMenu = () => {
 
   const menuItems = {
     posts: {
-      en: 'Photography',
-      fr: 'Photographie',
+      en: 'Photography Series',
+      fr: 'Séries Photographies',
     },
 
     bio: {

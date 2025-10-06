@@ -78,7 +78,7 @@ export default function MobileSlideshow({
 
         <button
           onClick={handleClose}
-          className="absolute -top-10 left-2  text-xs font-instrument z-50 hover:bg-[#edece0]/60 p-3 rounded-full"
+          className="absolute -top-10 left-2  text-xs font-inter z-50 hover:bg-[#edece0]/60 p-3 rounded-full"
         >
           close
         </button>
@@ -114,7 +114,7 @@ export default function MobileSlideshow({
           <h1 className="text-2xl md:text-3xl font-bold">{currentTitle}</h1>
         )}
         {currentExcerpt && (
-          <p className="mt-2 text-xs font-instrument">{currentExcerpt}</p>
+          <p className="mt-2 text-xs font-inter">{currentExcerpt}</p>
         )}
       </div>
     </div>

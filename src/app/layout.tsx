@@ -4,7 +4,7 @@ import './globals.css'
 
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
-import {  Cormorant_Unicase, Instrument_Sans } from 'next/font/google'
+import {  Cormorant_Unicase, Inter } from 'next/font/google'
 
 import { LanguageProvider } from './components/context/LanguageProvider'
 
@@ -18,8 +18,8 @@ const cormorant = Cormorant_Unicase({
   subsets: ['latin'],
 })
 
-const instrument = Instrument_Sans({
-  variable: '--font-family-instrument',
+const inter = Inter({
+  variable: '--font-family-inter',
   weight: [ '400',],
   style: ['normal'],
   subsets: ['latin'],
@@ -38,7 +38,7 @@ export default function RootLayout({
   return (
     <html
       lang="en" // Default to 'en' initially; language will be dynamically set in client-side code
-      className={` ${cormorant.variable} ${instrument.variable}`}
+      className={` ${cormorant.variable} ${inter.variable}`}
     >
       <body className="h-full bg-[#edece0] font-cormorant">
         <LanguageProvider>

@@ -58,7 +58,7 @@ export default function DesktopSlideshow({
       )}
       <button
         onClick={handleClose}
-        className="absolute font-instrument top-1 right-2 z-50 hover:font-bold p-3 rounded-full"
+        className="absolute font-inter top-1 right-2 z-50 hover:font-bold p-3 rounded-full"
       >
         close
       </button>
@@ -66,7 +66,7 @@ export default function DesktopSlideshow({
       {currentIndex > 0 && (
         <button
           onClick={handlePrev}
-          className="absolute left-0 top-1/2 -translate-y-1/2 hover:bg-black/10 p-2 rounded-full z-50"
+          className="absolute left-0 top-1/2 -translate-y-1/2 transition-transform duration-200 md:hover:scale-105  p-2 rounded-full z-50"
         >
           <ChevronLeft className="w-12 h-12" />
         </button>
@@ -74,7 +74,7 @@ export default function DesktopSlideshow({
       {currentIndex < post.images.length - 1 && (
         <button
           onClick={handleNext}
-          className="absolute right-0 top-1/2 -translate-y-1/2 hover:bg-black/10 p-2 rounded-full z-50"
+          className="absolute right-0 top-1/2 -translate-y-1/2 transition-transform duration-200 md:hover:scale-105  p-2 rounded-full z-50"
         >
           <ChevronRight className="w-12 h-12" />
         </button>
@@ -82,7 +82,7 @@ export default function DesktopSlideshow({
 
       <div className="absolute bottom-6 right-6 text-right max-w-sm">
         {currentTitle && <h1 className="text-2xl md:text-3xl font-bold">{currentTitle}</h1>}
-        {currentExcerpt && <p className="mt-2 text-xs font-instrument">{currentExcerpt}</p>}
+        {currentExcerpt && <p className="mt-2 text-base font-inter">{currentExcerpt}</p>}
       </div>
     </div>
   )
