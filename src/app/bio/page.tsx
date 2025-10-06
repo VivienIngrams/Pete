@@ -78,17 +78,7 @@ const Bio = async () => {
     <>
       <NavMenu />
       <div className="h-full md:ml-[20%] md:m-[3%] xl:min-h-[80vh] pb-20 font-cormorant font-bold bg-[#edece0] max-w-full ">
-      {/* Header Section */}
-        {/* {imageUrl && (
-              <Image
-                src={imageUrl}
-                alt="Biography Portrait"
-                className="object-contain"
-                fill
-                sizes="30vw"
-              />
-            )} */}
-      
+    About page
     </div>
     </>
   )

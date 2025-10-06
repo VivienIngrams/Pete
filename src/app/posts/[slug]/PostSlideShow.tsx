@@ -71,7 +71,7 @@ export default function PostSlideshow({
       </div>
 
       {/* Overlay */}
-      <div className="absolute bottom-6 left-6 bg-[#edece0]/50 p-4 rounded-xl max-w-lg">
+      <div className="absolute bottom-6 right-6 text-right bg-[#edece0]/50 p-4 rounded-xl max-w-lg">
         {currentTitle && <h1 className="text-3xl font-bold">{currentTitle}</h1>}
         {currentExcerpt && (
           <p className="mt-2 text-base font-instrument">{currentExcerpt}</p>
@@ -82,7 +82,7 @@ export default function PostSlideshow({
       {currentIndex > 0 && (
         <button
           onClick={handlePrev}
-          className="absolute left-4 top-1/2 -translate-y-1/2 hover:bg-black/10 p-3 rounded-full"
+          className="z-50 absolute left-4 top-1/2 -translate-y-1/2 hover:bg-black/10 p-3 rounded-full"
         >
           <ChevronLeft className="w-8 h-8" />
         </button>
