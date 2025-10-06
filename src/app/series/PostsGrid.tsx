@@ -70,8 +70,8 @@ export default function PostsGrid({ posts, language = 'fr' }: Props) {
               </div>
 
               {/* Desktop bottom-left overlay with title + excerpt */}
-              <div className="hidden md:flex fixed inset-0 z-20 pointer-events-none">
-                <div className="absolute bottom-4 left-4 flex flex-col items-start">
+              <div className="hidden md:flex fixed inset-0 z-20 pointer-events-none ">
+                <div className="absolute bottom-4 left-4 flex flex-col items-start ">
                   <Link
                     href={`/series/${post.slug.current}`}
                     className="text-black text-2xl font-bold underline-offset-2 underline transition-transform duration-200 hover:scale-105 pointer-events-auto mb-1"
@@ -80,7 +80,7 @@ export default function PostsGrid({ posts, language = 'fr' }: Props) {
                     {post.title}
                   </Link>
                   {excerpt && (
-                    <div className="max-w-xs text-xs font-inter text-black">
+                    <div className="max-w-[19vw] text-xs font-inter text-black">
                       <PortableText value={excerpt} />
                     </div>
                   )}

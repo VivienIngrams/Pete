@@ -4,11 +4,11 @@
 
 
 html {
-  font-size: 100%; /* ensures 1rem = 16px consistently */
+  font-size: 14px; /* ensures 1rem = 16px consistently */
 }
 
 body {
-  font-size: 1rem;
+ 
   -webkit-font-smoothing: auto;
   margin: 0;
 
