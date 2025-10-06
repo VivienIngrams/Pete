@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, X } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import type { Post } from '~/sanity/lib/sanity.queries'
 import { urlForImage } from '~/sanity/lib/sanity.image'
 
@@ -14,10 +15,9 @@ export default function PostSlideshow({
   language: string
 }) {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const router = useRouter()
 
-  if (!post.images || post.images.length === 0) {
-    return <p>No images found.</p>
-  }
+  if (!post.images || post.images.length === 0) return <p>No images found.</p>
 
   const handlePrev = () =>
     setCurrentIndex((prev) => (prev === 0 ? post.images!.length - 1 : prev - 1))
@@ -26,6 +26,14 @@ export default function PostSlideshow({
     setCurrentIndex((prev) =>
       prev === post.images!.length - 1 ? 0 : prev + 1
     )
+
+  const handleClose = () => {
+    if (document.referrer.includes('/posts')) {
+      router.back()
+    } else {
+      router.push(`/posts#${post.slug.current}`)
+    }
+  }
 
   const current = post.images[currentIndex]
   const currentTitle =
@@ -37,6 +45,15 @@ export default function PostSlideshow({
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-black text-white">
+      {/* Close Button */}
+      <button
+        onClick={handleClose}
+        aria-label="Close"
+        className="absolute top-4 right-4 z-50 bg-black/40 hover:bg-black/60 p-3 rounded-full"
+      >
+        <X className="w-6 h-6" />
+      </button>
+
       {/* Image */}
       <div className="w-full h-full flex items-center justify-center">
         {current.image ? (
