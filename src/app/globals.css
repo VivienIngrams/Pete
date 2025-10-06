@@ -4,7 +4,7 @@
 
 
 html {
-  font-size: 14px; /* ensures 1rem = 16px consistently */
+  font-size: 14px; 
 }
 
 body {
@@ -30,21 +30,13 @@ h1 {
   }
 }
 
-p {
-  font-size: 15px; /* Default size for small screens */
-  font-weight: 200;
+/* p {
+  font-size: 14px; /* Default size for small screens */
+  /* font-weight: 200;
   line-height: 18px;
 
-  @screen lg {
-    font-size: 16px; /* Large screens */
-    line-height: 21px;
-  }
 
-  @screen 2xl {
-    font-size: 17px;
-    line-height: 22px;
-  }
-}
+} */ */
  h2 {
   font-size: larger;
  }
