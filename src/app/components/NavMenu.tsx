@@ -35,10 +35,10 @@ const NavMenu = () => {
   }
 
   return (
-    <nav className="absolute h-screen md:w-[15%] md:mx-8 md:my-24 z-50 text-black font-medium tracking-tight">
+    <nav className="absolute h-screen md:w-[18%] md:mx-8 md:my-24 z-50 text-black font-medium tracking-tight">
       {/* Desktop menu */}
       <div
-        className={`w-full flex items-start justify-start md:justify-center ${isHomePage ? 'hidden' : 'xl:text-lg tracking-wide'}`}
+        className={`w-full flex items-start justify-start  ${isHomePage ? 'hidden' : 'xl:text-lg tracking-wide'}`}
       >
         <div className="flex items-center ">
           <div className="hidden md:block">

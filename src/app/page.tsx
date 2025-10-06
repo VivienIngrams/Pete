@@ -14,7 +14,7 @@ export default async function HomePage() {
       cache: 'no-store',
     },
   })
-console.log('homePageData', homePageData)
+
   return (
     <>
       {/* Entire Page Clickable */}
@@ -32,7 +32,7 @@ console.log('homePageData', homePageData)
             alt="Home Page Background"
           />
           {/* Title and Subtitle */}
-          <div className="fixed xl:min-w-full left-1/2 -translate-x-1/2 text-white  bottom-[42%] xl:bottom-[83%]  text-center">
+          <div className="fixed xl:min-w-full left-1/2 -translate-x-1/2 text-black  bottom-[42%] xl:bottom-[83%]  text-center">
             <h1 className="font-medium text-[50px] xl:text-8xl  tracking-tight">
               Peter Lippmann
             </h1>
