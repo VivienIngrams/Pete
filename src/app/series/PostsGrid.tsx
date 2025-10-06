@@ -62,6 +62,11 @@ export default function PostsGrid({ posts, language = 'fr' }: Props) {
                 >
                   {post.title}
                 </Link>
+                {excerpt && (
+                    <div className="md:hidden max-w-xs text-xs font-instrument text-black">
+                      <PortableText value={excerpt} />
+                    </div>
+                  )}
               </div>
 
               {/* Desktop bottom-left overlay with title + excerpt */}
@@ -75,7 +80,7 @@ export default function PostsGrid({ posts, language = 'fr' }: Props) {
                     {post.title}
                   </Link>
                   {excerpt && (
-                    <div className="max-w-xs text-sm font-instrument text-black">
+                    <div className="max-w-xs text-xs font-instrument text-black">
                       <PortableText value={excerpt} />
                     </div>
                   )}
