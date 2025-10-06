@@ -20,7 +20,7 @@ const cormorant = Cormorant_Unicase({
 
 const inter = Inter({
   variable: '--font-family-inter',
-  weight: [ '400',],
+  weight: [ '200', '300', '400', '600', '700', '800'],
   style: ['normal'],
   subsets: ['latin'],
 })
