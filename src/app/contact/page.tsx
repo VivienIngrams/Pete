@@ -11,7 +11,7 @@ export default function ContactPage() {
     <>
     <NavMenu/>
 
-    <div className="min-h-screen mt-20 xl:mt-20 bg-white text-gray-500 ">
+    <div className="min-h-screen mt-20 xl:mt-20 bg-[#edece0] text-gray-500 ">
       <div className="xl:h-[90%] flex flex-col items-center justify-center mx-6 xl:w-1/3 xl:mx-auto">
         <h1 className="text-2xl xl:text-3xl  w-full text-left font-cormorant py-4">
           {language === 'fr' ? 'Contact' : 'Contact'}

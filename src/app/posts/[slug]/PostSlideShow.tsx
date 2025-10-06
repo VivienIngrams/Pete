@@ -44,12 +44,12 @@ export default function PostSlideshow({
       : current.excerpt_fr
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-black text-white">
+    <div className="relative w-full h-screen overflow-hidden bg-[#edece0] ">
       {/* Close Button */}
       <button
         onClick={handleClose}
         aria-label="Close"
-        className="absolute top-4 right-4 z-50 bg-black/40 hover:bg-black/60 p-3 rounded-full"
+        className="absolute top-4 right-4 z-50 bg-[#edece0]/40 hover:bg-[#edece0]/60 p-3 rounded-full"
       >
         <X className="w-6 h-6" />
       </button>
@@ -71,26 +71,30 @@ export default function PostSlideshow({
       </div>
 
       {/* Overlay */}
-      <div className="absolute bottom-6 left-6 bg-black/50 p-4 rounded-xl max-w-lg">
+      <div className="absolute bottom-6 left-6 bg-[#edece0]/50 p-4 rounded-xl max-w-lg">
         {currentTitle && <h1 className="text-3xl font-bold">{currentTitle}</h1>}
         {currentExcerpt && (
-          <p className="mt-2 text-base text-gray-200">{currentExcerpt}</p>
+          <p className="mt-2 text-base font-instrument">{currentExcerpt}</p>
         )}
       </div>
 
       {/* Arrows */}
-      <button
-        onClick={handlePrev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 p-3 rounded-full"
-      >
-        <ChevronLeft className="w-8 h-8" />
-      </button>
-      <button
-        onClick={handleNext}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 p-3 rounded-full"
-      >
-        <ChevronRight className="w-8 h-8" />
-      </button>
+      {currentIndex > 0 && (
+        <button
+          onClick={handlePrev}
+          className="absolute left-4 top-1/2 -translate-y-1/2 hover:bg-black/10 p-3 rounded-full"
+        >
+          <ChevronLeft className="w-8 h-8" />
+        </button>
+      )}
+      {currentIndex < post.images.length - 1 && (
+        <button
+          onClick={handleNext}
+          className="absolute right-4 top-1/2 -translate-y-1/2 hover:bg-black/10 p-3 rounded-full"
+        >
+          <ChevronRight className="w-8 h-8" />
+        </button>
+      )}
     </div>
   )
 }

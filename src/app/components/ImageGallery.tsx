@@ -24,7 +24,7 @@ const ImageGallery = ({ images, slug, title }: ImageGalleryProps) => {
             <span className="absolute left-0 right-0 bottom-1/2 transform translate-y-2px bg-gray-400  h-[1px] z-5"></span>
 
             {/* Title with Grey Background covering only text width */}
-            <h1 className="text-gray-500 hover:text-black upper  font-light text-3xl lg:text-4xl inline-block relative z-11 px-1 my-4 bg-white">
+            <h1 className="text-gray-500 hover:text-black upper  font-light text-3xl lg:text-4xl inline-block relative z-11 px-1 my-4 bg-[#edece0]">
               {title}
             </h1>
           </div>

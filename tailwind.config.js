@@ -11,8 +11,7 @@ module.exports = {
       
       fontFamily: {
         cormorant: ['var(--font-family-cormorant)'],
-        arsenal: ['var(--font-family-arsenal)'],
-        montserrat: ['var(--font-family-montserrat)'],
+        instrument: ['var(--font-family-instrument'],
       },
         backgroundImage: {
           'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

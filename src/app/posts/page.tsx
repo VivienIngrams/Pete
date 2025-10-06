@@ -21,13 +21,13 @@ export default async function PostsPage() {
   return (
     <>
       <NavMenu />
-      <div className="h-full md:ml-[20%] pt-16 md:pt-0 md:m-[3%] xl:min-h-[80vh] pb-20 font-cormorant font-bold bg-white max-w-full ">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-0 border border-white">
+      <div className="bg-[#edece0]  h-full md:ml-[20%] pt-16 md:pt-0 md:m-[3%] xl:min-h-[80vh] pb-20 font-cormorant font-bold max-w-full ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-0 border border-[#edece0]">
           {posts.map((post) => (
             <div
               id={post.slug.current}
               key={post._id}
-              className="relative aspect-square border border-white group overflow-hidden"
+              className="relative aspect-square border border-[#edece0] group overflow-hidden"
             >
               {post.mainImage?.asset && (
                 <Image
