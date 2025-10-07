@@ -1,4 +1,4 @@
-import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
+import { FaFacebook, FaInstagram, FaLinkedin, } from 'react-icons/fa';
 import Link from 'next/link';
 
 interface Social {
@@ -11,19 +11,24 @@ const socialLinks: Social[] = [
     {
       label: 'Instagram',
       Icon: FaInstagram,
-      href: 'https://www.instagram.com/',
+      href: 'https://www.instagram.com/peterlippmann/#',
     },
     
     {
       label: 'Facebook',
       Icon: FaFacebook,
-      href: 'https://www.facebook.com/',
+      href: 'https://www.facebook.com/PeterLippmann/',
+    },
+    {
+      label: 'LinkedIn',
+      Icon: FaLinkedin,
+      href: 'https://www.linkedin.com/in/peter-lippmann-48b234108/',
     },
   ]
   
   export default function Socials() {
     return (
-      <div className='flex space-x-2 '>
+      <div className='flex space-x-2 py-2'>
         {socialLinks.map(({ label, Icon, href }) => (
           <Link
             aria-label={label}
