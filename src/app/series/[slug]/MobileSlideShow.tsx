@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useRef, useState, useEffect } from 'react'
 import type { Post } from '~/sanity/lib/sanity.queries'
 import { urlForImage } from '~/sanity/lib/sanity.image'
+import { PortableText } from '@portabletext/react'
 
 type Props = {
   post: Post
@@ -23,6 +24,7 @@ export default function MobileSlideshow({
   const router = useRouter()
   const imageWrapperRef = useRef<HTMLDivElement>(null)
   const [imageBottom, setImageBottom] = useState(0)
+  const [isAboutOpen, setIsAboutOpen] = useState(false)
 
   useEffect(() => {
     const updatePosition = () => {
@@ -46,6 +48,9 @@ export default function MobileSlideshow({
       ? current.excerpt_en || current.excerpt_fr
       : current.excerpt_fr
 
+  const postExcerptBlocks =
+    language === 'en' ? post.excerpt_en || post.excerpt : post.excerpt
+
   const handlePrev = () =>
     setCurrentIndex((prev) => (prev === 0 ? post.images!.length - 1 : prev - 1))
   const handleNext = () =>
@@ -60,7 +65,7 @@ export default function MobileSlideshow({
   }
 
   return (
-    <div className="relative w-full h-screen bg-[#edece0] flex flex-col items-center justify-center">
+    <div className="relative w-full h-screen bg-[#f6f5ee] flex flex-col items-center justify-center">
       <div
         ref={imageWrapperRef}
         className="relative w-full flex-shrink-0 flex items-center justify-center"
@@ -109,14 +114,49 @@ export default function MobileSlideshow({
       </div>
 
       {/* Overlay */}
-      <div className="absolute bottom-6 right-6 text-right bg-[#edece0]/50 max-w-sm">
+      <div className="absolute bottom-6 right-6 text-right bg-[#f6f5ee]/50 max-w-sm">
         {currentTitle && (
           <h1 className="text-2xl md:text-3xl font-bold">{currentTitle}</h1>
         )}
         {currentExcerpt && (
           <p className="mt-2 text-xs font-inter">{currentExcerpt}</p>
         )}
+        <div className="mt-3 flex justify-end">
+          <button
+            onClick={() => setIsAboutOpen(true)}
+            className="px-3 py-1 text-xs font-inter underline underline-offset-4"
+          >
+            About
+          </button>
+        </div>
       </div>
+
+      {isAboutOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center px-4"
+          onClick={() => setIsAboutOpen(false)}
+        >
+          <div
+            className="bg-[#f6f5ee] max-w-2xl w-full max-h-[80vh] overflow-auto p-6 rounded shadow"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-start mb-4">
+              <h2 className="text-xl font-bold">About</h2>
+              <button
+                onClick={() => setIsAboutOpen(false)}
+                className="text-sm font-inter underline underline-offset-4"
+              >
+                Close
+              </button>
+            </div>
+            {postExcerptBlocks && postExcerptBlocks.length ? (
+              <PortableText value={postExcerptBlocks} />
+            ) : (
+              <p className="text-sm font-inter">No description available.</p>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

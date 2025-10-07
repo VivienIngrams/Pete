@@ -77,7 +77,7 @@ const Bio = async () => {
   return (
     <>
       <NavMenu />
-      <div className="h-full md:ml-[20%] md:m-[3%] xl:min-h-[80vh] pb-20 font-genos font-bold bg-[#edece0] max-w-full ">
+      <div className="h-full md:ml-[20%] md:m-[3%] xl:min-h-[80vh] pb-20 font-genos font-bold bg-[#f6f5ee] max-w-full ">
     About page
     </div>
     </>

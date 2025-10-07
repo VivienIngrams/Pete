@@ -45,7 +45,7 @@ export default function DesktopSlideshow({
   }
 
   return (
-    <div className="relative w-full h-screen bg-[#edece0] flex items-center py-10 justify-center hide-scrollbar ">
+    <div className="relative w-full h-screen bg-[#f6f5ee] flex items-center py-10 justify-center hide-scrollbar ">
       {current.image && (
         <Image
           src={urlForImage(current.image).url() || ''}

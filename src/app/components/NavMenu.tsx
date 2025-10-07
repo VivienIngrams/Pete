@@ -6,6 +6,7 @@ import { useState } from 'react'
 
 import { useLanguage } from './context/LanguageProvider'
 import LanguageSwitcher from './LanguageSwitcher'
+import Socials from './Socials'
 
 const NavMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -49,13 +50,14 @@ const NavMenu = () => {
               <Link href="/contact" className="hover:text-gray-500">
                 {menuItems.contact[language] || menuItems.contact.en}
               </Link>
+              <Socials/>
             </div>
           </div>
         </div>
       </div>
 
       {/* Mobile header (fixed) */}
-      <div className="md:hidden fixed top-0 left-0 w-full bg-[#edece0]  z-50">
+      <div className="md:hidden fixed top-0 left-0 w-full bg-[#f6f5ee]  z-50">
         <div className="flex items-center justify-between p-4">
           {/* Site title in mobile header */}
           <Link href="/series">
@@ -106,7 +108,7 @@ const NavMenu = () => {
 
       {/* Mobile dropdown menu */}
       <div
-        className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-[#edece0] mt-16 w-screen`} // push down below header
+        className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-[#f6f5ee] mt-16 w-screen`} // push down below header
         id="mobile-menu"
         onClick={toggleMenu}
       >
@@ -118,6 +120,7 @@ const NavMenu = () => {
           <Link href="/contact" className="block px-2 py-1">
             {menuItems.contact[language] || menuItems.contact.en}
           </Link>
+          <Socials/>
         </div>
       </div>
     </nav>

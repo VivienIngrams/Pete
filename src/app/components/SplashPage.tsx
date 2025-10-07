@@ -62,7 +62,7 @@ export default function SplashPage({ mainImage }: SplashPageProps) {
       </div>
 
        {/* White semi-transparent overlay */}
-       <div className="absolute inset-0 bg-[#edece0]/15" />
+       <div className="absolute inset-0 bg-[#f6f5ee]/15" />
 
 
       {/* Title */}

@@ -25,7 +25,7 @@ export default function Footer({
       className={`fixed bottom-0 w-full md:h-8 p-4 pt-4 md:pb-7 flex items-end md:items-center justify-between ${
         isHomePage
           ? 'md:bg-transparent' // Transparent background on the homepage
-          : 'bg-[#edece0] text-gray-500'
+          : 'bg-[#f6f5ee] text-gray-500'
       }`}
     >
       {/* Gradient bar */}

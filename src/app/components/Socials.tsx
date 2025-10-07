@@ -11,23 +11,19 @@ const socialLinks: Social[] = [
     {
       label: 'Instagram',
       Icon: FaInstagram,
-      href: 'https://www.instagram.com/joel.bardeau.photo',
+      href: 'https://www.instagram.com/',
     },
-    {
-      label: 'Youtube',
-      Icon: FaYoutube,
-      href: 'https://www.youtube.com/@TheJbbrava',
-    },
+    
     {
       label: 'Facebook',
       Icon: FaFacebook,
-      href: 'https://www.facebook.com/joel.bardeau.photo',
+      href: 'https://www.facebook.com/',
     },
   ]
   
   export default function Socials() {
     return (
-      <>
+      <div className='flex space-x-1'>
         {socialLinks.map(({ label, Icon, href }) => (
           <Link
             aria-label={label}
@@ -37,10 +33,10 @@ const socialLinks: Social[] = [
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Icon className="h-5 w-5 align-baseline sm:h-6 sm:w-6" />
+            <Icon className="h-4 w-4 align-baseline sm:h-5 sm:w-5" />
           </Link>
         ))}
-      </>
+      </div>
     )
   }
   
