@@ -108,16 +108,16 @@ const NavMenu = () => {
 
       {/* Mobile dropdown menu */}
       <div
-        className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-[#f6f5ee] mt-16 w-screen`} // push down below header
+        className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-[#f6f5ee] pt-16 pb-8 w-screen`} // push down below header
         id="mobile-menu"
         onClick={toggleMenu}
       >
-        <div className="px-4 py-3 space-y-2  text-md">
+        <div className="px-4  space-y-3  text-md">
           
-          <Link href="/bio" className="block px-2 py-1">
+          <Link href="/bio" className="block  ">
             {menuItems.bio[language] || menuItems.bio.en}
           </Link>
-          <Link href="/contact" className="block px-2 py-1">
+          <Link href="/contact" className="block  ">
             {menuItems.contact[language] || menuItems.contact.en}
           </Link>
           <Socials/>

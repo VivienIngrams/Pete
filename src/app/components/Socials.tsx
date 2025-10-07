@@ -23,7 +23,7 @@ const socialLinks: Social[] = [
   
   export default function Socials() {
     return (
-      <div className='flex space-x-1'>
+      <div className='flex space-x-2 '>
         {socialLinks.map(({ label, Icon, href }) => (
           <Link
             aria-label={label}

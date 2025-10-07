@@ -83,7 +83,7 @@ export default function MobileSlideshow({
 
         <button
           onClick={handleClose}
-          className="fixed top-4 left-4  text-xs font-inter z-50 font-bold  p-3 "
+          className="fixed top-4 left-4  text-sm tracking-wider underline underline-offset-2 z-50 font-bold "
         >
           close
         </button>
@@ -124,36 +124,38 @@ export default function MobileSlideshow({
         <div className="mt-3 flex justify-end">
           <button
             onClick={() => setIsAboutOpen(true)}
-            className="px-3 py-1 text-xs font-inter underline underline-offset-4"
+            className=" text-base font-bold underline underline-offset-2 rounded-md tracking-wider"
           >
-            About
+            about
           </button>
         </div>
       </div>
 
       {isAboutOpen && (
         <div
-          className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center px-4"
+          className="fixed inset-0 z-50 text-black bg-[#f6f5ee]/85 flex items-center justify-center px-4"
           onClick={() => setIsAboutOpen(false)}
         >
           <div
-            className="bg-[#f6f5ee] max-w-2xl w-full max-h-[80vh] overflow-auto p-6 rounded shadow"
+            className=" max-w-2xl w-full max-h-[80vh] overflow-auto p-6 "
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-start mb-4">
-              <h2 className="text-xl font-bold">About</h2>
+              <h2 className="text-2xl font-bold">{post.title}</h2>
               <button
                 onClick={() => setIsAboutOpen(false)}
-                className="text-sm font-inter underline underline-offset-4"
+                className="text-sm fixed top-4 left-4 tracking-wider underline underline-offset-2 bg-[#f6f5ee] "
               >
-                Close
+                close
               </button>
             </div>
-            {postExcerptBlocks && postExcerptBlocks.length ? (
-              <PortableText value={postExcerptBlocks} />
-            ) : (
-              <p className="text-sm font-inter">No description available.</p>
-            )}
+            <div className="text-sm font-inter text-justify">
+              {postExcerptBlocks && postExcerptBlocks.length ? (
+                <PortableText value={postExcerptBlocks} />
+              ) : (
+                <p>No description available.</p>
+              )}
+            </div>
           </div>
         </div>
       )}
