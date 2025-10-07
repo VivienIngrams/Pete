@@ -67,7 +67,7 @@ export default function SplashPage({ mainImage }: SplashPageProps) {
 
       {/* Title */}
       <h1
-        className={`absolute  tracking-tight  text-2xl xl:text-7xl top-[10vh] md:top-[5vh]   transition-opacity duration-[1500ms] ${
+        className={`absolute text-black tracking-tight  text-2xl xl:text-7xl top-[10vh] md:top-[5vh]   transition-opacity duration-[1500ms] ${
           titleVisible ? 'opacity-100' : 'opacity-0'
         }`}
               >

@@ -12,6 +12,7 @@ module.exports = {
       fontFamily: {
         genos: ['var(--font-family-genos)'],
         inter: ['var(--font-family-inter)'],
+        smooch:  ['var(--font-family-smooch)'],
       },
         backgroundImage: {
           'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

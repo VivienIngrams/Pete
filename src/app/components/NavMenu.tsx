@@ -40,7 +40,7 @@ const NavMenu = () => {
   }
 
   return (
-    <nav className="fixed h-screen md:w-[15vw] md:ml-10 md:my-28 z-50 tracking-wider">
+    <nav className="fixed h-screen md:w-[15vw] md:ml-10 md:my-28 z-50 tracking-wider font-smooch">
       {/* Desktop menu */}
       <div
         className={`w-full flex items-start justify-start  ${isHomePage ? 'hidden' : '2xl:text-lg'}`}
@@ -123,7 +123,7 @@ const NavMenu = () => {
 
       {/* Mobile dropdown menu */}
       <div
-        className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-[#f6f5ee] pb-8 w-screen`} // push down below header
+        className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-[#f6f5ee] py-8 w-screen`} // push down below header
         id="mobile-menu"
         onClick={toggleMenu}
       >

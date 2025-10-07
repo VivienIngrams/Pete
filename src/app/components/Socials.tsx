@@ -15,24 +15,24 @@ const socialLinks: Social[] = [
     },
     
     {
-      label: 'Facebook',
-      Icon: FaFacebook,
-      href: 'https://www.facebook.com/PeterLippmann/',
-    },
-    {
       label: 'LinkedIn',
       Icon: FaLinkedin,
       href: 'https://www.linkedin.com/in/peter-lippmann-48b234108/',
+    },
+    {
+      label: 'Facebook',
+      Icon: FaFacebook,
+      href: 'https://www.facebook.com/PeterLippmann/',
     },
   ]
   
   export default function Socials() {
     return (
-      <div className='flex space-x-2 py-2'>
+      <div className='flex space-x-4 py-2'>
         {socialLinks.map(({ label, Icon, href }) => (
           <Link
             aria-label={label}
-            className=" rounded-md  transition-all duration-300  sm:-m-3 sm:p-3 hover:"
+            className=" rounded-md  transition-all duration-300 hover:text-black"
             href={href}
             key={label}
             target="_blank"

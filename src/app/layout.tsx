@@ -4,13 +4,19 @@ import './globals.css'
 
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
-import {  Genos, Inter } from 'next/font/google'
+import {  Genos, Inter, Smooch_Sans } from 'next/font/google'
 
 import { LanguageProvider } from './components/context/LanguageProvider'
 
 
 
 
+const smooch = Smooch_Sans({
+  variable: '--font-family-genos',
+  weight: [ '400',],
+  style: ['normal'],
+  subsets: ['latin'],
+})
 const genos = Genos({
   variable: '--font-family-genos',
   weight: [ '400',],
@@ -38,9 +44,9 @@ export default function RootLayout({
   return (
     <html
       lang="en" // Default to 'en' initially; language will be dynamically set in client-side code
-      className={` ${genos.variable} ${inter.variable}`}
+      className={` ${genos.variable} ${inter.variable} ${smooch.variable}`}
     >
-      <body className="h-full bg-[#f6f5ee] font-genos">
+      <body className="h-full bg-[#f6f5ee] font-smooch">
         <LanguageProvider>
        
             {children}

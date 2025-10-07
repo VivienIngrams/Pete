@@ -65,7 +65,7 @@ export default function MobileSlideshow({
   }
 
   return (
-    <div className="relative w-full h-screen bg-[#f6f5ee] flex flex-col items-center justify-center">
+    <div className="relative w-full h-screen bg-[#f6f5ee] mt-6 flex flex-col items-center justify-center">
       <div
         ref={imageWrapperRef}
         className="relative w-full flex-shrink-0 flex items-center justify-center"
