@@ -40,7 +40,7 @@ const NavMenu = () => {
   }
 
   return (
-    <nav className="fixed h-screen md:w-[15vw] md:ml-10 md:my-28 z-50 tracking-wider font-smooch">
+    <nav className="fixed h-screen md:w-[15vw] md:ml-10 md:my-28 z-50 tracking-wider font-genos">
       {/* Desktop menu */}
       <div
         className={`w-full flex items-start justify-start  ${isHomePage ? 'hidden' : '2xl:text-lg'}`}

@@ -46,7 +46,7 @@ export default function RootLayout({
       lang="en" // Default to 'en' initially; language will be dynamically set in client-side code
       className={` ${genos.variable} ${inter.variable} ${smooch.variable}`}
     >
-      <body className="h-full bg-[#f6f5ee] font-smooch">
+      <body className="h-full bg-[#f6f5ee] font-genos">
         <LanguageProvider>
        
             {children}
