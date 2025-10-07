@@ -12,11 +12,15 @@ const NavMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
   const path = usePathname()
   const isHomePage = path === '/'
+  const isSeriesPage = path === '/series'
 
   const { language } = useLanguage()
 
   const menuItems = {
-   
+    series: {
+      en: 'Series',
+      fr: 'Séries',
+    },
     bio: {
       en: 'About',
       fr: 'Bio',
@@ -44,10 +48,14 @@ const NavMenu = () => {
         <div className="flex items-center ">
           <div className="hidden md:block">
             <div className="flex flex-col items-baseline space-y-6">
-             
               <Link href="/series" className="hover:text-gray-500">
-              <h1 className="text-3xl my-4">Peter Lippmann</h1>
+                <h1 className="text-3xl my-2">Peter Lippmann</h1>
               </Link>
+              {!isSeriesPage && (
+                <Link href="/series" className="hover:text-gray-500">
+                  {menuItems.series[language] || menuItems.series.en}
+                </Link>
+              )}
               <Link href="/bio" className="hover:text-gray-500">
                 {menuItems.bio[language] || menuItems.bio.en}
               </Link>
@@ -57,7 +65,7 @@ const NavMenu = () => {
               <Link href="/contact" className="hover:text-gray-500">
                 {menuItems.contact[language] || menuItems.contact.en}
               </Link>
-              <Socials/>
+              <Socials />
             </div>
           </div>
         </div>
@@ -120,7 +128,9 @@ const NavMenu = () => {
         onClick={toggleMenu}
       >
         <div className="px-6  space-y-3  text-md">
-          
+          <Link href="/series" className="block">
+            {menuItems.series[language] || menuItems.series.en}
+          </Link>
           <Link href="/bio" className="block  ">
             {menuItems.bio[language] || menuItems.bio.en}
           </Link>
@@ -130,7 +140,7 @@ const NavMenu = () => {
           <Link href="/contact" className="block  ">
             {menuItems.contact[language] || menuItems.contact.en}
           </Link>
-          <Socials/>
+          <Socials />
         </div>
       </div>
     </nav>
