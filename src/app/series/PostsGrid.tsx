@@ -26,9 +26,7 @@ export default function PostsGrid({ posts, language = 'fr' }: Props) {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-0 border border-[#edece0]">
       {posts.map((post) => {
         const isActive = activeOverlay === post.slug.current
-        const excerpt =
-          language === 'en' ? post.excerpt_en || post.excerpt : post.excerpt
-
+   
         return (
           <div
             key={post._id}
@@ -65,31 +63,10 @@ export default function PostsGrid({ posts, language = 'fr' }: Props) {
                 >
                   {post.title}
                 </Link>
-                {excerpt && (
-                  <div className="md:hidden max-w-xs text-xs font-inter text-black">
-                    <PortableText value={excerpt} />
-                  </div>
-                )}
+               
               </div>
 
-              {/* Desktop bottom-left overlay with title + excerpt */}
-              {hoveredSlug === post.slug.current && (
-                <div className="hidden md:flex fixed inset-0 z-20 pointer-events-none">
-                  <div className="absolute bottom-4 left-4 flex flex-col items-start">
-                    <Link
-                      href={`/series/${post.slug.current}`}
-                      className="text-black text-2xl font-bold underline-offset-2 underline transition-transform duration-200 hover:scale-105 pointer-events-auto mb-1"
-                    >
-                      {post.title}
-                    </Link>
-                    {excerpt && (
-                      <div className="max-w-[19vw] text-base font-inter font-light text-black">
-                        <PortableText value={excerpt} />
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
+             
             </div>
           </div>
         )
