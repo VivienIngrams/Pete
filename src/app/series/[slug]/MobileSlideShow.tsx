@@ -78,7 +78,7 @@ export default function MobileSlideshow({
 
         <button
           onClick={handleClose}
-          className="absolute -top-10 left-2  text-xs font-inter z-50 hover:bg-[#edece0]/60 p-3 rounded-full"
+          className="fixed top-4 left-4  text-xs font-inter z-50 font-bold  p-3 "
         >
           close
         </button>
