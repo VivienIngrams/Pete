@@ -15,11 +15,7 @@ const NavMenu = () => {
   const { language } = useLanguage()
 
   const menuItems = {
-    posts: {
-      en: 'Photography Series',
-      fr: 'Séries Photographies',
-    },
-
+   
     bio: {
       en: 'About',
       fr: 'Bio',
@@ -35,7 +31,7 @@ const NavMenu = () => {
   }
 
   return (
-    <nav className="fixed h-screen md:w-[18vw] md:ml-8 md:my-20 z-50  font-semibold tracking-tight">
+    <nav className="fixed h-screen md:w-[15vw] md:ml-8 md:my-20 z-50  font-semibold tracking-tight">
       {/* Desktop menu */}
       <div
         className={`w-full flex items-start justify-start  ${isHomePage ? 'hidden' : '2xl:text-lg'}`}
@@ -43,11 +39,9 @@ const NavMenu = () => {
         <div className="flex items-center ">
           <div className="hidden md:block">
             <div className="flex flex-col items-baseline space-y-6">
-              <Link href="/">
-                <h1 className="font-bold my-4">Peter Lippmann</h1>
-              </Link>
+             
               <Link href="/series" className="hover:text-gray-500">
-                {menuItems.posts[language] || menuItems.posts.en}
+              <h1 className="font-bold my-4">Peter Lippmann</h1>
               </Link>
               <Link href="/bio" className="hover:text-gray-500">
                 {menuItems.bio[language] || menuItems.bio.en}
@@ -64,7 +58,7 @@ const NavMenu = () => {
       <div className="md:hidden fixed top-0 left-0 w-full bg-[#edece0]  z-50">
         <div className="flex items-center justify-between p-4">
           {/* Site title in mobile header */}
-          <Link href="/">
+          <Link href="/series">
             <h1 className="text-lg font-semibold">Peter Lippmann</h1>
           </Link>
           {/* Hamburger button */}
@@ -117,9 +111,7 @@ const NavMenu = () => {
         onClick={toggleMenu}
       >
         <div className="px-4 py-3 space-y-2 text-black text-md">
-          <Link href="/series" className="block px-2 py-1">
-            {menuItems.posts[language] || menuItems.posts.en}
-          </Link>
+          
           <Link href="/bio" className="block px-2 py-1">
             {menuItems.bio[language] || menuItems.bio.en}
           </Link>

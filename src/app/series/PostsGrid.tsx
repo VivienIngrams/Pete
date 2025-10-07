@@ -30,7 +30,7 @@ export default function PostsGrid({ posts, language = 'fr' }: Props) {
         return (
           <div
             key={post._id}
-            className="relative aspect-square border border-[#edece0] group overflow-hidden"
+            className="relative aspect-square  group overflow-hidden"
             onClick={() => toggleOverlay(post.slug.current)}
             onMouseEnter={() => setHoveredSlug(post.slug.current)}
             onMouseLeave={() => setHoveredSlug(null)}

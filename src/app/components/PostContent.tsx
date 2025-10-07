@@ -27,7 +27,7 @@ function PostContent({ post }: PostContentProps) {
       <div className="hidden xl:block absolute top-0 left-[24vw] min-[1800px]:left-[23vw] xl:w-[5vw] bg-gradient-to-r from-white via-white/70 to-transparent h-full"></div>
       <div className="xl:h-[80vh] flex flex-col justify-start xl:justify-center">
         {/* Title */}
-        <h1 className="text-2xl xl:text-4xl font-cormorant font-medium tracking-tighter xl:mt-16">
+        <h1 className="text-2xl xl:text-4xl font-genos font-medium tracking-tighter xl:mt-16">
           {post.title}
         </h1>
 

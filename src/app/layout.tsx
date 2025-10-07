@@ -4,15 +4,15 @@ import './globals.css'
 
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
-import {  Cormorant_Unicase, Inter } from 'next/font/google'
+import {  Genos, Inter } from 'next/font/google'
 
 import { LanguageProvider } from './components/context/LanguageProvider'
 
 
 
 
-const cormorant = Cormorant_Unicase({
-  variable: '--font-family-cormorant',
+const genos = Genos({
+  variable: '--font-family-genos',
   weight: [ '400',],
   style: ['normal'],
   subsets: ['latin'],
@@ -38,9 +38,9 @@ export default function RootLayout({
   return (
     <html
       lang="en" // Default to 'en' initially; language will be dynamically set in client-side code
-      className={` ${cormorant.variable} ${inter.variable}`}
+      className={` ${genos.variable} ${inter.variable}`}
     >
-      <body className="h-full bg-[#edece0] font-cormorant">
+      <body className="h-full bg-[#edece0] font-genos">
         <LanguageProvider>
        
             {children}

@@ -10,7 +10,7 @@ module.exports = {
     extend: {
       
       fontFamily: {
-        cormorant: ['var(--font-family-cormorant)'],
+        genos: ['var(--font-family-genos)'],
         inter: ['var(--font-family-inter)'],
       },
         backgroundImage: {
