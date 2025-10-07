@@ -2,9 +2,11 @@
 
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { Post } from '~/sanity/lib/sanity.queries'
 import { urlForImage } from '~/sanity/lib/sanity.image'
+import { PortableText } from '@portabletext/react'
 
 type Props = {
   post: Post
@@ -20,6 +22,7 @@ export default function DesktopSlideshow({
   setCurrentIndex,
 }: Props) {
   const router = useRouter()
+  const [isAboutOpen, setIsAboutOpen] = useState(false)
   const current = post.images?.[currentIndex]
   if (!current) return <p>No images found.</p>
 
@@ -44,6 +47,9 @@ export default function DesktopSlideshow({
     }
   }
 
+  const postExcerptBlocks =
+    language === 'en' ? post.excerpt_en || post.excerpt : post.excerpt
+
   return (
     <div className="relative w-full h-screen bg-[#f6f5ee] flex items-center py-10 justify-center hide-scrollbar ">
       {current.image && (
@@ -58,7 +64,7 @@ export default function DesktopSlideshow({
       )}
       <button
         onClick={handleClose}
-        className="absolute font-inter top-4 left-4 z-50 font-semibold hover:font-extrabold p-3 rounded-full"
+        className="absolute text-lg tracking-wider underline underline-offset-2 top-6 left-6 z-50 font-semibold hover:font-extrabold rounded-full"
       >
         close
       </button>
@@ -83,7 +89,44 @@ export default function DesktopSlideshow({
       <div className="absolute bottom-6 left-6  max-w-sm">
         {currentTitle && <h1 className="text-2xl md:text-3xl font-bold">{currentTitle}</h1>}
         {currentExcerpt && <p className="mt-2 text-base font-inter">{currentExcerpt}</p>}
+        <div className="mt-3">
+          <button
+            onClick={() => setIsAboutOpen(true)}
+            className=" text-lg font-bold underline underline-offset-2 rounded-md tracking-wider"
+          >
+            about
+          </button>
+        </div>
       </div>
+
+      {isAboutOpen && (
+        <div
+          className="fixed inset-0 z-50 text-black bg-[#f6f5ee]/85 flex items-center justify-center px-4"
+          onClick={() => setIsAboutOpen(false)}
+        >
+          <div
+            className=" max-w-2xl w-full max-h-[80vh] overflow-auto p-6 "
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-start mb-4">
+              <h2 className="text-4xl font-bold">{post.title}</h2>
+              <button
+                onClick={() => setIsAboutOpen(false)}
+                className="absolute text-lg underline underline-offset-2 top-6 left-6 z-50 font-semibold hover:font-extrabold tracking-wider bg-[#f6f5ee]"
+                >
+                close
+              </button>
+            </div>
+            <div className="text-base font-inter text-justify">
+              {postExcerptBlocks && postExcerptBlocks.length ? (
+                <PortableText value={postExcerptBlocks} />
+              ) : (
+                <p>No description available.</p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
