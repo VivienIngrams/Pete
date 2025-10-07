@@ -31,7 +31,7 @@ const socialLinks: Social[] = [
         {socialLinks.map(({ label, Icon, href }) => (
           <Link
             aria-label={label}
-            className=" rounded-md  transition-all duration-300  sm:-m-3 sm:p-3 hover:text-black"
+            className=" rounded-md  transition-all duration-300  sm:-m-3 sm:p-3 hover:"
             href={href}
             key={label}
             target="_blank"

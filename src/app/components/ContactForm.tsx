@@ -176,7 +176,7 @@ const ContactForm: React.FC<{ language: string }> = ({ language }) => {
         <div className="flex md:items-start md:justify-end">
           <button
             type="submit"
-            className=" mb-20 md:mt-4 text-gray-700 hover:text-black hover:scale-105 ease-in duration-600 border-2 border-gray-400 rounded-lg shadow-md p-2 "
+            className=" mb-20 md:mt-4 text-gray-700 hover: hover:scale-105 ease-in duration-600 border-2 border-gray-400 rounded-lg shadow-md p-2 "
             disabled={!isVerified}
           >
             {texts.sendMessage}

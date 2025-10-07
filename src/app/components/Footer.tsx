@@ -45,7 +45,7 @@ export default function Footer({
           rel="noopener noreferrer"
           className={`${
             isContactPage ? 'block' : 'hidden'
-          } font-arsenal text-gray-500 hover:text-black tracking-normal leading-loose text-[12px] ml-12 md:ml-2 mb-1`}
+          } font-arsenal text-gray-500 hover: tracking-normal leading-loose text-[12px] ml-12 md:ml-2 mb-1`}
         >
           {text[language] || text.en}
         </Link>

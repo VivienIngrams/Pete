@@ -19,6 +19,22 @@ const postsQuery = () => groq`
   layout
 }`
 
+// GROQ query to fetch posts in the order defined by the series grid
+export const seriesGridQuery = groq`
+*[_type == "grid"][0]{
+  "posts": seriesGrid[]->{
+    _id,
+    _createdAt,
+    title,
+    title_en,
+    slug,
+    excerpt,
+    excerpt_en,
+    mainImage,
+    layout
+  }
+}`
+
 export async function getPosts(
   client: SanityClient,
     language: 'en' | 'fr' | string = 'fr',
@@ -39,6 +55,33 @@ export async function getPosts(
     return languagePosts;
   } catch (error) {
     console.error('Error fetching posts by section:', error);
+    throw error;
+  }
+}
+
+// Fetch posts using the series grid order; returns empty array if no grid or references
+export async function getSeriesGridPosts(
+  client: SanityClient,
+  language: 'en' | 'fr' | string = 'fr',
+  options = {}
+): Promise<Post[]> {
+  try {
+    const result = await sanityFetch<{ posts: Post[] | undefined }>({
+      query: seriesGridQuery,
+      qParams: { ...options },
+    });
+
+    const posts = result?.posts ?? []
+
+    const languagePosts = posts.map((post) => ({
+      ...post,
+      title: language === 'en' ? post.title_en || post.title : post.title,
+      excerpt: language === 'en' ? post.excerpt_en || post.excerpt : post.excerpt,
+    }));
+
+    return languagePosts
+  } catch (error) {
+    console.error('Error fetching posts from series grid:', error);
     throw error;
   }
 }

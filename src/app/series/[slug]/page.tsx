@@ -2,7 +2,6 @@ import { cookies } from 'next/headers'
 import { readToken } from '~/sanity/lib/sanity.api'
 import { getClient } from '~/sanity/lib/sanity.client'
 import { getPost, getPosts, type Post } from '~/sanity/lib/sanity.queries'
-import NavMenu from '~/app/components/NavMenu'
 import PostSlideshow from './PostSlideShow'
 
 export default async function PostPage({
@@ -36,7 +35,7 @@ export default async function PostPage({
 
   return (
     <>
-      <NavMenu />
+    
       {/* Pass post data to client component */}
       <PostSlideshow post={post} language={language}/>
     </>

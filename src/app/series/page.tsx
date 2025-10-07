@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers'
 import { readToken } from '~/sanity/lib/sanity.api'
 import { getClient } from '~/sanity/lib/sanity.client'
-import { getPosts, type Post } from '~/sanity/lib/sanity.queries'
+import { getPosts, getSeriesGridPosts, type Post } from '~/sanity/lib/sanity.queries'
 import NavMenu from '../components/NavMenu'
 import PostsGrid from './PostsGrid'
 
@@ -12,14 +12,19 @@ export default async function PostsPage() {
   const cookieStore = cookies()
   const language = cookieStore.get('language')?.value || 'fr'
 
-  const posts: Post[] = await getPosts(client, language, {
+  // Prefer ordered posts from series grid; fallback to all posts if grid empty
+  const orderedPosts = await getSeriesGridPosts(client, language, {
     next: { revalidate: 600 },
   })
+
+  const posts: Post[] = orderedPosts.length
+    ? orderedPosts
+    : await getPosts(client, language, { next: { revalidate: 600 } })
 
   return (
     <>
       <NavMenu />
-      <div className="bg-[#edece0] h-full md:ml-[20vw] pt-16 md:pt-0 md:m-[4%] xl:min-h-[80vh] pb-20 font-genos font-bold max-w-full">
+      <div className="bg-[#edece0] h-full md:ml-[15vw] pt-16 md:pt-0 md:m-[7vw] xl:min-h-[80vh] pb-20 font-genos font-bold max-w-full">
         <PostsGrid posts={posts} />
       </div>
     </>

@@ -58,7 +58,7 @@ export default function PostsGrid({ posts, language = 'fr' }: Props) {
               <div className="flex flex-col items-center justify-center h-full px-2 text-center">
                 <Link
                   href={`/series/${post.slug.current}`}
-                  className="text-black text-xl md:text-2xl font-bold underline-offset-2 underline transition-transform duration-200 md:hover:scale-105 mb-2 pointer-events-auto"
+                  className=" text-xl md:text-2xl font-bold underline-offset-2 underline transition-transform duration-200 md:hover:scale-105 mb-2 pointer-events-auto"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {post.title}

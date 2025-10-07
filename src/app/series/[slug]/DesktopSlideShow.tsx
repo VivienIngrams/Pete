@@ -80,7 +80,7 @@ export default function DesktopSlideshow({
         </button>
       )}
 
-      <div className="absolute bottom-6 right-6 text-right max-w-sm">
+      <div className="absolute bottom-6 left-6  max-w-sm">
         {currentTitle && <h1 className="text-2xl md:text-3xl font-bold">{currentTitle}</h1>}
         {currentExcerpt && <p className="mt-2 text-base font-inter">{currentExcerpt}</p>}
       </div>
