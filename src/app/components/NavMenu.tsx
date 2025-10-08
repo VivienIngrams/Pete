@@ -40,16 +40,16 @@ const NavMenu = () => {
   }
 
   return (
-    <nav className="fixed h-screen md:w-[15vw] md:ml-10 md:my-28 z-50 tracking-wider font-genos">
+    <nav className="fixed h-screen md:w-[10vw] md:ml-10 z-50 tracking-wider font-genos">
       {/* Desktop menu */}
       <div
         className={`w-full flex items-start justify-start  ${isHomePage ? 'hidden' : '2xl:text-lg'}`}
       >
-        <div className="flex items-center ">
+        <div className="flex items-start ">
           <div className="hidden md:block">
             <div className="flex flex-col items-baseline space-y-6">
               <Link href="/series" className="hover:text-gray-500">
-                <h1 className="text-3xl my-2">Peter Lippmann</h1>
+                <h1 className="text-3xl mb-2 max-w-12 leading-none">Peter Lippmann</h1>
               </Link>
               {!isSeriesPage && (
                 <Link href="/series" className="hover:text-gray-500">
@@ -65,6 +65,10 @@ const NavMenu = () => {
               <Link href="/contact" className="hover:text-gray-500">
                 {menuItems.contact[language] || menuItems.contact.en}
               </Link>
+              <Link href="/" className="hover:text-gray-500 font-semibold">
+                Subscribe
+              </Link>
+
               <Socials />
             </div>
           </div>

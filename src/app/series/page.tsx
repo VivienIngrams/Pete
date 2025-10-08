@@ -24,7 +24,7 @@ export default async function PostsPage() {
   return (
     <>
       <NavMenu />
-      <div className="bg-[#f6f5ee] h-full md:ml-[15vw] mt-6 md:pt-8 md:mr-[7vw] xl:min-h-[80vh] pb-20 font-genos font-bold max-w-full">
+      <div className="bg-[#f6f5ee] h-full md:ml-[14vw] mt-6 md:mt-[6vw] md:mr-[6vw] xl:min-h-[80vh] pb-20 font-genos font-bold max-w-full">
         <PostsGrid posts={posts} />
       </div>
     </>

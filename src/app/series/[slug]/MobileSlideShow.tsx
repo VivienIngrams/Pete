@@ -83,7 +83,7 @@ export default function MobileSlideshow({
 
         <button
           onClick={handleClose}
-          className="fixed top-4 left-4  text-sm tracking-wider underline underline-offset-2 z-50 font-bold "
+          className="fixed top-4 left-4 text-black text-sm tracking-wider underline underline-offset-2 z-50 font-bold "
         >
           close
         </button>

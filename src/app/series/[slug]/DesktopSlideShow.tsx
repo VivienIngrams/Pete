@@ -64,7 +64,7 @@ export default function DesktopSlideshow({
       )}
       <button
         onClick={handleClose}
-        className="absolute text-lg tracking-wider underline underline-offset-2 top-6 left-6 z-50 font-semibold hover:font-extrabold rounded-full"
+        className="absolute text-lg text-black tracking-wider underline underline-offset-2 top-6 left-6 z-50 font-semibold hover:font-extrabold rounded-full"
       >
         close
       </button>
