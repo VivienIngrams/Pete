@@ -2,7 +2,7 @@ import { cookies } from 'next/headers'
 import { readToken } from '~/sanity/lib/sanity.api'
 import { getClient } from '~/sanity/lib/sanity.client'
 import { getPosts, getSeriesGridPosts, type Post } from '~/sanity/lib/sanity.queries'
-import NavMenu from '../components/NavMenu'
+import NavMenu2 from '../components/NavMenu2'
 import PostsGrid from './PostsGrid'
 
 export default async function PostsPage() {
@@ -23,8 +23,8 @@ export default async function PostsPage() {
 
   return (
     <>
-      <NavMenu />
-      <div className="bg-[#f6f5ee] h-full md:ml-[14vw] mt-6 md:mt-[6vw] md:mr-[6vw] xl:min-h-[80vh] pb-20 font-genos font-bold max-w-full">
+      <NavMenu2 />
+      <div className="bg-[#f6f5ee] h-full  mt-6 md:m-[8vw] xl:min-h-[80vh] pb-20 font-genos font-bold max-w-full">
         <PostsGrid posts={posts} />
       </div>
     </>
