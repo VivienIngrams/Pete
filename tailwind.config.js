@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        '3xl': '2220px', 
+      },
       
       fontFamily: {
         genos: ['var(--font-family-genos)'],
