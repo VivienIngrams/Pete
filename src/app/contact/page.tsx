@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 
 import ContactForm from '../components/ContactForm';
-import NavMenu2 from '../components/NavMenu2';
+import NavMenu from '../components/NavMenu';
 
 export default function ContactPage() {
   const cookieStore = cookies();
@@ -9,7 +9,7 @@ export default function ContactPage() {
  
   return (
     <>
-    <NavMenu2/>
+    <NavMenu/>
 
     <div className="min-h-screen mt- xl:mt-16 bg-[#f6f5ee] text-gray-500 ">
       <div className="xl:h-[90%] flex flex-col items-center justify-center mx-6 xl:w-1/3 xl:mx-auto">
