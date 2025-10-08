@@ -18,7 +18,7 @@ const NavMenu = () => {
 
   const menuItems = {
     series: { en: 'Series', fr: 'Séries' },
-    bio: { en: 'About', fr: 'Bio' },
+    bio: { en: 'About', fr: 'About' },
     commissions: { en: 'Commissions', fr: 'Commissions' },
     contact: { en: 'Contact', fr: 'Contact' },
   }
@@ -131,6 +131,9 @@ const NavMenu = () => {
           </Link>
           <Link href="/contact" className="block">
             {menuItems.contact[language] || menuItems.contact.en}
+          </Link>
+          <Link href="/" className="block font-semibold">
+            Subscribe
           </Link>
           <Socials />
         </div>
