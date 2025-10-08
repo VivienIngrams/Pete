@@ -23,7 +23,7 @@ export default function PostsGrid({ posts, language = 'fr' }: Props) {
   }
 
   return (
-    <div className="mx-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-0 border border-[#f6f5ee]">
+    <div className=" grid grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-0 border border-[#f6f5ee]">
       {posts.map((post) => {
         const isActive = activeOverlay === post.slug.current
    
