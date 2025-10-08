@@ -42,7 +42,7 @@ export default function SplashPage({ mainImage }: SplashPageProps) {
       </div>
 
       {/* Title */}
-      <h1 className="absolute text-black text-4xl xl:text-8xl top-[15vh] md:top-[8vh] tracking-widest">
+      <h1 className="absolute text-black text-4xl xl:text-[80px] top-[15vh] md:top-[8vh] tracking-widest">
         Peter Lippmann
       </h1>
     </div>

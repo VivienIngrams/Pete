@@ -35,7 +35,7 @@ const NavMenu2 = () => {
       >
         {/* Left: Logo / Title */}
         <Link href="/series" className="hover:text-gray-500">
-          <h1 className="text-3xl leading-[0.9] font-semibold">
+          <h1 className="text-3xl leading-[0.9] font-medium tracking-widest">
             Peter Lippmann
           </h1>
         </Link>

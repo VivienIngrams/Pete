@@ -31,13 +31,6 @@ h1 {
 
   font-weight: 500;
 
-  @screen md {
-    font-size: 32px; /* Medium screens */
-  }
-
-  @screen lg {
-    font-size: 35px; /* Large screens */
-  }
 }
 
 
