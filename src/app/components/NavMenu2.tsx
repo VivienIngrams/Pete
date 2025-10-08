@@ -8,7 +8,7 @@ import { useLanguage } from './context/LanguageProvider'
 import LanguageSwitcher from './LanguageSwitcher'
 import Socials from './Socials'
 
-const NavMenu = () => {
+const NavMenu2 = () => {
   const [isOpen, setIsOpen] = useState(false)
   const path = usePathname()
   const isHomePage = path === '/'
@@ -71,7 +71,7 @@ const NavMenu = () => {
       <div className="md:hidden fixed top-0 left-0 w-full bg-[#f6f5ee] z-50">
         <div className="flex items-center justify-between py-4 px-6">
           <Link href="/series">
-            <h1 className="text-xl font-semibold">Peter Lippmann</h1>
+            <h1 className="text-xl tracking-widest font-semibold">Peter Lippmann</h1>
           </Link>
           <button
             onClick={toggleMenu}
@@ -115,7 +115,7 @@ const NavMenu = () => {
 
       {/* Mobile dropdown menu */}
       <div
-        className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-[#f6f5ee] py-8 w-screen`}
+        className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-[#f6f5ee] py-6 w-screen`}
         id="mobile-menu"
         onClick={toggleMenu}
       >
@@ -142,4 +142,4 @@ const NavMenu = () => {
   )
 }
 
-export default NavMenu
+export default NavMenu2

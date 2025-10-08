@@ -9,7 +9,7 @@ import { readToken } from '~/sanity/lib/sanity.api'
 import { getClient } from '~/sanity/lib/sanity.client'
 import { getBioPage } from '~/sanity/lib/sanity.queries'
 
-import NavMenu from '../components/NavMenu'
+import NavMenu2 from '../components/NavMenu2'
 
 interface BiographyContent {
   biographyText: PortableTextBlock[] // Ensure this is an array of PortableTextBlocks
@@ -76,10 +76,10 @@ const Bio = async () => {
 
   return (
     <>
-      <NavMenu />
+      <NavMenu2 />
       <div className="min-h-screen mt-6 xl:mt-16 bg-[#f6f5ee]">
       <div className="xl:h-[90%] flex flex-col items-center justify-center mx-6 xl:w-1/3 xl:mx-auto">
-        <h1 className="text-2xl xl:text-4xl  w-full text-left font-genos py-12">
+        <h1 className="text-2xl xl:text-4xl  w-full text-left font-genos py-14">
           About
         </h1>
       

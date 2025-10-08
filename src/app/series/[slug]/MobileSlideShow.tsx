@@ -90,11 +90,11 @@ export default function MobileSlideshow({
       </div>
 
       {/* Mobile arrows: below image */}
-      <div className="flex w-full justify-between px-2 mt-2 md:hidden">
+      <div className="flex w-full justify-between px-2 mt-4 md:hidden">
         {currentIndex > 0 ? (
           <button
             onClick={handlePrev}
-            className="hover:bg-black/10 p-2 rounded-full"
+            className=""
           >
             <ChevronLeft className="w-8 h-8" />
           </button>
@@ -104,7 +104,7 @@ export default function MobileSlideshow({
         {currentIndex < post.images.length - 1 ? (
           <button
             onClick={handleNext}
-            className="hover:bg-black/10 p-2 rounded-full"
+            className=""
           >
             <ChevronRight className="w-8 h-8" />
           </button>
@@ -114,14 +114,14 @@ export default function MobileSlideshow({
       </div>
 
       {/* Overlay */}
-      <div className="absolute bottom-6 right-6 text-right bg-[#f6f5ee]/50 max-w-sm">
+      <div className=" bg-[#f6f5ee]/50 w-full px-4 py-4 ">
         {currentTitle && (
           <h1 className="text-2xl md:text-3xl font-bold">{currentTitle}</h1>
         )}
         {currentExcerpt && (
           <p className="mt-2 text-xs font-inter">{currentExcerpt}</p>
         )}
-        <div className="mt-3 flex justify-end">
+        <div className="mt-3 flex justify-start">
           <button
             onClick={() => setIsAboutOpen(true)}
             className=" text-base font-bold underline underline-offset-2 rounded-md tracking-wider"
