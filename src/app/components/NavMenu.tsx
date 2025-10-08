@@ -26,32 +26,37 @@ const NavMenu = () => {
   const toggleMenu = () => setIsOpen(!isOpen)
 
   return (
-    <nav className="fixed h-screen md:w-[10vw] md:ml-10 z-50 tracking-wider font-genos">
-    {/* Desktop menu */}
-    <div
-      className={`w-full flex items-start justify-start  ${isHomePage ? 'hidden' : '2xl:text-lg'}`}
-    >
-      <div className="flex items-start ">
-        <div className="hidden md:block">
-          <div className="flex flex-col items-baseline space-y-6">
+    <nav className="fixed top-0 left-0 w-full z-50 font-genos tracking-wider">
+      {/* Desktop menu */}
+      <div
+        className={`hidden md:flex items-center justify-between px-[8vw] py-[3vw] bg-[#f6f5ee] ${
+          isHomePage ? 'hidden' : ''
+        }`}
+      >
+        {/* Left: Logo / Title */}
+        <Link href="/series" className="hover:text-gray-500">
+          <h1 className="text-3xl leading-[0.9] font-medium tracking-widest">
+            Peter Lippmann
+          </h1>
+        </Link>
+
+        {/* Center: Menu items */}
+        <div className="flex items-center space-x-8 text-lg">
+          {!isSeriesPage && (
             <Link href="/series" className="hover:text-gray-500">
-              <h1 className="text-3xl mb-2 max-w-12 leading-none">Peter Lippmann</h1>
+              {menuItems.series[language] || menuItems.series.en}
             </Link>
-            {!isSeriesPage && (
-              <Link href="/series" className="hover:text-gray-500">
-                {menuItems.series[language] || menuItems.series.en}
-              </Link>
-            )}
-            <Link href="/bio" className="hover:text-gray-500">
-              {menuItems.bio[language] || menuItems.bio.en}
-            </Link>
-            <Link href="/commissions" className="hover:text-gray-500">
-              {menuItems.commissions[language] || menuItems.commissions.en}
-            </Link>
-            <Link href="/contact" className="hover:text-gray-500">
-              {menuItems.contact[language] || menuItems.contact.en}
-            </Link>
-            <Link href="/" className="hover:text-gray-500 font-semibold">
+          )}
+          <Link href="/bio" className="hover:text-gray-500">
+            {menuItems.bio[language] || menuItems.bio.en}
+          </Link>
+          <Link href="/commissions" className="hover:text-gray-500">
+            {menuItems.commissions[language] || menuItems.commissions.en}
+          </Link>
+          <Link href="/contact" className="hover:text-gray-500">
+            {menuItems.contact[language] || menuItems.contact.en}
+          </Link>
+          <Link href="/" className="hover:text-gray-500 font-semibold">
             Subscribe
           </Link>
         {/* Right: Socials */}
@@ -61,7 +66,7 @@ const NavMenu = () => {
         </div>
 
       </div>
-      </div>
+
       {/* Mobile header (unchanged) */}
       <div className="md:hidden fixed top-0 left-0 w-full bg-[#f6f5ee] z-50">
         <div className="flex items-center justify-between py-4 px-6">
@@ -132,7 +137,6 @@ const NavMenu = () => {
           </Link>
           <Socials />
         </div>
-      </div>
       </div>
     </nav>
   )
