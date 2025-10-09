@@ -25,6 +25,7 @@ export default function MobileSlideshow({
   const imageWrapperRef = useRef<HTMLDivElement>(null)
   const [imageBottom, setImageBottom] = useState(0)
   const [isAboutOpen, setIsAboutOpen] = useState(false)
+  const [isImageLoading, setIsImageLoading] = useState(true)
 
   // --- Swipe gesture refs ---
   const touchStartX = useRef<number | null>(null)
@@ -45,8 +46,15 @@ export default function MobileSlideshow({
   const current = post.images?.[currentIndex]
   if (!current) return <p>No images found.</p>
 
-  const currentTitle =
-    language === 'en' ? current.title_en || current.title_fr : current.title_fr
+  const postTitle =  language === 'en'
+  ? post.title_en || post.title
+  : post.title_en
+
+  const currentTitle = 
+    (language === 'en'
+      ? current.title_en || current.title_fr
+      : current.title_en) || `${postTitle} ${currentIndex + 1}`
+
   const currentExcerpt =
     language === 'en'
       ? current.excerpt_en || current.excerpt_fr
@@ -58,7 +66,9 @@ export default function MobileSlideshow({
   const handlePrev = () =>
     setCurrentIndex((prev) => (prev === 0 ? post.images!.length - 1 : prev - 1))
   const handleNext = () =>
-    setCurrentIndex((prev) => (prev === post.images.length - 1 ? 0 : prev + 1))
+    setCurrentIndex((prev) =>
+      prev === post.images.length - 1 ? 0 : prev + 1
+    )
 
   const handleClose = () => {
     if (document.referrer.includes('/series')) {
@@ -83,16 +93,10 @@ export default function MobileSlideshow({
     const diff = touchStartX.current - touchEndX.current
 
     if (Math.abs(diff) > 50) {
-      if (diff > 0) {
-        // Swipe left → next image
-        handleNext()
-      } else {
-        // Swipe right → previous image
-        handlePrev()
-      }
+      if (diff > 0) handleNext()
+      else handlePrev()
     }
 
-    // Reset refs
     touchStartX.current = null
     touchEndX.current = null
   }
@@ -102,20 +106,31 @@ export default function MobileSlideshow({
       <div
         ref={imageWrapperRef}
         className="relative w-full flex-shrink-0 flex items-center justify-center"
-        // 👇 Add swipe listeners
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
         {current.image && (
-          <Image
-            src={urlForImage(current.image).url() || ''}
-            alt={currentTitle || post.title}
-            width={1600}
-            height={1200}
-            className="w-auto max-h-[80vh] md:max-h-[95vh] object-contain transition-transform duration-300"
-            priority
-          />
+          <div className="relative w-auto max-h-[80vh] md:max-h-[95vh] flex items-center justify-center">
+            {/* Loading placeholder */}
+            {isImageLoading && (
+              <div className="absolute inset-0 flex items-center justify-center bg-[#eae8dd] animate-pulse">
+                <div className="w-16 h-16 border-4 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            )}
+
+            <Image
+              src={urlForImage(current.image).url() || ''}
+              alt={currentTitle || post.title}
+              width={1600}
+              height={1200}
+              className={`w-auto max-h-[80vh] md:max-h-[95vh] object-contain transition-opacity duration-500 ${
+                isImageLoading ? 'opacity-0' : 'opacity-100'
+              }`}
+              onLoadingComplete={() => setIsImageLoading(false)}
+              priority
+            />
+          </div>
         )}
 
         <button
@@ -126,7 +141,7 @@ export default function MobileSlideshow({
         </button>
       </div>
 
-      {/* Mobile arrows: always visible, wrap around */}
+      {/* Mobile arrows */}
       <div className="flex w-full justify-between px-4 mt-4 md:hidden">
         <button
           onClick={handlePrev}
@@ -160,6 +175,7 @@ export default function MobileSlideshow({
         </div>
       </div>
 
+      {/* About modal */}
       {isAboutOpen && (
         <div
           className="fixed inset-0 z-50 text-black bg-[#f6f5ee]/85 flex items-center justify-center px-4"

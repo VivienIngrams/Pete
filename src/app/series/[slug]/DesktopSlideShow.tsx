@@ -23,15 +23,25 @@ export default function DesktopSlideshow({
 }: Props) {
   const router = useRouter()
   const [isAboutOpen, setIsAboutOpen] = useState(false)
+  const [isImageLoading, setIsImageLoading] = useState(true)
+
   const current = post.images?.[currentIndex]
   if (!current) return <p>No images found.</p>
 
-  const currentTitle =
-    language === 'en' ? current.title_en || current.title_fr : current.title_fr
+  const postTitle =  language === 'en'
+  ? post.title_en || post.title
+  : post.title_en
+
+  const currentTitle = 
+    (language === 'en'
+      ? current.title_en || current.title_fr
+      : current.title_en) || `${postTitle} ${currentIndex + 1}`
+ 
+
   const currentExcerpt =
     language === 'en'
       ? current.excerpt_en || current.excerpt_fr
-      : current.excerpt_fr
+      : current.excerpt_en
 
   const handlePrev = () =>
     setCurrentIndex((prev) => (prev === 0 ? post.images!.length - 1 : prev - 1))
@@ -52,13 +62,23 @@ export default function DesktopSlideshow({
 
   return (
     <div className="relative w-full h-screen bg-[#f6f5ee] flex items-center py-10 justify-center hide-scrollbar ">
+        {/* Placeholder skeleton */}
+    {isImageLoading && (
+      <div className="absolute inset-0 flex items-center justify-center bg-[#eae8dd] animate-pulse">
+        <div className="w-16 h-16 border-4 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    )}
       {current.image && (
         <Image
           src={urlForImage(current.image).url() || ''}
           alt={currentTitle || post.title}
           width={1600}
           height={1200}
-          className="w-auto h-full object-contain"
+          className={`w-auto h-full object-contain transition-opacity duration-500 ${
+            isImageLoading ? 'opacity-0' : 'opacity-100'
+          }`}
+          onLoadingComplete={() => setIsImageLoading(false)}
+          
           priority
         />
       )}
