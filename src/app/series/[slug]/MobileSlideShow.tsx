@@ -126,22 +126,20 @@ export default function MobileSlideshow({
         </button>
       </div>
 
-      {/* Mobile arrows: below image */}
-      <div className="flex w-full justify-between px-2 mt-4 md:hidden">
-        {currentIndex > 0 ? (
-          <button onClick={handlePrev}>
-            <ChevronLeft className="w-8 h-8" />
-          </button>
-        ) : (
-          <div className="w-8" />
-        )}
-        {currentIndex < post.images.length - 1 ? (
-          <button onClick={handleNext}>
-            <ChevronRight className="w-8 h-8" />
-          </button>
-        ) : (
-          <div className="w-8" />
-        )}
+      {/* Mobile arrows: always visible, wrap around */}
+      <div className="flex w-full justify-between px-4 mt-4 md:hidden">
+        <button
+          onClick={handlePrev}
+          className="p-2 rounded-full bg-[#f6f5ee]/60 active:bg-[#f6f5ee]/90 transition"
+        >
+          <ChevronLeft className="w-8 h-8" />
+        </button>
+        <button
+          onClick={handleNext}
+          className="p-2 rounded-full bg-[#f6f5ee]/60 active:bg-[#f6f5ee]/90 transition"
+        >
+          <ChevronRight className="w-8 h-8" />
+        </button>
       </div>
 
       {/* Overlay */}
