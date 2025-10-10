@@ -115,7 +115,7 @@ const NavMenu = () => {
 
       {/* Mobile dropdown menu */}
       <div
-        className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-[#f6f5ee] py-14 w-screen`}
+        className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-[#f6f5ee] pt-16 pb-4 w-screen`}
         id="mobile-menu"
         onClick={toggleMenu}
       >
