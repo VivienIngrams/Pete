@@ -19,7 +19,7 @@ export default defineType({
     }),
     defineField({
       name: 'slug',
-      title: 'Click on "Generate"',
+      title: 'CLICK on the button "Generate" to automatically create the url',
       type: 'slug',
       validation: (Rule) => Rule.required(),
       options: {

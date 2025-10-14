@@ -74,7 +74,7 @@ export default function DesktopSlideshow({
           alt={currentTitle || post.title}
           width={1600}
           height={1200}
-          className={`w-auto h-full object-contain transition-opacity duration-500 ${
+          className={`w-auto h-full object-contain transition-opacity duration-500 max-w-[70vw] ${
             isImageLoading ? 'opacity-0' : 'opacity-100'
           }`}
           onLoadingComplete={() => setIsImageLoading(false)}
@@ -106,8 +106,8 @@ export default function DesktopSlideshow({
         </button>
       )}
 
-      <div className="absolute bottom-6 left-6  max-w-sm">
-        {currentTitle && <h1 className="text-xl md:text-2xl font-normal">{currentTitle}</h1>}
+      <div className="absolute bottom-6 left-6 max-w-[15vw]">
+        {currentTitle && <h1 className="text-xl md:text-2xl font-normal ">{currentTitle}</h1>}
         {currentExcerpt && <p className="mt-2 text-sm font-light font-roboto">{currentExcerpt}</p>}
         <div className="mt-3">
           <button
