@@ -37,7 +37,7 @@ export default async function PostPage({
     <>
     
       {/* Pass post data to client component */}
-      <PostSlideshow post={post} language={language}/>
+      <PostSlideshow post={post}/>
     </>
   )
 }

@@ -7,10 +7,9 @@ import MobileSlideshow from './MobileSlideShow'
 
 type Props = {
   post: Post
-  language: string
 }
 
-export default function PostSlideshow({ post, language }: Props) {
+export default function PostSlideshow({ post }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   return (
