@@ -103,9 +103,15 @@ export default function MobileSlideshow({
 
   return (
     <div className="relative w-full h-screen bg-[#f6f5ee] mt-6 flex flex-col items-center justify-center">
+      <button
+          onClick={handleClose}
+          className="fixed top-4 left-4 text-black text-xs tracking-wide underline underline-offset-2 z-50 font-normal"
+        >
+          close
+        </button>
       <div
         ref={imageWrapperRef}
-        className="relative w-full flex-shrink-0 flex items-center justify-center"
+        className="relative w-full flex-shrink-0 flex items-center justify-center  pt-10"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -133,12 +139,7 @@ export default function MobileSlideshow({
           </div>
         )}
 
-        <button
-          onClick={handleClose}
-          className="fixed top-4 left-4 text-black text-xs tracking-wide underline underline-offset-2 z-50 font-normal"
-        >
-          close
-        </button>
+        
       </div>
 
       {/* Mobile arrows */}

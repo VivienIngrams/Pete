@@ -38,7 +38,7 @@ const NavMenu = () => {
       >
         {/* Left: Logo / Title */}
         <Link href="/" className="hover:text-gray-500">
-          <h1 className="text-2xl font-light tracking-">Peter Lippmann</h1>
+          <h1 className="text-3xl font-light tracking-">Peter Lippmann</h1>
         </Link>
 
         {/* Center: Menu items */}
