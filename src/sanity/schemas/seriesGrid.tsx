@@ -2,7 +2,7 @@ import { defineField, defineType, defineArrayMember } from 'sanity'
 
 export default defineType({
   name: 'grid',
-  title: 'Series grid on Main page',
+  title: 'Icons on Main page',
   type: 'document',
   fields: [
     defineField({
