@@ -5,14 +5,17 @@ import Link from 'next/link'
 import Image from 'next/image'
 import type { Post } from '~/sanity/lib/sanity.queries'
 import { urlForImage } from '~/sanity/lib/sanity.image'
-import { PortableText } from '@portabletext/react'
+import { useLanguage } from '~/app/components/context/LanguageProvider'
 
 type Props = {
   posts: Post[]
-  language?: string
+  language?: string // optional prop fallback
 }
 
-export default function PostsGrid({ posts, language = 'fr' }: Props) {
+export default function PostsGrid({ posts, language }: Props) {
+  const { language: activeLang } = useLanguage()
+  const lang = language || activeLang || 'en'
+
   const [activeOverlay, setActiveOverlay] = useState<string | null>(null)
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null) // desktop hover only
 
@@ -26,11 +29,15 @@ export default function PostsGrid({ posts, language = 'fr' }: Props) {
     <div className="pt-4 md:pt-0 grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-0 overflow-hidden">
       {posts.map((post) => {
         const isActive = activeOverlay === post.slug.current
-   
+        const title =
+          lang === 'en'
+            ? post.title_en || post.title || ''
+            : post.title || post.title_en || ''
+
         return (
           <div
             key={post._id}
-            className="relative aspect-square  group overflow-hidden m-[-0.5px]"
+            className="relative aspect-square group overflow-hidden m-[-0.5px]"
             onClick={() => toggleOverlay(post.slug.current)}
             onMouseEnter={() => setHoveredSlug(post.slug.current)}
             onMouseLeave={() => setHoveredSlug(null)}
@@ -39,7 +46,7 @@ export default function PostsGrid({ posts, language = 'fr' }: Props) {
             {post.mainImage?.asset && (
               <Image
                 src={urlForImage(post.mainImage).url() as string}
-                alt={post.title}
+                alt={title}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className={`object-cover transition-opacity duration-300 scale-[1.01]
@@ -54,19 +61,16 @@ export default function PostsGrid({ posts, language = 'fr' }: Props) {
                 ${isActive ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
                 md:group-hover:opacity-100 md:pointer-events-auto`}
             >
-              {/* Centered title (both mobile and desktop) */}
+              {/* Centered title */}
               <div className="flex flex-col items-center justify-center h-full px-2 text-center">
                 <Link
                   href={`/series/${post.slug.current}`}
                   className="font-normal text-base md:text-lg underline-offset-2 underline transition-transform duration-200 md:hover:scale-105 mb-2 pointer-events-auto"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {post.title}
+                  {title}
                 </Link>
-               
               </div>
-
-             
             </div>
           </div>
         )
@@ -74,4 +78,3 @@ export default function PostsGrid({ posts, language = 'fr' }: Props) {
     </div>
   )
 }
-
