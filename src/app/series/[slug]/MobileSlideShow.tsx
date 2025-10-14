@@ -12,14 +12,12 @@ import { useLanguage } from '~/app/components/context/LanguageProvider'
 
 type Props = {
   post: Post
-  language: string
   currentIndex: number
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>
 }
 
 export default function MobileSlideshow({
   post,
-  language,
   currentIndex,
   setCurrentIndex,
 }: Props) {
@@ -51,7 +49,9 @@ export default function MobileSlideshow({
       : current.excerpt_fr || current.excerpt_en
 
       const postExcerptBlocks =
-      language === 'en' ? post.excerpt_en || post.excerpt : post.excerpt || post.excerpt_en
+      activeLang === 'en'
+        ? post.excerpt_en || post.excerpt
+        : post.excerpt || post.excerpt_en
     
   const handlePrev = () =>
     setCurrentIndex((prev) => (prev === 0 ? post.images!.length - 1 : prev - 1))

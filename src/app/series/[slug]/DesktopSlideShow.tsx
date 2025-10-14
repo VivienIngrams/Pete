@@ -12,14 +12,12 @@ import { useLanguage } from '~/app/components/context/LanguageProvider'
 
 type Props = {
   post: Post
-  language: string
   currentIndex: number
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>
 }
 
 export default function DesktopSlideshow({
   post,
-  language: initialLanguage,
   currentIndex,
   setCurrentIndex,
 }: Props) {
@@ -28,22 +26,22 @@ export default function DesktopSlideshow({
   const [isImageLoading, setIsImageLoading] = useState(true)
 
   // Use global language context instead of prop
-  const { language } = useLanguage()
+  const { language: activeLang } = useLanguage()
 
   const current = post.images?.[currentIndex]
   if (!current) return <p>No images found.</p>
 
   // Titles and excerpts depend on language
   const postTitle =
-    language === 'en' ? post.title_en || post.title : post.title || post.title
+    activeLang === 'en' ? post.title_en || post.title : post.title || post.title
 
   const currentTitle =
-    (language === 'en'
+    (activeLang === 'en'
       ? current.title_en || current.title_fr
       : current.title_fr || current.title_en) || `${postTitle} ${currentIndex + 1}`
 
   const currentExcerpt =
-    language === 'en'
+  activeLang === 'en'
       ? current.excerpt_en || current.excerpt_fr
       : current.excerpt_fr || current.excerpt_en
 
@@ -65,14 +63,14 @@ export default function DesktopSlideshow({
 
   // Dynamic post excerpt (updates instantly when language changes)
   const postExcerptBlocks =
-    language === 'en'
-      ? post.excerpt_en || post.excerpt
-      : post.excerpt || post.excerpt
+  activeLang === 'en'
+    ? post.excerpt_en || post.excerpt
+    : post.excerpt || post.excerpt_en
 
   // Translations for buttons
   const t = {
-    about: language === 'en' ? 'about' : 'à propos',
-    close: language === 'en' ? 'close' : 'fermer',
+    about: activeLang === 'en' ? 'about' : 'à propos',
+    close: activeLang === 'en' ? 'close' : 'fermer',
   }
 
   return (
@@ -165,7 +163,7 @@ export default function DesktopSlideshow({
 
             <div className="text-base font-roboto text-justify mb-6">
               {postExcerptBlocks && postExcerptBlocks.length ? (
-                <PortableText key={language} value={postExcerptBlocks} />
+                <PortableText key={activeLang} value={postExcerptBlocks} />
 
               ) : (
                 <p>No description available.</p>
