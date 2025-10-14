@@ -129,16 +129,16 @@ export default function MobileSlideshow({
       </div>
 
       {/* Navigation arrows */}
-      <div className="flex w-full justify-between px-4 mt-4 md:hidden">
+      <div className="flex w-full justify-between px-1 mt-4 md:hidden">
         <button
           onClick={handlePrev}
-          className="p-2 rounded-full bg-[#f6f5ee]/60 active:bg-[#f6f5ee]/90 transition"
+          className="rounded-full bg-[#f6f5ee]/60 active:bg-[#f6f5ee]/90 transition"
         >
           <ChevronLeft className="w-8 h-8" />
         </button>
         <button
           onClick={handleNext}
-          className="p-2 rounded-full bg-[#f6f5ee]/60 active:bg-[#f6f5ee]/90 transition"
+          className="rounded-full bg-[#f6f5ee]/60 active:bg-[#f6f5ee]/90 transition"
         >
           <ChevronRight className="w-8 h-8" />
         </button>
@@ -150,9 +150,9 @@ export default function MobileSlideshow({
           <h1 className="text-xl md:text-2xl font-normal">{currentTitle}</h1>
         )}
         {currentExcerpt && (
-          <div className="mt-2 text-xs font-roboto"><PortableText value={currentExcerpt} key={activeLang} /></div>
+          <div className="mt-3 text-xs font-roboto"><PortableText value={currentExcerpt} key={activeLang} /></div>
         )}
-        <div className="mt-3 flex justify-start">
+        <div className=" flex justify-start">
           <button
             onClick={() => setIsAboutOpen(true)}
             className="text-sm font-normal underline underline-offset-2 tracking-wide"
