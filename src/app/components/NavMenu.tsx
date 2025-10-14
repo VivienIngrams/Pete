@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
+import SubscribeModal from './SubscribeModal'
 
 import { useLanguage } from './context/LanguageProvider'
 import LanguageSwitcher from './LanguageSwitcher'
@@ -10,6 +11,8 @@ import Socials from './Socials'
 
 const NavMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [isSubscribeOpen, setIsSubscribeOpen] = useState(false)
+
   const path = usePathname()
   const isHomePage = path === '/'
   const isSeriesPage = path === '/series'
@@ -26,7 +29,7 @@ const NavMenu = () => {
   const toggleMenu = () => setIsOpen(!isOpen)
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 font-inter tracking-wide">
+    <nav className="fixed top-0 left-0 w-full z-50 font-roboto tracking-wide">
       {/* Desktop menu */}
       <div
         className={`hidden md:flex items-center justify-between px-[12vw] py-[3vw] bg-[#f6f5ee] ${
@@ -34,10 +37,8 @@ const NavMenu = () => {
         }`}
       >
         {/* Left: Logo / Title */}
-        <Link href="/series" className="hover:text-gray-500">
-          <h1 className="text-2xl font-light tracking-">
-            Peter Lippmann
-          </h1>
+        <Link href="/" className="hover:text-gray-500">
+          <h1 className="text-2xl font-light tracking-">Peter Lippmann</h1>
         </Link>
 
         {/* Center: Menu items */}
@@ -56,22 +57,27 @@ const NavMenu = () => {
           <Link href="/contact" className="hover:text-gray-500">
             {menuItems.contact[language] || menuItems.contact.en}
           </Link>
-          <Link href="/" className="hover:text-gray-500">
+          <button
+            onClick={() => setIsSubscribeOpen(true)}
+            className="hover:text-gray-500"
+          >
             Subscribe
-          </Link>
-        {/* Right: Socials */}
-        <div className="flex items-center space-x-4">
-          <Socials />
-        </div>
-        </div>
+          </button>
 
+          {/* Right: Socials */}
+          <div className="flex items-center space-x-4">
+            <Socials />
+          </div>
+        </div>
       </div>
 
       {/* Mobile header (unchanged) */}
       <div className="md:hidden fixed top-0 left-0 w-full bg-[#f6f5ee] z-50">
         <div className="flex items-center justify-between py-4 px-6">
-          <Link href="/series">
-            <h1 className="text-xl font-normal tracking-wide">Peter Lippmann</h1>
+          <Link href="/">
+            <h1 className="text-xl font-normal tracking-wide">
+              Peter Lippmann
+            </h1>
           </Link>
           <button
             onClick={toggleMenu}
@@ -132,12 +138,20 @@ const NavMenu = () => {
           <Link href="/contact" className="block">
             {menuItems.contact[language] || menuItems.contact.en}
           </Link>
-          <Link href="/" className="block font">
+          <button
+            onClick={() => setIsSubscribeOpen(true)}
+            className="hover:text-gray-500"
+          >
             Subscribe
-          </Link>
+          </button>
+
           <Socials />
         </div>
       </div>
+      <SubscribeModal
+        isOpen={isSubscribeOpen}
+        onClose={() => setIsSubscribeOpen(false)}
+      />
     </nav>
   )
 }

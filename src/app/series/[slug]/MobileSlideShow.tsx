@@ -163,7 +163,7 @@ export default function MobileSlideshow({
           <h1 className="text-xl md:text-2xl font-normal">{currentTitle}</h1>
         )}
         {currentExcerpt && (
-          <p className="mt-2 text-xs font-inter">{currentExcerpt}</p>
+          <p className="mt-2 text-xs font-roboto">{currentExcerpt}</p>
         )}
         <div className="mt-3 flex justify-start">
           <button
@@ -194,7 +194,7 @@ export default function MobileSlideshow({
                 close
               </button>
             </div>
-            <div className="text-xs font-inter text-justify">
+            <div className="text-xs font-roboto text-justify">
               {postExcerptBlocks && postExcerptBlocks.length ? (
                 <PortableText value={postExcerptBlocks} />
               ) : (

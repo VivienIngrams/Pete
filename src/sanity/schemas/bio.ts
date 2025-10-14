@@ -7,32 +7,32 @@ const localizedContentSchema = {
   
     {
       name: 'biographyText',
-      title: 'Première paragraphe de texte (sous la photo de profile, et à gauche sur ordinateur)',
+      title: 'Text',
       type: 'blockContent',
     },
     {
       name: 'biographyText2',
-      title: 'Texte biographie',
+      title: 'Text',
       type: 'blockContent',
     },
     {
       name: 'artisticTraining',
       type: 'array',
-      title: 'Formations artistiques',
+      title: 'Commissions',
       of: [{ type: 'string' }],
     },
 
     {
       name: 'organizer',
       type: 'array',
-      title: 'Organisateur, Animateur, Conférencier',
+      title: 'Publications',
       of: [{ type: 'string' }],
     },
 
     {
       name: 'exhibitions',
       type: 'array',
-      title: 'Expositions et publications',
+      title: 'Exhibitions',
       of: [{ type: 'string' }],
     },
   ],
@@ -64,12 +64,12 @@ export default defineType({
         },
         {
           name: 'en',
-          title: 'Anglais',
+          title: 'English',
           type: 'object',
           fields: localizedContentSchema.fields,
         },
       ],
-      description: 'Bloc de contenu riche pour la biographie.',
+      description: 'Text for the biography',
     },
   ],
 })

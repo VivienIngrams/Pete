@@ -24,8 +24,8 @@ const genos = Genos({
   subsets: ['latin'],
 })
 
-const inter = Roboto({
-  variable: '--font-family-inter',
+const roboto = Roboto({
+  variable: '--font-family-roboto',
   weight: [ '100', '300', '400', '500', '700' ],
   style: ['normal'],
   subsets: ['latin'],
@@ -44,9 +44,9 @@ export default function RootLayout({
   return (
     <html
       lang="en" // Default to 'en' initially; language will be dynamically set in client-side code
-      className={` ${genos.variable} ${inter.variable} ${smooch.variable}`}
+      className={` ${genos.variable} ${roboto.variable} ${smooch.variable}`}
     >
-      <body className="h-full bg-[#f6f5ee] font-inter">
+      <body className="h-full bg-[#f6f5ee] font-roboto">
         <LanguageProvider>
        
             {children}

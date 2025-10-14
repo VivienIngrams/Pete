@@ -108,7 +108,7 @@ export default function DesktopSlideshow({
 
       <div className="absolute bottom-6 left-6  max-w-sm">
         {currentTitle && <h1 className="text-xl md:text-2xl font-normal">{currentTitle}</h1>}
-        {currentExcerpt && <p className="mt-2 text-sm font-light font-inter">{currentExcerpt}</p>}
+        {currentExcerpt && <p className="mt-2 text-sm font-light font-roboto">{currentExcerpt}</p>}
         <div className="mt-3">
           <button
             onClick={() => setIsAboutOpen(true)}
@@ -137,7 +137,7 @@ export default function DesktopSlideshow({
                 close
               </button>
             </div>
-            <div className="text-base font-inter text-justify">
+            <div className="text-base font-roboto text-justify">
               {postExcerptBlocks && postExcerptBlocks.length ? (
                 <PortableText value={postExcerptBlocks} />
               ) : (

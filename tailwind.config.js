@@ -14,7 +14,7 @@ module.exports = {
       
       fontFamily: {
         genos: ['var(--font-family-genos)'],
-        inter: ['var(--font-family-inter)'],
+        roboto: ['var(--font-family-roboto)'],
         smooch:  ['var(--font-family-smooch)'],
       },
         backgroundImage: {
