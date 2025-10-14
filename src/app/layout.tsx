@@ -4,7 +4,7 @@ import './globals.css'
 
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
-import {  Genos, Inter, Smooch_Sans } from 'next/font/google'
+import {  Genos, Roboto, Smooch_Sans } from 'next/font/google'
 
 import { LanguageProvider } from './components/context/LanguageProvider'
 
@@ -24,9 +24,9 @@ const genos = Genos({
   subsets: ['latin'],
 })
 
-const inter = Inter({
+const inter = Roboto({
   variable: '--font-family-inter',
-  weight: [ '200', '300', '400', '600', '700', '800'],
+  weight: [ '100', '300', '400', '500', '700' ],
   style: ['normal'],
   subsets: ['latin'],
 })
@@ -46,7 +46,7 @@ export default function RootLayout({
       lang="en" // Default to 'en' initially; language will be dynamically set in client-side code
       className={` ${genos.variable} ${inter.variable} ${smooch.variable}`}
     >
-      <body className="h-full bg-[#f6f5ee] font-genos">
+      <body className="h-full bg-[#f6f5ee] font-inter">
         <LanguageProvider>
        
             {children}

@@ -26,7 +26,7 @@ const NavMenu = () => {
   const toggleMenu = () => setIsOpen(!isOpen)
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 font-genos tracking-wider">
+    <nav className="fixed top-0 left-0 w-full z-50 font-inter tracking-wide">
       {/* Desktop menu */}
       <div
         className={`hidden md:flex items-center justify-between px-[8vw] py-[3vw] bg-[#f6f5ee] ${
@@ -35,13 +35,13 @@ const NavMenu = () => {
       >
         {/* Left: Logo / Title */}
         <Link href="/series" className="hover:text-gray-500">
-          <h1 className="text-3xl leading-[0.9] font-medium tracking-widest">
+          <h1 className="text-2xl font-light tracking-">
             Peter Lippmann
           </h1>
         </Link>
 
         {/* Center: Menu items */}
-        <div className="flex items-center space-x-8 text-lg">
+        <div className="flex items-center space-x-8 text-base font-light">
           {!isSeriesPage && (
             <Link href="/series" className="hover:text-gray-500">
               {menuItems.series[language] || menuItems.series.en}
@@ -56,7 +56,7 @@ const NavMenu = () => {
           <Link href="/contact" className="hover:text-gray-500">
             {menuItems.contact[language] || menuItems.contact.en}
           </Link>
-          <Link href="/" className="hover:text-gray-500 font-semibold">
+          <Link href="/" className="hover:text-gray-500">
             Subscribe
           </Link>
         {/* Right: Socials */}
@@ -71,7 +71,7 @@ const NavMenu = () => {
       <div className="md:hidden fixed top-0 left-0 w-full bg-[#f6f5ee] z-50">
         <div className="flex items-center justify-between py-4 px-6">
           <Link href="/series">
-            <h1 className="text-[22px] tracking-widest font-medium">Peter Lippmann</h1>
+            <h1 className="text-[22px] font-medium">Peter Lippmann</h1>
           </Link>
           <button
             onClick={toggleMenu}

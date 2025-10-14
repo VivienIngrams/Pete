@@ -95,7 +95,7 @@ const ContactForm: React.FC<{ language: string }> = ({ language }) => {
       action="/api"
       encType="multipart/form-data"
       onSubmit={handleSubmit}
-      className="font-genos w-full"
+      className="font-inter w-full"
     >
       <div className="flex flex-col">
         <label htmlFor="name" className=" text-sm py-1">

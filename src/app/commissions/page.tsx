@@ -12,7 +12,7 @@ export default function ContactPage() {
     <NavMenu/>
     <div className="min-h-screen mt-6 xl:mt-16 bg-[#f6f5ee]">
       <div className="xl:h-[90%] flex flex-col items-center justify-center mx-6 xl:w-1/3 xl:mx-auto">
-        <h1 className="text-2xl xl:text-4xl  w-full text-left font-genos py-14">
+        <h1 className="text-2xl xl:text-4xl  w-full text-left font-inter py-14">
           Commissions
         </h1>
       
