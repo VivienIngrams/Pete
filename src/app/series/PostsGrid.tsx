@@ -23,7 +23,7 @@ export default function PostsGrid({ posts, language = 'fr' }: Props) {
   }
 
   return (
-    <div className="pt-4 md:pt-0 grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-0 border border-[#f6f5ee]">
+    <div className="pt-4 md:pt-0 grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-0 ">
       {posts.map((post) => {
         const isActive = activeOverlay === post.slug.current
    
@@ -42,7 +42,7 @@ export default function PostsGrid({ posts, language = 'fr' }: Props) {
                 alt={post.title}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                className={`object-cover transition-opacity duration-300
+                className={`object-cover transition-opacity duration-300 scale-[1.01]
                   ${isActive ? 'opacity-20' : 'opacity-100'}
                   md:group-hover:opacity-20`}
               />
