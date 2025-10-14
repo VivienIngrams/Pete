@@ -1,56 +1,53 @@
-// components/context/LanguageProvider.tsx
-
 'use client'
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react'
 
 // Create context to provide and consume language state
-const LanguageContext = createContext(null);
+const LanguageContext = createContext(null)
 
 export const useLanguage = () => {
-  return useContext(LanguageContext);
-};
+  return useContext(LanguageContext)
+}
 
 // Helper function to get language from cookies
 const getLanguageFromCookies = () => {
   if (typeof document !== 'undefined') {
-    const match = document.cookie.match(/language=([^;]+)/);
-    return match ? match[1] : 'fr'; // Default to 'en'
+    const match = document.cookie.match(/language=([^;]+)/)
+    return match ? match[1] : 'fr' // Default to 'fr'
   }
-  return 'fr'; // Fallback if document is undefined (e.g., server-side)
-};
+  return 'fr'
+}
 
 // Helper function to set language in cookies
-const setLanguageInCookies = (language) => {
-  document.cookie = `language=${language}; path=/; max-age=${60 * 60 * 24 * 365}`; // 1 year expiration
-};
+const setLanguageInCookies = (language: string) => {
+  document.cookie = `language=${language}; path=/; max-age=${60 * 60 * 24 * 365}` // 1 year expiration
+}
 
-export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState('fr');
+export const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
+  const [language, setLanguage] = useState('fr')
 
-  // Set the language after initial render
+  // Load language from cookies on mount
   useEffect(() => {
-    const initialLanguage = getLanguageFromCookies(); // Fetch language from cookies
-    setLanguage(initialLanguage); // Set language in state
-    // Update the document's lang attribute on client side after hydration
+    const initialLanguage = getLanguageFromCookies()
+    setLanguage(initialLanguage)
     if (typeof document !== 'undefined') {
-      document.documentElement.lang = initialLanguage;
+      document.documentElement.lang = initialLanguage
     }
-  }, []);
+  }, [])
 
   const toggleLanguage = () => {
-    const newLanguage = language === 'en' ? 'fr' : 'en';
-    setLanguage(newLanguage); // Update state
-    setLanguageInCookies(newLanguage); // Update cookie
+    const newLanguage = language === 'en' ? 'fr' : 'en'
+    setLanguage(newLanguage)
+    setLanguageInCookies(newLanguage)
     if (typeof document !== 'undefined') {
-      document.documentElement.lang = newLanguage; // Update lang attribute on HTML element
+      document.documentElement.lang = newLanguage
     }
-    window.location.reload(); // Force reload to apply the language change
-  };
+    // ❌ No window.location.reload() — let React rerender naturally
+  }
 
   return (
     <LanguageContext.Provider value={{ language, toggleLanguage }}>
       {children}
     </LanguageContext.Provider>
-  );
-};
+  )
+}

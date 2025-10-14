@@ -21,7 +21,7 @@ const NavMenu = () => {
 
   const menuItems = {
     series: { en: 'Series', fr: 'Séries' },
-    bio: { en: 'About', fr: 'About' },
+    bio: { en: 'About', fr: 'Bio' },
     commissions: { en: 'Commissions', fr: 'Commissions' },
     contact: { en: 'Contact', fr: 'Contact' },
   }
@@ -57,6 +57,7 @@ const NavMenu = () => {
           <Link href="/contact" className="hover:text-gray-500">
             {menuItems.contact[language] || menuItems.contact.en}
           </Link>
+
           <button
             onClick={() => setIsSubscribeOpen(true)}
             className="hover:text-gray-500"
@@ -64,14 +65,15 @@ const NavMenu = () => {
             Subscribe
           </button>
 
-          {/* Right: Socials */}
-          <div className="flex items-center space-x-4">
+          {/* Right: Socials + Language */}
+          <div className="flex items-center space-x-6">
             <Socials />
+            <LanguageSwitcher />
           </div>
         </div>
       </div>
 
-      {/* Mobile header (unchanged) */}
+      {/* Mobile header */}
       <div className="md:hidden fixed top-0 left-0 w-full bg-[#f6f5ee] z-50">
         <div className="flex items-center justify-between py-4 px-6">
           <Link href="/">
@@ -121,7 +123,9 @@ const NavMenu = () => {
 
       {/* Mobile dropdown menu */}
       <div
-        className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-[#f6f5ee] pt-16 pb-4 w-screen`}
+        className={`${
+          isOpen ? 'block' : 'hidden'
+        } md:hidden bg-[#f6f5ee] pt-16 pb-4 w-screen`}
         id="mobile-menu"
         onClick={toggleMenu}
       >
@@ -138,6 +142,7 @@ const NavMenu = () => {
           <Link href="/contact" className="block">
             {menuItems.contact[language] || menuItems.contact.en}
           </Link>
+
           <button
             onClick={() => setIsSubscribeOpen(true)}
             className="hover:text-gray-500"
@@ -146,8 +151,15 @@ const NavMenu = () => {
           </button>
 
           <Socials />
+
+          {/* Language Switcher (mobile) */}
+          <div className="">
+            <LanguageSwitcher />
+          </div>
         </div>
       </div>
+
+      {/* Subscribe Modal */}
       <SubscribeModal
         isOpen={isSubscribeOpen}
         onClose={() => setIsSubscribeOpen(false)}

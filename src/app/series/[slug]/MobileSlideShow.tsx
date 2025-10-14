@@ -7,6 +7,8 @@ import { useRef, useState, useEffect } from 'react'
 import type { Post } from '~/sanity/lib/sanity.queries'
 import { urlForImage } from '~/sanity/lib/sanity.image'
 import { PortableText } from '@portabletext/react'
+import LanguageSwitcher from '~/app/components/LanguageSwitcher'
+import { useLanguage } from '~/app/components/context/LanguageProvider'
 
 type Props = {
   post: Post
@@ -23,45 +25,33 @@ export default function MobileSlideshow({
 }: Props) {
   const router = useRouter()
   const imageWrapperRef = useRef<HTMLDivElement>(null)
-  const [imageBottom, setImageBottom] = useState(0)
   const [isAboutOpen, setIsAboutOpen] = useState(false)
   const [isImageLoading, setIsImageLoading] = useState(true)
+  const { language: activeLang } = useLanguage() // 🔥 live language context
 
   // --- Swipe gesture refs ---
   const touchStartX = useRef<number | null>(null)
   const touchEndX = useRef<number | null>(null)
 
-  useEffect(() => {
-    const updatePosition = () => {
-      if (imageWrapperRef.current) {
-        const rect = imageWrapperRef.current.getBoundingClientRect()
-        setImageBottom(rect.bottom)
-      }
-    }
-    updatePosition()
-    window.addEventListener('resize', updatePosition)
-    return () => window.removeEventListener('resize', updatePosition)
-  }, [currentIndex])
-
   const current = post.images?.[currentIndex]
   if (!current) return <p>No images found.</p>
 
-  const postTitle =  language === 'en'
-  ? post.title_en || post.title
-  : post.title_en
+  // --- Titles & text (use activeLang for reactivity) ---
+  const postTitle =
+    activeLang === 'en' ? post.title_en || post.title : post.title
 
-  const currentTitle = 
-    (language === 'en'
+  const currentTitle =
+    (activeLang === 'en'
       ? current.title_en || current.title_fr
-      : current.title_en) || `${postTitle} ${currentIndex + 1}`
+      : current.title_fr || current.title_en) || `${postTitle} ${currentIndex + 1}`
 
   const currentExcerpt =
-    language === 'en'
+    activeLang === 'en'
       ? current.excerpt_en || current.excerpt_fr
-      : current.excerpt_fr
+      : current.excerpt_fr || current.excerpt_en
 
   const postExcerptBlocks =
-    language === 'en' ? post.excerpt_en || post.excerpt : post.excerpt
+    activeLang === 'en' ? post.excerpt_en || post.excerpt : post.excerpt
 
   const handlePrev = () =>
     setCurrentIndex((prev) => (prev === 0 ? post.images!.length - 1 : prev - 1))
@@ -71,11 +61,8 @@ export default function MobileSlideshow({
     )
 
   const handleClose = () => {
-    if (document.referrer.includes('/series')) {
-      router.back()
-    } else {
-      router.push(`/series#${post.slug.current}`)
-    }
+    if (document.referrer.includes('/series')) router.back()
+    else router.push(`/series#${post.slug.current}`)
   }
 
   // --- Swipe Handlers ---
@@ -89,36 +76,38 @@ export default function MobileSlideshow({
 
   const handleTouchEnd = () => {
     if (touchStartX.current === null || touchEndX.current === null) return
-
     const diff = touchStartX.current - touchEndX.current
-
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) handleNext()
-      else handlePrev()
-    }
-
+    if (Math.abs(diff) > 50) diff > 0 ? handleNext() : handlePrev()
     touchStartX.current = null
     touchEndX.current = null
   }
 
+  // --- Translations ---
+  const t = {
+    about: activeLang === 'en' ? 'about' : 'à propos',
+    close: activeLang === 'en' ? 'close' : 'fermer',
+  }
+
   return (
     <div className="relative w-full h-screen bg-[#f6f5ee] mt-6 flex flex-col items-center justify-center">
+      {/* Close button */}
       <button
-          onClick={handleClose}
-          className="fixed top-4 left-4 text-black text-xs tracking-wide underline underline-offset-2 z-50 font-normal"
-        >
-          close
-        </button>
+        onClick={handleClose}
+        className="fixed top-4 left-4 text-black text-xs tracking-wide underline underline-offset-2 z-50 font-normal"
+      >
+        {t.close}
+      </button>
+
+      {/* Image + swipe area */}
       <div
         ref={imageWrapperRef}
-        className="relative w-full flex-shrink-0 flex items-center justify-center  pt-10"
+        className="relative w-full flex-shrink-0 flex items-center justify-center pt-10"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
         {current.image && (
           <div className="relative w-auto max-h-[80vh] md:max-h-[95vh] flex items-center justify-center">
-            {/* Loading placeholder */}
             {isImageLoading && (
               <div className="absolute inset-0 flex items-center justify-center bg-[#eae8dd] animate-pulse">
                 <div className="w-16 h-16 border-4 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
@@ -138,11 +127,9 @@ export default function MobileSlideshow({
             />
           </div>
         )}
-
-        
       </div>
 
-      {/* Mobile arrows */}
+      {/* Navigation arrows */}
       <div className="flex w-full justify-between px-4 mt-4 md:hidden">
         <button
           onClick={handlePrev}
@@ -158,7 +145,7 @@ export default function MobileSlideshow({
         </button>
       </div>
 
-      {/* Overlay */}
+      {/* Caption overlay */}
       <div className="bg-[#f6f5ee]/50 w-full px-4 py-4">
         {currentTitle && (
           <h1 className="text-xl md:text-2xl font-normal">{currentTitle}</h1>
@@ -171,7 +158,7 @@ export default function MobileSlideshow({
             onClick={() => setIsAboutOpen(true)}
             className="text-sm font-normal underline underline-offset-2 tracking-wide"
           >
-            about
+            {t.about}
           </button>
         </div>
       </div>
@@ -179,7 +166,7 @@ export default function MobileSlideshow({
       {/* About modal */}
       {isAboutOpen && (
         <div
-          className="fixed inset-0 z-50 text-black bg-[#f6f5ee]/85 flex items-center justify-center px-4"
+          className="fixed inset-0 z-50 text-black bg-[#f6f5ee]/90 flex items-center justify-center px-4"
           onClick={() => setIsAboutOpen(false)}
         >
           <div
@@ -187,12 +174,12 @@ export default function MobileSlideshow({
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-start mb-4">
-              <h2 className="text-xl font-normal">{post.title}</h2>
+              <h2 className="text-xl font-normal">{postTitle}</h2>
               <button
                 onClick={() => setIsAboutOpen(false)}
                 className="text-xs fixed top-4 left-4 tracking-wide underline underline-offset-2 bg-[#f6f5ee]"
               >
-                close
+                {t.close}
               </button>
             </div>
             <div className="text-xs font-roboto text-justify">
@@ -201,6 +188,11 @@ export default function MobileSlideshow({
               ) : (
                 <p>No description available.</p>
               )}
+            </div>
+
+            {/* Inline Language Switcher */}
+            <div className="p-4 flex justify-center ">
+              <LanguageSwitcher />
             </div>
           </div>
         </div>
