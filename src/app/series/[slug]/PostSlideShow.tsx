@@ -18,7 +18,6 @@ export default function PostSlideshow({ post, language }: Props) {
       <div className="hidden md:block">
         <DesktopSlideshow
           post={post}
-          language={language}
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
         />
@@ -26,7 +25,6 @@ export default function PostSlideshow({ post, language }: Props) {
       <div className="block md:hidden">
         <MobileSlideshow
           post={post}
-          language={language}
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
         />
