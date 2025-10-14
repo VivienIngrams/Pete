@@ -135,7 +135,7 @@ export default function MobileSlideshow({
 
         <button
           onClick={handleClose}
-          className="fixed top-4 left-4 text-black text-sm tracking-wider underline underline-offset-2 z-50 font-bold"
+          className="fixed top-4 left-4 text-black text-xs tracking-wide underline underline-offset-2 z-50 font-normal"
         >
           close
         </button>
@@ -160,7 +160,7 @@ export default function MobileSlideshow({
       {/* Overlay */}
       <div className="bg-[#f6f5ee]/50 w-full px-4 py-4">
         {currentTitle && (
-          <h1 className="text-2xl md:text-3xl font-bold">{currentTitle}</h1>
+          <h1 className="text-xl md:text-2xl font-normal">{currentTitle}</h1>
         )}
         {currentExcerpt && (
           <p className="mt-2 text-xs font-inter">{currentExcerpt}</p>
@@ -168,7 +168,7 @@ export default function MobileSlideshow({
         <div className="mt-3 flex justify-start">
           <button
             onClick={() => setIsAboutOpen(true)}
-            className="text-base font-bold underline underline-offset-2 rounded-md tracking-wider"
+            className="text-sm font-normal underline underline-offset-2 tracking-wide"
           >
             about
           </button>
@@ -186,15 +186,15 @@ export default function MobileSlideshow({
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-start mb-4">
-              <h2 className="text-2xl font-bold">{post.title}</h2>
+              <h2 className="text-xl font-normal">{post.title}</h2>
               <button
                 onClick={() => setIsAboutOpen(false)}
-                className="text-sm fixed top-4 left-4 tracking-wider underline underline-offset-2 bg-[#f6f5ee]"
+                className="text-xs fixed top-4 left-4 tracking-wide underline underline-offset-2 bg-[#f6f5ee]"
               >
                 close
               </button>
             </div>
-            <div className="text-sm font-inter text-justify">
+            <div className="text-xs font-inter text-justify">
               {postExcerptBlocks && postExcerptBlocks.length ? (
                 <PortableText value={postExcerptBlocks} />
               ) : (

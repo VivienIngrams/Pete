@@ -84,7 +84,7 @@ export default function DesktopSlideshow({
       )}
       <button
         onClick={handleClose}
-        className="absolute text-lg text-black tracking-wider underline underline-offset-2 top-6 left-6 z-50 font-semibold hover:font-extrabold rounded-full"
+        className="absolute text-base text-black tracking-wide underline underline-offset-2 top-6 left-6 z-50 font-normal hover:font-boldl"
       >
         close
       </button>
@@ -107,12 +107,12 @@ export default function DesktopSlideshow({
       )}
 
       <div className="absolute bottom-6 left-6  max-w-sm">
-        {currentTitle && <h1 className="text-2xl md:text-3xl font-bold">{currentTitle}</h1>}
-        {currentExcerpt && <p className="mt-2 text-base font-inter">{currentExcerpt}</p>}
+        {currentTitle && <h1 className="text-xl md:text-2xl font-normal">{currentTitle}</h1>}
+        {currentExcerpt && <p className="mt-2 text-sm font-light font-inter">{currentExcerpt}</p>}
         <div className="mt-3">
           <button
             onClick={() => setIsAboutOpen(true)}
-            className=" text-lg font-bold underline underline-offset-2 rounded-md tracking-wider"
+            className=" text-base font-normal underline underline-offset-2 rounded-md tracking-wider"
           >
             about
           </button>
@@ -129,10 +129,10 @@ export default function DesktopSlideshow({
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-start mb-4">
-              <h2 className="text-4xl font-bold">{post.title}</h2>
+              <h2 className="text-3xl font-normal">{post.title}</h2>
               <button
                 onClick={() => setIsAboutOpen(false)}
-                className="absolute text-lg underline underline-offset-2 top-6 left-6 z-50 font-semibold hover:font-extrabold tracking-wider bg-[#f6f5ee]"
+                className="absolute text-base underline underline-offset-2 top-6 left-6 z-50 font-normal hover:font-bold tracking-wide bg-[#f6f5ee]"
                 >
                 close
               </button>

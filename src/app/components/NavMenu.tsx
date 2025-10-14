@@ -71,7 +71,7 @@ const NavMenu = () => {
       <div className="md:hidden fixed top-0 left-0 w-full bg-[#f6f5ee] z-50">
         <div className="flex items-center justify-between py-4 px-6">
           <Link href="/series">
-            <h1 className="text-[22px] font-medium">Peter Lippmann</h1>
+            <h1 className="text-xl font-normal tracking-wide">Peter Lippmann</h1>
           </Link>
           <button
             onClick={toggleMenu}
@@ -119,7 +119,7 @@ const NavMenu = () => {
         id="mobile-menu"
         onClick={toggleMenu}
       >
-        <div className="px-6 space-y-3 text-md">
+        <div className="px-6 space-y-3 text-base">
           <Link href="/series" className="block">
             {menuItems.series[language] || menuItems.series.en}
           </Link>
@@ -132,7 +132,7 @@ const NavMenu = () => {
           <Link href="/contact" className="block">
             {menuItems.contact[language] || menuItems.contact.en}
           </Link>
-          <Link href="/" className="block font-semibold">
+          <Link href="/" className="block font">
             Subscribe
           </Link>
           <Socials />
