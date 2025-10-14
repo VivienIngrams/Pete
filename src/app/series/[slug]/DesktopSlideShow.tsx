@@ -84,7 +84,7 @@ export default function DesktopSlideshow({
       )}
       <button
         onClick={handleClose}
-        className="absolute text-base text-black tracking-wide underline underline-offset-2 top-6 left-6 z-50 font-normal hover:font-boldl"
+        className="absolute text-base text-black tracking-wide underline underline-offset-2 top-6 left-6 z-50 font-normal hover:font-bold"
       >
         close
       </button>
@@ -112,7 +112,7 @@ export default function DesktopSlideshow({
         <div className="mt-3">
           <button
             onClick={() => setIsAboutOpen(true)}
-            className=" text-base font-normal underline underline-offset-2 rounded-md tracking-wider"
+            className=" text-base font-normal underline underline-offset-2 rounded-md tracking-wide hover:font-bold"
           >
             about
           </button>
