@@ -23,14 +23,14 @@ export default function PostsGrid({ posts, language = 'fr' }: Props) {
   }
 
   return (
-    <div className="pt-4 md:pt-0 grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-0 ">
+    <div className="pt-4 md:pt-0 grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-0 overflow-hidden">
       {posts.map((post) => {
         const isActive = activeOverlay === post.slug.current
    
         return (
           <div
             key={post._id}
-            className="relative aspect-square  group overflow-hidden"
+            className="relative aspect-square  group overflow-hidden m-[-0.5px]"
             onClick={() => toggleOverlay(post.slug.current)}
             onMouseEnter={() => setHoveredSlug(post.slug.current)}
             onMouseLeave={() => setHoveredSlug(null)}
