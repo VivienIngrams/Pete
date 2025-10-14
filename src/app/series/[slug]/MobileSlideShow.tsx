@@ -50,9 +50,9 @@ export default function MobileSlideshow({
       ? current.excerpt_en || current.excerpt_fr
       : current.excerpt_fr || current.excerpt_en
 
-  const postExcerptBlocks =
-    activeLang === 'en' ? post.excerpt_en || post.excerpt : post.excerpt
-
+      const postExcerptBlocks =
+      language === 'en' ? post.excerpt_en || post.excerpt : post.excerpt || post.excerpt_en
+    
   const handlePrev = () =>
     setCurrentIndex((prev) => (prev === 0 ? post.images!.length - 1 : prev - 1))
   const handleNext = () =>
@@ -184,7 +184,7 @@ export default function MobileSlideshow({
             </div>
             <div className="text-xs font-roboto text-justify">
               {postExcerptBlocks && postExcerptBlocks.length ? (
-                <PortableText value={postExcerptBlocks} />
+                <PortableText value={postExcerptBlocks} key={activeLang} />
               ) : (
                 <p>No description available.</p>
               )}

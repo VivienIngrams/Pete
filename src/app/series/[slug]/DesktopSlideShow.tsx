@@ -156,7 +156,7 @@ export default function DesktopSlideshow({
               {t.close}
             </button>
           <div
-            className="relative max-w-2xl w-full max-h-[80vh] overflow-auto"
+            className="relative max-w-2xl w-full max-h-[80vh] overflow-auto hide-scrollbar"
             onClick={(e) => e.stopPropagation()}
           >
             
@@ -165,7 +165,8 @@ export default function DesktopSlideshow({
 
             <div className="text-base font-roboto text-justify mb-6">
               {postExcerptBlocks && postExcerptBlocks.length ? (
-                <PortableText value={postExcerptBlocks} />
+                <PortableText key={language} value={postExcerptBlocks} />
+
               ) : (
                 <p>No description available.</p>
               )}
