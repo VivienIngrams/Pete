@@ -38,10 +38,11 @@ export default function DesktopSlideshow({
   const currentTitle =
     (activeLang === 'en'
       ? current.title_en || current.title_fr
-      : current.title_fr || current.title_en) || `${postTitle} ${currentIndex + 1}`
+      : current.title_fr || current.title_en) ||
+    `${postTitle} ${currentIndex + 1}`
 
   const currentExcerpt =
-  activeLang === 'en'
+    activeLang === 'en'
       ? current.excerpt_en || current.excerpt_fr
       : current.excerpt_fr || current.excerpt_en
 
@@ -49,9 +50,7 @@ export default function DesktopSlideshow({
     setCurrentIndex((prev) => (prev === 0 ? post.images!.length - 1 : prev - 1))
 
   const handleNext = () =>
-    setCurrentIndex((prev) =>
-      prev === post.images.length - 1 ? 0 : prev + 1
-    )
+    setCurrentIndex((prev) => (prev === post.images.length - 1 ? 0 : prev + 1))
 
   const handleClose = () => {
     if (document.referrer.includes('/series')) {
@@ -63,9 +62,9 @@ export default function DesktopSlideshow({
 
   // Dynamic post excerpt (updates instantly when language changes)
   const postExcerptBlocks =
-  activeLang === 'en'
-    ? post.excerpt_en || post.excerpt
-    : post.excerpt || post.excerpt_en
+    activeLang === 'en'
+      ? post.excerpt_en || post.excerpt
+      : post.excerpt || post.excerpt_en
 
   // Translations for buttons
   const t = {
@@ -129,7 +128,9 @@ export default function DesktopSlideshow({
           <h1 className="text-xl md:text-2xl font-normal">{currentTitle}</h1>
         )}
         {currentExcerpt && (
-          <p className="mt-2 text-sm font-light font-roboto">{currentExcerpt}</p>
+          <p className="mt-2 text-sm font-light font-roboto">
+            {currentExcerpt}
+          </p>
         )}
         <div className="mt-3">
           <button
@@ -148,32 +149,30 @@ export default function DesktopSlideshow({
           onClick={() => setIsAboutOpen(false)}
         >
           <button
-              onClick={() => setIsAboutOpen(false)}
-              className="absolute text-base underline underline-offset-2 top-6 left-6 z-50 font-normal hover:font-bold tracking-wide bg-[#f6f5ee]"
-            >
-              {t.close}
-            </button>
+            onClick={() => setIsAboutOpen(false)}
+            className="absolute text-base underline underline-offset-2 top-6 left-6 z-50 font-normal hover:font-bold tracking-wide bg-[#f6f5ee]"
+          >
+            {t.close}
+          </button>
           <div
             className="relative max-w-2xl w-full max-h-[80vh] overflow-auto hide-scrollbar"
             onClick={(e) => e.stopPropagation()}
           >
-            
+            {/* Live language switcher inside modal */}
+            <div className="flex justify-end">
+              <LanguageSwitcher />
+            </div>
 
             <h2 className="text-3xl font-normal mb-4">{postTitle}</h2>
 
             <div className="text-base font-roboto text-justify mb-6">
               {postExcerptBlocks && postExcerptBlocks.length ? (
                 <PortableText key={activeLang} value={postExcerptBlocks} />
-
               ) : (
                 <p>No description available.</p>
               )}
             </div>
 
-            {/* Live language switcher inside modal */}
-            <div className="flex justify-start">
-              <LanguageSwitcher />
-            </div>
           </div>
         </div>
       )}

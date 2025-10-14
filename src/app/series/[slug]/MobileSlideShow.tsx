@@ -41,24 +41,23 @@ export default function MobileSlideshow({
   const currentTitle =
     (activeLang === 'en'
       ? current.title_en || current.title_fr
-      : current.title_fr || current.title_en) || `${postTitle} ${currentIndex + 1}`
+      : current.title_fr || current.title_en) ||
+    `${postTitle} ${currentIndex + 1}`
 
   const currentExcerpt =
     activeLang === 'en'
       ? current.excerpt_en || current.excerpt_fr
       : current.excerpt_fr || current.excerpt_en
 
-      const postExcerptBlocks =
-      activeLang === 'en'
-        ? post.excerpt_en || post.excerpt
-        : post.excerpt || post.excerpt_en
-    
+  const postExcerptBlocks =
+    activeLang === 'en'
+      ? post.excerpt_en || post.excerpt
+      : post.excerpt || post.excerpt_en
+
   const handlePrev = () =>
     setCurrentIndex((prev) => (prev === 0 ? post.images!.length - 1 : prev - 1))
   const handleNext = () =>
-    setCurrentIndex((prev) =>
-      prev === post.images.length - 1 ? 0 : prev + 1
-    )
+    setCurrentIndex((prev) => (prev === post.images.length - 1 ? 0 : prev + 1))
 
   const handleClose = () => {
     if (document.referrer.includes('/series')) router.back()
@@ -173,6 +172,11 @@ export default function MobileSlideshow({
             className="max-w-2xl w-full max-h-[80vh] overflow-auto p-6"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Inline Language Switcher */}
+            <div className=" flex justify-end ">
+              <LanguageSwitcher />
+            </div>
+
             <div className="flex justify-between items-start mb-4">
               <h2 className="text-xl font-normal">{postTitle}</h2>
               <button
@@ -188,11 +192,6 @@ export default function MobileSlideshow({
               ) : (
                 <p>No description available.</p>
               )}
-            </div>
-
-            {/* Inline Language Switcher */}
-            <div className="p-4 flex justify-center ">
-              <LanguageSwitcher />
             </div>
           </div>
         </div>
