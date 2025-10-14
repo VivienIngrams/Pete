@@ -128,9 +128,9 @@ export default function DesktopSlideshow({
           <h1 className="text-xl md:text-2xl font-normal">{currentTitle}</h1>
         )}
         {currentExcerpt && (
-          <p className="prose prose-sm md:prose-base mt-2 text-sm font-light font-roboto">
-            {currentExcerpt}
-          </p>
+          <div className="prose prose-sm md:prose-base mt-2 text-sm font-light font-roboto">
+            <PortableText key={activeLang} value={currentExcerpt} />
+          </div>
         )}
         <div className="mt-3">
           <button
