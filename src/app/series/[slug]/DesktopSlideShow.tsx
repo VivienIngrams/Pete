@@ -91,7 +91,7 @@ export default function DesktopSlideshow({
           className={`w-auto h-full object-contain transition-opacity duration-500 max-w-[70vw] ${
             isImageLoading ? 'opacity-0' : 'opacity-100'
           }`}
-          onLoadingComplete={() => setIsImageLoading(false)}
+          onLoad={() => setIsImageLoading(false)}
           priority
         />
       )}
@@ -128,7 +128,7 @@ export default function DesktopSlideshow({
           <h1 className="text-xl md:text-2xl font-normal">{currentTitle}</h1>
         )}
         {currentExcerpt && (
-          <p className="mt-2 text-sm font-light font-roboto">
+          <p className="prose prose-sm md:prose-base mt-2 text-sm font-light font-roboto">
             {currentExcerpt}
           </p>
         )}
@@ -165,7 +165,7 @@ export default function DesktopSlideshow({
 
             <h2 className="text-3xl font-normal mb-4">{postTitle}</h2>
 
-            <div className="text-base font-roboto text-justify mb-6">
+            <div className="prose prose-sm md:prose-base text-base font-roboto text-justify mb-6">
               {postExcerptBlocks && postExcerptBlocks.length ? (
                 <PortableText key={activeLang} value={postExcerptBlocks} />
               ) : (

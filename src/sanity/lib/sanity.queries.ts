@@ -151,8 +151,8 @@ export type Post = {
     image: any
     title_fr?: string
     title_en?: string
-    excerpt_fr?: string
-    excerpt_en?: string
+    excerpt_fr?: PortableTextBlock[]
+    excerpt_en?: PortableTextBlock[]
   }[]
 }
 

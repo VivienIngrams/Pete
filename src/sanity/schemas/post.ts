@@ -71,15 +71,15 @@ export default defineType({
             },
             {
               name: 'excerpt_fr',
-              type: 'text',
+              type: 'blockContent',
               title: 'Texte (Français)',
-              rows: 3,
+             
             },
             {
               name: 'excerpt_en',
-              type: 'text',
+              type: 'blockContent',
               title: 'Text (English)',
-              rows: 3,
+              
             },
           ],
           preview: {

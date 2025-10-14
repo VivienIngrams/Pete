@@ -121,7 +121,7 @@ export default function MobileSlideshow({
               className={`w-auto max-h-[80vh] md:max-h-[95vh] object-contain transition-opacity duration-500 ${
                 isImageLoading ? 'opacity-0' : 'opacity-100'
               }`}
-              onLoadingComplete={() => setIsImageLoading(false)}
+              onLoad={() => setIsImageLoading(false)}
               priority
             />
           </div>
@@ -150,7 +150,7 @@ export default function MobileSlideshow({
           <h1 className="text-xl md:text-2xl font-normal">{currentTitle}</h1>
         )}
         {currentExcerpt && (
-          <p className="mt-2 text-xs font-roboto">{currentExcerpt}</p>
+          <div className="mt-2 text-xs font-roboto"><PortableText value={currentExcerpt} key={activeLang} /></div>
         )}
         <div className="mt-3 flex justify-start">
           <button
@@ -186,7 +186,7 @@ export default function MobileSlideshow({
                 {t.close}
               </button>
             </div>
-            <div className="text-xs font-roboto text-justify">
+            <div className="prose prose-sm md:prose-base text-xs font-roboto text-justify">
               {postExcerptBlocks && postExcerptBlocks.length ? (
                 <PortableText value={postExcerptBlocks} key={activeLang} />
               ) : (
