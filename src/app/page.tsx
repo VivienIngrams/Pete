@@ -6,7 +6,7 @@ export default async function HomePage() {
   const client = getClient()
 
   const homePageData = await getHomePage(client, {
-    next: { revalidate: 10 },
+    next: { revalidate: 30 },
   })
 
   return <SplashPage mainImage={homePageData.mainImage} />

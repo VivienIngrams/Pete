@@ -41,12 +41,9 @@ export default function SplashPage({ mainImage }: SplashPageProps) {
         />
       </div>
 
-       {/* White semi-transparent overlay */}
-       {/* <div className="absolute inset-0 md:bg-white/15" /> */}
-
 
       {/* Title */}
-      <h1 className="absolute text-gray-200 md:text-black uppercase text-4xl md:text-5xl xl:text-[75px] top-[86vh] md:top-[13vh] tracking-[0.48em] font-light">
+      <h1 className="absolute text-black uppercase text-2xl md:text-5xl xl:text-[75px] top-[22vh] md:top-[13vh] tracking-[0.48em] md:font-light">
         Peter Lippmann
       </h1>
     </div>
