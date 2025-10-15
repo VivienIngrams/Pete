@@ -32,7 +32,7 @@ const NavMenu = () => {
     <nav className="fixed top-0 left-0 w-full z-50 font-roboto tracking-wide">
       {/* Desktop menu */}
       <div
-        className={`hidden md:flex items-center justify-between px-[12vw] py-[3vw] bg-[#f6f5ee] ${
+        className={`hidden md:flex items-center justify-between px-[12vw] py-[3vw] bg-white ${
           isHomePage ? 'hidden' : ''
         }`}
       >
@@ -74,7 +74,7 @@ const NavMenu = () => {
       </div>
 
       {/* Mobile header */}
-      <div className="md:hidden fixed top-0 left-0 w-full bg-[#f6f5ee] z-50">
+      <div className="md:hidden fixed top-0 left-0 w-full bg-white z-50">
         <div className="flex items-center justify-between py-4 px-6">
           <Link href="/">
             <h1 className="text-xl font-normal tracking-wide">
@@ -125,7 +125,7 @@ const NavMenu = () => {
       <div
         className={`${
           isOpen ? 'block' : 'hidden'
-        } md:hidden bg-[#f6f5ee] pt-16 pb-4 w-screen`}
+        } md:hidden bg-white pt-16 pb-4 w-screen`}
         id="mobile-menu"
         onClick={toggleMenu}
       >

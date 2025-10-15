@@ -33,7 +33,7 @@ const SubscribeModal = ({ isOpen, onClose }) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
           >
-            <div className="bg-[#f6f5ee] rounded-sm shadow-xl p-8 w-[90%] max-w-md text-center">
+            <div className="bg-white rounded-sm shadow-xl p-8 w-[90%] max-w-md text-center">
               <h2 className="text-2xl text-black font-light mb-4">Subscribe</h2>
               <p className="text-gray-600 mb-6 text-sm">
                 Join our list to receive updates on new series and exhibitions.

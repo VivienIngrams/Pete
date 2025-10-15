@@ -88,19 +88,21 @@ export default function MobileSlideshow({
   }
 
   return (
-    <div className="relative w-full h-screen bg-[#f6f5ee] mt-6 flex flex-col items-center justify-center">
-      {/* Close button */}
-      <button
-        onClick={handleClose}
-        className="fixed top-4 left-4 text-black text-xs tracking-wide underline underline-offset-2 z-50 font-normal"
-      >
-        {t.close}
-      </button>
+    <div className="relative w-full h-screen bg-white mt-6 flex flex-col items-center justify-center">
+      {/* Persistent top bar with close button */}
+      <div className="fixed top-0 left-0 right-0 z-[9999] bg-white flex items-center h-10 px-4 ">
+        <button
+          onClick={handleClose}
+          className="text-black text-xs tracking-wide underline underline-offset-2 font-normal"
+        >
+          {t.close}
+        </button>
+      </div>
 
       {/* Image + swipe area */}
       <div
         ref={imageWrapperRef}
-        className="relative w-full flex-shrink-0 flex items-center justify-center pt-10"
+        className="relative w-full flex-shrink-0 flex items-center justify-center mt-10"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -132,25 +134,27 @@ export default function MobileSlideshow({
       <div className="flex w-full justify-between px-1 mt-4 md:hidden">
         <button
           onClick={handlePrev}
-          className="rounded-full bg-[#f6f5ee]/60 active:bg-[#f6f5ee]/90 transition"
+          className="rounded-full bg-white/60 active:bg-white/90 transition"
         >
           <ChevronLeft className="w-8 h-8" />
         </button>
         <button
           onClick={handleNext}
-          className="rounded-full bg-[#f6f5ee]/60 active:bg-[#f6f5ee]/90 transition"
+          className="rounded-full bg-white/60 active:bg-white/90 transition"
         >
           <ChevronRight className="w-8 h-8" />
         </button>
       </div>
 
       {/* Caption overlay */}
-      <div className="bg-[#f6f5ee]/50 w-full px-4 py-4">
+      <div className="bg-white/50 w-full px-4 py-4">
         {currentTitle && (
           <h1 className="text-xl md:text-2xl font-normal">{currentTitle}</h1>
         )}
         {currentExcerpt && (
-          <div className="mt-3 text-xs font-roboto"><PortableText value={currentExcerpt} key={activeLang} /></div>
+          <div className="mt-3 text-xs font-roboto">
+            <PortableText value={currentExcerpt} key={activeLang} />
+          </div>
         )}
         <div className=" flex justify-start">
           <button
@@ -165,7 +169,7 @@ export default function MobileSlideshow({
       {/* About modal */}
       {isAboutOpen && (
         <div
-          className="fixed inset-0 z-50 text-black bg-[#f6f5ee]/90 flex items-center justify-center px-4"
+          className="fixed inset-0 z-50 text-black bg-white/90 flex items-center justify-center px-4"
           onClick={() => setIsAboutOpen(false)}
         >
           <div
@@ -181,7 +185,7 @@ export default function MobileSlideshow({
               <h2 className="text-xl font-normal">{postTitle}</h2>
               <button
                 onClick={() => setIsAboutOpen(false)}
-                className="text-xs fixed top-4 left-4 tracking-wide underline underline-offset-2 bg-[#f6f5ee]"
+                className="text-xs fixed top-4 left-4 tracking-wide underline underline-offset-2 bg-white"
               >
                 {t.close}
               </button>

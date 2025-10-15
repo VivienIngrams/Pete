@@ -20,7 +20,7 @@ function PostContent({ post }: PostContentProps) {
 
   return (
 <div
-      className={`w-full h-full xl:h-[94%] relative xl:fixed xl:max-w-[25vw] min-[1800px]:max-w-[23vw] xl:top-0 xl:left-0 xl:bg-[#f6f5ee] pb-6 xl:py-16 px-4 xl:pl-7 z-40 ${
+      className={`w-full h-full xl:h-[94%] relative xl:fixed xl:max-w-[25vw] min-[1800px]:max-w-[23vw] xl:top-0 xl:left-0 xl:bg-white pb-6 xl:py-16 px-4 xl:pl-7 z-40 ${
         post.section === 'gallery' ? 'pt-44' : 'pt-36'
       }`}
     >      {/* Gradient Space */}
