@@ -34,10 +34,6 @@ export default function PostsGrid({ posts, language }: Props) {
     return type === 'image' ? 'title' : 'image'
   }
 
-  // Alternate title alignment by row
-  const getAlignment = (row: number) =>
-    row % 2 === 0 ? 'justify-start text-left pr-4' : 'justify-end text-right pl-4'
-
   return (
     <div
       className="
@@ -50,9 +46,6 @@ export default function PostsGrid({ posts, language }: Props) {
         const mobileCols = 2
         const desktopCols = 4
 
-        const rowMobile = Math.floor(index / mobileCols)
-        const rowDesktop = Math.floor(index / desktopCols)
-
         const displayTypeMobile = getDisplayType(index, type, mobileCols)
         const displayTypeDesktop = getDisplayType(index, type, desktopCols)
 
@@ -61,7 +54,7 @@ export default function PostsGrid({ posts, language }: Props) {
             ? post.title_en || post.title || ''
             : post.title || post.title_en || ''
 
-        // flip image horizontally only for title squares
+        // Flip horizontally for title squares only
         const flipClass = 'scale-x-[-1]'
 
         return (
@@ -82,13 +75,13 @@ export default function PostsGrid({ posts, language }: Props) {
               />
               {displayTypeMobile === 'title' && (
                 <div
-                  className={`
+                  className="
                     absolute inset-0 bg-white/80
-                    flex items-center ${getAlignment(rowMobile)}
-                  `}
+                    flex items-center justify-center
+                  "
                 >
                   {title && (
-                    <span className="font-normal text-lg text-black px-4  underline underline-offset-2">
+                    <span className="font-normal text-lg text-black text-center underline underline-offset-2 px-4 break-words">
                       {title}
                     </span>
                   )}
@@ -109,13 +102,13 @@ export default function PostsGrid({ posts, language }: Props) {
               />
               {displayTypeDesktop === 'title' && (
                 <div
-                  className={`
+                  className="
                     absolute inset-0 bg-white/80
-                    flex items-center ${getAlignment(rowDesktop)}
-                  `}
+                    flex items-center justify-center
+                  "
                 >
                   {title && (
-                    <span className="font-normal text-lg md:text-xl text-black px-4 underline underline-offset-2">
+                    <span className="font-normal text-lg md:text-xl text-black text-center underline underline-offset-2 px-6 break-words">
                       {title}
                     </span>
                   )}
