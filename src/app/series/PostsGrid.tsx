@@ -20,13 +20,13 @@ export default function PostsGrid({ posts, language }: Props) {
   const { language: activeLang } = useLanguage()
   const lang = language || activeLang || 'en'
 
-  // ✅ Explicitly tell TypeScript what this array contains
+  // Each post contributes two squares: image + title
   const squares: Square[] = posts.flatMap((post) => [
     { type: 'image' as const, post },
     { type: 'title' as const, post },
   ])
 
-  // Determines whether to flip the order on a row
+  // Alternate order per row (chessboard effect)
   const getDisplayType = (index: number, type: 'image' | 'title', cols: number) => {
     const row = Math.floor(index / cols)
     const isReversedRow = row % 2 !== 0
@@ -34,6 +34,7 @@ export default function PostsGrid({ posts, language }: Props) {
     return type === 'image' ? 'title' : 'image'
   }
 
+  // Alternate title alignment by row
   const getAlignment = (row: number) =>
     row % 2 === 0 ? 'justify-start text-left pr-4' : 'justify-end text-right pl-4'
 
@@ -60,52 +61,61 @@ export default function PostsGrid({ posts, language }: Props) {
             ? post.title_en || post.title || ''
             : post.title || post.title_en || ''
 
+        // flip image horizontally only for title squares
+        const flipClass = 'scale-x-[-1]'
+
         return (
           <div
             key={`${post._id}-${index}`}
             className="relative aspect-square flex items-center justify-center overflow-hidden m-[-0.5px]"
           >
-            {/* MOBILE */}
-            <div className="block lg:hidden w-full h-full">
-              {displayTypeMobile === 'image' && post.mainImage?.asset ? (
-                <Image
-                  src={urlForImage(post.mainImage).url() as string}
-                  alt={post.title}
-                  fill
-                  sizes="100vw"
-                  className="object-cover"
-                />
-              ) : (
+            {/* --- MOBILE --- */}
+            <div className="block lg:hidden w-full h-full relative">
+              <Image
+                src={urlForImage(post.mainImage).url() as string}
+                alt={post.title}
+                fill
+                sizes="100vw"
+                className={`object-cover ${
+                  displayTypeMobile === 'title' ? flipClass : ''
+                }`}
+              />
+              {displayTypeMobile === 'title' && (
                 <div
-                  className={`w-full h-full bg-white flex items-center ${getAlignment(
-                    rowMobile
-                  )}`}
+                  className={`
+                    absolute inset-0 bg-white/80
+                    flex items-center ${getAlignment(rowMobile)}
+                  `}
                 >
                   {title && (
-                    <span className="font-normal text-lg px-4">{title}</span>
+                    <span className="font-normal text-lg text-black px-4  underline underline-offset-2">
+                      {title}
+                    </span>
                   )}
                 </div>
               )}
             </div>
 
-            {/* DESKTOP */}
-            <div className="hidden lg:block w-full h-full">
-              {displayTypeDesktop === 'image' && post.mainImage?.asset ? (
-                <Image
-                  src={urlForImage(post.mainImage).url() as string}
-                  alt={post.title}
-                  fill
-                  sizes="(max-width: 1024px) 50vw, 33vw"
-                  className="object-cover"
-                />
-              ) : (
+            {/* --- DESKTOP --- */}
+            <div className="hidden lg:block w-full h-full relative">
+              <Image
+                src={urlForImage(post.mainImage).url() as string}
+                alt={post.title}
+                fill
+                sizes="(max-width: 1024px) 50vw, 33vw"
+                className={`object-cover ${
+                  displayTypeDesktop === 'title' ? flipClass : ''
+                }`}
+              />
+              {displayTypeDesktop === 'title' && (
                 <div
-                  className={`w-full h-full bg-white flex items-center ${getAlignment(
-                    rowDesktop
-                  )}`}
+                  className={`
+                    absolute inset-0 bg-white/80
+                    flex items-center ${getAlignment(rowDesktop)}
+                  `}
                 >
                   {title && (
-                    <span className="font-normal text-lg md:text-xl px-4">
+                    <span className="font-normal text-lg md:text-xl text-black px-4 underline underline-offset-2">
                       {title}
                     </span>
                   )}
