@@ -41,10 +41,11 @@ export default function PostsGrid({ posts, language }: Props) {
         return (
           <div
             key={post._id}
-            className="relative aspect-square group overflow-hidden m-[-0.5px] cursor-pointer leading-[0.7]"
+            className="relative aspect-square group overflow-hidden m-[-0.5px] cursor-pointer leading-mini font-light"
             onClick={() => handleClick(post.slug.current)}
           >
             {/* Background Image */}
+
             <Image
               src={urlForImage(post.mainImage).url() as string}
               alt={title}
@@ -53,18 +54,21 @@ export default function PostsGrid({ posts, language }: Props) {
               className="object-cover transition-all duration-300 scale-[1.01] md:group-hover:opacity-100"
             />
 
+            {/* White-to-transparent radial overlay */}
+            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.8)_0%,rgba(255,255,255,0)_70%)]" />
+
             {/* Title Overlay */}
             <div className="absolute inset-0 flex items-center justify-center text-center pointer-events-none">
               <Link
                 href={`/series/${post.slug.current}`}
-                className="relative font-normal text-lg md:text-4xl max-w-20 md:max-w-24 
+                className="relative font-light text-lg md:text-3xl max-w-20 md:max-w-24 
                p-3 md:p-6 pointer-events-auto flex items-center justify-center
                transition-transform duration-200 md:hover:scale-105"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Title (default state) */}
                 <span
-                  className={`absolute text-white-stroke-black transition-opacity duration-200
+                  className={`absolute text-black transition-opacity duration-200
         ${isActive ? 'opacity-0' : 'opacity-100 md:group-hover:opacity-0'}
       `}
                 >
@@ -73,7 +77,7 @@ export default function PostsGrid({ posts, language }: Props) {
 
                 {/* "View series" (hover/tap state) */}
                 <span
-                  className={`absolute text-white-stroke-black font-normal transition-opacity duration-200
+                  className={`absolute text-base md:text-lg leading-none underline underline-offset-2 text-black transition-opacity font-light duration-200
         ${isActive ? 'opacity-100' : 'opacity-0 md:group-hover:opacity-100'}
       `}
                 >

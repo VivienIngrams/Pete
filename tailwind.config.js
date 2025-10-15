@@ -8,6 +8,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      lineHeight: {
+        tighter: '0.9',
+        ultra: '0.8',
+        mini: '-0.35',
+      },
       screens: {
         '3xl': '2220px',
       },
