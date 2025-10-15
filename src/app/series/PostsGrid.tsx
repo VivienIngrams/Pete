@@ -81,7 +81,7 @@ export default function PostsGrid({ posts, language }: Props) {
                   "
                 >
                   {title && (
-                    <span className="font-normal text-lg text-black text-center underline underline-offset-2 px-4 break-words">
+                    <span className="font-normal text-lg text-black text-center underline underline-offset-2 px-4 break-words max-w-32">
                       {title}
                     </span>
                   )}
@@ -108,7 +108,7 @@ export default function PostsGrid({ posts, language }: Props) {
                   "
                 >
                   {title && (
-                    <span className="font-normal text-lg md:text-xl text-black text-center underline underline-offset-2 px-6 break-words">
+                    <span className="font-normal text-lg md:text-xl max-w-36 text-black text-center underline underline-offset-2 px-6 break-words">
                       {title}
                     </span>
                   )}
