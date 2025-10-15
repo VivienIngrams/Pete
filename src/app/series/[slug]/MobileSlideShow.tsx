@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useMemo } from 'react'
 import type { Post } from '~/sanity/lib/sanity.queries'
 import { urlForImage } from '~/sanity/lib/sanity.image'
 import { PortableText } from '@portabletext/react'
@@ -22,49 +22,65 @@ export default function MobileSlideshow({
   setCurrentIndex,
 }: Props) {
   const router = useRouter()
-  const imageWrapperRef = useRef<HTMLDivElement>(null)
+  const { language: activeLang } = useLanguage()
   const [isAboutOpen, setIsAboutOpen] = useState(false)
   const [isImageLoading, setIsImageLoading] = useState(true)
-  const { language: activeLang } = useLanguage() // 🔥 live language context
+  const imageWrapperRef = useRef<HTMLDivElement>(null)
 
   // --- Swipe gesture refs ---
   const touchStartX = useRef<number | null>(null)
   const touchEndX = useRef<number | null>(null)
 
-  const current = post.images?.[currentIndex]
-  if (!current) return <p>No images found.</p>
+// Memoize images array to have a stable reference
+const images = useMemo(() => post.images || [], [post.images])
 
-  // --- Titles & text (use activeLang for reactivity) ---
-  const postTitle =
-    activeLang === 'en' ? post.title_en || post.title : post.title
+// Memoize current image based on currentIndex
+const current = useMemo(() => images[currentIndex] || null, [images, currentIndex])
 
-  const currentTitle =
-    (activeLang === 'en'
-      ? current.title_en || current.title_fr
-      : current.title_fr || current.title_en) ||
-    `${postTitle} ${currentIndex + 1}`
 
-  const currentExcerpt =
-    activeLang === 'en'
+  // --- Memoized titles & excerpts ---
+  const postTitle = useMemo(
+    () => (activeLang === 'en' ? post.title_en || post.title : post.title),
+    [activeLang, post.title, post.title_en]
+  )
+  const currentTitle = useMemo(() => {
+    if (!current) return ''
+    return (
+      (activeLang === 'en'
+        ? current.title_en || current.title_fr
+        : current.title_fr || current.title_en) || `${postTitle} ${currentIndex + 1}`
+    )
+  }, [activeLang, current, currentIndex, postTitle])
+  
+  const currentExcerpt = useMemo(() => {
+    if (!current) return null
+    return activeLang === 'en'
       ? current.excerpt_en || current.excerpt_fr
       : current.excerpt_fr || current.excerpt_en
-
-  const postExcerptBlocks =
-    activeLang === 'en'
+  }, [activeLang, current])
+  
+  const postExcerptBlocks = useMemo(() => {
+    return activeLang === 'en'
       ? post.excerpt_en || post.excerpt
       : post.excerpt || post.excerpt_en
+  }, [activeLang, post.excerpt, post.excerpt_en])
 
+  // Early return for empty images
+  if (!images.length) return <p>No images found.</p>
+
+  // --- Navigation handlers ---
   const handlePrev = () =>
-    setCurrentIndex((prev) => (prev === 0 ? post.images!.length - 1 : prev - 1))
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
   const handleNext = () =>
-    setCurrentIndex((prev) => (prev === post.images.length - 1 ? 0 : prev + 1))
+    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
 
+  // --- Close handler ---
   const handleClose = () => {
     if (document.referrer.includes('/series')) router.back()
     else router.push(`/series#${post.slug.current}`)
   }
 
-  // --- Swipe Handlers ---
+  // --- Swipe handlers ---
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX
   }
@@ -76,7 +92,7 @@ export default function MobileSlideshow({
   const handleTouchEnd = () => {
     if (touchStartX.current === null || touchEndX.current === null) return
     const diff = touchStartX.current - touchEndX.current
-    if (Math.abs(diff) > 50) diff > 0 ? handleNext() : handlePrev()
+    if (Math.abs(diff) > 50) (diff > 0 ? handleNext() : handlePrev())
     touchStartX.current = null
     touchEndX.current = null
   }
@@ -86,6 +102,7 @@ export default function MobileSlideshow({
     about: activeLang === 'en' ? 'about' : 'à propos',
     close: activeLang === 'en' ? 'close' : 'fermer',
   }
+
 
   return (
     <div className="relative w-full h-screen bg-white mt-6 flex flex-col items-center justify-center">
