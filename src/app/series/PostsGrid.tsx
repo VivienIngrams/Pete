@@ -64,7 +64,7 @@ export default function PostsGrid({ posts, language }: Props) {
               >
                 {/* Title (default state) */}
                 <span
-                  className={`absolute text-black-stroke-white transition-opacity duration-200
+                  className={`absolute text-white-stroke-black transition-opacity duration-200
         ${isActive ? 'opacity-0' : 'opacity-100 md:group-hover:opacity-0'}
       `}
                 >
