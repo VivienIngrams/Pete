@@ -55,7 +55,7 @@ export default function PostsGrid({ posts, language }: Props) {
             />
 
             {/* White-to-transparent radial overlay */}
-            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.8)_0%,rgba(255,255,255,0)_70%)]" />
+            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.8)_0%,rgba(0,0,0,0)_70%)]" />
 
             {/* Title Overlay */}
             <div className="absolute inset-0 flex items-center justify-center text-center pointer-events-none">
@@ -68,7 +68,7 @@ export default function PostsGrid({ posts, language }: Props) {
               >
                 {/* Title (default state) */}
                 <span
-                  className={`absolute text-black transition-opacity duration-200
+                  className={`absolute text-white transition-opacity duration-200
         ${isActive ? 'opacity-0' : 'opacity-100 md:group-hover:opacity-0'}
       `}
                 >
@@ -77,7 +77,7 @@ export default function PostsGrid({ posts, language }: Props) {
 
                 {/* "View series" (hover/tap state) */}
                 <span
-                  className={`absolute text-base md:text-lg leading-none underline underline-offset-2 text-black transition-opacity font-light duration-200
+                  className={`absolute text-base md:text-lg leading-none underline underline-offset-2 text-white transition-opacity font-light duration-200
         ${isActive ? 'opacity-100' : 'opacity-0 md:group-hover:opacity-100'}
       `}
                 >
