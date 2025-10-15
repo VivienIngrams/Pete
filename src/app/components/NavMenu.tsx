@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import SubscribeModal from './SubscribeModal'
+import Image from 'next/image'
 
 import { useLanguage } from './context/LanguageProvider'
 import LanguageSwitcher from './LanguageSwitcher'
@@ -37,8 +38,14 @@ const NavMenu = () => {
         }`}
       >
         {/* Left: Logo / Title */}
-        <Link href="/" className="hover:text-gray-500">
-          <h1 className="text-3xl font-light tracking-">Peter Lippmann</h1>
+        <Link href="/" className="hover:opacity-70 h-12 transition">
+          <Image
+            src="/logo.png"
+            alt="Peter Lippmann"
+            width={150}
+            height={30}
+            priority
+          />
         </Link>
 
         {/* Center: Menu items */}
@@ -76,11 +83,16 @@ const NavMenu = () => {
       {/* Mobile header */}
       <div className="md:hidden fixed top-0 left-0 w-full bg-white z-50">
         <div className="flex items-center justify-between py-4 px-6">
-          <Link href="/">
-            <h1 className="text-xl font-normal tracking-wide">
-              Peter Lippmann
-            </h1>
+          <Link href="/" className="hover:opacity-70 transition">
+            <Image
+              src="/logo.png"
+              alt="Peter Lippmann"
+              width={140}
+              height={20}
+              priority
+            />
           </Link>
+
           <button
             onClick={toggleMenu}
             type="button"

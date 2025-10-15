@@ -65,13 +65,13 @@ export default function PostsGrid({ posts, language }: Props) {
             <div className="absolute inset-0 flex items-center justify-center text-center pointer-events-none">
               <Link
                 href={`/series/${post.slug.current}`}
-                className={`relative font-light text-base md:text-lg max-w-20 md:max-w-24 text-white  transition-transform duration-200 md:hover:scale-105
-                   backdrop-blur-[2px] p-3 md:p-6 pointer-events-auto flex items-center justify-center`}
+                className={`relative font-light text-lg md:text-3xl max-w-20 md:max-w-24   text-white  transition-transform duration-200 md:hover:scale-105
+                    p-1 md:p-2 pointer-events-auto flex items-center justify-center`}
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Original title */}
                 <span
-                  className={`transition-opacity duration-200 ${
+                  className={`transition-opacity duration-200 backdrop-blur-[2px] ${
                     isActive ? 'opacity-0' : 'opacity-100 md:group-hover:opacity-0'
                   }`}
                 >
@@ -79,7 +79,7 @@ export default function PostsGrid({ posts, language }: Props) {
                 </span>
                 {/* Hover / active text */}
                 <span
-                  className={`absolute transition-opacity duration-200 font-normal underline underline-offset-2 ${
+                  className={`absolute transition-opacity duration-200 font-light backdrop-blur-[2px]  text-base md:text-xl underline underline-offset-2 ${
                     isActive ? 'opacity-100' : 'opacity-0 md:group-hover:opacity-100'
                   }`}
                 >
