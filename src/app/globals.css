@@ -29,6 +29,20 @@ img {
   scrollbar-width: none;     /* Firefox */
 }
 
+.blur-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+
+  /* Apply the blur */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  /* Create a radial falloff for the blur */
+  mask-image: radial-gradient(circle at center, rgba(0,0,0,1), rgba(0,0,0,0));
+  -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1), rgba(0,0,0,0));
+}
 
 
 h1 {

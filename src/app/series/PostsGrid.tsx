@@ -105,16 +105,16 @@ export default function PostsGrid({ posts, language }: Props) {
             </Link>
 
             {/* Title Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center text-center pointer-events-none">
+            <div className="absolute inset-0 flex items-center justify-center text-center pointer-events-none  blur-gradient-overlay">
               <Link
                 href={`/series/${post.slug.current}`}
-                className={`relative font-light text-lg md:text-3xl max-w-20 md:max-w-24   text-[#e3e1de]  transition-transform duration-200 md:hover:scale-105
+                className={`relative font-light text-lg md:text-3xl max-w-20 md:max-w-24  text-[#e3e1de]  transition-transform duration-200 md:hover:scale-105
                     p-1 md:p-2 pointer-events-auto flex items-center justify-center`}
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Original title */}
                 <span
-                  className={`transition-opacity duration-200 backdrop-blur-[2px] ${
+                  className={`transition-opacity duration-200  ${
                     isActive ? 'opacity-0' : 'opacity-100 md:group-hover:opacity-0'
                   }`}
                 >
