@@ -23,23 +23,28 @@ export default async function PostsPage() {
     : await getPosts(client, language, { next: { revalidate: 600 } })
 
   return (
-    <>
-      <NavMenu />
-      <div className="bg-[#e3e1de] h-full  mt-12 md:mt-[8vw] md:mx-[12vw] xl:min-h-[80vh] pb-14 font-roboto font-bold max-w-full">
-           {/* Banner section */}
-           <div className="relative w-full bg-[#e3e1de] mt-12 md:mt-[6vw]">
-        <div className="relative w-full h-[15vw] min-h-[110px] flex items-center justify-center ">
-          <Image
-            src="/shifting-ground.png"
-            alt="Shifting Ground"
-            fill
-            className="object-contain py-6 pb-20"
-            priority
-          />
-        </div>
-      </div>
-        <PostsGrid posts={posts} />
-      </div>
-    </>
+   // PostsPage.tsx
+<>
+  <NavMenu />
+
+  {/* Fixed banner on top */}
+  <div className="fixed top-12 md:top-[8vw] left-0 right-0 z-20 bg-[#e3e1de]">
+    <div className="relative w-full h-[12vw] min-h-[80px] max-h-[100px] flex items-center justify-center my-16">
+      <Image
+        src="/shifting-ground.png"
+        alt="Shifting Ground"
+        fill
+        className="object-contain"
+        priority
+      />
+    </div>
+  </div>
+
+  {/* Horizontal Scroll Section */}
+  <div className=' px-[12vw]'>
+  <PostsGrid posts={posts} />
+  </div>
+</>
+
   )
 }

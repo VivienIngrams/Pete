@@ -1,12 +1,14 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import Image from 'next/image'
-import type { Post } from '~/sanity/lib/sanity.queries'
-import { urlForImage } from '~/sanity/lib/sanity.image'
-import { useLanguage } from '~/app/components/context/LanguageProvider'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { urlForImage } from '~/sanity/lib/sanity.image'
+import type { Post } from '~/sanity/lib/sanity.queries'
+import { useLanguage } from '~/app/components/context/LanguageProvider'
 
 type Props = {
   posts: Post[]
@@ -29,31 +31,72 @@ export default function PostsGrid({ posts, language }: Props) {
     }
   }
 
+  const containerRef = useRef<HTMLDivElement>(null)
+  const wrapperRef = useRef<HTMLDivElement>(null)
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  useEffect(() => {
+    if (!containerRef.current || !wrapperRef.current) return
+
+    const container = containerRef.current
+    const wrapper = wrapperRef.current
+
+    // Calculate the total scroll distance
+    const totalWidth = container.scrollWidth - window.innerWidth
+
+    const ctx = gsap.context(() => {
+      const animation = gsap.to(container, {
+        x: -totalWidth,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: wrapper,
+          start: 'top top',
+          end: () => `+=${totalWidth}`,
+          scrub: 1,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      })
+    }, wrapper)
+
+    return () => {
+      ctx.revert()
+    }
+  }, [posts])
+
   return (
-    <div className="pt-4 md:pt-0 grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-0 overflow-hidden">
-      {posts.map((post) => {
-        const isActive = activeOverlay === post.slug.current
-        const title =
-          lang === 'en'
-            ? post.title_en || post.title || ''
-            : post.title || post.title_en || ''
+    <div
+      ref={wrapperRef}
+      className="relative h-[130vh] overflow-hidden bg-[#e3e1de] "
+    >
+      <div
+        ref={containerRef}
+        className="flex gap-[1px] h-full items-center"
+      >
+        {posts.map((post) => {
+          const isActive = activeOverlay === post.slug.current
+          const title =
+            lang === 'en'
+              ? post.title_en || post.title || ''
+              : post.title || post.title_en || ''
 
-        return (
-          <div
-            key={post._id}
-            className="relative aspect-square group overflow-hidden m-[-0.5px] cursor-pointer"
-            onClick={() => handleClick(post.slug.current)}
-          >
-            {/* Background Image */}
-            <Image
-              src={urlForImage(post.mainImage).url() as string}
-              alt={title}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover transition-all duration-300 scale-[1.01] md:group-hover:opacity-100"
-            />
+          return (
+            <div
+              key={post._id}
+              className="relative flex-shrink-0 w-[70vw] sm:w-[40vw] md:w-[25vw] lg:w-[20vw] xl:w-[15vw] aspect-square group overflow-hidden cursor-pointer"
+              onClick={() => handleClick(post.slug.current)}
+            >
+              <Image
+                src={urlForImage(post.mainImage).url() as string}
+                alt={title}
+                fill
+                sizes="25vw"
+                className="object-contain transition-all duration-300 scale-[1.01]"
+              />
 
-            {/* Desktop link overlay */}
+             {/* Desktop link overlay */}
             <Link
               href={`/series/${post.slug.current}`}
               className="hidden md:block absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -86,10 +129,11 @@ export default function PostsGrid({ posts, language }: Props) {
                   View series
                 </span>
               </Link>
+              </div>
             </div>
-          </div>
-        )
-      })}
+          )
+        })}
+      </div>
     </div>
   )
 }
