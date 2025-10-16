@@ -73,7 +73,7 @@ export default function DesktopSlideshow({
   }
 
   return (
-    <div className="relative w-full h-screen bg-white flex items-center py-10 justify-center hide-scrollbar">
+    <div className="relative w-full h-screen bg-[#e3e1de] flex items-center py-10 justify-center hide-scrollbar">
       {/* Placeholder skeleton */}
       {isImageLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-[#eae8dd] animate-pulse">
@@ -145,12 +145,12 @@ export default function DesktopSlideshow({
       {/* ABOUT MODAL */}
       {isAboutOpen && (
         <div
-          className="fixed inset-0 z-50 text-black bg-white/85 flex items-center justify-center px-4"
+          className="fixed inset-0 z-50 text-black bg-[#e3e1de]/85 flex items-center justify-center px-4"
           onClick={() => setIsAboutOpen(false)}
         >
           <button
             onClick={() => setIsAboutOpen(false)}
-            className="absolute text-base underline underline-offset-2 top-6 left-6 z-50 font-normal hover:font-bold tracking-wide bg-white"
+            className="absolute text-base underline underline-offset-2 top-6 left-6 z-50 font-normal hover:font-bold tracking-wide bg-[#e3e1de]"
           >
             {t.close}
           </button>

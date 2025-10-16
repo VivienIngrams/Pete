@@ -105,9 +105,9 @@ const current = useMemo(() => images[currentIndex] || null, [images, currentInde
 
 
   return (
-    <div className="relative w-full h-screen bg-white mt-6 flex flex-col items-center justify-center">
+    <div className="relative w-full h-screen bg-[#e3e1de] mt-6 flex flex-col items-center justify-center">
       {/* Persistent top bar with close button */}
-      <div className="fixed top-0 left-0 right-0 z-[9999] bg-white flex items-center h-10 px-4 ">
+      <div className="fixed top-0 left-0 right-0 z-[9999] bg-[#e3e1de] flex items-center h-10 px-4 ">
         <button
           onClick={handleClose}
           className="text-black text-xs tracking-wide underline underline-offset-2 font-normal"
@@ -151,20 +151,20 @@ const current = useMemo(() => images[currentIndex] || null, [images, currentInde
       <div className="flex w-full justify-between px-1 mt-4 md:hidden">
         <button
           onClick={handlePrev}
-          className="rounded-full bg-white/60 active:bg-white/90 transition"
+          className="rounded-full bg-[#e3e1de]/60 active:bg-[#e3e1de]/90 transition"
         >
           <ChevronLeft className="w-8 h-8" />
         </button>
         <button
           onClick={handleNext}
-          className="rounded-full bg-white/60 active:bg-white/90 transition"
+          className="rounded-full bg-[#e3e1de]/60 active:bg-[#e3e1de]/90 transition"
         >
           <ChevronRight className="w-8 h-8" />
         </button>
       </div>
 
       {/* Caption overlay */}
-      <div className="bg-white/50 w-full px-4 py-4">
+      <div className="bg-[#e3e1de]/50 w-full px-4 py-4">
         {currentTitle && (
           <h1 className="text-xl md:text-2xl font-normal">{currentTitle}</h1>
         )}
@@ -186,7 +186,7 @@ const current = useMemo(() => images[currentIndex] || null, [images, currentInde
       {/* About modal */}
       {isAboutOpen && (
         <div
-          className="fixed inset-0 z-50 text-black bg-white/90 flex items-center justify-center px-4"
+          className="fixed inset-0 z-50 text-black bg-[#e3e1de]/90 flex items-center justify-center px-4"
           onClick={() => setIsAboutOpen(false)}
         >
           <div
@@ -202,7 +202,7 @@ const current = useMemo(() => images[currentIndex] || null, [images, currentInde
               <h2 className="text-xl font-normal">{postTitle}</h2>
               <button
                 onClick={() => setIsAboutOpen(false)}
-                className="text-xs fixed top-4 left-4 tracking-wide underline underline-offset-2 bg-white"
+                className="text-xs fixed top-4 left-4 tracking-wide underline underline-offset-2 bg-[#e3e1de]"
               >
                 {t.close}
               </button>

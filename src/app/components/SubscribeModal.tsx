@@ -33,7 +33,7 @@ const SubscribeModal = ({ isOpen, onClose }) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
           >
-            <div className="bg-white rounded-sm shadow-xl p-8 w-[90%] max-w-md text-center">
+            <div className="bg-[#e3e1de] rounded-sm shadow-xl p-8 w-[90%] max-w-md text-center">
               <h2 className="text-2xl text-black font-light mb-4">Subscribe</h2>
               <p className="text-gray-600 mb-6 text-sm">
                 Join our list to receive updates on new series and exhibitions.
@@ -45,11 +45,11 @@ const SubscribeModal = ({ isOpen, onClose }) => {
                   placeholder="Your email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="border border-gray-300 rounded-lg py-2 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-gray-500 bg-white"
+                  className="border border-gray-300 rounded-lg py-2 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-gray-500 bg-[#e3e1de]"
                 />
                 <button
                   type="submit"
-                  className="bg-black text-white py-2 rounded-lg text-sm hover:bg-gray-800 transition"
+                  className="bg-black text-[#e3e1de] py-2 rounded-lg text-sm hover:bg-gray-800 transition"
                 >
                   Subscribe
                 </button>

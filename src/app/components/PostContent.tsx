@@ -20,11 +20,11 @@ function PostContent({ post }: PostContentProps) {
 
   return (
 <div
-      className={`w-full h-full xl:h-[94%] relative xl:fixed xl:max-w-[25vw] min-[1800px]:max-w-[23vw] xl:top-0 xl:left-0 xl:bg-white pb-6 xl:py-16 px-4 xl:pl-7 z-40 ${
+      className={`w-full h-full xl:h-[94%] relative xl:fixed xl:max-w-[25vw] min-[1800px]:max-w-[23vw] xl:top-0 xl:left-0 xl:bg-[#e3e1de] pb-6 xl:py-16 px-4 xl:pl-7 z-40 ${
         post.section === 'gallery' ? 'pt-44' : 'pt-36'
       }`}
     >      {/* Gradient Space */}
-      <div className="hidden xl:block absolute top-0 left-[24vw] min-[1800px]:left-[23vw] xl:w-[5vw] bg-gradient-to-r from-white via-white/70 to-transparent h-full"></div>
+      <div className="hidden xl:block absolute top-0 left-[24vw] min-[1800px]:left-[23vw] xl:w-[5vw] bg-gradient-to-r from-[#e3e1de] via-[#e3e1de]/70 to-transparent h-full"></div>
       <div className="xl:h-[80vh] flex flex-col justify-start xl:justify-center">
         {/* Title */}
         <h1 className="text-2xl xl:text-4xl font-roboto font-medium tracking-tighter xl:mt-16">

@@ -33,17 +33,17 @@ const NavMenu = () => {
     <nav className="fixed top-0 left-0 w-full z-50 font-roboto tracking-wide">
       {/* Desktop menu */}
       <div
-        className={`hidden md:flex items-center justify-between px-[12vw] py-[3vw] bg-white ${
+        className={`hidden md:flex items-center justify-between px-[12vw] py-[3vw] bg-[#e3e1de] ${
           isHomePage ? 'hidden' : ''
         }`}
       >
         {/* Left: Logo / Title */}
         <Link href="/" className="hover:opacity-70 h-12 transition">
           <Image
-            src="/logo.png"
+            src="/peter-lippmann.png"
             alt="Peter Lippmann"
-            width={150}
-            height={30}
+            width={200}
+            height={50}
             priority
           />
         </Link>
@@ -81,11 +81,11 @@ const NavMenu = () => {
       </div>
 
       {/* Mobile header */}
-      <div className="md:hidden fixed top-0 left-0 w-full bg-white z-50">
+      <div className="md:hidden fixed top-0 left-0 w-full bg-[#e3e1de] z-50">
         <div className="flex items-center justify-between py-4 px-6">
           <Link href="/" className="hover:opacity-70 transition">
             <Image
-              src="/logo.png"
+              src="/peter-lippmann.png"
               alt="Peter Lippmann"
               width={140}
               height={20}
@@ -137,7 +137,7 @@ const NavMenu = () => {
       <div
         className={`${
           isOpen ? 'block' : 'hidden'
-        } md:hidden bg-white pt-16 pb-4 w-screen`}
+        } md:hidden bg-[#e3e1de] pt-16 pb-4 w-screen`}
         id="mobile-menu"
         onClick={toggleMenu}
       >
