@@ -28,12 +28,12 @@ export default async function PostsPage() {
       <div className="bg-[#e3e1de] h-full  mt-12 md:mt-[8vw] md:mx-[12vw] xl:min-h-[80vh] pb-14 font-roboto font-bold max-w-full">
            {/* Banner section */}
            <div className="relative w-full bg-[#e3e1de] mt-12 md:mt-[6vw]">
-        <div className="relative w-full h-[15vw] min-h-[110px] flex items-center justify-center p-12">
+        <div className="relative w-full h-[15vw] min-h-[110px] flex items-center justify-center ">
           <Image
             src="/shifting-ground.png"
             alt="Shifting Ground"
             fill
-            className="object-contain p-12"
+            className="object-contain py-6 pb-20"
             priority
           />
         </div>
