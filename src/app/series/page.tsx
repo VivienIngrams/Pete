@@ -1,10 +1,15 @@
 import { cookies } from 'next/headers'
 import { readToken } from '~/sanity/lib/sanity.api'
 import { getClient } from '~/sanity/lib/sanity.client'
-import { getPosts, getSeriesGridPosts, type Post } from '~/sanity/lib/sanity.queries'
+import {
+  getPosts,
+  getSeriesGridPosts,
+  type Post,
+} from '~/sanity/lib/sanity.queries'
 import NavMenu from '../components/NavMenu'
 import PostsGrid from './PostsGrid'
 import Image from 'next/image'
+import PostsGridMobile from './PostsGridMobile'
 
 export default async function PostsPage() {
   const client = getClient({ token: readToken })
@@ -23,28 +28,30 @@ export default async function PostsPage() {
     : await getPosts(client, language, { next: { revalidate: 600 } })
 
   return (
-   // PostsPage.tsx
-<>
-  <NavMenu />
+    // PostsPage.tsx
+    <>
+      <NavMenu />
 
-  {/* Fixed banner on top */}
-  <div className="fixed top-12 md:top-[8vw] left-0 right-0 z-20 bg-[#e3e1de]">
-    <div className="relative w-full h-[12vw] min-h-[80px] max-h-[100px] flex items-center justify-center my-16">
-      <Image
-        src="/shifting-ground.png"
-        alt="Shifting Ground"
-        fill
-        className="object-contain"
-        priority
-      />
-    </div>
-  </div>
+      {/* Fixed banner on top */}
+      <div className="fixed top-12 md:top-[8vw] left-0 right-0 z-20 bg-[#e3e1de]">
+        <div className="relative w-full h-[12vw] min-h-[80px] max-h-[100px] flex items-center justify-center my-16">
+          <Image
+            src="/shifting-ground.png"
+            alt="Shifting Ground"
+            fill
+            className="object-contain"
+            priority
+          />
+        </div>
+      </div>
 
-  {/* Horizontal Scroll Section */}
-  <div className=' px-[12vw]'>
-  <PostsGrid posts={posts} />
-  </div>
-</>
-
+      <div className=" md:hidden">
+        <PostsGridMobile posts={posts} />
+      </div>
+      {/* Horizontal Scroll Section */}
+      <div className="hidden md:block md:px-[12vw]">
+        <PostsGrid posts={posts} />
+      </div>
+    </>
   )
 }
