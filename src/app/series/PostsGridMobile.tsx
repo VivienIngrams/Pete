@@ -59,7 +59,7 @@ export default function PostsGrid({ posts, language }: Props) {
             <div className="absolute inset-0 flex items-center justify-center text-center pointer-events-none">
               <Link
                 href={`/series/${post.slug.current}`}
-                className={`relative font-light text-lg md:text-3xl max-w-20 md:max-w-24  blur-gradient-overlay text-[#e3e1de]  transition-transform duration-200 md:hover:scale-105
+                className={`relative font-light text-lg md:text-3xl max-w-20 md:max-w-24  blur-gradient-overlay text-white  transition-transform duration-200 md:hover:scale-105
                     p-1 md:p-2 pointer-events-auto flex items-center justify-center`}
                 onClick={(e) => e.stopPropagation()}
               >

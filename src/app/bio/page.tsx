@@ -77,7 +77,7 @@ const Bio = async () => {
   return (
     <>
       <NavMenu />
-      <div className="min-h-screen mt-6 xl:mt-24 bg-[#e3e1de]">
+      <div className="min-h-screen mt-6 xl:mt-24 bg-white">
       <div className="xl:h-[90%] flex flex-col items-center justify-center mx-6 xl:w-1/3 xl:mx-auto">
         <h1 className="text-2xl xl:text-4xl  w-full text-left font-roboto py-14">
           About

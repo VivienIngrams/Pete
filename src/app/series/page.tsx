@@ -33,7 +33,7 @@ export default async function PostsPage() {
       <NavMenu />
 
       {/* Fixed banner on top */}
-      <div className="fixed top-12 md:top-[8vw] left-0 right-0 z-20 bg-[#e3e1de]">
+      <div className="fixed top-12 md:top-[8vw] left-0 right-0 z-20 bg-white">
         <div className="relative w-full h-[12vw] min-h-[80px] max-h-[100px] flex items-center justify-center my-16">
           <Image
             src="/shifting-ground.png"
@@ -42,6 +42,9 @@ export default async function PostsPage() {
             className="object-contain"
             priority
           />
+        </div>
+        <div>
+          <h3>Fine art photos for an upcoming book</h3>
         </div>
       </div>
 
