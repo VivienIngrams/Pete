@@ -33,7 +33,7 @@ const NavMenu = () => {
     <nav className="fixed top-0 left-0 w-full z-50 font-roboto tracking-wide">
       {/* Desktop menu */}
       <div
-        className={`hidden md:flex items-center justify-between px-[12vw] py-[3vw] bg-[#e3e1de] ${
+        className={`hidden md:flex items-center justify-between px-[12vw] py-[3vw] bg-[#e3e1de] font-black ${
           isHomePage ? 'hidden' : ''
         }`}
       >
