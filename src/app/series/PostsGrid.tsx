@@ -122,7 +122,7 @@ export default function PostsGrid({ posts, language }: Props) {
                 </span>
                 {/* Hover / active text */}
                 <span
-                  className={`absolute transition-opacity duration-200 font-light backdrop-blur-[2px]  text-base md:text-xl underline underline-offset-2 ${
+                  className={`absolute transition-opacity duration-200 font-light blur-gradient-overlay  text-base md:text-xl underline underline-offset-2 ${
                     isActive ? 'opacity-100' : 'opacity-0 md:group-hover:opacity-100'
                   }`}
                 >
