@@ -33,8 +33,8 @@ export default async function PostsPage() {
       <NavMenu />
 
       {/* Fixed banner on top */}
-      <div className="fixed top-12 md:top-[8vw] left-0 right-0 z-20 bg-white">
-        <div className="relative w-full h-[12vw] min-h-[80px] max-h-[100px] flex items-center justify-center my-16">
+      <div className="fixed top-12 md:top-[10vw] left-0 right-0 z-20 bg-white">
+        <div className="relative w-full h-[12vw] min-h-[60px] max-h-[130px] flex items-center justify-center mt-6 ">
           <Image
             src="/shifting-ground.png"
             alt="Shifting Ground"
@@ -43,7 +43,7 @@ export default async function PostsPage() {
             priority
           />
         </div>
-        <div>
+        <div className='pb-4 md:px-8 flex justify-center text-black font-light font-roboto tracking-wide text-base md:text-2xl'>
           <h3>Fine art photos for an upcoming book</h3>
         </div>
       </div>

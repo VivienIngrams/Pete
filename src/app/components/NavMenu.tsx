@@ -40,7 +40,7 @@ const NavMenu = () => {
         {/* Left: Logo / Title */}
         <Link href="/" className="hover:opacity-70 h-12 transition">
           <Image
-            src="/peter-lippmann.png"
+            src="/peter.png"
             alt="Peter Lippmann"
             width={220}
             height={60}
@@ -85,9 +85,9 @@ const NavMenu = () => {
         <div className="flex items-center justify-between py-4 px-6">
           <Link href="/" className="hover:opacity-70 transition">
             <Image
-              src="/peter-lippmann.png"
+              src="/peter.png"
               alt="Peter Lippmann"
-              width={140}
+              width={130}
               height={20}
               priority
             />

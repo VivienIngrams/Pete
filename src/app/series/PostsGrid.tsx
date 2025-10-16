@@ -69,7 +69,7 @@ export default function PostsGrid({ posts, language }: Props) {
   return (
     <div
       ref={wrapperRef}
-      className="relative h-[130vh] overflow-hidden bg-white "
+      className="relative h-[150vh] overflow-hidden bg-white "
     >
       <div
         ref={containerRef}
@@ -85,7 +85,7 @@ export default function PostsGrid({ posts, language }: Props) {
           return (
             <div
               key={post._id}
-              className="relative flex-shrink-0 w-[70vw] sm:w-[40vw] md:w-[25vw] lg:w-[20vw] xl:w-[15vw] aspect-square group overflow-hidden cursor-pointer"
+              className="relative flex-shrink-0 w-[70vw] sm:w-[40vw] md:w-[25vw] lg:w-[20vw] xl:w-[15vw] aspect-square group overflow-hidden cursor-pointer m-[-0.5px]"
               onClick={() => handleClick(post.slug.current)}
             >
               <Image
@@ -122,7 +122,7 @@ export default function PostsGrid({ posts, language }: Props) {
                 </span>
                 {/* Hover / active text */}
                 <span
-                  className={`absolute transition-opacity duration-200 font-light blur-gradient-overlay  text-base md:text-xl underline underline-offset-2 ${
+                  className={`absolute transition-opacity duration-200 font-light p-6 text-base md:text-xl  ${
                     isActive ? 'opacity-100' : 'opacity-0 md:group-hover:opacity-100'
                   }`}
                 >

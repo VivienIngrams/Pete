@@ -30,7 +30,7 @@ export default function PostsGrid({ posts, language }: Props) {
   }
 
   return (
-    <div className="pt-[250px] grid grid-cols-2 xl:grid-cols-5 gap-0 overflow-hidden">
+    <div className="pt-[170px] grid grid-cols-2 xl:grid-cols-5 gap-0 overflow-hidden">
       {posts.map((post) => {
         const isActive = activeOverlay === post.slug.current
         const title =
@@ -56,10 +56,10 @@ export default function PostsGrid({ posts, language }: Props) {
         
 
             {/* Title Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center text-center pointer-events-none">
+            <div className="absolute inset-0 flex items-center justify-center blur-gradient-overlay text-center pointer-events-none">
               <Link
                 href={`/series/${post.slug.current}`}
-                className={`relative font-light text-lg md:text-3xl max-w-20 md:max-w-24  blur-gradient-overlay text-white  transition-transform duration-200 md:hover:scale-105
+                className={`relative font-light text-lg md:text-3xl max-w-20 md:max-w-24   text-white  transition-transform duration-200 md:hover:scale-105
                     p-1 md:p-2 pointer-events-auto flex items-center justify-center`}
                 onClick={(e) => e.stopPropagation()}
               >
@@ -73,7 +73,7 @@ export default function PostsGrid({ posts, language }: Props) {
                 </span>
                 {/* Hover / active text */}
                 <span
-                  className={`absolute transition-opacity duration-200 font-light blur-gradient-overlay  text-base md:text-xl underline underline-offset-2 ${
+                  className={`absolute transition-opacity duration-200 font-light  text-base md:text-xl underline underline-offset-2 ${
                     isActive ? 'opacity-100' : 'opacity-0 md:group-hover:opacity-100'
                   }`}
                 >
