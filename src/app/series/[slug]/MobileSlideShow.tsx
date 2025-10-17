@@ -121,7 +121,7 @@ export default function MobileSlideshow({
       {/* Image + swipe area */}
       <div
         ref={imageWrapperRef}
-        className="relative w-full flex-shrink-0 flex items-center justify-center mt-10 touch-pan-x"
+        className="relative w-full flex-shrink-0 flex items-center justify-center mt-10 touch-pan-x touch-swipe-container"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
