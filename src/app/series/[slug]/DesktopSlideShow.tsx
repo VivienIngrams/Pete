@@ -123,12 +123,12 @@ export default function DesktopSlideshow({
       )}
 
       {/* Caption + About link */}
-      <div className="absolute bottom-6 left-6 max-w-[15vw]">
+      <div className="absolute bottom-6 left-6 ">
         {currentTitle && (
-          <h1 className="text-xl md:text-2xl font-normal">{currentTitle}</h1>
+          <h1 className="text-xl md:text-2xl font-normal max-w-[calc(15vw-24px)]">{currentTitle}</h1>
         )}
         {currentExcerpt && (
-          <div className="prose prose-sm md:prose-base mt-3 text-sm font-light font-roboto">
+          <div className="prose prose-sm md:prose-base mt-3 text-sm font-light font-roboto max-w-[calc(15vw-24px)]">
             <PortableText key={activeLang} value={currentExcerpt} />
           </div>
         )}

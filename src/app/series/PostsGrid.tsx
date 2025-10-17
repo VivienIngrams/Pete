@@ -1,11 +1,10 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { urlForImage } from '~/sanity/lib/sanity.image'
 import type { Post } from '~/sanity/lib/sanity.queries'
 import { useLanguage } from '~/app/components/context/LanguageProvider'
@@ -18,91 +17,63 @@ type Props = {
 export default function PostsGrid({ posts, language }: Props) {
   const { language: activeLang } = useLanguage()
   const lang = language || activeLang || 'en'
-  const router = useRouter()
-  const [activeOverlay, setActiveOverlay] = useState<string | null>(null)
-  const [mounted, setMounted] = useState(false)
-
-  const handleClick = (slug: string) => {
-    if (window.innerWidth < 768) {
-      if (activeOverlay === slug) {
-        router.push(`/series/${slug}`)
-      } else {
-        setActiveOverlay(slug)
-      }
-    }
-  }
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
 
   const containerRef = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
 
   gsap.registerPlugin(ScrollTrigger)
 
-  // Triple the posts for smoother infinite scrolling
+  // Triple posts for seamless infinite scroll
   const infinitePosts = [...posts, ...posts, ...posts]
 
   useEffect(() => {
-    if (!mounted) return
-    if (!containerRef.current || !wrapperRef.current) return
-  
-    const container = containerRef.current;
-    const wrapper = wrapperRef.current;
-  
-    // Reset initial position
-    gsap.set(container, { x: 0 });
-  
-    const singleSetWidth = container.scrollWidth / 3;
-    const totalScrollDistance = singleSetWidth * 10;
-  
+    const container = containerRef.current
+    const wrapper = wrapperRef.current
+    if (!container || !wrapper) return
+
+    gsap.set(container, { x: 0 })
+
+    const singleSetWidth = container.scrollWidth / 3
+    const totalScrollDistance = singleSetWidth * 10
+
     const ctx = gsap.context(() => {
       gsap.to(container, {
         x: () => -singleSetWidth * 10,
-        ease: "none",
+        ease: 'none',
         modifiers: {
           x: (x) => {
-            const xNum = parseFloat(x);
-            const wrapped = xNum % singleSetWidth;
-            return `${wrapped}px`;
-          }
+            const xNum = parseFloat(x)
+            const wrapped = xNum % singleSetWidth
+            return `${wrapped}px`
+          },
         },
         scrollTrigger: {
           trigger: wrapper,
-          start: "top center",
+          start: 'top center',
           end: () => `+=${totalScrollDistance}`,
           scrub: 1,
           pin: true,
-         
           anticipatePin: 1,
           invalidateOnRefresh: true,
-        }
-      });
-    }, wrapper);
-  
-    return () => {
-      ctx.revert();
-    }
-  }, [posts, mounted]);
-  
-  
-  if (!mounted) return null
+        },
+      })
+    }, wrapper)
+
+    return () => ctx.revert()
+  }, [posts])
 
   return (
     <div
       ref={wrapperRef}
       className="relative overflow-hidden bg-white"
-      style={{ 
-        marginTop: '300px', // Adjust this value to clear your banner
+      style={{
+        marginTop: '300px',
         height: '65vh',
-     paddingLeft: '32px'
-
+        paddingLeft: '32px',
       }}
     >
-    <div ref={containerRef} className="flex gap-[1px] h-[70%] items-center">
+      <div ref={containerRef} className="flex gap-[1px] h-[70%] items-center">
         {infinitePosts.map((post, index) => {
-          const isActive = activeOverlay === post.slug.current
           const title =
             lang === 'en'
               ? post.title_en || post.title || ''
@@ -111,8 +82,7 @@ export default function PostsGrid({ posts, language }: Props) {
           return (
             <div
               key={`${post._id}-${index}`}
-              className="relative flex-shrink-0  w-[65vw] sm:w-[50vw] md:w-[25vw] lg:w-[17vw] mr-4 aspect-square group overflow-hidden cursor-pointer m-[-0.5px]"
-              onClick={() => handleClick(post.slug.current)}
+              className="relative flex-shrink-0 w-[25vw] lg:w-[17vw] mr-4 aspect-square group overflow-hidden cursor-pointer m-[-0.5px]"
             >
               <Image
                 src={urlForImage(post.mainImage).url() as string}
@@ -125,24 +95,17 @@ export default function PostsGrid({ posts, language }: Props) {
               <Link
                 href={`/series/${post.slug.current}`}
                 className="absolute inset-0 z-10 flex items-center justify-center text-center"
-                onClick={(e) => e.stopPropagation()}
               >
                 <span className="sr-only">{title}</span>
 
-                <div className="relative font-light text-lg md:text-3xl text-white transition-transform duration-200 md:hover:scale-105 p-4 md:p-6 leading-tight">
+                <div className="relative font-light text-3xl text-white transition-transform duration-200 group-hover:scale-105 p-6 leading-tight">
                   <span className="relative inline-block text-center">
                     <span
                       className="absolute inset-[-0.3em] blur-text-background"
                       aria-hidden="true"
                     />
 
-                    <span
-                      className={`relative block transition-opacity duration-200 ${
-                        isActive
-                          ? 'opacity-0'
-                          : 'opacity-100 md:group-hover:opacity-0'
-                      }`}
-                    >
+                    <span className="relative block transition-opacity duration-200 group-hover:opacity-0">
                       {title.split(' ').map((word, i) => (
                         <span key={i} className="block leading-[0.95]">
                           {word}
@@ -151,13 +114,7 @@ export default function PostsGrid({ posts, language }: Props) {
                     </span>
                   </span>
 
-                  <span
-                    className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200 font-light text-base md:text-xl ${
-                      isActive
-                        ? 'opacity-100'
-                        : 'opacity-0 md:group-hover:opacity-100'
-                    }`}
-                  >
+                  <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 font-light text-xl">
                     View series
                   </span>
                 </div>
@@ -168,4 +125,4 @@ export default function PostsGrid({ posts, language }: Props) {
       </div>
     </div>
   )
-} 
+}
