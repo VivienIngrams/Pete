@@ -72,7 +72,7 @@ export default function PostsGrid({ posts, language }: Props) {
         paddingLeft: '32px',
       }}
     >
-      <div ref={containerRef} className="flex gap-[1px] h-[70%] items-center">
+      <div ref={containerRef} className="flex gap-[1px] h-[70%] items-center pr-4">
         {infinitePosts.map((post, index) => {
           const title =
             lang === 'en'
@@ -122,6 +122,7 @@ export default function PostsGrid({ posts, language }: Props) {
             </div>
           )
         })}
+      <div className="flex-shrink-0 w-4" />
       </div>
     </div>
   )

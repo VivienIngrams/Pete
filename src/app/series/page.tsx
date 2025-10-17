@@ -64,6 +64,11 @@ export default async function PostsPage() {
       <div className="hidden md:fixed bottom-0 left-0 right-0 w-screen md:flex justify-center pb-2">
         <p>scroll</p>
       </div>
+      {/* RIGHT visual margin overlay (16px) — non-interactive */}
+      <div
+        className="pointer-events-none hidden md:block  md:fixed right-0 top-0 bottom-0 w-4 z-50 bg-white"
+        aria-hidden="true"
+      />
     </>
   )
 }
