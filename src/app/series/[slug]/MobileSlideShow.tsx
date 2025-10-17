@@ -173,7 +173,7 @@ const current = useMemo(() => images[currentIndex] || null, [images, currentInde
             <PortableText value={currentExcerpt} key={activeLang} />
           </div>
         )}
-        <div className=" flex justify-start">
+        <div className="mt-2 flex justify-start">
           <button
             onClick={() => setIsAboutOpen(true)}
             className="text-sm font-normal underline underline-offset-2 tracking-wide"

@@ -94,9 +94,10 @@ export default function PostsGrid({ posts, language }: Props) {
       ref={wrapperRef}
       className="relative overflow-hidden bg-white"
       style={{ 
-        marginTop: '350px', // Adjust this value to clear your banner
+        marginTop: '300px', // Adjust this value to clear your banner
         height: '65vh',
-        paddingLeft: '1vw'
+     paddingLeft: '32px'
+
       }}
     >
     <div ref={containerRef} className="flex gap-[1px] h-[70%] items-center">
@@ -110,7 +111,7 @@ export default function PostsGrid({ posts, language }: Props) {
           return (
             <div
               key={`${post._id}-${index}`}
-              className="relative flex-shrink-0  w-[70vw] sm:w-[40vw] md:w-[25vw] lg:w-[17vw]  ml-6 aspect-square group overflow-hidden cursor-pointer m-[-0.5px]"
+              className="relative flex-shrink-0  w-[65vw] sm:w-[50vw] md:w-[25vw] lg:w-[17vw] mr-4 aspect-square group overflow-hidden cursor-pointer m-[-0.5px]"
               onClick={() => handleClick(post.slug.current)}
             >
               <Image

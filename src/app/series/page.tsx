@@ -33,8 +33,11 @@ export default async function PostsPage() {
       <NavMenu />
 
       {/* Fixed banner on top */}
-      <div id="series-banner" className="fixed top-12 md:top-[10vw] left-0 right-0 z-20 bg-white">
-        <div className="relative w-full h-[12vw] min-h-[60px] max-h-[120px] flex items-center justify-center mt-6 ">
+      <div
+        id="series-banner"
+        className="fixed top-36 md:top-[9vw] left-0 right-0 z-20 bg-white"
+      >
+        <div className="relative w-full h-[12vw] min-h-[60px] max-h-[120px] flex items-center justify-center">
           <Image
             src="/shifting-ground.png"
             alt="Shifting Ground"
@@ -43,15 +46,23 @@ export default async function PostsPage() {
             priority
           />
         </div>
-        <div className='pb-4 md:px-8 flex justify-center text-black font-light font-roboto tracking-wide text-base md:text-2xl'>
+        <div className="pb-4 md:px-8 flex justify-center text-black font-light font-roboto tracking-wide text-base md:text-2xl">
           <h3>Fine art photos for an upcoming book</h3>
         </div>
       </div>
 
-     
-      {/* Horizontal Scroll Section */}
-      <div className=" md:px-[1vw]">
+      {/* Desktop horizontal scroll */}
+      <div className="hidden md:block md:ml-4 md:mr-4">
         <PostsGrid posts={posts} />
+      </div>
+
+      {/* Mobile horizontal touch scroll */}
+      <div className="block md:hidden">
+        <PostsGridMobile posts={posts} />
+      </div>
+
+      <div className="hidden md:fixed bottom-0 left-0 right-0 w-screen md:flex justify-center pb-2">
+        <p>scroll</p>
       </div>
     </>
   )

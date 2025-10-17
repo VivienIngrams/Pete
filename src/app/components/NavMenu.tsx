@@ -38,7 +38,7 @@ const NavMenu = () => {
         }`}
       >
         {/* Left: Logo / Title */}
-        <Link href="/" className="hover:text-gray-500 text-3xl font-light transition">
+        <Link href="/" className="hover:text-gray-500 text-3xl pb-1 font-light transition">
           Peter Lippmann
         </Link>
 
@@ -77,7 +77,7 @@ const NavMenu = () => {
       {/* Mobile header */}
       <div className="md:hidden fixed top-0 left-0 w-full bg-white z-50">
         <div className="flex items-center justify-between py-4 px-6">
-          <Link href="/" className="hover:opacity-70 transition">
+          <Link href="/" className="text-black text-xl font-light transition">
             Peter Lippmann
           </Link>
 
