@@ -38,14 +38,8 @@ const NavMenu = () => {
         }`}
       >
         {/* Left: Logo / Title */}
-        <Link href="/" className="hover:opacity-70 h-12 transition">
-          <Image
-            src="/peter.png"
-            alt="Peter Lippmann"
-            width={220}
-            height={60}
-            priority
-          />
+        <Link href="/" className="hover:text-gray-500 text-3xl font-light transition">
+          Peter Lippmann
         </Link>
 
         {/* Center: Menu items */}
@@ -84,13 +78,7 @@ const NavMenu = () => {
       <div className="md:hidden fixed top-0 left-0 w-full bg-white z-50">
         <div className="flex items-center justify-between py-4 px-6">
           <Link href="/" className="hover:opacity-70 transition">
-            <Image
-              src="/peter.png"
-              alt="Peter Lippmann"
-              width={130}
-              height={20}
-              priority
-            />
+            Peter Lippmann
           </Link>
 
           <button
