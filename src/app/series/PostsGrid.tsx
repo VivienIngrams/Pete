@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import Image from 'next/image'
@@ -80,14 +80,8 @@ export default function PostsGrid({ posts, language }: Props) {
   return (
     <div
       ref={wrapperRef}
-      className="relative overflow-hidden bg-white"
-      style={{
-        marginTop: '300px',
-        height: '65vh',
-        paddingLeft: '',
-      }}
-    >
-      <div ref={containerRef} className="flex h-[70%] items-start pr-4">
+      className="relative overflow-hidden bg-white mt-[22vw] h-[65vh]"   >
+      <div ref={containerRef} className="flex h-[60%] items-start pl-4">
         {infinitePosts.map((post, index) => {
           const title =
             lang === 'en'
@@ -110,7 +104,7 @@ export default function PostsGrid({ posts, language }: Props) {
                   />
                 </div>
 
-                <h3 className=" text-black font-light text-2xl text-center transition-all duration-200 group-hover:text-gray-800">
+                <h3 className="text-black font-light text-2xl text-center transition-all duration-200 group-hover:text-gray-800">
                   <span className="group-hover:hidden">{title}</span>
                   <span className="hidden group-hover:inline underline underline-offset-2 font-normal text-lg tracking-tight">View series</span>
                 </h3>

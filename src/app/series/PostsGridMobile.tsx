@@ -49,7 +49,7 @@ export default function PostsGridMobile({ posts, language }: Props) {
           return (
             <div
               key={`${post._id}-${index}`}
-              className="flex-shrink-0 w-[65vw] mr-1 flex flex-col items-center group cursor-pointer"
+              className="flex-shrink-0 w-[65vw] flex flex-col items-center group ${index === 0 ? 'ml-4' : ''}"
               onClick={() => handleClick(post.slug.current)}
             >
               <Link href={`/series/${post.slug.current}`} className="w-full flex flex-col items-center" onClick={(e) => e.stopPropagation()}>
