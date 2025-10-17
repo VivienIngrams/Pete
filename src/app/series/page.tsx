@@ -34,7 +34,7 @@ export default async function PostsPage() {
 
       {/* Fixed banner on top */}
       <div className="fixed top-12 md:top-[10vw] left-0 right-0 z-20 bg-white">
-        <div className="relative w-full h-[12vw] min-h-[60px] max-h-[130px] flex items-center justify-center mt-6 ">
+        <div className="relative w-full h-[12vw] min-h-[60px] max-h-[120px] flex items-center justify-center mt-6 ">
           <Image
             src="/shifting-ground.png"
             alt="Shifting Ground"
@@ -48,11 +48,9 @@ export default async function PostsPage() {
         </div>
       </div>
 
-      <div className=" md:hidden">
-        <PostsGridMobile posts={posts} />
-      </div>
+     
       {/* Horizontal Scroll Section */}
-      <div className="hidden md:block md:px-[12vw]">
+      <div className=" md:px-[12vw]">
         <PostsGrid posts={posts} />
       </div>
     </>

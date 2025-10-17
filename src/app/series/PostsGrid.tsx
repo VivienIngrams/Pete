@@ -36,22 +36,35 @@ export default function PostsGrid({ posts, language }: Props) {
 
   gsap.registerPlugin(ScrollTrigger)
 
+  // Duplicate posts for infinite scroll on desktop
+  const infinitePosts = [...posts, ...posts, ...posts]
+
   useEffect(() => {
     if (!containerRef.current || !wrapperRef.current) return
+    if (window.innerWidth < 768) return // Skip GSAP for mobile
 
     const container = containerRef.current
     const wrapper = wrapperRef.current
 
-    const totalWidth = container.scrollWidth - window.innerWidth
+    // Width of one set of posts
+    const singleSetWidth = container.scrollWidth / 3
 
     const ctx = gsap.context(() => {
       gsap.to(container, {
-        x: -totalWidth,
+        x: () => -singleSetWidth * 10,
         ease: 'none',
+        modifiers: {
+          x: (x) => {
+            const xNum = parseFloat(x)
+            // Wrap position for seamless infinite scroll
+            const wrapped = xNum % singleSetWidth
+            return `${wrapped}px`
+          }
+        },
         scrollTrigger: {
           trigger: wrapper,
           start: 'top top',
-          end: () => `+=${totalWidth}`,
+          end: () => `+=${singleSetWidth * 10}`,
           scrub: 1,
           pin: true,
           anticipatePin: 1,
@@ -65,13 +78,27 @@ export default function PostsGrid({ posts, language }: Props) {
     }
   }, [posts])
 
+  // Check screen width for mobile rendering
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+
   return (
     <div
       ref={wrapperRef}
-      className="relative h-[150vh] overflow-hidden bg-white"
+      className={`relative overflow-hidden bg-white`}
+      style={{
+        marginTop: '280px', // adjust for banners if needed
+        height: '60vh'
+      }}
     >
-      <div ref={containerRef} className="flex gap-[1px] h-full items-center">
-        {posts.map((post) => {
+      <div
+        ref={containerRef}
+        className={`flex h-full items-center ${
+          isMobile
+            ? 'overflow-x-auto snap-x snap-mandatory touch-pan-x'
+            : 'gap-[1px]'
+        }`}
+      >
+        {(isMobile ? posts : infinitePosts).map((post, index) => {
           const isActive = activeOverlay === post.slug.current
           const title =
             lang === 'en'
@@ -80,8 +107,10 @@ export default function PostsGrid({ posts, language }: Props) {
 
           return (
             <div
-              key={post._id}
-              className="relative flex-shrink-0 w-[70vw] sm:w-[40vw] md:w-[25vw] lg:w-[20vw] xl:w-[15vw] aspect-square group overflow-hidden cursor-pointer m-[-0.5px]"
+              key={`${post._id}-${index}`}
+              className={`relative flex-shrink-0 w-[70vw] sm:w-[40vw] md:w-[25vw] lg:w-[20vw] xl:w-[15vw] aspect-square group overflow-hidden cursor-pointer m-[-0.5px] ${
+                isMobile ? 'snap-start' : ''
+              }`}
               onClick={() => handleClick(post.slug.current)}
             >
               <Image
@@ -92,7 +121,6 @@ export default function PostsGrid({ posts, language }: Props) {
                 className="object-contain transition-all duration-300 scale-[1.01]"
               />
 
-              {/* Single Link overlay that handles both desktop and mobile */}
               <Link
                 href={`/series/${post.slug.current}`}
                 className="absolute inset-0 z-10 flex items-center justify-center text-center"
@@ -100,17 +128,13 @@ export default function PostsGrid({ posts, language }: Props) {
               >
                 <span className="sr-only">{title}</span>
 
-                {/* Text content */}
                 <div className="relative font-light text-lg md:text-3xl text-white transition-transform duration-200 md:hover:scale-105 p-4 md:p-6 leading-tight">
-                  {/* Title with adaptive blur */}
                   <span className="relative inline-block text-center">
-                    {/* Light blur backdrop that hugs text */}
                     <span
                       className="absolute inset-[-0.3em] blur-text-background"
                       aria-hidden="true"
                     />
 
-                    {/* One word per line */}
                     <span
                       className={`relative block transition-opacity duration-200 ${
                         isActive
@@ -126,7 +150,6 @@ export default function PostsGrid({ posts, language }: Props) {
                     </span>
                   </span>
 
-                  {/* Hover / active text */}
                   <span
                     className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200 font-light text-base md:text-xl ${
                       isActive
