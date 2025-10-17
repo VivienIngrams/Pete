@@ -38,7 +38,10 @@ const NavMenu = () => {
         }`}
       >
         {/* Left: Logo / Title */}
-        <Link href="/" className="hover:text-gray-500 text-3xl pb-1 font-light transition">
+        <Link
+          href="/"
+          className="hover:text-gray-500 text-3xl pb-1 font-light transition"
+        >
           Peter Lippmann
         </Link>
 
@@ -153,7 +156,7 @@ const NavMenu = () => {
           <Socials />
 
           {/* Language Switcher (mobile) */}
-          <div className="">
+          <div onClick={(e) => e.stopPropagation()}>
             <LanguageSwitcher />
           </div>
         </div>

@@ -13,6 +13,10 @@ html {
 html[data-theme="light"] {
   color-scheme: light;
 }
+.touch-swipe-container {
+  touch-action: pan-x; /* allows horizontal pan gestures */
+  -webkit-overflow-scrolling: touch;
+}
 
 body {
  

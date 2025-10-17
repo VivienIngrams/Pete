@@ -73,7 +73,7 @@ export default function DesktopSlideshow({
   }
 
   return (
-    <div className="relative w-full h-screen bg-white flex items-center py-10 justify-center hide-scrollbar">
+    <div className="relative w-full h-screen bg-white font-light flex items-center py-10 justify-center hide-scrollbar">
       {/* Placeholder skeleton */}
       {isImageLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-[#eae8dd] animate-pulse">
@@ -99,7 +99,7 @@ export default function DesktopSlideshow({
       {/* Close button */}
       <button
         onClick={handleClose}
-        className="absolute text-base text-black tracking-wide underline underline-offset-2 top-6 left-6 z-50 font-normal hover:font-bold"
+        className="absolute text-sm text-black tracking-wide underline underline-offset-2 top-6 left-6 z-50  hover:font-bold"
       >
         {t.close}
       </button>
@@ -123,23 +123,23 @@ export default function DesktopSlideshow({
       )}
 
       {/* Caption + About link */}
-      <div className="absolute bottom-6 left-6 ">
+      <div className="absolute bottom-12 left-6 ">
         {currentTitle && (
-          <h1 className="text-xl md:text-2xl font-normal max-w-[calc(15vw-24px)]">{currentTitle}</h1>
+          <h1 className="text-xl md:text-2xl font-normal max-w-[calc(15vw-24px)]">
+            {currentTitle}
+          </h1>
         )}
         {currentExcerpt && (
-          <div className="prose prose-sm md:prose-base mt-3 text-sm font-light font-roboto max-w-[calc(15vw-24px)]">
+          <div className="prose prose-sm md:prose-base  text-sm font-roboto max-w-[calc(15vw-24px)]">
             <PortableText key={activeLang} value={currentExcerpt} />
+            <button
+              onClick={() => setIsAboutOpen(true)}
+              className="text-sm  underline underline-offset-2 tracking-wide hover:font-bold"
+            >
+              {t.about}
+            </button>
           </div>
         )}
-        <div className="">
-          <button
-            onClick={() => setIsAboutOpen(true)}
-            className="text-base font-normal underline underline-offset-2 rounded-md tracking-wide hover:font-bold"
-          >
-            {t.about}
-          </button>
-        </div>
       </div>
 
       {/* ABOUT MODAL */}
@@ -172,7 +172,6 @@ export default function DesktopSlideshow({
                 <p>No description available.</p>
               )}
             </div>
-
           </div>
         </div>
       )}

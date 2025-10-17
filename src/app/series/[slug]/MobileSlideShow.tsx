@@ -31,34 +31,37 @@ export default function MobileSlideshow({
   const touchStartX = useRef<number | null>(null)
   const touchEndX = useRef<number | null>(null)
 
-// Memoize images array to have a stable reference
-const images = useMemo(() => post.images || [], [post.images])
+  // Memoize images array to have a stable reference
+  const images = useMemo(() => post.images || [], [post.images])
 
-// Memoize current image based on currentIndex
-const current = useMemo(() => images[currentIndex] || null, [images, currentIndex])
-
+  // Memoize current image based on currentIndex
+  const current = useMemo(
+    () => images[currentIndex] || null,
+    [images, currentIndex],
+  )
 
   // --- Memoized titles & excerpts ---
   const postTitle = useMemo(
     () => (activeLang === 'en' ? post.title_en || post.title : post.title),
-    [activeLang, post.title, post.title_en]
+    [activeLang, post.title, post.title_en],
   )
   const currentTitle = useMemo(() => {
     if (!current) return ''
     return (
       (activeLang === 'en'
         ? current.title_en || current.title_fr
-        : current.title_fr || current.title_en) || `${postTitle} ${currentIndex + 1}`
+        : current.title_fr || current.title_en) ||
+      `${postTitle} ${currentIndex + 1}`
     )
   }, [activeLang, current, currentIndex, postTitle])
-  
+
   const currentExcerpt = useMemo(() => {
     if (!current) return null
     return activeLang === 'en'
       ? current.excerpt_en || current.excerpt_fr
       : current.excerpt_fr || current.excerpt_en
   }, [activeLang, current])
-  
+
   const postExcerptBlocks = useMemo(() => {
     return activeLang === 'en'
       ? post.excerpt_en || post.excerpt
@@ -92,7 +95,7 @@ const current = useMemo(() => images[currentIndex] || null, [images, currentInde
   const handleTouchEnd = () => {
     if (touchStartX.current === null || touchEndX.current === null) return
     const diff = touchStartX.current - touchEndX.current
-    if (Math.abs(diff) > 50) (diff > 0 ? handleNext() : handlePrev())
+    if (Math.abs(diff) > 50) diff > 0 ? handleNext() : handlePrev()
     touchStartX.current = null
     touchEndX.current = null
   }
@@ -103,14 +106,13 @@ const current = useMemo(() => images[currentIndex] || null, [images, currentInde
     close: activeLang === 'en' ? 'close' : 'fermer',
   }
 
-
   return (
     <div className="relative w-full h-screen bg-white mt-6 flex flex-col items-center justify-center">
       {/* Persistent top bar with close button */}
       <div className="fixed top-0 left-0 right-0 z-[9999] bg-white flex items-center h-10 px-4 ">
         <button
           onClick={handleClose}
-          className="text-black text-xs tracking-wide underline underline-offset-2 font-normal"
+          className="text-black text-sm tracking-wide underline underline-offset-2"
         >
           {t.close}
         </button>
@@ -119,7 +121,7 @@ const current = useMemo(() => images[currentIndex] || null, [images, currentInde
       {/* Image + swipe area */}
       <div
         ref={imageWrapperRef}
-        className="relative w-full flex-shrink-0 flex items-center justify-center mt-10"
+        className="relative w-full flex-shrink-0 flex items-center justify-center mt-10 touch-pan-x"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -166,21 +168,19 @@ const current = useMemo(() => images[currentIndex] || null, [images, currentInde
       {/* Caption overlay */}
       <div className="bg-white/50 w-full px-4 py-4">
         {currentTitle && (
-          <h1 className="text-xl md:text-2xl font-normal">{currentTitle}</h1>
+          <h1 className="text-xl font-normal">{currentTitle}</h1>
         )}
         {currentExcerpt && (
-          <div className="mt-3 text-xs font-roboto">
+          <div className=" text-sm font-roboto">
             <PortableText value={currentExcerpt} key={activeLang} />
+            <button
+              onClick={() => setIsAboutOpen(true)}
+              className="text-sm underline underline-offset-2 tracking-wide"
+            >
+              {t.about}
+            </button>
           </div>
         )}
-        <div className="mt-2 flex justify-start">
-          <button
-            onClick={() => setIsAboutOpen(true)}
-            className="text-sm font-normal underline underline-offset-2 tracking-wide"
-          >
-            {t.about}
-          </button>
-        </div>
       </div>
 
       {/* About modal */}
@@ -202,12 +202,12 @@ const current = useMemo(() => images[currentIndex] || null, [images, currentInde
               <h2 className="text-xl font-normal">{postTitle}</h2>
               <button
                 onClick={() => setIsAboutOpen(false)}
-                className="text-xs fixed top-4 left-4 tracking-wide underline underline-offset-2 bg-white"
+                className="text-sm fixed top-4 left-4 tracking-wide underline underline-offset-2 bg-white"
               >
                 {t.close}
               </button>
             </div>
-            <div className="prose prose-sm md:prose-base text-xs font-roboto text-justify">
+            <div className="prose prose-sm md:prose-base text-sm font-roboto text-justify">
               {postExcerptBlocks && postExcerptBlocks.length ? (
                 <PortableText value={postExcerptBlocks} key={activeLang} />
               ) : (
