@@ -1,4 +1,6 @@
 import { cookies } from 'next/headers'
+import Image from 'next/image'
+
 import { readToken } from '~/sanity/lib/sanity.api'
 import { getClient } from '~/sanity/lib/sanity.client'
 import {
@@ -6,9 +8,9 @@ import {
   getSeriesGridPosts,
   type Post,
 } from '~/sanity/lib/sanity.queries'
+
 import NavMenu from '../components/NavMenu'
 import PostsGrid from './PostsGrid'
-import Image from 'next/image'
 import PostsGridMobile from './PostsGridMobile'
 
 export default async function PostsPage() {

@@ -1,13 +1,14 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
+
+import { useLanguage } from '~/app/components/context/LanguageProvider'
 import { urlForImage } from '~/sanity/lib/sanity.image'
 import type { Post } from '~/sanity/lib/sanity.queries'
-import { useLanguage } from '~/app/components/context/LanguageProvider'
 
 type Props = {
   posts: Post[]
@@ -80,7 +81,7 @@ export default function PostsGrid({ posts, language }: Props) {
   return (
     <div
       ref={wrapperRef}
-      className="relative overflow-hidden bg-white mt-[22vw] h-[65vh]"   >
+      className="relative overflow-hidden bg-white mt-[23vw] h-[65vh]"   >
       <div ref={containerRef} className="flex h-[60%] items-start pl-4">
         {infinitePosts.map((post, index) => {
           const title =

@@ -32,7 +32,7 @@ export default function PostsGridMobile({ posts, language }: Props) {
 
   return (
     <div
-      className="relative overflow-x-auto overflow-y-hidden bg-white mt-[45vh] "
+      className="relative overflow-x-auto overflow-y-hidden bg-white mt-[45vh] hide-scrollbar"
       style={{
         WebkitOverflowScrolling: 'touch',
         scrollSnapType: 'x mandatory',

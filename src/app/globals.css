@@ -5,7 +5,13 @@
 
 html {
   font-size: 14px; 
-  color: #46433e
+  color: #46433e;
+  color-scheme: light;
+  background-color: white;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
 }
 
 body {
@@ -19,6 +25,12 @@ img {
   display: block;
 }
 
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: black;
+    color: white;
+  }
+}
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
