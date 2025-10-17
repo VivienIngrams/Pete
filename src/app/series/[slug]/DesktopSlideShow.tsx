@@ -129,9 +129,10 @@ export default function DesktopSlideshow({
             {currentTitle}
           </h1>
         )}
-        {currentExcerpt && (
           <div className="prose prose-sm md:prose-base  text-sm font-roboto max-w-[calc(15vw-24px)]">
-            <PortableText key={activeLang} value={currentExcerpt} />
+        {currentExcerpt && (
+          <PortableText key={activeLang} value={currentExcerpt} />
+        )}
             <button
               onClick={() => setIsAboutOpen(true)}
               className="text-sm  underline underline-offset-2 tracking-wide hover:font-bold"
@@ -139,7 +140,6 @@ export default function DesktopSlideshow({
               {t.about}
             </button>
           </div>
-        )}
       </div>
 
       {/* ABOUT MODAL */}

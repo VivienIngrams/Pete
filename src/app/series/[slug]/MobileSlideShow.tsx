@@ -170,9 +170,10 @@ export default function MobileSlideshow({
         {currentTitle && (
           <h1 className="text-xl font-normal">{currentTitle}</h1>
         )}
-        {currentExcerpt && (
           <div className=" text-sm font-roboto">
+        {currentExcerpt && (
             <PortableText value={currentExcerpt} key={activeLang} />
+          )}
             <button
               onClick={() => setIsAboutOpen(true)}
               className="text-sm underline underline-offset-2 tracking-wide"
@@ -180,7 +181,6 @@ export default function MobileSlideshow({
               {t.about}
             </button>
           </div>
-        )}
       </div>
 
       {/* About modal */}
