@@ -42,11 +42,10 @@ export default function PostsGrid({ posts, language }: Props) {
     const container = containerRef.current
     const wrapper = wrapperRef.current
 
-    // Calculate the total scroll distance
     const totalWidth = container.scrollWidth - window.innerWidth
 
     const ctx = gsap.context(() => {
-      const animation = gsap.to(container, {
+      gsap.to(container, {
         x: -totalWidth,
         ease: 'none',
         scrollTrigger: {
@@ -69,12 +68,9 @@ export default function PostsGrid({ posts, language }: Props) {
   return (
     <div
       ref={wrapperRef}
-      className="relative h-[150vh] overflow-hidden bg-white "
+      className="relative h-[150vh] overflow-hidden bg-white"
     >
-      <div
-        ref={containerRef}
-        className="flex gap-[1px] h-full items-center"
-      >
+      <div ref={containerRef} className="flex gap-[1px] h-full items-center">
         {posts.map((post) => {
           const isActive = activeOverlay === post.slug.current
           const title =
@@ -96,40 +92,52 @@ export default function PostsGrid({ posts, language }: Props) {
                 className="object-contain transition-all duration-300 scale-[1.01]"
               />
 
-             {/* Desktop link overlay */}
-            <Link
-              href={`/series/${post.slug.current}`}
-              className="hidden md:block absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            >
-              <span className="sr-only">{title}</span>
-            </Link>
-
-            {/* Title Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center text-center pointer-events-none  blur-gradient-overlay">
+              {/* Single Link overlay that handles both desktop and mobile */}
               <Link
                 href={`/series/${post.slug.current}`}
-                className={`relative font-light text-lg md:text-3xl max-w-20 md:max-w-24  text-white  transition-transform duration-200 md:hover:scale-105
-                    p-1 md:p-2 pointer-events-auto flex items-center justify-center`}
+                className="absolute inset-0 z-10 flex items-center justify-center text-center"
                 onClick={(e) => e.stopPropagation()}
               >
-                {/* Original title */}
-                <span
-                  className={`transition-opacity duration-200  ${
-                    isActive ? 'opacity-0' : 'opacity-100 md:group-hover:opacity-0'
-                  }`}
-                >
-                  {title}
-                </span>
-                {/* Hover / active text */}
-                <span
-                  className={`absolute transition-opacity duration-200 font-light p-6 text-base md:text-xl  ${
-                    isActive ? 'opacity-100' : 'opacity-0 md:group-hover:opacity-100'
-                  }`}
-                >
-                  View series
-                </span>
+                <span className="sr-only">{title}</span>
+
+                {/* Text content */}
+                <div className="relative font-light text-lg md:text-3xl text-white transition-transform duration-200 md:hover:scale-105 p-4 md:p-6 leading-tight">
+                  {/* Title with adaptive blur */}
+                  <span className="relative inline-block text-center">
+                    {/* Light blur backdrop that hugs text */}
+                    <span
+                      className="absolute inset-[-0.3em] blur-text-background"
+                      aria-hidden="true"
+                    />
+
+                    {/* One word per line */}
+                    <span
+                      className={`relative block transition-opacity duration-200 ${
+                        isActive
+                          ? 'opacity-0'
+                          : 'opacity-100 md:group-hover:opacity-0'
+                      }`}
+                    >
+                      {title.split(' ').map((word, i) => (
+                        <span key={i} className="block leading-[0.95]">
+                          {word}
+                        </span>
+                      ))}
+                    </span>
+                  </span>
+
+                  {/* Hover / active text */}
+                  <span
+                    className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200 font-light text-base md:text-xl ${
+                      isActive
+                        ? 'opacity-100'
+                        : 'opacity-0 md:group-hover:opacity-100'
+                    }`}
+                  >
+                    View series
+                  </span>
+                </div>
               </Link>
-              </div>
             </div>
           )
         })}
