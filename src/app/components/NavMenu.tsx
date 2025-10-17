@@ -132,7 +132,7 @@ const NavMenu = () => {
         id="mobile-menu"
         onClick={toggleMenu}
       >
-        <div className="px-6 space-y-3 text-base">
+        <div className="px-6 space-y-4 text-base">
           <Link href="/series" className="block">
             {menuItems.series[language] || menuItems.series.en}
           </Link>
