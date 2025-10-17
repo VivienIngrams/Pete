@@ -32,13 +32,13 @@ export default function PostsGridMobile({ posts, language }: Props) {
 
   return (
     <div
-      className="relative overflow-x-auto overflow-y-hidden bg-white mt-[45vh]"
+      className="relative overflow-x-auto overflow-y-hidden bg-white mt-[45vh] "
       style={{
         WebkitOverflowScrolling: 'touch',
         scrollSnapType: 'x mandatory',
       }}
     >
-      <div className="flex gap-[1px] h-[70%] items-center w-max pb-4">
+      <div className="flex gap-4 h-[70%] items-start w-max pb-4">
         {doublePosts.map((post, index) => {
           const isActive = activeOverlay === post.slug.current
           const title =
@@ -49,52 +49,24 @@ export default function PostsGridMobile({ posts, language }: Props) {
           return (
             <div
               key={`${post._id}-${index}`}
-              className="relative flex-shrink-0 w-[65vw] mr-4 aspect-square overflow-hidden cursor-pointer m-[-0.5px]"
+              className="flex-shrink-0 w-[65vw] mr-1 flex flex-col items-center group cursor-pointer"
               onClick={() => handleClick(post.slug.current)}
             >
-              <Image
-                src={urlForImage(post.mainImage).url() as string}
-                alt={title}
-                fill
-                sizes="65vw"
-                className="object-contain transition-all duration-300 scale-[1.01]"
-              />
-
-              <Link
-                href={`/series/${post.slug.current}`}
-                className="absolute inset-0 z-10 flex items-center justify-center text-center"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <span className="sr-only">{title}</span>
-
-                {/* identical overlay structure */}
-                <div className="relative font-light text-2xl text-white p-4 leading-tight">
-                  <span className="relative inline-block text-center">
-                    <span
-                      className="absolute inset-[-0.3em] blur-text-background"
-                      aria-hidden="true"
-                    />
-                    <span
-                      className={`relative block transition-opacity duration-200 ${
-                        isActive ? 'opacity-0' : 'opacity-100'
-                      }`}
-                    >
-                      {title.split(' ').map((word, i) => (
-                        <span key={i} className="block leading-[0.95]">
-                          {word}
-                        </span>
-                      ))}
-                    </span>
-                  </span>
-
-                  <span
-                    className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200 font-light text-base ${
-                      isActive ? 'opacity-100' : 'opacity-0'
-                    }`}
-                  >
-                    View series
-                  </span>
+              <Link href={`/series/${post.slug.current}`} className="w-full flex flex-col items-center" onClick={(e) => e.stopPropagation()}>
+                <div className="relative w-full aspect-square overflow-hidden">
+                  <Image
+                    src={urlForImage(post.mainImage).url() as string}
+                    alt={title}
+                    fill
+                    sizes="65vw"
+                    className="object-contain transition-transform duration-300 group-hover:scale-105"
+                  />
                 </div>
+
+                <h3 className=" text-black font-light text-xl text-center transition-all duration-200">
+                  <span className={`${isActive ? 'hidden' : 'inline'}`}>{title}</span>
+                  
+                </h3>
               </Link>
             </div>
           )

@@ -61,7 +61,7 @@ export default async function PostsPage() {
         <PostsGridMobile posts={posts} />
       </div>
 
-      <div className="hidden md:fixed bottom-0 left-0 right-0 w-screen md:flex justify-center pb-2">
+      <div className="hidden md:fixed bottom-0 left-0 right-0 text-sm w-screen md:flex justify-center pb-2">
         <p>scroll</p>
       </div>
       {/* RIGHT visual margin overlay (16px) — non-interactive */}

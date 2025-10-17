@@ -72,7 +72,7 @@ export default function PostsGrid({ posts, language }: Props) {
         paddingLeft: '32px',
       }}
     >
-      <div ref={containerRef} className="flex gap-[1px] h-[70%] items-center pr-4">
+      <div ref={containerRef} className="flex gap-[1px] h-[70%] items-start pr-4">
         {infinitePosts.map((post, index) => {
           const title =
             lang === 'en'
@@ -82,47 +82,27 @@ export default function PostsGrid({ posts, language }: Props) {
           return (
             <div
               key={`${post._id}-${index}`}
-              className="relative flex-shrink-0 w-[25vw] lg:w-[17vw] mr-4 aspect-square group overflow-hidden cursor-pointer m-[-0.5px]"
+              className="flex-shrink-0 w-[25vw] lg:w-[17vw] mr-4 flex flex-col items-center group cursor-pointer"
             >
-              <Image
-                src={urlForImage(post.mainImage).url() as string}
-                alt={title}
-                fill
-                sizes="25vw"
-                className="object-contain transition-all duration-300 scale-[1.01]"
-              />
-
-              <Link
-                href={`/series/${post.slug.current}`}
-                className="absolute inset-0 z-10 flex items-center justify-center text-center"
-              >
-                <span className="sr-only">{title}</span>
-
-                <div className="relative font-light text-3xl text-white transition-transform duration-200 group-hover:scale-105 p-6 leading-tight">
-                  <span className="relative inline-block text-center">
-                    <span
-                      className="absolute inset-[-0.3em] blur-text-background"
-                      aria-hidden="true"
-                    />
-
-                    <span className="relative block transition-opacity duration-200 group-hover:opacity-0">
-                      {title.split(' ').map((word, i) => (
-                        <span key={i} className="block leading-[0.95]">
-                          {word}
-                        </span>
-                      ))}
-                    </span>
-                  </span>
-
-                  <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 font-light text-xl">
-                    View series
-                  </span>
+              <Link href={`/series/${post.slug.current}`} className="w-full flex flex-col items-center">
+                <div className="relative w-full aspect-square overflow-hidden">
+                  <Image
+                    src={urlForImage(post.mainImage).url() as string}
+                    alt={title}
+                    fill
+                    sizes="25vw"
+                    className="object-contain transition-transform duration-300 group-hover:scale-105"
+                  />
                 </div>
+
+                <h3 className=" text-black font-light text-2xl text-center transition-all duration-200 group-hover:text-gray-800">
+                  <span className="group-hover:hidden">{title}</span>
+                  <span className="hidden group-hover:inline underline underline-offset-2 font-normal text-lg tracking-tight">View series</span>
+                </h3>
               </Link>
             </div>
           )
         })}
-      <div className="flex-shrink-0 w-4" />
       </div>
     </div>
   )
