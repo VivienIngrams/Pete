@@ -50,7 +50,7 @@ export default async function PostsPage() {
 
      
       {/* Horizontal Scroll Section */}
-      <div className=" md:px-[5vw]">
+      <div className=" md:px-[1vw]">
         <PostsGrid posts={posts} />
       </div>
     </>
