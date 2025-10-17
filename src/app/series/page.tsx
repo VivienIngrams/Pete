@@ -52,7 +52,7 @@ export default async function PostsPage() {
       </div>
 
       {/* Desktop horizontal scroll */}
-      <div className="hidden md:block md:ml-4 md:mx-4">
+      <div className="hidden md:block ml-4 ">
         <PostsGrid posts={posts} />
       </div>
 

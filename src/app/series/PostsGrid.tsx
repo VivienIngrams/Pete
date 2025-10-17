@@ -24,18 +24,18 @@ export default function PostsGrid({ posts, language }: Props) {
   gsap.registerPlugin(ScrollTrigger)
 
   // Triple posts for seamless infinite scroll
-  const infinitePosts = [...posts, ...posts, ...posts]
+  const infinitePosts = [...posts, ...posts,]
 
   useEffect(() => {
     const container = containerRef.current
     const wrapper = wrapperRef.current
     if (!container || !wrapper) return
-
+  
     gsap.set(container, { x: 0 })
-
-    const singleSetWidth = container.scrollWidth / 3
+  
+    const singleSetWidth = container.scrollWidth / 2
     const totalScrollDistance = singleSetWidth * 10
-
+  
     const ctx = gsap.context(() => {
       gsap.to(container, {
         x: () => -singleSetWidth * 10,
@@ -58,10 +58,25 @@ export default function PostsGrid({ posts, language }: Props) {
         },
       })
     }, wrapper)
-
-    return () => ctx.revert()
+  
+    // 👇 HORIZONTAL SCROLL -> VERTICAL SCROLL
+    const onWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+        window.scrollBy({
+          top: e.deltaX,
+          behavior: 'smooth',
+        })
+      }
+    }
+  
+    window.addEventListener('wheel', onWheel, { passive: false })
+  
+    return () => {
+      ctx.revert()
+      window.removeEventListener('wheel', onWheel)
+    }
   }, [posts])
-
+  
   return (
     <div
       ref={wrapperRef}
@@ -69,10 +84,10 @@ export default function PostsGrid({ posts, language }: Props) {
       style={{
         marginTop: '300px',
         height: '65vh',
-        paddingLeft: '32px',
+        paddingLeft: '',
       }}
     >
-      <div ref={containerRef} className="flex gap-[1px] h-[70%] items-start pr-4">
+      <div ref={containerRef} className="flex h-[70%] items-start pr-4">
         {infinitePosts.map((post, index) => {
           const title =
             lang === 'en'
