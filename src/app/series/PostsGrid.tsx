@@ -20,6 +20,7 @@ export default function PostsGrid({ posts, language }: Props) {
   const lang = language || activeLang || 'en'
   const router = useRouter()
   const [activeOverlay, setActiveOverlay] = useState<string | null>(null)
+  const [mounted, setMounted] = useState(false)
 
   const handleClick = (slug: string) => {
     if (window.innerWidth < 768) {
@@ -30,6 +31,10 @@ export default function PostsGrid({ posts, language }: Props) {
       }
     }
   }
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
 
   const containerRef = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -40,6 +45,7 @@ export default function PostsGrid({ posts, language }: Props) {
   const infinitePosts = [...posts, ...posts, ...posts]
 
   useEffect(() => {
+    if (!mounted) return
     if (!containerRef.current || !wrapperRef.current) return
   
     const container = containerRef.current;
@@ -78,9 +84,11 @@ export default function PostsGrid({ posts, language }: Props) {
     return () => {
       ctx.revert();
     }
-  }, [posts]);
+  }, [posts, mounted]);
   
   
+  if (!mounted) return null
+
   return (
     <div
       ref={wrapperRef}
@@ -88,7 +96,7 @@ export default function PostsGrid({ posts, language }: Props) {
       style={{ 
         marginTop: '300px', // Adjust this value to clear your banner
         height: '60vh',
-        paddingLeft: '5vw'
+        paddingLeft: '3vw'
       }}
     >
     <div ref={containerRef} className="flex gap-[1px] h-[70%] items-center">
@@ -102,7 +110,7 @@ export default function PostsGrid({ posts, language }: Props) {
           return (
             <div
               key={`${post._id}-${index}`}
-              className="relative flex-shrink-0  w-[70vw] sm:w-[40vw] md:w-[25vw] lg:w-[20vw] xl:w-[15vw]  aspect-square group overflow-hidden cursor-pointer m-[-0.5px]"
+              className="relative flex-shrink-0  w-[70vw] sm:w-[40vw] md:w-[25vw] lg:w-[17vw]  ml-10 aspect-square group overflow-hidden cursor-pointer m-[-0.5px]"
               onClick={() => handleClick(post.slug.current)}
             >
               <Image
