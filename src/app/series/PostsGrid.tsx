@@ -36,69 +36,63 @@ export default function PostsGrid({ posts, language }: Props) {
 
   gsap.registerPlugin(ScrollTrigger)
 
-  // Duplicate posts for infinite scroll on desktop
+  // Triple the posts for smoother infinite scrolling
   const infinitePosts = [...posts, ...posts, ...posts]
 
   useEffect(() => {
     if (!containerRef.current || !wrapperRef.current) return
-    if (window.innerWidth < 768) return // Skip GSAP for mobile
-
-    const container = containerRef.current
-    const wrapper = wrapperRef.current
-
-    // Width of one set of posts
-    const singleSetWidth = container.scrollWidth / 3
-
+  
+    const container = containerRef.current;
+    const wrapper = wrapperRef.current;
+  
+    // Reset initial position
+    gsap.set(container, { x: 0 });
+  
+    const singleSetWidth = container.scrollWidth / 3;
+    const totalScrollDistance = singleSetWidth * 10;
+  
     const ctx = gsap.context(() => {
       gsap.to(container, {
         x: () => -singleSetWidth * 10,
-        ease: 'none',
+        ease: "none",
         modifiers: {
           x: (x) => {
-            const xNum = parseFloat(x)
-            // Wrap position for seamless infinite scroll
-            const wrapped = xNum % singleSetWidth
-            return `${wrapped}px`
+            const xNum = parseFloat(x);
+            const wrapped = xNum % singleSetWidth;
+            return `${wrapped}px`;
           }
         },
         scrollTrigger: {
           trigger: wrapper,
-          start: 'top top',
-          end: () => `+=${singleSetWidth * 10}`,
+          start: "top center",
+          end: () => `+=${totalScrollDistance}`,
           scrub: 1,
           pin: true,
+         
           anticipatePin: 1,
           invalidateOnRefresh: true,
-        },
-      })
-    }, wrapper)
-
+        }
+      });
+    }, wrapper);
+  
     return () => {
-      ctx.revert()
+      ctx.revert();
     }
-  }, [posts])
-
-  // Check screen width for mobile rendering
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
-
+  }, [posts]);
+  
+  
   return (
     <div
       ref={wrapperRef}
-      className={`relative overflow-hidden bg-white`}
-      style={{
-        marginTop: '280px', // adjust for banners if needed
-        height: '60vh'
+      className="relative overflow-hidden bg-white"
+      style={{ 
+        marginTop: '300px', // Adjust this value to clear your banner
+        height: '60vh',
+        paddingLeft: '5vw'
       }}
     >
-      <div
-        ref={containerRef}
-        className={`flex h-full items-center ${
-          isMobile
-            ? 'overflow-x-auto snap-x snap-mandatory touch-pan-x'
-            : 'gap-[1px]'
-        }`}
-      >
-        {(isMobile ? posts : infinitePosts).map((post, index) => {
+    <div ref={containerRef} className="flex gap-[1px] h-[70%] items-center">
+        {infinitePosts.map((post, index) => {
           const isActive = activeOverlay === post.slug.current
           const title =
             lang === 'en'
@@ -108,9 +102,7 @@ export default function PostsGrid({ posts, language }: Props) {
           return (
             <div
               key={`${post._id}-${index}`}
-              className={`relative flex-shrink-0 w-[70vw] sm:w-[40vw] md:w-[25vw] lg:w-[20vw] xl:w-[15vw] aspect-square group overflow-hidden cursor-pointer m-[-0.5px] ${
-                isMobile ? 'snap-start' : ''
-              }`}
+              className="relative flex-shrink-0  w-[70vw] sm:w-[40vw] md:w-[25vw] lg:w-[20vw] xl:w-[15vw]  aspect-square group overflow-hidden cursor-pointer m-[-0.5px]"
               onClick={() => handleClick(post.slug.current)}
             >
               <Image
@@ -167,4 +159,4 @@ export default function PostsGrid({ posts, language }: Props) {
       </div>
     </div>
   )
-}
+} 

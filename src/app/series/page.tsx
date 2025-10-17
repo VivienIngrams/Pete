@@ -33,7 +33,7 @@ export default async function PostsPage() {
       <NavMenu />
 
       {/* Fixed banner on top */}
-      <div className="fixed top-12 md:top-[10vw] left-0 right-0 z-20 bg-white">
+      <div id="series-banner" className="fixed top-12 md:top-[10vw] left-0 right-0 z-20 bg-white">
         <div className="relative w-full h-[12vw] min-h-[60px] max-h-[120px] flex items-center justify-center mt-6 ">
           <Image
             src="/shifting-ground.png"

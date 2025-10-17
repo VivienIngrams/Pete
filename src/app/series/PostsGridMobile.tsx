@@ -30,7 +30,7 @@ export default function PostsGrid({ posts, language }: Props) {
   }
 
   return (
-    <div className="pt-[170px] grid grid-cols-2 xl:grid-cols-5 gap-0 overflow-hidden">
+    <div className="pt-[170px] grid grid-cols-2  gap-[1px] overflow-hidden">
       {posts.map((post) => {
         const isActive = activeOverlay === post.slug.current
         const title =
@@ -41,7 +41,7 @@ export default function PostsGrid({ posts, language }: Props) {
         return (
           <div
             key={post._id}
-            className="relative aspect-square group overflow-hidden m-[-0.5px] cursor-pointer"
+            className="relative aspect-square group overflow-hidden cursor-pointer m-[-1px] "
             onClick={() => handleClick(post.slug.current)}
           >
             {/* Background Image */}
@@ -50,37 +50,50 @@ export default function PostsGrid({ posts, language }: Props) {
               alt={title}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover transition-all duration-300 scale-[1.01] md:group-hover:opacity-100"
+              className="object-cover transition-all duration-300 scale-[1.02]"
             />
 
-        
+            {/* Overlay with exact same logic as desktop */}
+            <Link
+              href={`/series/${post.slug.current}`}
+              className="absolute inset-0 z-10 flex items-center justify-center text-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <span className="sr-only">{title}</span>
 
-            {/* Title Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center blur-gradient-overlay text-center pointer-events-none">
-              <Link
-                href={`/series/${post.slug.current}`}
-                className={`relative font-light text-lg md:text-3xl max-w-20 md:max-w-24   text-white  transition-transform duration-200 md:hover:scale-105
-                    p-1 md:p-2 pointer-events-auto flex items-center justify-center`}
-                onClick={(e) => e.stopPropagation()}
-              >
-                {/* Original title */}
-                <span
-                  className={`transition-opacity duration-200  ${
-                    isActive ? 'opacity-0' : 'opacity-100 md:group-hover:opacity-0'
-                  }`}
-                >
-                  {title}
+              <div className="relative font-light text-lg md:text-3xl text-white transition-transform duration-200 md:hover:scale-105 p-4 md:p-6 leading-tight">
+                <span className="relative inline-block text-center">
+                  <span
+                    className="absolute inset-[-0.3em] blur-text-background"
+                    aria-hidden="true"
+                  />
+
+                  <span
+                    className={`relative block transition-opacity duration-200 ${
+                      isActive
+                        ? 'opacity-0'
+                        : 'opacity-100 md:group-hover:opacity-0'
+                    }`}
+                  >
+                    {title.split(' ').map((word, i) => (
+                      <span key={i} className="block leading-[0.95]">
+                        {word}
+                      </span>
+                    ))}
+                  </span>
                 </span>
-                {/* Hover / active text */}
+
                 <span
-                  className={`absolute transition-opacity duration-200 font-light  text-base md:text-xl underline underline-offset-2 ${
-                    isActive ? 'opacity-100' : 'opacity-0 md:group-hover:opacity-100'
+                  className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200 font-light text-base md:text-xl ${
+                    isActive
+                      ? 'opacity-100'
+                      : 'opacity-0 md:group-hover:opacity-100'
                   }`}
                 >
                   View series
                 </span>
-              </Link>
-            </div>
+              </div>
+            </Link>
           </div>
         )
       })}
