@@ -8,10 +8,12 @@ import {  Genos, Roboto, Smooch_Sans } from 'next/font/google'
 
 import { LanguageProvider } from './components/context/LanguageProvider'
 import type { Viewport } from 'next'
- 
 export const viewport: Viewport = {
-  themeColor: 'white',
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#ffffff',
 }
+
 
 
 
@@ -38,13 +40,7 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: 'Peter Lippmann',
   description: 'Photographer',
-  themeColor: '#ffffff',
-  colorScheme: 'light',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
   
-  },
 }
 
 export default function RootLayout({
@@ -59,10 +55,7 @@ export default function RootLayout({
       data-theme="light"
       style={{ colorScheme: 'light' }}
     >
-      {/* <head>
-        <meta name="color-scheme" content="light" />
-        <meta name="theme-color" content="#ffffff" />
-      </head> */}
+      
       <body className="h-full bg-white font-roboto">
         <LanguageProvider>
        
