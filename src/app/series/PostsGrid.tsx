@@ -28,13 +28,14 @@ export default function PostsGrid({ posts, language }: Props) {
 
   gsap.registerPlugin(ScrollTrigger)
 
+
   // Set dimensions of images based on aspect ratio
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const height = window.innerHeight * 0.33
       let totalImagesWidth = 0
-
-      posts.forEach((post) => {
+      const infinitePosts = [...posts, ...posts,]
+      infinitePosts.forEach((post) => {
         // Sanity aspectRatio is width/height, so we use it directly
         const aspectRatio = post.mainImage.aspectRatio || 1.5 // fallback aspect ratio
         const imgWidth = height * aspectRatio
@@ -73,7 +74,7 @@ export default function PostsGrid({ posts, language }: Props) {
       }
     }
   }, [dimensions])
-
+  const infinitePosts = [...posts, ...posts,]
   return (
     <>
      <section ref={triggerRef} className="w-full h-full overflow-visible bg-white pt-[25vh]">
@@ -83,7 +84,7 @@ export default function PostsGrid({ posts, language }: Props) {
           className="flex pl-12 space-x-12"
           style={{ width: `${dimensions.totalImagesWidth}px` }}
         >
-          {posts.map((post, index) => {
+          {infinitePosts.map((post, index) => {
             const title = lang === 'en' 
               ? post.title_en || post.title || ''
               : post.title || post.title_en || ''
@@ -113,7 +114,7 @@ export default function PostsGrid({ posts, language }: Props) {
                 />
               </div>
               {/* Title that changes to "View series" on hover */}
-              <div className="w-full h-[50px] mt-2 px-4 transition-opacity duration-300">
+              <div className="w-full h-[50px]  px-4 transition-opacity duration-300">
                 <h3 className="text-black font-light text-xl text-center">
                   <span className="group-hover:hidden">{title}</span>
                   <span className="hidden group-hover:inline underline underline-offset-2 font-normal text-lg tracking-tight">
