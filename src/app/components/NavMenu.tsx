@@ -10,7 +10,12 @@ import { useLanguage } from './context/LanguageProvider'
 import LanguageSwitcher from './LanguageSwitcher'
 import Socials from './Socials'
 
-const NavMenu = () => {
+interface NavMenuProps {
+  slideshowMode?: boolean
+  onDropdownToggle?: (isOpen: boolean) => void
+}
+
+const NavMenu = ({ slideshowMode = false, onDropdownToggle }: NavMenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isSubscribeOpen, setIsSubscribeOpen] = useState(false)
 
@@ -27,7 +32,13 @@ const NavMenu = () => {
     contact: { en: 'Contact', fr: 'Contact' },
   }
 
-  const toggleMenu = () => setIsOpen(!isOpen)
+  const toggleMenu = () => {
+    const newIsOpen = !isOpen
+    setIsOpen(newIsOpen)
+    if (onDropdownToggle) {
+      onDropdownToggle(newIsOpen)
+    }
+  }
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 font-roboto tracking-wide">
@@ -78,11 +89,15 @@ const NavMenu = () => {
       </div>
 
       {/* Mobile header */}
-      <div className="md:hidden fixed top-0 left-0 w-full bg-white z-50">
+      <div className={`md:hidden fixed top-0 left-0 w-full bg-white ${slideshowMode ? 'z-[1002]' : 'z-50'}`}>
         <div className="flex items-center justify-between py-4 px-6">
-          <Link href="/" className="text-black text-xl font-light transition">
-            Peter Lippmann
-          </Link>
+          {!slideshowMode && (
+            <Link href="/" className="text-black text-xl font-light transition">
+              Peter Lippmann
+            </Link>
+          )}
+          
+          {slideshowMode && <div></div>}
 
           <button
             onClick={toggleMenu}
@@ -128,7 +143,7 @@ const NavMenu = () => {
       <div
         className={`${
           isOpen ? 'block' : 'hidden'
-        } md:hidden bg-white pt-16 pb-4 w-screen`}
+        } md:hidden bg-white pt-16 pb-4 w-screen ${slideshowMode ? 'z-[1010]' : 'z-40'}`}
         id="mobile-menu"
         onClick={toggleMenu}
       >

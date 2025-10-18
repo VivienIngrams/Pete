@@ -1,14 +1,16 @@
 'use client'
 
-import Image from 'next/image'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { useRef, useState, useMemo, useEffect } from 'react'
-import type { Post } from '~/sanity/lib/sanity.queries'
-import { urlForImage } from '~/sanity/lib/sanity.image'
 import { PortableText } from '@portabletext/react'
-import LanguageSwitcher from '~/app/components/LanguageSwitcher'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { useEffect,useMemo, useRef, useState } from 'react'
+
 import { useLanguage } from '~/app/components/context/LanguageProvider'
+import LanguageSwitcher from '~/app/components/LanguageSwitcher'
+import NavMenu from '~/app/components/NavMenu'
+import { urlForImage } from '~/sanity/lib/sanity.image'
+import type { Post } from '~/sanity/lib/sanity.queries'
 
 type Props = {
   post: Post
@@ -26,6 +28,7 @@ export default function MobileSlideshow({
   const [isAboutOpen, setIsAboutOpen] = useState(false)
   const [isImageLoading, setIsImageLoading] = useState(true)
   const [forceRender, setForceRender] = useState(0)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const imageWrapperRef = useRef<HTMLDivElement>(null)
 
   // Force re-render when language changes to ensure PortableText updates
@@ -114,8 +117,9 @@ export default function MobileSlideshow({
 
   return (
     <div className="relative w-full h-screen bg-white mt-6 flex flex-col items-center justify-center">
+      <NavMenu slideshowMode={true} onDropdownToggle={setIsDropdownOpen} />
       {/* Persistent top bar with close button */}
-      <div className="fixed top-0 left-0 right-0 z-[9999] bg-white flex items-center h-10 px-4 ">
+      <div className={`fixed top-0 left-0 z-[900] bg-white flex items-center h-10 p-6 ${isDropdownOpen ? 'hidden' : 'block'}`}>
         <button
           onClick={handleClose}
           className="text-black text-sm tracking-wide underline underline-offset-2"
