@@ -105,7 +105,7 @@ export default function DesktopSlideshow({
       {/* Close button */}
       <button
         onClick={handleClose}
-        className="absolute text-sm text-black tracking-wide underline underline-offset-2 top-6 left-6 z-50  hover:font-bold"
+        className="absolute text-sm text-black tracking-wide uppercase top-6 left-6 z-50  hover:font-bold"
       >
         {t.close}
       </button>
@@ -141,7 +141,7 @@ export default function DesktopSlideshow({
         )}
             <button
               onClick={() => setIsAboutOpen(true)}
-              className="text-sm  underline underline-offset-2 tracking-wide hover:font-bold"
+              className="text-sm  uppercase tracking-wide hover:font-bold"
             >
               {t.about}
             </button>
@@ -156,7 +156,7 @@ export default function DesktopSlideshow({
         >
           <button
             onClick={() => setIsAboutOpen(false)}
-            className="absolute text-base underline underline-offset-2 top-6 left-6 z-50 font-normal hover:font-bold tracking-wide bg-white"
+            className="absolute text-base uppercase top-6 left-6 z-50 font-normal hover:font-bold tracking-wide bg-white"
           >
             {t.close}
           </button>

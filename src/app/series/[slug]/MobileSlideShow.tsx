@@ -119,10 +119,10 @@ export default function MobileSlideshow({
     <div className="relative w-full h-screen bg-white mt-6 flex flex-col items-center justify-center">
       <NavMenu slideshowMode={true} onDropdownToggle={setIsDropdownOpen} />
       {/* Persistent top bar with close button */}
-      <div className={`fixed top-0 left-0 z-[900] bg-white flex items-center h-10 p-6 ${isDropdownOpen ? 'hidden' : 'block'}`}>
+      <div className={`fixed top-0 left-0 z-[900] bg-white flex items-center h-12 p-6 ${isDropdownOpen ? 'hidden' : 'block'}`}>
         <button
           onClick={handleClose}
-          className="text-black text-sm tracking-wide underline underline-offset-2"
+          className="text-black text-sm tracking-wide uppercase mt-1"
         >
           {t.close}
         </button>
@@ -160,7 +160,7 @@ export default function MobileSlideshow({
       </div>
 
       {/* Navigation arrows */}
-      <div className="flex w-full justify-between px-1 mt-4 md:hidden">
+      <div className="flex w-full justify-between px-3 mt-4 md:hidden">
         <button
           onClick={handlePrev}
           className="rounded-full bg-white/60 active:bg-white/90 transition"
@@ -176,7 +176,7 @@ export default function MobileSlideshow({
       </div>
 
       {/* Caption overlay */}
-      <div className="bg-white/50 w-full px-4 py-4">
+      <div className="bg-white/50 w-full px-6 py-4 min-h-[120px]">
         {currentTitle && (
           <h1 className="text-xl font-normal">{currentTitle}</h1>
         )}
@@ -186,7 +186,7 @@ export default function MobileSlideshow({
           )}
             <button
               onClick={() => setIsAboutOpen(true)}
-              className="text-sm underline underline-offset-2 tracking-wide"
+              className="text-sm uppercase tracking-wide"
             >
               {t.about}
             </button>
@@ -212,7 +212,7 @@ export default function MobileSlideshow({
               <h2 className="text-xl font-normal">{postTitle}</h2>
               <button
                 onClick={() => setIsAboutOpen(false)}
-                className="text-sm fixed top-4 left-4 tracking-wide underline underline-offset-2 bg-white"
+                className="text-sm fixed top-4 left-4 tracking-wide uppercase bg-white"
               >
                 {t.close}
               </button>

@@ -85,7 +85,7 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle }: NavMenuProps) => {
       <div className={`md:hidden fixed top-0 left-0 w-full bg-white ${slideshowMode ? 'z-[1002]' : 'z-50'}`}>
         <div className="flex items-center justify-between py-4 px-6">
           {!slideshowMode && (
-            <Link href="/" className="text-black text-2xl tracking-widest transition font-light">
+            <Link href="/" className="text-black text-2xl sm:text-3xl tracking-widest transition font-light">
               Peter Lippmann
             </Link>
           )}
