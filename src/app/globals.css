@@ -5,7 +5,7 @@
 
 html {
   font-size: 14px; 
-  color: #46433e;
+  color: black;
   color-scheme: light;
   background-color: white;
 }
@@ -29,11 +29,16 @@ img {
   display: block;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: black;
-    color: white;
-  }
+/* Only apply dark mode styles when data-theme is explicitly set to dark */
+html[data-theme="dark"] body {
+  background-color: white;
+  color: black;
+}
+
+/* Override any system dark mode preferences when light theme is set */
+html[data-theme="light"] body {
+  background-color: white;
+  color: black;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
