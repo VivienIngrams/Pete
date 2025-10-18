@@ -76,7 +76,7 @@ export default function DesktopSlideshow({
     <div className="relative w-full h-screen bg-white font-light flex items-center py-10 justify-center hide-scrollbar">
       {/* Placeholder skeleton */}
       {isImageLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-[#eae8dd] animate-pulse">
+        <div className="absolute inset-0 flex items-center justify-center bg-white animate-pulse">
           <div className="w-16 h-16 border-4 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}

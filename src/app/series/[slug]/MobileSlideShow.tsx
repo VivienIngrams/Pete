@@ -129,7 +129,7 @@ export default function MobileSlideshow({
         {current.image && (
           <div className="relative w-auto max-h-[80vh] md:max-h-[95vh] flex items-center justify-center">
             {isImageLoading && (
-              <div className="absolute inset-0 flex items-center justify-center bg-[#eae8dd] animate-pulse">
+              <div className="absolute inset-0 flex items-center justify-center bg-white animate-pulse">
                 <div className="w-16 h-16 border-4 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
               </div>
             )}
