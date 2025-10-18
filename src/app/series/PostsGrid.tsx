@@ -32,7 +32,7 @@ export default function PostsGrid({ posts, language }: Props) {
   // Set dimensions of images based on aspect ratio
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const height = window.innerHeight * 0.33
+      const height = window.innerHeight * 0.45
       let totalImagesWidth = 0
       const infinitePosts = [...posts, ...posts,]
       infinitePosts.forEach((post) => {
@@ -81,7 +81,7 @@ export default function PostsGrid({ posts, language }: Props) {
 
         <div
           ref={sectionRef}
-          className="flex pl-12 space-x-12"
+          className="flex space-x-12"
           style={{ width: `${dimensions.totalImagesWidth}px` }}
         >
           {infinitePosts.map((post, index) => {
@@ -110,7 +110,7 @@ export default function PostsGrid({ posts, language }: Props) {
                   alt={title}
                   fill
                   sizes="25vw"
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="object-cover transition-transform duration-300 group-hover:shadow-md shadow-black"
                 />
               </div>
               {/* Title that changes to "View series" on hover */}
