@@ -22,13 +22,19 @@ export default async function HomePage() {
 
   // Prefer ordered posts from series grid; fallback to all posts if grid empty
   const orderedPosts = await getSeriesGridPosts(client, language, {
-    next: { revalidate: 600 },
+    next: { revalidate: 10 },
   })
 
   const posts: Post[] = orderedPosts.length
     ? orderedPosts
     : await getPosts(client, language, { next: { revalidate: 600 } })
 
+      posts.forEach((post) => {
+        console.log('Post Main Image:', post.mainImage);
+        console.log('Aspect Ratio:', post.mainImage?.aspectRatio);
+      });
+  
+    
   return (
     // PostsPage.tsx
     <>
@@ -75,7 +81,7 @@ export default async function HomePage() {
       </div>
 
       {/* Desktop horizontal scroll */}
-      <div className="hidden md:block ml-4 ">
+      <div className="hidden md:block ml-4 flex-grow h-full">
         <PostsGrid posts={posts} />
       </div>
 

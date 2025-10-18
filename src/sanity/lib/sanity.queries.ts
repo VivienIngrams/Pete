@@ -15,7 +15,10 @@ const postsQuery = () => groq`
   slug,
   excerpt,
   excerpt_en,
-  mainImage,
+  mainImage {
+    ...,
+    "aspectRatio": asset->metadata.dimensions.aspectRatio
+  },
   layout
 }`
 
@@ -30,7 +33,10 @@ export const seriesGridQuery = groq`
     slug,
     excerpt,
     excerpt_en,
-    mainImage,
+    mainImage {
+      ...,
+      "aspectRatio": asset->metadata.dimensions.aspectRatio
+    },
     layout
   }
 }`
@@ -141,7 +147,11 @@ export type Post = {
   _publishedAt: string
   slug: { current: string }
   _createdAt: string
-  mainImage: any
+  mainImage: {
+    _type: 'image'
+    asset: any
+    aspectRatio?: number
+  }
   title: string
   title_en?: string
   excerpt?: PortableTextBlock[]

@@ -1,16 +1,74 @@
 'use client'
 
-import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
+
+import { useLanguage } from '~/app/components/context/LanguageProvider'
 import { urlForImage } from '~/sanity/lib/sanity.image'
 import type { Post } from '~/sanity/lib/sanity.queries'
-import { useLanguage } from '~/app/components/context/LanguageProvider'
 
 type Props = {
   posts: Post[]
   language?: string
+}
+
+// Component for individual post with aspect ratio calculation
+function PostItemMobile({ post, title, lang, isActive, onClick }: { 
+  post: Post; 
+  title: string; 
+  lang: string; 
+  isActive: boolean; 
+  onClick: () => void;
+}) {
+  const [imageWidth, setImageWidth] = useState<number | null>(null)
+  const [imageLoaded, setImageLoaded] = useState(false)
+  const FIXED_HEIGHT = 35 // 35vh
+
+  useEffect(() => {
+    const loadImage = () => {
+      const img = document.createElement('img')
+      img.onload = () => {
+        const aspectRatio = img.naturalWidth / img.naturalHeight
+        const calculatedWidth = (FIXED_HEIGHT * window.innerHeight / 100) * aspectRatio
+        setImageWidth(calculatedWidth)
+        setImageLoaded(true)
+      }
+      img.src = urlForImage(post.mainImage).url() as string
+    }
+
+    loadImage()
+  }, [post.mainImage])
+
+  return (
+    <div
+      className="flex-shrink-0 flex flex-col items-center group"
+      style={{ width: imageWidth ? `${imageWidth}px` : 'auto' }}
+      onClick={onClick}
+    >
+      <Link href={`/series/${post.slug.current}`} className="flex flex-col items-center" onClick={(e) => e.stopPropagation()}>
+        <div className="relative overflow-hidden" style={{ height: `${FIXED_HEIGHT}vh` }}>
+          {imageLoaded && imageWidth ? (
+            <Image
+              src={urlForImage(post.mainImage).url() as string}
+              alt={title}
+              width={imageWidth}
+              height={FIXED_HEIGHT * window.innerHeight / 100}
+              sizes="65vw"
+              className="object-contain transition-transform duration-300 group-hover:scale-105"
+            />
+          ) : (
+            <div className="w-full h-full bg-gray-200 animate-pulse" />
+          )}
+        </div>
+
+        <h3 className=" text-black font-light text-xl text-center transition-all duration-200">
+          <span className={`${isActive ? 'hidden' : 'inline'}`}>{title}</span>
+        </h3>
+      </Link>
+    </div>
+  )
 }
 
 export default function PostsGridMobile({ posts, language }: Props) {
@@ -47,28 +105,14 @@ export default function PostsGridMobile({ posts, language }: Props) {
               : post.title || post.title_en || ''
 
           return (
-            <div
+            <PostItemMobile
               key={`${post._id}-${index}`}
-              className="flex-shrink-0 w-[65vw] flex flex-col items-center group ${index === 0 ? 'ml-4' : ''}"
+              post={post}
+              title={title}
+              lang={lang}
+              isActive={isActive}
               onClick={() => handleClick(post.slug.current)}
-            >
-              <Link href={`/series/${post.slug.current}`} className="w-full flex flex-col items-center" onClick={(e) => e.stopPropagation()}>
-                <div className="relative w-full aspect-square overflow-hidden">
-                  <Image
-                    src={urlForImage(post.mainImage).url() as string}
-                    alt={title}
-                    fill
-                    sizes="65vw"
-                    className="object-contain transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-
-                <h3 className=" text-black font-light text-xl text-center transition-all duration-200">
-                  <span className={`${isActive ? 'hidden' : 'inline'}`}>{title}</span>
-                  
-                </h3>
-              </Link>
-            </div>
+            />
           )
         })}
       </div>
