@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useRef, useState, useMemo } from 'react'
+import { useRef, useState, useMemo, useEffect } from 'react'
 import type { Post } from '~/sanity/lib/sanity.queries'
 import { urlForImage } from '~/sanity/lib/sanity.image'
 import { PortableText } from '@portabletext/react'
@@ -25,7 +25,13 @@ export default function MobileSlideshow({
   const { language: activeLang } = useLanguage()
   const [isAboutOpen, setIsAboutOpen] = useState(false)
   const [isImageLoading, setIsImageLoading] = useState(true)
+  const [forceRender, setForceRender] = useState(0)
   const imageWrapperRef = useRef<HTMLDivElement>(null)
+
+  // Force re-render when language changes to ensure PortableText updates
+  useEffect(() => {
+    setForceRender(prev => prev + 1)
+  }, [activeLang])
 
   // --- Swipe gesture refs ---
   const touchStartX = useRef<number | null>(null)
@@ -172,7 +178,7 @@ export default function MobileSlideshow({
         )}
           <div className=" text-sm font-roboto">
         {currentExcerpt && (
-            <PortableText value={currentExcerpt} key={activeLang} />
+            <PortableText key={`${activeLang}-${forceRender}`} value={currentExcerpt} />
           )}
             <button
               onClick={() => setIsAboutOpen(true)}
@@ -209,7 +215,7 @@ export default function MobileSlideshow({
             </div>
             <div className="prose prose-sm md:prose-base text-sm font-roboto text-justify">
               {postExcerptBlocks && postExcerptBlocks.length ? (
-                <PortableText value={postExcerptBlocks} key={activeLang} />
+                <PortableText key={`${activeLang}-${forceRender}`} value={postExcerptBlocks} />
               ) : (
                 <p>No description available.</p>
               )}

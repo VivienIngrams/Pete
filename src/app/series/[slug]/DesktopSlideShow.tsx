@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import type { Post } from '~/sanity/lib/sanity.queries'
 import { urlForImage } from '~/sanity/lib/sanity.image'
@@ -24,9 +24,15 @@ export default function DesktopSlideshow({
   const router = useRouter()
   const [isAboutOpen, setIsAboutOpen] = useState(false)
   const [isImageLoading, setIsImageLoading] = useState(true)
+  const [forceRender, setForceRender] = useState(0)
 
   // Use global language context instead of prop
   const { language: activeLang } = useLanguage()
+
+  // Force re-render when language changes to ensure PortableText updates
+  useEffect(() => {
+    setForceRender(prev => prev + 1)
+  }, [activeLang])
 
   const current = post.images?.[currentIndex]
   if (!current) return <p>No images found.</p>
@@ -131,7 +137,7 @@ export default function DesktopSlideshow({
         )}
           <div className="prose prose-sm md:prose-base  text-sm font-roboto max-w-[calc(15vw-24px)]">
         {currentExcerpt && (
-          <PortableText key={activeLang} value={currentExcerpt} />
+          <PortableText key={`${activeLang}-${forceRender}`} value={currentExcerpt} />
         )}
             <button
               onClick={() => setIsAboutOpen(true)}
@@ -167,7 +173,7 @@ export default function DesktopSlideshow({
 
             <div className="prose prose-sm md:prose-base text-base font-roboto text-justify mb-6">
               {postExcerptBlocks && postExcerptBlocks.length ? (
-                <PortableText key={activeLang} value={postExcerptBlocks} />
+                <PortableText key={`${activeLang}-${forceRender}`} value={postExcerptBlocks} />
               ) : (
                 <p>No description available.</p>
               )}
