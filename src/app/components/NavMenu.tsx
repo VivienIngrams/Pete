@@ -1,14 +1,14 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
-import SubscribeModal from './SubscribeModal'
-import Image from 'next/image'
 
 import { useLanguage } from './context/LanguageProvider'
 import LanguageSwitcher from './LanguageSwitcher'
 import Socials from './Socials'
+import SubscribeModal from './SubscribeModal'
 
 interface NavMenuProps {
   slideshowMode?: boolean
@@ -21,12 +21,10 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle }: NavMenuProps) => {
 
   const path = usePathname()
   const isHomePage = path === '/'
-  const isSeriesPage = path === '/series'
 
   const { language } = useLanguage()
 
   const menuItems = {
-    series: { en: 'Series', fr: 'Séries' },
     bio: { en: 'About', fr: 'Bio' },
     commissions: { en: 'Commissions', fr: 'Commissions' },
     contact: { en: 'Contact', fr: 'Contact' },
@@ -51,18 +49,13 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle }: NavMenuProps) => {
         {/* Left: Logo / Title */}
         <Link
           href="/"
-          className="hover:text-gray-500 text-3xl pb-1 font-light transition"
+          className="hover:text-gray-500 text-4xl pb-1 font-light transition  tracking-widest"
         >
           Peter Lippmann
         </Link>
 
         {/* Center: Menu items */}
         <div className="flex items-center space-x-8 text-base font-light">
-          {!isSeriesPage && (
-            <Link href="/series" className="hover:text-gray-500">
-              {menuItems.series[language] || menuItems.series.en}
-            </Link>
-          )}
           <Link href="/bio" className="hover:text-gray-500">
             {menuItems.bio[language] || menuItems.bio.en}
           </Link>
@@ -92,7 +85,7 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle }: NavMenuProps) => {
       <div className={`md:hidden fixed top-0 left-0 w-full bg-white ${slideshowMode ? 'z-[1002]' : 'z-50'}`}>
         <div className="flex items-center justify-between py-4 px-6">
           {!slideshowMode && (
-            <Link href="/" className="text-black text-xl font-light transition">
+            <Link href="/" className="text-black text-2xl tracking-widest transition font-light">
               Peter Lippmann
             </Link>
           )}
@@ -148,9 +141,6 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle }: NavMenuProps) => {
         onClick={toggleMenu}
       >
         <div className="px-6 space-y-4 text-base">
-          <Link href="/series" className="block">
-            {menuItems.series[language] || menuItems.series.en}
-          </Link>
           <Link href="/bio" className="block">
             {menuItems.bio[language] || menuItems.bio.en}
           </Link>
