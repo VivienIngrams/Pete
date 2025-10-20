@@ -55,7 +55,7 @@ export default async function HomePage() {
           <div className="w-full h-[12vh] relative mr-5">
             <Image
               src="/shifting.png"
-              alt="Shifting Ground Top"
+              alt="Shifting"
               fill
               sizes="70vw"
               className="object-contain"
@@ -65,7 +65,7 @@ export default async function HomePage() {
           <div className="w-full h-[11vh] relative -mt-[3vh]">
             <Image
               src="/ground.png"
-              alt="Shifting Ground Bottom"
+              alt="Ground"
               layout="fill"
               className="object-contain"
               priority

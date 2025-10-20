@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useState, useEffect } from 'react'
+import React, { createContext, useContext, useEffect,useState } from 'react'
 
 // Create context to provide and consume language state
 const LanguageContext = createContext(null)

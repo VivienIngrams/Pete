@@ -1,14 +1,15 @@
 'use client'
 
-import Image from 'next/image'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import type { Post } from '~/sanity/lib/sanity.queries'
-import { urlForImage } from '~/sanity/lib/sanity.image'
 import { PortableText } from '@portabletext/react'
-import LanguageSwitcher from '~/app/components/LanguageSwitcher'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { useEffect,useState } from 'react'
+
 import { useLanguage } from '~/app/components/context/LanguageProvider'
+import LanguageSwitcher from '~/app/components/LanguageSwitcher'
+import { urlForImage } from '~/sanity/lib/sanity.image'
+import type { Post } from '~/sanity/lib/sanity.queries'
 
 type Props = {
   post: Post

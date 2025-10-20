@@ -4,10 +4,10 @@ import './globals.css'
 
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
+import type { Viewport } from 'next'
 import {  Genos, Roboto, Smooch_Sans } from 'next/font/google'
 
 import { LanguageProvider } from './components/context/LanguageProvider'
-import type { Viewport } from 'next'
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,

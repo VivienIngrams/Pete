@@ -1,7 +1,9 @@
 import { cookies } from 'next/headers'
+
 import { readToken } from '~/sanity/lib/sanity.api'
 import { getClient } from '~/sanity/lib/sanity.client'
 import { getPost, getPosts, type Post } from '~/sanity/lib/sanity.queries'
+
 import PostSlideshow from './PostSlideShow'
 
 export default async function PostPage({

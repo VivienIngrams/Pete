@@ -1,9 +1,9 @@
 import { SchemaTypeDefinition } from 'sanity'
 
+import bio from './bio'
 import blockContent from './blockContent'
 import home from './homePage'
 import post from './post'
-import bio from './bio'
 import grid from './seriesGrid'
 
 
