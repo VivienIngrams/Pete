@@ -66,7 +66,8 @@ export default async function HomePage() {
             <Image
               src="/ground.png"
               alt="Ground"
-              layout="fill"
+              fill
+              sizes="70vw"
               className="object-contain"
               priority
             />
