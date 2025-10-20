@@ -24,7 +24,7 @@ function PostItemMobile({ post, title, lang, isActive, onClick }: {
 }) {
   const [imageWidth, setImageWidth] = useState<number | null>(null)
   const [imageLoaded, setImageLoaded] = useState(false)
-  const FIXED_HEIGHT = 35 // 35vh
+  const FIXED_HEIGHT = 40
 
   useEffect(() => {
     const loadImage = () => {
@@ -96,7 +96,7 @@ export default function PostsGridMobile({ posts, language }: Props) {
         scrollSnapType: 'x mandatory',
       }}
     >
-      <div className="flex gap-4 h-[70%] items-start w-max pb-4">
+      <div className="flex gap-4 h-[80%] items-start w-max pb-4">
         {doublePosts.map((post, index) => {
           const isActive = activeOverlay === post.slug.current
           const title =

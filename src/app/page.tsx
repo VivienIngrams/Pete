@@ -41,12 +41,12 @@ export default async function HomePage() {
         id="series-banner"
         className="fixed top-[12vh] md:top-[9vw] left-0 right-0 z-20 bg-white"
       >
-        <div className="hidden relative w-full  h-[12vh] md:flex items-center justify-center">
+        <div className="hidden relative w-full  h-[13vh] md:flex items-center justify-center">
           <Image
             src="/shifting-ground.png"
             alt="Shifting Ground"
             fill
-            sizes="70vw"
+            sizes="50vw"
             className="object-contain"
             priority
           />
@@ -62,7 +62,7 @@ export default async function HomePage() {
               priority
             />
           </div>
-          <div className="w-full h-[11vh] relative -mt-[3vh]">
+          <div className="w-full h-[12vh] relative -mt-[4vh]">
             <Image
               src="/ground.png"
               alt="Ground"

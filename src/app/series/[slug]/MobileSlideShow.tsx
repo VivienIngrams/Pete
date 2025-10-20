@@ -137,7 +137,7 @@ export default function MobileSlideshow({
         onTouchEnd={handleTouchEnd}
       >
         {current.image && (
-          <div className="relative w-auto max-h-[80vh] md:max-h-[95vh] flex items-center justify-center">
+          <div className="relative w-auto max-h-[80vh] flex items-center justify-center">
             {isImageLoading && (
               <div className="absolute inset-0 flex items-center justify-center bg-white animate-pulse">
                 <div className="w-16 h-16 border-4 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
@@ -147,9 +147,9 @@ export default function MobileSlideshow({
             <Image
               src={urlForImage(current.image).url() || ''}
               alt={currentTitle || post.title}
-              width={1600}
-              height={1200}
-              className={`w-auto max-h-[80vh] md:max-h-[95vh] object-contain transition-opacity duration-500 ${
+              width={500}
+              height={500}
+              className={`w-auto max-h-[80vh]  object-contain transition-opacity duration-500 ${
                 isImageLoading ? 'opacity-0' : 'opacity-100'
               }`}
               onLoad={() => setIsImageLoading(false)}

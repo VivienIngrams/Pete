@@ -25,6 +25,7 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle }: NavMenuProps) => {
   const { language } = useLanguage()
 
   const menuItems = {
+    series: { en: 'Series', fr: 'Séries' },
     bio: { en: 'About', fr: 'Bio' },
     commissions: { en: 'Commissions', fr: 'Commissions' },
     contact: { en: 'Contact', fr: 'Contact' },
@@ -56,6 +57,12 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle }: NavMenuProps) => {
 
         {/* Center: Menu items */}
         <div className="flex items-center space-x-8 text-base font-light">
+          <Link
+            href="/series"
+            className={`block ${isHomePage ? 'hidden' : ''}`}
+          >
+            {menuItems.series[language] || menuItems.bio.en}
+          </Link>
           <Link href="/bio" className="hover:text-gray-500">
             {menuItems.bio[language] || menuItems.bio.en}
           </Link>
@@ -82,14 +89,19 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle }: NavMenuProps) => {
       </div>
 
       {/* Mobile header */}
-      <div className={`md:hidden fixed top-0 left-0 w-full bg-white ${slideshowMode ? 'z-[1002]' : 'z-50'}`}>
+      <div
+        className={`md:hidden fixed top-0 left-0 w-full bg-white ${slideshowMode ? 'z-[1002]' : 'z-50'}`}
+      >
         <div className="flex items-center justify-between py-4 px-6">
           {!slideshowMode && (
-            <Link href="/" className="text-black text-2xl sm:text-3xl tracking-widest transition font-light">
+            <Link
+              href="/"
+              className="text-black text-2xl sm:text-3xl tracking-widest transition font-light"
+            >
               Peter Lippmann
             </Link>
           )}
-          
+
           {slideshowMode && <div></div>}
 
           <button
@@ -136,11 +148,22 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle }: NavMenuProps) => {
       <div
         className={`${
           isOpen ? 'block' : 'hidden'
-        } md:hidden bg-white pt-16 pb-4 w-screen ${slideshowMode ? 'z-[1010]' : 'z-40'}`}
+        } md:hidden bg-white  pb-4 w-screen ${slideshowMode ? 'z-[1003] pt-4 pb-12' : 'py-16 z-40'}`}
         id="mobile-menu"
         onClick={toggleMenu}
       >
         <div className="px-6 space-y-4 text-base">
+          {slideshowMode && (
+            <Link
+              href="/"
+              className={`text-black text-2xl sm:text-3xl tracking-widest transition font-light z-1010 pt-12 ${slideshowMode ? 'z-[1010] block' : 'hidden'}`}
+            >
+              Peter Lippmann
+            </Link>
+          )}
+          <Link href="/series" className="block">
+            {menuItems.series[language] || menuItems.bio.en}
+          </Link>
           <Link href="/bio" className="block">
             {menuItems.bio[language] || menuItems.bio.en}
           </Link>
