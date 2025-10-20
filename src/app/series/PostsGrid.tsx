@@ -4,8 +4,8 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import Image from 'next/image'
 import Link from 'next/link'
-
 import React, { useEffect, useRef, useState } from 'react'
+
 import { useLanguage } from '~/app/components/context/LanguageProvider'
 import { urlForImage } from '~/sanity/lib/sanity.image'
 import type { Post } from '~/sanity/lib/sanity.queries'
@@ -40,7 +40,7 @@ export default function PostsGrid({ posts, language }: Props) {
         const aspectRatio = post.mainImage.aspectRatio || 1.5 // fallback aspect ratio
         const imgWidth = height * aspectRatio
         totalImagesWidth += imgWidth + 64 // spacing
-        console.log('Post:', post.title, 'AspectRatio:', aspectRatio, 'Width:', imgWidth) // Debug log
+       
       })
 
       setDimensions({ height, totalImagesWidth })
@@ -51,7 +51,7 @@ export default function PostsGrid({ posts, language }: Props) {
   useEffect(() => {
     if (dimensions.totalImagesWidth > 0 && typeof window !== 'undefined') {
       const containerWidth = window.innerWidth * 0.7
-      const totalWidth = dimensions.totalImagesWidth - containerWidth
+      const totalWidth = dimensions.totalImagesWidth - containerWidth - 20
 
       const pin = gsap.fromTo(
         sectionRef.current,
@@ -77,7 +77,7 @@ export default function PostsGrid({ posts, language }: Props) {
   const infinitePosts = [...posts, ...posts,]
   return (
     <>
-     <section ref={triggerRef} className="w-full h-full overflow-visible bg-white pt-[25vh]">
+     <section ref={triggerRef} className="w-full h-full overflow-visible bg-white pt-[36vh]">
 
         <div
           ref={sectionRef}
@@ -96,7 +96,7 @@ export default function PostsGrid({ posts, language }: Props) {
             return (
               
               <Link
-              key={post._id || index}
+              key={`${post._id}-${index}`}
               href={`/series/${post.slug.current}`}
               className="relative flex-shrink-0 cursor-pointer group"
               style={{
