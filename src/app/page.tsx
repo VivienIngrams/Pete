@@ -29,11 +29,7 @@ export default async function HomePage() {
     ? orderedPosts
     : await getPosts(client, language, { next: { revalidate: 600 } })
 
-      posts.forEach((post) => {
-        console.log('Post Main Image:', post.mainImage);
-        console.log('Aspect Ratio:', post.mainImage?.aspectRatio);
-      });
-  
+      
     
   return (
     // PostsPage.tsx
@@ -83,7 +79,7 @@ export default async function HomePage() {
       </div>
 
       {/* Desktop horizontal scroll */}
-      <div className="hidden md:block ml-[12vw]  flex-grow h-full">
+      <div className="hidden md:block flex-grow h-full pl-12">
         <PostsGrid posts={posts} />
       </div>
 
