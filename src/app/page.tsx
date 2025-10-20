@@ -41,7 +41,7 @@ export default async function HomePage() {
         id="series-banner"
         className="fixed top-[12vh] md:top-[9vw] left-0 right-0 z-20 bg-white"
       >
-        <div className="hidden relative w-full  h-[120px] md:flex items-center justify-center">
+        <div className="hidden relative w-full  h-[12vh] md:flex items-center justify-center">
           <Image
             src="/shifting-ground.png"
             alt="Shifting Ground"
@@ -88,8 +88,8 @@ export default async function HomePage() {
         <PostsGridMobile posts={posts} />
       </div>
 
-      <div className="hidden md:fixed bottom-0 left-0 right-0 text-sm w-screen md:flex justify-center pb-2">
-        <p>scroll</p>
+      <div className="hidden md:fixed bottom-0 left-0 right-0 text-xs w-screen md:flex justify-center pb-2 bg-black text-white uppercase pt-2">
+        <p>scroll to explore</p>
       </div>
       {/* RIGHT visual margin overlay (16px) — non-interactive */}
       <div

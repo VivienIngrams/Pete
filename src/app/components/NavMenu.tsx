@@ -42,14 +42,14 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle }: NavMenuProps) => {
     <nav className="fixed top-0 left-0 w-full z-50 font-roboto tracking-wide">
       {/* Desktop menu */}
       <div
-        className={`hidden md:flex items-center justify-between px-[12vw] py-[2vw] bg-white text-black ${
+        className={`hidden md:flex items-center justify-between px-[12vw] py-[3vh] bg-white text-black ${
           isHomePage ? 'hidden' : ''
         }`}
       >
         {/* Left: Logo / Title */}
         <Link
           href="/"
-          className="hover:text-gray-500 text-4xl pb-1 font-light transition  tracking-widest"
+          className="hover:text-gray-500 text-3xl pb-1 font-light transition  tracking-widest"
         >
           Peter Lippmann
         </Link>

@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useLanguage } from '~/app/components/context/LanguageProvider'
 import { urlForImage } from '~/sanity/lib/sanity.image'
@@ -14,71 +14,26 @@ type Props = {
   language?: string
 }
 
-// Component for individual post with aspect ratio calculation
-function PostItemMobile({ post, title, lang, isActive, onClick }: { 
-  post: Post; 
-  title: string; 
-  lang: string; 
-  isActive: boolean; 
-  onClick: () => void;
-}) {
-  const [imageWidth, setImageWidth] = useState<number | null>(null)
-  const [imageLoaded, setImageLoaded] = useState(false)
-  const FIXED_HEIGHT = 35 // 35vh
-
-  useEffect(() => {
-    const loadImage = () => {
-      const img = document.createElement('img')
-      img.onload = () => {
-        const aspectRatio = img.naturalWidth / img.naturalHeight
-        const calculatedWidth = (FIXED_HEIGHT * window.innerHeight / 100) * aspectRatio
-        setImageWidth(calculatedWidth)
-        setImageLoaded(true)
-      }
-      img.src = urlForImage(post.mainImage).url() as string
-    }
-
-    loadImage()
-  }, [post.mainImage])
-
-  return (
-    <div
-      className="flex-shrink-0 flex flex-col items-center group"
-      style={{ width: imageWidth ? `${imageWidth}px` : 'auto' }}
-      onClick={onClick}
-    >
-      <Link href={`/series/${post.slug.current}`} className="flex flex-col items-center" onClick={(e) => e.stopPropagation()}>
-        <div className="relative overflow-hidden" style={{ height: `${FIXED_HEIGHT}vh` }}>
-          {imageLoaded && imageWidth ? (
-            <Image
-              src={urlForImage(post.mainImage).url() as string}
-              alt={title}
-              width={imageWidth}
-              height={FIXED_HEIGHT * window.innerHeight / 100}
-              sizes="65vw"
-              className="object-contain transition-transform duration-300 group-hover:scale-105"
-            />
-          ) : (
-            <div className="w-full h-full bg-gray-200 animate-pulse" />
-          )}
-        </div>
-
-        <h3 className=" text-black font-light text-xl text-center transition-all duration-200">
-          <span className={`${isActive ? 'hidden' : 'inline'}`}>{title}</span>
-        </h3>
-      </Link>
-    </div>
-  )
-}
+const FIXED_HEIGHT_VH = 60
+const IMAGE_SPACING = 12
 
 export default function PostsGridMobile({ posts, language }: Props) {
   const { language: activeLang } = useLanguage()
   const lang = language || activeLang || 'en'
+  const [isLoaded, setIsLoaded] = useState(false)
   const router = useRouter()
   const [activeOverlay, setActiveOverlay] = useState<string | null>(null)
+  const [dimensions, setDimensions] = useState<{ height: number }>({ height: 0 })
 
-  // Duplicate posts for smoother horizontal scroll
-  const doublePosts = [...posts, ...posts]
+  // Calculate height once on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const height = (FIXED_HEIGHT_VH / 100) * window.innerHeight
+      setDimensions({ height })
+    }
+  }, [])
+
+  const infinitePosts = [...posts, ...posts]
 
   const handleClick = (slug: string) => {
     if (activeOverlay === slug) {
@@ -90,29 +45,67 @@ export default function PostsGridMobile({ posts, language }: Props) {
 
   return (
     <div
-      className="relative overflow-x-auto overflow-y-hidden bg-white mt-[45vh] hide-scrollbar"
+      className="relative overflow-x-auto overflow-y-hidden bg-white mt-[55vh] hide-scrollbar"
       style={{
         WebkitOverflowScrolling: 'touch',
         scrollSnapType: 'x mandatory',
+        scrollBehavior: 'smooth',
       }}
     >
-      <div className="flex gap-4 h-[70%] items-start w-max pb-4">
-        {doublePosts.map((post, index) => {
+      <div className="flex items-start w-max pb-4" style={{ gap: `${IMAGE_SPACING}px` }}>
+        {infinitePosts.map((post, index) => {
           const isActive = activeOverlay === post.slug.current
           const title =
             lang === 'en'
               ? post.title_en || post.title || ''
               : post.title || post.title_en || ''
 
+          const aspectRatio = post.mainImage.aspectRatio || 1.5
+          const imgWidth = dimensions.height * aspectRatio
+
+    
+
           return (
-            <PostItemMobile
+            <div
               key={`${post._id}-${index}`}
-              post={post}
-              title={title}
-              lang={lang}
-              isActive={isActive}
+              className="flex-shrink-0 flex flex-col items-center group"
+              style={{
+                width: `${imgWidth}px`,
+                height: `${dimensions.height}px`,
+                scrollSnapAlign: 'start',
+              }}
               onClick={() => handleClick(post.slug.current)}
-            />
+            >
+              <Link
+                href={`/series/${post.slug.current}`}
+                className="flex flex-col items-center"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="relative w-full h-full">
+                  {!isLoaded && (
+                    <div className="absolute inset-0 bg-gray-200 animate-pulse z-0" />
+                  )}
+                  <Image
+                    src={urlForImage(post.mainImage).url() as string}
+                    alt={title}
+                    fill
+                    sizes="65vw"
+                    onLoadingComplete={() => setIsLoaded(true)}
+                    className={`object-cover transition-transform duration-300 group-hover:scale-105 ${
+                      isLoaded ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  />
+                </div>
+
+                {isLoaded && (
+                  <div className="w-full h-[50px] px-4 transition-opacity duration-300">
+                    <h3 className="text-black font-light text-xl text-center">
+                      <span className={`${isActive ? 'hidden' : 'inline'}`}>{title}</span>
+                    </h3>
+                  </div>
+                )}
+              </Link>
+            </div>
           )
         })}
       </div>
