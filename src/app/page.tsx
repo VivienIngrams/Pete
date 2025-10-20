@@ -63,14 +63,14 @@ export default async function HomePage() {
             />
           </div>
           <div className="w-full h-[11vh] relative -mt-[3vh]">
-            <Image
-              src="/ground.png"
-              alt="Ground"
-              fill
-              sizes="70vw"
-              className="object-contain"
-              priority
-            />
+          <Image
+  src="/ground.png"
+  alt="Ground"
+  width={800}
+  height={200}
+  className="object-contain"
+  priority
+/>
           </div>
         </div>
 
