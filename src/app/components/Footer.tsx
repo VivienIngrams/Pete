@@ -2,8 +2,8 @@
 
 import Link from 'next/link'
 
-import Socials from './Socials'
 import { useLanguage } from './context/LanguageProvider'
+import Socials from './Socials'
 
 export default function Footer({
   isHomePage,

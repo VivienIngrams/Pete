@@ -1,7 +1,9 @@
 'use client'
 
 import { useState } from 'react'
+
 import type { Post } from '~/sanity/lib/sanity.queries'
+
 import DesktopSlideshow from './DesktopSlideShow'
 import MobileSlideshow from './MobileSlideShow'
 
@@ -16,7 +18,7 @@ export default function PostSlideshow({ post }: Props) {
     <>
       <div className="hidden md:block">
         <DesktopSlideshow
-          post={post}
+                  post={post}
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
         />

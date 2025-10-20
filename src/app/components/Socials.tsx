@@ -1,5 +1,5 @@
-import { FaFacebook, FaInstagram, FaLinkedin, } from 'react-icons/fa';
 import Link from 'next/link';
+import { FaFacebook, FaInstagram, FaLinkedin, } from 'react-icons/fa';
 
 interface Social {
     label: string

@@ -1,6 +1,8 @@
-import { createClient, type SanityClient, type QueryParams } from 'next-sanity';
-import { apiVersion, dataset, projectId, useCdn } from '~/sanity/lib/sanity.api';
 import "server-only";
+
+import { createClient, type QueryParams,type SanityClient } from 'next-sanity';
+
+import { apiVersion, dataset, projectId, useCdn } from '~/sanity/lib/sanity.api';
 
 // Create the Sanity client
 export function getClient(preview?: { token: string }): SanityClient {
