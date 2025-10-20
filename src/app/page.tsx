@@ -52,7 +52,7 @@ export default async function HomePage() {
           />
         </div>
         <div className="md:hidden relative w-full h-auto  flex flex-col items-center justify-center">
-          <div className="w-full h-[12vh] relative mr-5">
+          {/* <div className="w-full h-[12vh] relative mr-5">
             <Image
               src="/shifting.png"
               alt="Shifting"
@@ -61,16 +61,16 @@ export default async function HomePage() {
               className="object-contain"
               priority
             />
-          </div>
+          </div> */}
           <div className="w-full h-[11vh] relative -mt-[3vh]">
-          <Image
-  src="/ground.png"
-  alt="Ground"
-  width={800}
-  height={200}
-  className="object-contain"
-  priority
-/>
+            <Image
+              src="/ground.png"
+              alt="Ground"
+              fill
+              sizes="70vw"
+              className="object-contain"
+              priority
+            />
           </div>
         </div>
 
