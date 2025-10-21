@@ -13,9 +13,10 @@ import SubscribeModal from './SubscribeModal'
 interface NavMenuProps {
   slideshowMode?: boolean
   onDropdownToggle?: (isOpen: boolean) => void
+  hideMenu?: boolean
 }
 
-const NavMenu = ({ slideshowMode = false, onDropdownToggle }: NavMenuProps) => {
+const NavMenu = ({ slideshowMode = false, onDropdownToggle, hideMenu = false }: NavMenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isSubscribeOpen, setIsSubscribeOpen] = useState(false)
 
@@ -90,7 +91,7 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle }: NavMenuProps) => {
 
       {/* Mobile header */}
       <div
-        className={`md:hidden fixed top-0 left-0 w-full bg-white ${slideshowMode ? 'z-[1002]' : 'z-50'}`}
+        className={`md:hidden fixed top-0 left-0 w-full bg-white ${slideshowMode ? 'z-[1002]' : 'z-50'} ${hideMenu ? 'hidden' : ''}`}
       >
         <div className="flex items-center justify-between py-4 px-6">
           {!slideshowMode && (
@@ -148,7 +149,7 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle }: NavMenuProps) => {
       <div
         className={`${
           isOpen ? 'block' : 'hidden'
-        } md:hidden bg-white  pb-4 w-screen ${slideshowMode ? 'z-[1003] pt-4 pb-12' : 'py-16 z-40'}`}
+        } md:hidden bg-white  pb-4 w-screen ${slideshowMode ? 'z-[1003] pt-4 mb-12' : 'py-16 z-40'}`}
         id="mobile-menu"
         onClick={toggleMenu}
       >

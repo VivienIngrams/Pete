@@ -47,7 +47,7 @@ function PostItemMobile({ post, title, lang, isActive, onClick }: {
       style={{ width: imageWidth ? `${imageWidth}px` : 'auto' }}
       onClick={onClick}
     >
-      <Link href={`/series/${post.slug.current}`} className="flex flex-col items-center" onClick={(e) => e.stopPropagation()}>
+      <Link href={`/series/${post.slug.current}`} className="flex flex-col items-center min-h-[150px]" onClick={(e) => e.stopPropagation()}>
         <div className="relative overflow-hidden" style={{ height: `${FIXED_HEIGHT}vh` }}>
           {imageLoaded && imageWidth ? (
             <Image
@@ -55,8 +55,8 @@ function PostItemMobile({ post, title, lang, isActive, onClick }: {
               alt={title}
               width={imageWidth}
               height={FIXED_HEIGHT * window.innerHeight / 100}
-              sizes="65vw"
-              className="object-contain transition-transform duration-300 group-hover:scale-105"
+              sizes="85vw"
+              className="object-fill transition-transform duration-300 group-hover:scale-105"
             />
           ) : (
             <div className="w-full h-full bg-gray-200 animate-pulse" />

@@ -85,7 +85,7 @@ export default function PostsGrid({ posts, language }: Props) {
     >
       <div
         ref={sectionRef}
-        className="flex space-x-16 pl-16"
+        className="flex space-x-8 pl-16"
         style={{ width: `${dimensions.totalImagesWidth}px` }}
       >
         {infinitePosts.map((post, index) => {

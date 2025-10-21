@@ -36,6 +36,11 @@ export default function MobileSlideshow({
     setForceRender(prev => prev + 1)
   }, [activeLang])
 
+  // Reset loading state when image changes
+  useEffect(() => {
+    setIsImageLoading(true)
+  }, [currentIndex])
+
   // --- Swipe gesture refs ---
   const touchStartX = useRef<number | null>(null)
   const touchEndX = useRef<number | null>(null)
@@ -117,9 +122,13 @@ export default function MobileSlideshow({
 
   return (
     <div className="relative w-full h-screen bg-white mt-6 flex flex-col items-center justify-center">
-      <NavMenu slideshowMode={true} onDropdownToggle={setIsDropdownOpen} />
+      <NavMenu 
+        slideshowMode={true} 
+        onDropdownToggle={setIsDropdownOpen}
+        hideMenu={isAboutOpen}
+      />
       {/* Persistent top bar with close button */}
-      <div className={`fixed top-0 left-0 z-[900] bg-white flex items-center h-12 p-6 ${isDropdownOpen ? 'hidden' : 'block'}`}>
+      <div className={`fixed top-0 left-0 z-[900] bg-white flex items-center h-12 p-6 ${isDropdownOpen || isAboutOpen ? 'hidden' : 'block'}`}>
         <button
           onClick={handleClose}
           className="text-black text-sm tracking-wide uppercase mt-1"
@@ -196,11 +205,11 @@ export default function MobileSlideshow({
       {/* About modal */}
       {isAboutOpen && (
         <div
-          className="fixed inset-0 z-50 text-black bg-white/90 flex items-center justify-center px-4"
+          className="fixed inset-0 z-[1100] text-black bg-white/90 flex items-center justify-center mt-12 px-4"
           onClick={() => setIsAboutOpen(false)}
         >
           <div
-            className="max-w-2xl w-full max-h-[80vh] overflow-auto p-6"
+            className="max-w-2xl w-full max-h-[90vh] overflow-auto p-6"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Inline Language Switcher */}

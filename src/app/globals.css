@@ -128,3 +128,7 @@ h4 {
   font-weight: bold;
 }
 
+/* Add a new class to make sure the dropdown is above the modal */
+.dropdown-menu {
+  z-index: 1010 !important; /* Ensure it's above the modal */
+}

@@ -1,10 +1,12 @@
+
+
 'use client'
 
 import { PortableText } from '@portabletext/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useEffect,useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useLanguage } from '~/app/components/context/LanguageProvider'
 import LanguageSwitcher from '~/app/components/LanguageSwitcher'
@@ -27,18 +29,41 @@ export default function DesktopSlideshow({
   const [isImageLoading, setIsImageLoading] = useState(true)
   const [forceRender, setForceRender] = useState(0)
 
-  // Use global language context instead of prop
   const { language: activeLang } = useLanguage()
 
-  // Force re-render when language changes to ensure PortableText updates
   useEffect(() => {
     setForceRender(prev => prev + 1)
   }, [activeLang])
 
+  useEffect(() => {
+    setIsImageLoading(true)
+  }, [currentIndex])
+
+  // Preload next image for smoother transitions
+  useEffect(() => {
+    if (!post.images) return
+    const nextIndex = currentIndex < post.images.length - 1 ? currentIndex + 1 : 0
+    const prevIndex = currentIndex > 0 ? currentIndex - 1 : post.images.length - 1
+    
+    // Preload next and previous images
+    const preloadImage = (index: number) => {
+      const img = post.images[index]
+      if (img?.image) {
+        const link = document.createElement('link')
+        link.rel = 'preload'
+        link.as = 'image'
+        link.href = urlForImage(img.image).width(1920).quality(85).url()
+        document.head.appendChild(link)
+      }
+    }
+    
+    preloadImage(nextIndex)
+    preloadImage(prevIndex)
+  }, [currentIndex, post.images])
+
   const current = post.images?.[currentIndex]
   if (!current) return <p>No images found.</p>
 
-  // Titles and excerpts depend on language
   const postTitle =
     activeLang === 'en' ? post.title_en || post.title : post.title || post.title
 
@@ -67,13 +92,11 @@ export default function DesktopSlideshow({
     }
   }
 
-  // Dynamic post excerpt (updates instantly when language changes)
   const postExcerptBlocks =
     activeLang === 'en'
       ? post.excerpt_en || post.excerpt
       : post.excerpt || post.excerpt_en
 
-  // Translations for buttons
   const t = {
     about: activeLang === 'en' ? 'about' : 'à propos',
     close: activeLang === 'en' ? 'close' : 'fermer',
@@ -81,37 +104,35 @@ export default function DesktopSlideshow({
 
   return (
     <div className="relative w-full h-screen bg-white font-light flex items-center py-10 justify-center hide-scrollbar">
-      {/* Placeholder skeleton */}
       {isImageLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-white animate-pulse">
           <div className="w-16 h-16 border-4 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
 
-      {/* Main image */}
       {current.image && (
         <Image
-          src={urlForImage(current.image).url() || ''}
+          src={urlForImage(current.image).width(1920).quality(85).auto("format").url()}
           alt={currentTitle || post.title}
-          width={1600}
-          height={1200}
+          width={1920}
+          height={1080}
+          sizes="(max-width: 768px) 100vw, 70vw"
           className={`w-auto h-full object-contain transition-opacity duration-500 max-w-[70vw] ${
             isImageLoading ? 'opacity-0' : 'opacity-100'
           }`}
           onLoad={() => setIsImageLoading(false)}
           priority
+          quality={85}
         />
       )}
 
-      {/* Close button */}
       <button
         onClick={handleClose}
-        className="absolute text-sm text-black tracking-wide uppercase top-6 left-6 z-50  hover:font-bold"
+        className="absolute text-sm text-black tracking-wide uppercase top-6 left-6 z-50 hover:font-bold"
       >
         {t.close}
       </button>
 
-      {/* Navigation arrows */}
       {currentIndex > 0 && (
         <button
           onClick={handlePrev}
@@ -129,27 +150,25 @@ export default function DesktopSlideshow({
         </button>
       )}
 
-      {/* Caption + About link */}
-      <div className="absolute bottom-12 left-6 ">
+      <div className="absolute bottom-12 left-6">
         {currentTitle && (
           <h1 className="text-xl md:text-2xl font-normal max-w-[calc(15vw-24px)]">
             {currentTitle}
           </h1>
         )}
-          <div className="prose prose-sm md:prose-base  text-sm font-roboto max-w-[calc(15vw-24px)]">
-        {currentExcerpt && (
-          <PortableText key={`${activeLang}-${forceRender}`} value={currentExcerpt} />
-        )}
-            <button
-              onClick={() => setIsAboutOpen(true)}
-              className="text-sm  uppercase tracking-wide hover:font-bold"
-            >
-              {t.about}
-            </button>
-          </div>
+        <div className="prose prose-sm md:prose-base text-sm font-roboto max-w-[calc(15vw-24px)]">
+          {currentExcerpt && (
+            <PortableText key={`${activeLang}-${forceRender}`} value={currentExcerpt} />
+          )}
+          <button
+            onClick={() => setIsAboutOpen(true)}
+            className="text-sm uppercase tracking-wide hover:font-bold"
+          >
+            {t.about}
+          </button>
+        </div>
       </div>
 
-      {/* ABOUT MODAL */}
       {isAboutOpen && (
         <div
           className="fixed inset-0 z-50 text-black bg-white/85 flex items-center justify-center px-4"
@@ -165,7 +184,6 @@ export default function DesktopSlideshow({
             className="relative max-w-2xl w-full max-h-[80vh] overflow-auto hide-scrollbar"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Live language switcher inside modal */}
             <div className="flex justify-end">
               <LanguageSwitcher />
             </div>
