@@ -35,7 +35,11 @@ export default function RootLayout({
       lang="en" // Default to 'en' initially; language will be dynamically set in client-side code
       className={` ${roboto.variable} `}
       data-theme="light"
-      style={{ colorScheme: 'light' }}
+      style={{
+        colorScheme: 'only light',
+        backgroundColor: 'white',
+        color: 'black',
+      }}
     >
       <body className="h-full bg-white font-roboto">
         <LanguageProvider>

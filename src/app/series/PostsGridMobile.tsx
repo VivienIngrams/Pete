@@ -41,6 +41,7 @@ function PostItemMobile({ post, title, lang, isActive, onClick }: {
     loadImage()
   }, [post.mainImage])
 
+
   return (
     <div
       className="flex-shrink-0 flex flex-col items-center group"
