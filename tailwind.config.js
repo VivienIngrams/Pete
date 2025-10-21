@@ -6,6 +6,7 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}', // Include components with both JS/TS
     './app/**/*.{js,ts,jsx,tsx}', // If you're using the App Router in Next.js 13+
   ],
+  darkMode: 'class', // Control dark mode via class (in this case, 'data-theme')
   theme: {
     extend: {
       screens: {

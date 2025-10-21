@@ -10,9 +10,25 @@ html {
   background-color: white;
 }
 
+html {
+  color-scheme: light; 
+}
+
+/* globals.css */
 html[data-theme="light"] {
   color-scheme: light;
 }
+
+html[data-theme="light"] body {
+  background-color: white;
+  color: black;
+}
+
+html[data-theme="dark"] body {
+  background-color: white; /* Prevent dark background in dark mode */
+  color: black; /* Prevent dark text in dark mode */
+}
+
 .touch-swipe-container {
   touch-action: pan-x; /* allows horizontal pan gestures */
   -webkit-overflow-scrolling: touch;
@@ -27,18 +43,6 @@ body {
 
 img {
   display: block;
-}
-
-/* Only apply dark mode styles when data-theme is explicitly set to dark */
-html[data-theme="dark"] body {
-  background-color: white;
-  color: black;
-}
-
-/* Override any system dark mode preferences when light theme is set */
-html[data-theme="light"] body {
-  background-color: white;
-  color: black;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
@@ -126,9 +130,4 @@ h1 {
  }
 h4 {
   font-weight: bold;
-}
-
-/* Add a new class to make sure the dropdown is above the modal */
-.dropdown-menu {
-  z-index: 1010 !important; /* Ensure it's above the modal */
 }

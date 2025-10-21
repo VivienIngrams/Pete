@@ -205,11 +205,11 @@ export default function MobileSlideshow({
       {/* About modal */}
       {isAboutOpen && (
         <div
-          className="fixed inset-0 z-[1100] text-black bg-white/90 flex items-center justify-center mt-12 px-4"
+          className="fixed inset-0 z-[1100] text-black bg-white/90 flex items-center justify-center px-4"
           onClick={() => setIsAboutOpen(false)}
         >
           <div
-            className="max-w-2xl w-full max-h-[90vh] overflow-auto p-6"
+            className="max-w-2xl w-full max-h-[90vh] overflow-auto p-6 -mt-12"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Inline Language Switcher */}
@@ -217,7 +217,7 @@ export default function MobileSlideshow({
               <LanguageSwitcher />
             </div>
 
-            <div className="flex justify-between items-start mb-4">
+            <div className="flex justify-between items-start mb-4 ">
               <h2 className="text-xl font-normal">{postTitle}</h2>
               <button
                 onClick={() => setIsAboutOpen(false)}
@@ -226,7 +226,7 @@ export default function MobileSlideshow({
                 {t.close}
               </button>
             </div>
-            <div className="prose prose-sm md:prose-base text-sm font-roboto text-justify">
+            <div className="prose prose-sm md:prose-base text-sm font-roboto text-justify ">
               {postExcerptBlocks && postExcerptBlocks.length ? (
                 <PortableText key={`${activeLang}-${forceRender}`} value={postExcerptBlocks} />
               ) : (
