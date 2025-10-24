@@ -24,6 +24,15 @@ html {
     color: black !important;
   }
 }
+html, body {
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+}
+section {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
 
 .touch-swipe-container {
   touch-action: pan-x; /* allows horizontal pan gestures */
@@ -46,4 +55,13 @@ img {
 .hide-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+.scroll-x-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  white-space: nowrap;
 }
