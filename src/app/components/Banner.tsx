@@ -32,14 +32,14 @@ export function BannerWithAutoFallback() {
   return (
     <div
       id="series-banner"
-      className={`fixed top-[12vh] md:top-[9vw] left-0 right-0 z-20 ${
+      className={`fixed top-[12vh] md:top-[15vh] left-0 right-0 z-20 ${
         isDarkBackground ? 'bg-black' : 'bg-white'
       }`}
     >
       {/* Desktop banner */}
       <div className="hidden relative w-full h-[13vh] md:flex items-center justify-center">
         <Image
-          src={isDarkBackground ? '/shifting-ground-white.png' : '/shifting-ground.png'}
+          src={ '/shifting-ground.png'}
           alt="Shifting Ground"
           fill
           sizes="50vw"

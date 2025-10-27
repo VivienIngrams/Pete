@@ -22,12 +22,12 @@ export default function PostsGrid({ posts, language }: Props) {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const [ready, setReady] = useState(false)
   const [loadedMap, setLoadedMap] = useState<Record<string, boolean>>({})
-
+ 
   gsap.registerPlugin(ScrollTrigger)
 
   // ---- CONFIG ----
-  const IMAGE_SPACING = 64 // px between images
-  const HEIGHT_RATIO = 0.45 // proportion of viewport height for image height
+  const IMAGE_SPACING = 48 // px between images
+  const HEIGHT_RATIO = 0.5 // proportion of viewport height for image height
 
   // ---- Set up layout once images known ----
   useEffect(() => {
@@ -49,6 +49,7 @@ export default function PostsGrid({ posts, language }: Props) {
     const viewportHeight = window.innerHeight
     const imgHeight = viewportHeight * HEIGHT_RATIO
     let totalWidth = IMAGE_SPACING
+  
 
     repeated.forEach((post) => {
       const aspect = post.mainImage.aspectRatio || 1.5
@@ -67,6 +68,7 @@ export default function PostsGrid({ posts, language }: Props) {
     const wrapper = wrapperRef.current
     const container = containerRef.current
     const totalScroll = container.scrollWidth - window.innerWidth
+    const top = window.innerHeight * 0.4
 
     const ctx = gsap.context(() => {
       gsap.to(container, {
@@ -74,7 +76,7 @@ export default function PostsGrid({ posts, language }: Props) {
         ease: 'none',
         scrollTrigger: {
           trigger: wrapper,
-          start: 'top top',
+          start: `top, ${top}`,
           end: () => `+=${totalScroll}`,
           scrub: 1,
           pin: true,
@@ -90,13 +92,15 @@ export default function PostsGrid({ posts, language }: Props) {
   const repeatedPosts = [...posts, ...posts]
 
   return (
+    
     <section
       ref={wrapperRef}
-      className="relative h-[130vh] overflow-hidden "
+      className="relative overflow-hidden "
     >
+     
       <div
         ref={containerRef}
-        className="flex items-center gap-16 will-change-transform"
+        className="flex items-center gap-12 max-h-full "
       >
         {repeatedPosts.map((post, index) => {
           const postKey = `${post._id}-${index}` // unique key per instance
@@ -105,19 +109,15 @@ export default function PostsGrid({ posts, language }: Props) {
               ? post.title_en || post.title || ''
               : post.title || post.title_en || ''
           const aspect = post.mainImage.aspectRatio || 1.5
-          const imgHeight = typeof window !== 'undefined' ? window.innerHeight * HEIGHT_RATIO : 500
-          const imgWidth = imgHeight * aspect
-          const isLoaded = loadedMap[postKey]
+         
+                    const isLoaded = loadedMap[postKey]
 
           return (
             <Link
               key={`${post._id}-${index}`}
               href={`/series/${post.slug.current}`}
-              className="relative flex-shrink-0 group"
-              style={{
-                width: `${imgWidth}px`,
-                height: `${imgHeight}px`,
-              }}
+            className="relative flex-shrink-0 group h-[50vh]"
+              style={{ width: `${aspect * 50}vh` }}
             >
               <div className="relative w-full h-full transform-gpu">
                 <Image
@@ -125,7 +125,7 @@ export default function PostsGrid({ posts, language }: Props) {
                   alt={title}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                  sizes="25vw"
+                  sizes="35vw"
                   priority={index < 3}
                 />
               </div>
