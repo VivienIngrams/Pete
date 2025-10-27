@@ -7,10 +7,12 @@ import { Roboto } from 'next/font/google'
 
 import { LanguageProvider } from './components/context/LanguageProvider'
 import ThemeProvider from './components/ThemeProvider'
+
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   themeColor: '#ffffff',
+  colorScheme: 'light',
 }
 
 const roboto = Roboto({
@@ -23,6 +25,9 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: 'Peter Lippmann',
   description: 'Art Photography',
+  other: {
+    'color-scheme': 'light only',
+  },
 }
 
 export default function RootLayout({
@@ -32,12 +37,25 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en" // Default to 'en' initially; language will be dynamically set in client-side code
-      className={` ${roboto.variable} `}
+      lang="en"
+      className={`${roboto.variable}`}
       data-theme="light"
-      
+      style={{ colorScheme: 'light only', backgroundColor: 'white', color: 'black' }}
     >
-      <body className="h-full bg-white font-roboto">
+      <head>
+        <meta name="color-scheme" content="light only" />
+        <meta name="theme-color" content="#ffffff" />
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            :root { color-scheme: light only !important; }
+            html, body { background-color: white !important; color: black !important; }
+          `
+        }} />
+      </head>
+      <body 
+        className="h-full bg-white font-roboto"
+        style={{ backgroundColor: 'white', color: 'black' }}
+      >
         <LanguageProvider>
           <ThemeProvider />
           {children}

@@ -2,19 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Force light mode only */
-html {
-  font-size: 14px;
-  color-scheme: light; /* only advertise light to the UA */
+/* Force light mode only - enhanced enforcement */
+:root {
+  color-scheme: light only !important;
   background-color: white !important;
   color: black !important;
 }
 
+html {
+  font-size: 14px;
+  color-scheme: light only !important;
+  background-color: white !important;
+  color: black !important;
+}
+
+/* Prevent dark mode at body level */
 html, body {
   overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;
   background-color: white !important;
   color: black !important;
+}
+
+/* Override any dark mode attempts */
+@media (prefers-color-scheme: dark) {
+  html, body, :root {
+    color-scheme: light only !important;
+    background-color: white !important;
+    color: black !important;
+  }
+}
+
+/* Prevent dark mode on all elements */
+* {
+  color-scheme: light only !important;
 }
 
 section {

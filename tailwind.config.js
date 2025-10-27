@@ -7,7 +7,7 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}', // Include components with both JS/TS
     './app/**/*.{js,ts,jsx,tsx}', // If you're using the App Router in Next.js 13+
   ],
-  darkMode: ['variant', '&:where([data-theme=dark])'],
+  darkMode: 'media', 
   theme: {
     extend: {
       screens: {
