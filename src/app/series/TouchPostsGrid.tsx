@@ -15,7 +15,7 @@ type Props = {
 }
 
 // Component for individual post with aspect ratio calculation
-function PostItemMobile({ post, title, lang, isActive, onClick }: { 
+function PostItem({ post, title, lang, isActive, onClick }: { 
   post: Post; 
   title: string; 
   lang: string; 
@@ -25,7 +25,7 @@ function PostItemMobile({ post, title, lang, isActive, onClick }: {
   const [imageWidth, setImageWidth] = useState<number | null>(null)
   const [imageLoaded, setImageLoaded] = useState(false)
   const [loadedMap, setLoadedMap] = useState<Record<string, boolean>>({})
-  const FIXED_HEIGHT = 45
+  const FIXED_HEIGHT = 47
 
   useEffect(() => {
     const loadImage = () => {
@@ -85,7 +85,7 @@ function PostItemMobile({ post, title, lang, isActive, onClick }: {
   )
 }
 
-export default function PostsGridMobile({ posts, language }: Props) {
+export default function TouchPostsGrid({ posts, language }: Props) {
   const { language: activeLang } = useLanguage()
   const lang = language || activeLang || 'en'
   const router = useRouter()
@@ -119,7 +119,7 @@ export default function PostsGridMobile({ posts, language }: Props) {
               : post.title || post.title_en || ''
 
           return (
-            <PostItemMobile
+            <PostItem
               key={`${post._id}-${index}`}
               post={post}
               title={title}

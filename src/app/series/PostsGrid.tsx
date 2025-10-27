@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import PostsGridMobile from './PostsGridMobile'
-import PostsGridDesktop from './PostsGridDesktop'
+import TouchPostsGrid from './TouchPostsGrid'
+import ScrollPostsGrid from './ScrollPostsGrid'
 import type { Post } from '~/sanity/lib/sanity.queries'
 
 type Props = {
@@ -36,8 +36,8 @@ export default function PostsGrid({ posts }: Props) {
   }, [])
 
   return isTouchPad ? (
-    <PostsGridMobile posts={posts} />
+    <TouchPostsGrid posts={posts} />
   ) : (
-    <PostsGridDesktop posts={posts} />
+    <ScrollPostsGrid posts={posts} />
   )
 }

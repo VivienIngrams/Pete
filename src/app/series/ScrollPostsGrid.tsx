@@ -14,7 +14,7 @@ type Props = {
   language?: string
 }
 
-export default function PostsGridDesktop({ posts, language }: Props) {
+export default function ScrollPostsGrid({ posts, language }: Props) {
   const { language: activeLang } = useLanguage()
   const lang = language || activeLang || 'en'
 
