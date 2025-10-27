@@ -49,7 +49,7 @@ export default async function HomePage() {
       
 
       {/* Mobile horizontal touch scroll */}
-      <div className="block md:hidden  ">
+      <div className="block md:hidden  pl-4">
         <PostsGridMobile posts={posts} />
       </div>
 

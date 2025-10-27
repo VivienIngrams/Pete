@@ -3,7 +3,7 @@ import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import type { Viewport } from 'next'
-import { Genos, Roboto } from 'next/font/google'
+import { Roboto } from 'next/font/google'
 
 import { LanguageProvider } from './components/context/LanguageProvider'
 import ThemeProvider from './components/ThemeProvider'

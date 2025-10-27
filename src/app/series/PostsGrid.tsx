@@ -39,7 +39,6 @@ export default function PostsGrid({ posts, language }: Props) {
   useEffect(() => {
     if (!containerRef.current || !wrapperRef.current) return
 
-    const wrapper = wrapperRef.current
     const container = containerRef.current
 
     // Duplicate posts for looping feel
@@ -60,39 +59,52 @@ export default function PostsGrid({ posts, language }: Props) {
     setReady(true)
   }, [posts])
 
+  let isTouchPad = false
+
+  window.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaX) > 0 || Math.abs(e.deltaY) < 10) {
+      isTouchPad = true
+    }
+  })
+
   // ---- GSAP horizontal scroll setup ----
   useEffect(() => {
-    if (!ready || !containerRef.current || !wrapperRef.current) return
+    if (!isTouchPad) {
+      if (!ready || !containerRef.current || !wrapperRef.current) return
 
-    const wrapper = wrapperRef.current
-    const container = containerRef.current
-    const totalScroll = container.scrollWidth - window.innerWidth
-    const top = window.innerHeight * 0.4
+      const wrapper = wrapperRef.current
+      const container = containerRef.current
+      const totalScroll = container.scrollWidth - window.innerWidth
+      const top = window.innerHeight * 0.4
 
-    const ctx = gsap.context(() => {
-      gsap.to(container, {
-        x: -totalScroll,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: wrapper,
-          start: `top, ${top}`,
-          end: () => `+=${totalScroll}`,
-          scrub: 1,
-          pin: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
-      })
-    }, wrapper)
+      const ctx = gsap.context(() => {
+        gsap.to(container, {
+          x: -totalScroll,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: wrapper,
+            start: `top, ${top}`,
+            end: () => `+=${totalScroll}`,
+            scrub: 1,
+            pin: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        })
+      }, wrapper)
 
-    return () => ctx.revert()
-  }, [ready])
+      return () => ctx.revert()
+    }
+  }, [ready, isTouchPad])
 
   const repeatedPosts = [...posts, ...posts]
 
   return (
     <section ref={wrapperRef} className="relative overflow-hidden ">
-      <div ref={containerRef} className="flex items-center gap-12 max-h-full ">
+      <div
+        ref={containerRef}
+        className="flex items-center gap-12 max-h-full  overflow-x-auto scroll-smooth touch-pan-x"
+      >
         {repeatedPosts.map((post, index) => {
           const postKey = `${post._id}-${index}` // unique key per instance
           const title =
@@ -101,48 +113,47 @@ export default function PostsGrid({ posts, language }: Props) {
               : post.title || post.title_en || ''
           const aspect = post.mainImage.aspectRatio || 1.5
 
-        
-
           return (
             <Link
-  key={`${post._id}-${index}`}
-  href={`/series/${post.slug.current}`}
-  className="relative flex-shrink-0 group"
-  style={{ width: `${aspect * window.innerHeight * HEIGHT_RATIO}px` }}
->
-  {/* IMAGE */}
-  <div
-    className="relative overflow-hidden"
-    style={{ height: `${window.innerHeight * HEIGHT_RATIO}px` }}
-  >
-    <Image
-      src={urlForImage(post.mainImage).url() as string}
-      alt={title}
-      fill
-      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-      sizes="35vw"
-      priority={index < 3}
-      onLoadingComplete={() =>
-        setLoadedMap((prev) => ({ ...prev, [postKey]: true }))
-      }
-    />
-  </div>
+              key={`${post._id}-${index}`}
+              href={`/series/${post.slug.current}`}
+              className="relative flex-shrink-0 group"
+              style={{
+                width: `${aspect * window.innerHeight * HEIGHT_RATIO}px`,
+              }}
+            >
+              {/* IMAGE */}
+              <div
+                className="relative overflow-hidden"
+                style={{ height: `${window.innerHeight * HEIGHT_RATIO}px` }}
+              >
+                <Image
+                  src={urlForImage(post.mainImage).url() as string}
+                  alt={title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  sizes="35vw"
+                  priority={index < 3}
+                  onLoadingComplete={() =>
+                    setLoadedMap((prev) => ({ ...prev, [postKey]: true }))
+                  }
+                />
+              </div>
 
-  {/* TITLE BELOW IMAGE */}
-  <div
-    className={`w-full px-4 mt-2 transition-opacity duration-500 ${
-      loadedMap[postKey] ? 'opacity-100' : 'opacity-0'
-    }`}
-  >
-    <h3 className="text-black font-light text-xl text-center">
-      <span className="group-hover:hidden">{title}</span>
-      <span className="hidden group-hover:inline underline underline-offset-2 font-normal text-lg tracking-tight">
-        View series
-      </span>
-    </h3>
-  </div>
-</Link>
-
+              {/* TITLE BELOW IMAGE */}
+              <div
+                className={`w-full px-4 mt-2 transition-opacity duration-500 ${
+                  loadedMap[postKey] ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                <h3 className="text-black font-light text-xl text-center">
+                  <span className="group-hover:hidden">{title}</span>
+                  <span className="hidden group-hover:inline underline underline-offset-2 font-normal text-lg tracking-tight">
+                    View series
+                  </span>
+                </h3>
+              </div>
+            </Link>
           )
         })}
       </div>
