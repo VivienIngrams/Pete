@@ -1,38 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* 
-@custom-variant dark (&:where(.dark, .dark *)); */
 
+/* Force light mode only */
 html {
   font-size: 14px;
-  color-scheme: light;
-  color-scheme: only light;
+  color-scheme: light; /* only advertise light to the UA */
   background-color: white !important;
   color: black !important;
 }
 
-html {
-  color-scheme: only light;
-  background-color: white !important;
-  color: black !important;
-}
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: only light;
-    background-color: white !important;
-    color: black !important;
-  }
-}
 html, body {
   overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;
+  background-color: white !important;
+  color: black !important;
 }
+
 section {
   transform: translateZ(0);
   will-change: transform;
 }
-
 
 .touch-swipe-container {
   touch-action: pan-x; /* allows horizontal pan gestures */

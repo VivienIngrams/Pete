@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+
 import { useLanguage } from '~/app/components/context/LanguageProvider'
 import { urlForImage } from '~/sanity/lib/sanity.image'
 import type { Post } from '~/sanity/lib/sanity.queries'
@@ -43,7 +44,7 @@ export default function PostsGrid({ posts, language }: Props) {
   const scroll = (direction: 'left' | 'right') => {
     if (!scrollContainerRef.current) return
 
-    const scrollAmount = scrollContainerRef.current.clientWidth * 0.8
+    const scrollAmount = scrollContainerRef.current.clientWidth * 0.3
     const newScrollLeft =
       direction === 'left'
         ? scrollContainerRef.current.scrollLeft - scrollAmount
@@ -76,9 +77,7 @@ export default function PostsGrid({ posts, language }: Props) {
       <button
         onClick={() => scroll('right')}
         disabled={!canScrollRight}
-        className={`absolute -right-2 md:right-4 
-    top-[85%] md:top-1/2 md:-translate-y-1/2 
-    z-10 bg-white/90 hover:bg-white  rounded-full p-3 transition-all duration-300 
+        className={`absolute -right-2 md:right-4 top-[85%] md:top-1/2 md:-translate-y-1/2 z-10 bg-white/90 hover:bg-white  rounded-full p-3 transition-all duration-300 
     ${canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         aria-label="Scroll right"
       >
@@ -88,7 +87,7 @@ export default function PostsGrid({ posts, language }: Props) {
       <div
         ref={scrollContainerRef}
         onScroll={updateScrollButtons}
-        className="flex gap-4 md:gap-8 overflow-x-auto scroll-smooth snap-x    scrollbar-hide"
+        className="flex gap-4 md:gap-8 overflow-x-auto scroll-smooth snap-x scrollbar-hide"
         style={{
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
