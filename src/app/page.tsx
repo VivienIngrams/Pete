@@ -12,7 +12,7 @@ import {
 import { BannerWithAutoFallback } from './components/Banner'
 import NavMenu from './components/NavMenu'
 import PostsGrid from './series/PostsGrid'
-import PostsGridMobile from './series/TouchPostsGrid'
+
 
 export default async function HomePage() {
   const client = getClient({ token: readToken })
