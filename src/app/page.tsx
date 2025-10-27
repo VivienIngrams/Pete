@@ -37,18 +37,11 @@ export default async function HomePage() {
 
       <BannerWithAutoFallback />
 
-      <div className="hidden md:block flex-grow h-[60vh] pl-4 md:pl-12 mt-[40vh]">
+      <div className="flex flex-grow h-[60vh] px-4 mt-[38vh]">
         <PostsGrid posts={posts} />
       </div>
 
-      <div className="hidden md:fixed bottom-0 left-0 right-0 text-xs w-screen md:flex justify-center pb-2 bg-black text-white uppercase pt-2">
-        <p>scroll to explore</p>
-      </div>
-      {/* RIGHT visual margin overlay (16px) — non-interactive */}
-      <div
-        className="pointer-events-none hidden md:block  md:fixed right-0 top-0 bottom-0 w-4 z-50 bg-white"
-        aria-hidden="true"
-      />
+    
     </>
   )
 }
