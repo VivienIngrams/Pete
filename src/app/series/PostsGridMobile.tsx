@@ -24,7 +24,8 @@ function PostItemMobile({ post, title, lang, isActive, onClick }: {
 }) {
   const [imageWidth, setImageWidth] = useState<number | null>(null)
   const [imageLoaded, setImageLoaded] = useState(false)
-  const FIXED_HEIGHT = 40
+  const [loadedMap, setLoadedMap] = useState<Record<string, boolean>>({})
+  const FIXED_HEIGHT = 45
 
   useEffect(() => {
     const loadImage = () => {
@@ -48,7 +49,7 @@ function PostItemMobile({ post, title, lang, isActive, onClick }: {
       style={{ width: imageWidth ? `${imageWidth}px` : 'auto' }}
       onClick={onClick}
     >
-      <Link href={`/series/${post.slug.current}`} className="flex flex-col items-center min-h-[150px]" onClick={(e) => e.stopPropagation()}>
+      <Link href={`/series/${post.slug.current}`} className="flex flex-col items-center min-h-[150px]"  onClick={(e) => e.stopPropagation()}>
         <div className="relative overflow-hidden" style={{ height: `${FIXED_HEIGHT}vh` }}>
           {imageLoaded && imageWidth ? (
             <Image
@@ -56,17 +57,29 @@ function PostItemMobile({ post, title, lang, isActive, onClick }: {
               alt={title}
               width={imageWidth}
               height={FIXED_HEIGHT * window.innerHeight / 100}
-              sizes="85vw"
+              sizes="85vw, "
               className="object-fill transition-transform duration-300 group-hover:scale-105"
+              onLoad={() =>
+                setLoadedMap((prev) => ({ ...prev}))
+              }
             />
           ) : (
             <div className="w-full h-full bg-gray-200 animate-pulse" />
           )}
         </div>
 
-        <h3 className=" text-black font-light text-xl text-center transition-all duration-200">
-          <span className={`${isActive ? 'hidden' : 'inline'}`}>{title}</span>
-        </h3>
+        <div
+                className={`w-full px-4 mt-2 transition-opacity duration-500 ${
+                  loadedMap ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                <h3 className="text-black font-light text-xl text-center">
+                  <span className="group-hover:hidden">{title}</span>
+                  <span className="hidden group-hover:inline underline underline-offset-2 font-normal text-lg tracking-tight">
+                    View series
+                  </span>
+                </h3>
+              </div>
       </Link>
     </div>
   )
@@ -91,13 +104,13 @@ export default function PostsGridMobile({ posts, language }: Props) {
 
   return (
     <div
-      className="relative overflow-x-auto overflow-y-hidden bg-white mt-[45vh] hide-scrollbar"
+      className="relative overflow-x-auto overflow-y-hidden bg-white mt-[45vh] md:mt-[40vh] hide-scrollbar"
       style={{
         WebkitOverflowScrolling: 'touch',
         scrollSnapType: 'x mandatory',
       }}
     >
-      <div className="flex gap-4 h-[80%] items-start w-max pb-4">
+      <div className="flex gap-4 md:gap-12 h-[80%] items-start w-max pb-4">
         {doublePosts.map((post, index) => {
           const isActive = activeOverlay === post.slug.current
           const title =

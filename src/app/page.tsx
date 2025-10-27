@@ -14,7 +14,6 @@ import NavMenu from './components/NavMenu'
 import PostsGrid from './series/PostsGrid'
 import PostsGridMobile from './series/PostsGridMobile'
 
-
 export default async function HomePage() {
   const client = getClient({ token: readToken })
 
@@ -31,8 +30,6 @@ export default async function HomePage() {
     ? orderedPosts
     : await getPosts(client, language, { next: { revalidate: 600 } })
 
-      
-    
   return (
     // PostsPage.tsx
     <>
@@ -40,17 +37,8 @@ export default async function HomePage() {
 
       <BannerWithAutoFallback />
 
-
-      {/* Desktop horizontal scroll */}
-    
-      <div className="hidden md:block flex-grow h-[60vh] pl-12 mt-[40vh]">
+      <div className="hidden md:block flex-grow h-[60vh] pl-4 md:pl-12 mt-[40vh]">
         <PostsGrid posts={posts} />
-      </div>
-      
-
-      {/* Mobile horizontal touch scroll */}
-      <div className="block md:hidden  pl-4">
-        <PostsGridMobile posts={posts} />
       </div>
 
       <div className="hidden md:fixed bottom-0 left-0 right-0 text-xs w-screen md:flex justify-center pb-2 bg-black text-white uppercase pt-2">
