@@ -43,7 +43,7 @@ export default async function HomePage() {
 
       {/* Desktop horizontal scroll */}
     
-      <div className="hidden md:block flex-grow max-h-[50vh] pl-12 mt-[40vh]">
+      <div className="hidden md:block flex-grow h-[60vh] pl-12 mt-[40vh]">
         <PostsGrid posts={posts} />
       </div>
       

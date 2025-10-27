@@ -22,12 +22,12 @@ export default function PostsGrid({ posts, language }: Props) {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const [ready, setReady] = useState(false)
   const [loadedMap, setLoadedMap] = useState<Record<string, boolean>>({})
- 
+
   gsap.registerPlugin(ScrollTrigger)
 
   // ---- CONFIG ----
   const IMAGE_SPACING = 48 // px between images
-  const HEIGHT_RATIO = 0.5 // proportion of viewport height for image height
+  const HEIGHT_RATIO = 0.47 // proportion of viewport height for image height
 
   // ---- Set up layout once images known ----
   useEffect(() => {
@@ -49,7 +49,6 @@ export default function PostsGrid({ posts, language }: Props) {
     const viewportHeight = window.innerHeight
     const imgHeight = viewportHeight * HEIGHT_RATIO
     let totalWidth = IMAGE_SPACING
-  
 
     repeated.forEach((post) => {
       const aspect = post.mainImage.aspectRatio || 1.5
@@ -92,16 +91,8 @@ export default function PostsGrid({ posts, language }: Props) {
   const repeatedPosts = [...posts, ...posts]
 
   return (
-    
-    <section
-      ref={wrapperRef}
-      className="relative overflow-hidden "
-    >
-     
-      <div
-        ref={containerRef}
-        className="flex items-center gap-12 max-h-full "
-      >
+    <section ref={wrapperRef} className="relative overflow-hidden ">
+      <div ref={containerRef} className="flex items-center gap-12 max-h-full ">
         {repeatedPosts.map((post, index) => {
           const postKey = `${post._id}-${index}` // unique key per instance
           const title =
@@ -109,38 +100,49 @@ export default function PostsGrid({ posts, language }: Props) {
               ? post.title_en || post.title || ''
               : post.title || post.title_en || ''
           const aspect = post.mainImage.aspectRatio || 1.5
-         
-                    const isLoaded = loadedMap[postKey]
+
+        
 
           return (
             <Link
-              key={`${post._id}-${index}`}
-              href={`/series/${post.slug.current}`}
-            className="relative flex-shrink-0 group h-[50vh]"
-              style={{ width: `${aspect * 50}vh` }}
-            >
-              <div className="relative w-full h-full transform-gpu">
-                <Image
-                  src={urlForImage(post.mainImage).url() as string}
-                  alt={title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                  sizes="35vw"
-                  priority={index < 3}
-                />
-              </div>
+  key={`${post._id}-${index}`}
+  href={`/series/${post.slug.current}`}
+  className="relative flex-shrink-0 group"
+  style={{ width: `${aspect * window.innerHeight * HEIGHT_RATIO}px` }}
+>
+  {/* IMAGE */}
+  <div
+    className="relative overflow-hidden"
+    style={{ height: `${window.innerHeight * HEIGHT_RATIO}px` }}
+  >
+    <Image
+      src={urlForImage(post.mainImage).url() as string}
+      alt={title}
+      fill
+      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+      sizes="35vw"
+      priority={index < 3}
+      onLoadingComplete={() =>
+        setLoadedMap((prev) => ({ ...prev, [postKey]: true }))
+      }
+    />
+  </div>
 
-              {isLoaded && (
-                <div className="w-full h-[50px] px-4 transition-opacity duration-300">
-                  <h3 className="text-black font-light text-xl text-center">
-                    <span className="group-hover:hidden">{title}</span>
-                    <span className="hidden group-hover:inline underline underline-offset-2 font-normal text-lg tracking-tight">
-                      View series
-                    </span>
-                  </h3>
-                </div>
-              )}
-            </Link>
+  {/* TITLE BELOW IMAGE */}
+  <div
+    className={`w-full px-4 mt-2 transition-opacity duration-500 ${
+      loadedMap[postKey] ? 'opacity-100' : 'opacity-0'
+    }`}
+  >
+    <h3 className="text-black font-light text-xl text-center">
+      <span className="group-hover:hidden">{title}</span>
+      <span className="hidden group-hover:inline underline underline-offset-2 font-normal text-lg tracking-tight">
+        View series
+      </span>
+    </h3>
+  </div>
+</Link>
+
           )
         })}
       </div>
@@ -206,11 +208,9 @@ export default function PostsGrid({ posts, language }: Props) {
 //     }
 //   }, [dimensions])
 
-
-
 //   return (
 //     <>
-//       
+//
 //       <section
 //         ref={triggerRef}
 //         className="w-full h-full pt-28 overflow-hidden bg-white pl-[28vw]"
@@ -225,7 +225,7 @@ export default function PostsGrid({ posts, language }: Props) {
 //             const imgWidth = dimensions.height * aspectRatio
 
 //             return (
-//               
+//
 //           })}
 //         </div>
 //       </section>
