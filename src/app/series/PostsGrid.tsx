@@ -1,43 +1,34 @@
-'use client'
+"use client"
 
-import { useEffect, useState } from 'react'
-import TouchPostsGrid from './TouchPostsGrid'
-import ScrollPostsGrid from './ScrollPostsGrid'
-import type { Post } from '~/sanity/lib/sanity.queries'
+import { useEffect, useState } from "react"
+import TouchPostsGrid from "./TouchPostsGrid"
+import ScrollPostsGrid from "./ScrollPostsGrid"
+import type { Post } from "~/sanity/lib/sanity.queries"
 
 type Props = {
   posts: Post[]
 }
 
 export default function PostsGrid({ posts }: Props) {
-  // Default to desktop to ensure immediate rendering
-  const [isTouchPad, setIsTouchPad] = useState(false)
+  const [isTouchDevice, setIsTouchDevice] = useState<boolean | null>(null)
 
   useEffect(() => {
-    const onWheel = (e: WheelEvent) => {
-      // Detect touchpads by smaller vertical delta or any horizontal movement
-      if (Math.abs(e.deltaY) < 10 || Math.abs(e.deltaX) > 0) {
-        setIsTouchPad(true)
-      } else {
-        setIsTouchPad(false)
-      }
-      // Remove listener after first detection
-      window.removeEventListener('wheel', onWheel)
-    }
+    // Detect touch capability reliably
+    const hasTouch =
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
-    window.addEventListener('wheel', onWheel, { passive: true })
-
-    // Fallback for mobile / touch devices
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-      setIsTouchPad(true)
-    }
-
-    return () => window.removeEventListener('wheel', onWheel)
+    setIsTouchDevice(hasTouch)
   }, [])
 
-  return isTouchPad ? (
-    <TouchPostsGrid posts={posts} />
-  ) : (
-    <ScrollPostsGrid posts={posts} />
-  )
+  if (isTouchDevice === null) {
+    return (
+      <div className="h-[60vh] flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-gray-300 border-t-black rounded-full animate-spin" />
+      </div>
+    )
+  }
+
+  return isTouchDevice ? <TouchPostsGrid posts={posts} /> : <ScrollPostsGrid posts={posts} />
 }
