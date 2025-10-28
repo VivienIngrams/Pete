@@ -17,11 +17,7 @@ const config = {
   compress: true,
   // Optimize production builds
   swcMinify: true,
-  // Experimental features for better performance
-  experimental: {
-    optimizeCss: true,
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
-  },
+  
 }
 
 export default config

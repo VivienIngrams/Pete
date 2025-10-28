@@ -65,7 +65,7 @@ export default function PostsGrid({ posts, language }: Props) {
   const repeatedPosts = [...posts, ...posts]
 
   return (
-    <section className="relative w-full mt-[8vh] md:mt-[2vh]">
+    <section className="relative w-full mt-[6vh] md:mt-[2vh]">
       <button
         onClick={() => scroll('left')}
         disabled={!canScrollLeft}
@@ -73,7 +73,7 @@ export default function PostsGrid({ posts, language }: Props) {
     ${canScrollLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         aria-label="Scroll left"
       >
-        <ChevronLeft className="w-4 h-4 md:w-6 md:h-6 text-black" />
+        <ChevronLeft className="w-8 h-8 md:w-10 md:h-10 text-black" />
       </button>
 
       <button
@@ -83,7 +83,7 @@ export default function PostsGrid({ posts, language }: Props) {
     ${canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         aria-label="Scroll right"
       >
-        <ChevronRight className="w-4 h-4 md:w-6 md:h-6 text-black" />
+        <ChevronRight className="w-8 h-8 md:w-10 md:h-10 text-black" />
       </button>
 
       <div
