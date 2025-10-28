@@ -3,10 +3,10 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { useLanguage } from '~/app/components/context/LanguageProvider'
-import { urlForImage } from '~/sanity/lib/sanity.image'
+import { urlForThumbnail, getBlurDataURL } from '~/sanity/lib/sanity.image'
 import type { Post } from '~/sanity/lib/sanity.queries'
 
 type Props = {
@@ -22,24 +22,37 @@ export default function PostsGrid({ posts, language }: Props) {
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
   const [mounted, setMounted] = useState(false)
+  const [visibleRange, setVisibleRange] = useState({ start: 0, end: 10 })
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  const updateScrollButtons = () => {
+  const updateScrollButtons = useCallback(() => {
     if (!scrollContainerRef.current) return
 
     const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current
     setCanScrollLeft(scrollLeft > 0)
     setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10)
-  }
+
+    // Calculate which images are in viewport for lazy loading
+    const containerLeft = scrollLeft
+    const containerRight = scrollLeft + clientWidth
+    const itemWidth = clientWidth * 0.3 // Approximate item width
+
+    const start = Math.max(0, Math.floor(containerLeft / itemWidth) - 2)
+    const end = Math.min(posts.length * 2, Math.ceil(containerRight / itemWidth) + 2)
+    
+    setVisibleRange({ start, end })
+  }, [posts.length])
 
   useEffect(() => {
+    if (!mounted) return
+    
     updateScrollButtons()
     window.addEventListener('resize', updateScrollButtons)
     return () => window.removeEventListener('resize', updateScrollButtons)
-  }, [mounted])
+  }, [mounted, updateScrollButtons])
 
   const scroll = (direction: 'left' | 'right') => {
     if (!scrollContainerRef.current) return
@@ -59,7 +72,7 @@ export default function PostsGrid({ posts, language }: Props) {
   if (!mounted) {
     return null
   }
-  // Duplicate posts for looping feel
+
   const repeatedPosts = [...posts, ...posts]
 
   return (
@@ -67,7 +80,7 @@ export default function PostsGrid({ posts, language }: Props) {
       <button
         onClick={() => scroll('left')}
         disabled={!canScrollLeft}
-        className={`absolute -left-2    top-[85%]     z-10 bg-white hover:bg-black/10  rounded-full p-3 transition-all duration-300 
+        className={`absolute -left-2 top-[85%] z-10 bg-white hover:bg-black/10 rounded-full p-3 transition-all duration-300 
     ${canScrollLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         aria-label="Scroll left"
       >
@@ -77,7 +90,7 @@ export default function PostsGrid({ posts, language }: Props) {
       <button
         onClick={() => scroll('right')}
         disabled={!canScrollRight}
-        className={`absolute -right-2 top-[85%] z-10 bg-white hover:bg-black/10  rounded-full p-3 transition-all duration-300 
+        className={`absolute -right-2 top-[85%] z-10 bg-white hover:bg-black/10 rounded-full p-3 transition-all duration-300 
     ${canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         aria-label="Scroll right"
       >
@@ -104,9 +117,12 @@ export default function PostsGrid({ posts, language }: Props) {
             typeof window !== 'undefined' && window.innerWidth < 768 ? 30 : 40
           const widthVh = aspect * height
 
+          // Only render images in or near viewport
+          const shouldLoad = i >= visibleRange.start && i <= visibleRange.end
+
           return (
             <Link
-              key={`${post._id}-${i}`} // ✅ ensures unique key across duplicates
+              key={`${post._id}-${i}`}
               href={`/series/${post.slug.current}`}
               className="relative flex-shrink-0 snap-center group"
               style={{
@@ -120,18 +136,20 @@ export default function PostsGrid({ posts, language }: Props) {
                   aspectRatio: aspect.toString(),
                 }}
               >
-                <Image
-                  src={
-                    (post.mainImage
-                      ? urlForImage(post.mainImage).url()
-                      : '/placeholder.svg') as string
-                  }
-                  alt={title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="80vw"
-                  priority={false}
-                />
+                {shouldLoad && post.mainImage ? (
+                  <Image
+                    src={urlForThumbnail(post.mainImage, 800)}
+                    alt={title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 50vw, 40vh"
+                    loading={i < 3 ? 'eager' : 'lazy'}
+                    placeholder="blur"
+                    blurDataURL={getBlurDataURL(post.mainImage)}
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-gray-100 animate-pulse" />
+                )}
               </div>
 
               <div className="w-full px-4">
