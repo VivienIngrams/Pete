@@ -4,43 +4,42 @@ import { useEffect } from 'react'
 
 export default function ThemeProvider() {
   useEffect(() => {
-    // Force light mode on mount
+    // Single enforcement function
     const enforceLight = () => {
-      document.documentElement.classList.remove('dark')
-      document.documentElement.dataset.theme = 'light'
-      document.documentElement.style.colorScheme = 'light only'
-      document.documentElement.style.backgroundColor = 'white'
-      document.documentElement.style.color = 'black'
+      const html = document.documentElement
+      const body = document.body
       
-      document.body.classList.remove('dark')
-      document.body.style.backgroundColor = 'white'
-      document.body.style.color = 'black'
+      // Remove dark class
+      html.classList.remove('dark')
+      body.classList.remove('dark')
+      
+      // Set data attribute
+      html.dataset.theme = 'light'
+      
+      // Set styles
+      html.style.colorScheme = 'light only'
+      html.style.backgroundColor = 'white'
+      html.style.color = 'black'
+      
+      body.style.backgroundColor = 'white'
+      body.style.color = 'black'
     }
     
     // Initial enforcement
     enforceLight()
     
-    // Re-enforce on visibility change (iOS sometimes resets on app switch)
-    document.addEventListener('visibilitychange', enforceLight)
+    // Re-enforce on visibility change (for iOS app switching)
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        enforceLight()
+      }
+    }
     
-    // Re-enforce on focus (when returning to tab)
-    window.addEventListener('focus', enforceLight)
+    document.addEventListener('visibilitychange', handleVisibilityChange)
     
-    // Watch for any class changes on html/body
-    const observer = new MutationObserver(enforceLight)
-    observer.observe(document.documentElement, { 
-      attributes: true, 
-      attributeFilter: ['class', 'data-theme', 'style'] 
-    })
-    observer.observe(document.body, { 
-      attributes: true, 
-      attributeFilter: ['class', 'style'] 
-    })
-    
+    // Cleanup
     return () => {
-      document.removeEventListener('visibilitychange', enforceLight)
-      window.removeEventListener('focus', enforceLight)
-      observer.disconnect()
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
     }
   }, [])
 
