@@ -31,7 +31,7 @@ export default function CommissionsGrid({ posts, language }: Props) {
   }
 
   return (
-    <div className="p-4 md:p-0 grid grid-cols-2 md:grid-cols-4 gap-4 overflow-hidden">
+    <div className="p-8 md:p-0 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 overflow-hidden">
       {posts.map((post) => {
         const isActive = activeOverlay === post.slug.current
         const title =
@@ -84,7 +84,7 @@ export default function CommissionsGrid({ posts, language }: Props) {
                     }`}
                   >
                     {title.split(' ').map((word, i) => (
-                      <span key={i} className="block leading-[0.95]">
+                      <span key={i} className="block leading-[0.95] uppercase tracking-wide">
                         {word}
                       </span>
                     ))}
