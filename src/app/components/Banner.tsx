@@ -44,8 +44,8 @@ export function BannerWithAutoFallback() {
         </div>
       </div>
 
-      <div className="pb-4 md:px-8 flex justify-center -mt-1 font-light font-roboto tracking-wide text-lg text-black">
-        <h3>Fine art photos for an upcoming book</h3>
+      <div className="pb-4 md:px-8 flex justify-center -mt-1 font-light font-roboto tracking-wide text-lg md:text-xl 3xl:text-2xl text-black">
+        <h3>Slow photography for an accelerating world</h3>
       </div>
     </div>
   )

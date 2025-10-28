@@ -3,13 +3,12 @@
 import { PortableText } from '@portabletext/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import { usePathname } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import { useLanguage } from '~/app/components/context/LanguageProvider'
 import LanguageSwitcher from '~/app/components/LanguageSwitcher'
-import { getBlurDataURL,urlForSlideshow } from '~/sanity/lib/sanity.image'
+import { urlForSlideshow } from '~/sanity/lib/sanity.image'
 import type { Post } from '~/sanity/lib/sanity.queries'
 
 type Props = {
@@ -24,6 +23,7 @@ export default function DesktopSlideshow({
   setCurrentIndex,
 }: Props) {
   const router = useRouter()
+  const pathname = usePathname()
   const [isAboutOpen, setIsAboutOpen] = useState(false)
   const [isImageLoading, setIsImageLoading] = useState(true)
   const [forceRender, setForceRender] = useState(0)
@@ -38,23 +38,24 @@ export default function DesktopSlideshow({
     setIsImageLoading(true)
   }, [currentIndex])
 
-  // Preload next and previous images for smoother transitions
+  // Simple preloading of next/prev images only
   useEffect(() => {
     if (!post.images || post.images.length === 0) return
-    const nextIndex = currentIndex < post.images.length - 1 ? currentIndex + 1 : 0
-    const prevIndex = currentIndex > 0 ? currentIndex - 1 : post.images.length - 1
-
+    
+    const nextIndex = (currentIndex + 1) % post.images.length
+    const prevIndex = (currentIndex - 1 + post.images.length) % post.images.length
+    
     const preloadImage = (index: number) => {
       const img = post.images[index]
       if (img?.image) {
         const link = document.createElement('link')
-        link.rel = 'preload'
+        link.rel = 'prefetch'
         link.as = 'image'
         link.href = urlForSlideshow(img.image, 1920)
         document.head.appendChild(link)
       }
     }
-
+    
     preloadImage(nextIndex)
     preloadImage(prevIndex)
   }, [currentIndex, post.images])
@@ -82,17 +83,15 @@ export default function DesktopSlideshow({
   const handleNext = () =>
     setCurrentIndex((prev) => (prev === post.images!.length - 1 ? 0 : prev + 1))
 
-const pathname = usePathname()
-  // --- Close handler ---
   const handleClose = () => {
-  if (pathname.startsWith('/series')) {
-    router.push('/series#' + post.slug.current)
-  } else if (pathname.startsWith('/commissions')) {
-    router.push('/commissions#' + post.slug.current)
-  } else {
-    router.push('/') // fallback
+    if (pathname.startsWith('/series')) {
+      router.push('/series#' + post.slug.current)
+    } else if (pathname.startsWith('/commissions')) {
+      router.push('/commissions#' + post.slug.current)
+    } else {
+      router.push('/')
+    }
   }
-}
 
   const postExcerptBlocks =
     activeLang === 'en'
@@ -108,7 +107,7 @@ const pathname = usePathname()
     <div className="relative w-full h-screen bg-white font-light flex items-center py-10 justify-center hide-scrollbar">
       {/* Loading spinner */}
       {isImageLoading && hasImages && (
-        <div className="absolute inset-0 flex items-center justify-center bg-white animate-pulse">
+        <div className="absolute inset-0 flex items-center justify-center bg-white">
           <div className="w-16 h-16 border-4 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
@@ -118,22 +117,20 @@ const pathname = usePathname()
         current?.image && (
           <Image
             src={urlForSlideshow(current.image, 1920)}
-            blurDataURL={getBlurDataURL(current.image)}
-            placeholder="blur"
             alt={currentTitle || post.title}
             width={1920}
             height={1080}
-            sizes="(max-width: 768px) 100vw, 70vw"
-            className={`w-auto h-full object-contain transition-opacity duration-500 max-w-[70vw] ${
+            sizes="70vw"
+            className={`w-auto h-full object-contain transition-opacity duration-300 max-w-[70vw] ${
               isImageLoading ? 'opacity-0' : 'opacity-100'
             }`}
             onLoad={() => setIsImageLoading(false)}
-            priority
+            priority={currentIndex === 0}
             quality={85}
           />
         )
       ) : (
-        <div className="w-full h-[80vh] flex items-center justify-center  text-sm uppercase tracking-wide">
+        <div className="w-full h-[80vh] flex items-center justify-center text-sm uppercase tracking-wide">
           No images available
         </div>
       )}
@@ -146,18 +143,20 @@ const pathname = usePathname()
         {t.close}
       </button>
 
-      {/* Navigation arrows (only show if multiple images) */}
+      {/* Navigation arrows */}
       {hasImages && post.images.length > 1 && (
         <>
           <button
             onClick={handlePrev}
             className="absolute left-0 top-1/2 -translate-y-1/2 transition-transform duration-200 md:hover:scale-105 p-2 rounded-full z-50 ml-4"
+            aria-label="Previous image"
           >
             <ChevronLeft className="w-12 h-12" />
           </button>
           <button
             onClick={handleNext}
             className="absolute right-0 top-1/2 -translate-y-1/2 transition-transform duration-200 md:hover:scale-105 p-2 rounded-full z-50 mr-4"
+            aria-label="Next image"
           >
             <ChevronRight className="w-12 h-12" />
           </button>
@@ -206,11 +205,12 @@ const pathname = usePathname()
 
             <h2 className="text-3xl font-normal mb-4">{postTitle}</h2>
 
-            <div className="prose prose-sm md:prose-base  text-base font-roboto text-justify mb-6">
+            <div className="prose prose-sm md:prose-base portable-text text-base font-roboto text-justify mb-6">
               {postExcerptBlocks && postExcerptBlocks.length ? (
                 <div className='portable-text'>
-                <PortableText key={`${activeLang}-${forceRender}`} value={postExcerptBlocks} />
-              </div>) : (
+                  <PortableText key={`${activeLang}-${forceRender}`} value={postExcerptBlocks} />
+                </div>
+              ) : (
                 <p>No description available.</p>
               )}
             </div>

@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { useLanguage } from '~/app/components/context/LanguageProvider'
-import { urlForThumbnail, getBlurDataURL } from '~/sanity/lib/sanity.image'
+import { urlForThumbnail } from '~/sanity/lib/sanity.image'
 import type { Post } from '~/sanity/lib/sanity.queries'
 
 type Props = {
@@ -22,7 +22,6 @@ export default function PostsGrid({ posts, language }: Props) {
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
   const [mounted, setMounted] = useState(false)
-  const [visibleRange, setVisibleRange] = useState({ start: 0, end: 10 })
 
   useEffect(() => {
     setMounted(true)
@@ -34,17 +33,7 @@ export default function PostsGrid({ posts, language }: Props) {
     const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current
     setCanScrollLeft(scrollLeft > 0)
     setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10)
-
-    // Calculate which images are in viewport for lazy loading
-    const containerLeft = scrollLeft
-    const containerRight = scrollLeft + clientWidth
-    const itemWidth = clientWidth * 0.3 // Approximate item width
-
-    const start = Math.max(0, Math.floor(containerLeft / itemWidth) - 2)
-    const end = Math.min(posts.length * 2, Math.ceil(containerRight / itemWidth) + 2)
-    
-    setVisibleRange({ start, end })
-  }, [posts.length])
+  }, [])
 
   useEffect(() => {
     if (!mounted) return
@@ -117,9 +106,6 @@ export default function PostsGrid({ posts, language }: Props) {
             typeof window !== 'undefined' && window.innerWidth < 768 ? 30 : 40
           const widthVh = aspect * height
 
-          // Only render images in or near viewport
-          const shouldLoad = i >= visibleRange.start && i <= visibleRange.end
-
           return (
             <Link
               key={`${post._id}-${i}`}
@@ -136,23 +122,21 @@ export default function PostsGrid({ posts, language }: Props) {
                   aspectRatio: aspect.toString(),
                 }}
               >
-                {shouldLoad && post.mainImage ? (
+                {post.mainImage ? (
                   <Image
-                    src={urlForThumbnail(post.mainImage, 800)}
+                    src={urlForThumbnail(post.mainImage, 600)}
                     alt={title}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                     sizes="(max-width: 768px) 50vw, 40vh"
-                    loading={i < 3 ? 'eager' : 'lazy'}
-                    placeholder="blur"
-                    blurDataURL={getBlurDataURL(post.mainImage)}
+                    loading={i < 4 ? 'eager' : 'lazy'}
                   />
                 ) : (
-                  <div className="absolute inset-0 bg-gray-100 animate-pulse" />
+                  <div className="absolute inset-0 bg-gray-100" />
                 )}
               </div>
 
-              <div className="w-full px-4">
+              <div className="w-full px-4 md:mt-1">
                 <h3 className="text-black font-light text-xl text-center transition-all duration-300">
                   <span className="group-hover:hidden">{title}</span>
                   <span className="hidden group-hover:inline underline underline-offset-2 font-normal text-lg tracking-tight">
