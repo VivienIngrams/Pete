@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react'
 
 import { useLanguage } from '~/app/components/context/LanguageProvider'
 import LanguageSwitcher from '~/app/components/LanguageSwitcher'
-import { urlForImage } from '~/sanity/lib/sanity.image'
+import { getBlurDataURL,urlForSlideshow } from '~/sanity/lib/sanity.image'
 import type { Post } from '~/sanity/lib/sanity.queries'
 
 type Props = {
@@ -50,7 +50,7 @@ export default function DesktopSlideshow({
         const link = document.createElement('link')
         link.rel = 'preload'
         link.as = 'image'
-        link.href = urlForImage(img.image).width(1920).quality(85).url()
+        link.href = urlForSlideshow(img.image, 1920)
         document.head.appendChild(link)
       }
     }
@@ -117,7 +117,9 @@ const pathname = usePathname()
       {hasImages ? (
         current?.image && (
           <Image
-            src={urlForImage(current.image).width(1920).quality(85).auto('format').url()}
+            src={urlForSlideshow(current.image, 1920)}
+            blurDataURL={getBlurDataURL(current.image)}
+            placeholder="blur"
             alt={currentTitle || post.title}
             width={1920}
             height={1080}
