@@ -67,9 +67,7 @@ export default function PostsGrid({ posts, language }: Props) {
       <button
         onClick={() => scroll('left')}
         disabled={!canScrollLeft}
-        className={`absolute -left-2 md:left-4 
-    top-[85%] md:top-[45%] md:-translate-y-1/2 
-    z-10 bg-white/90 hover:bg-white  rounded-full p-3 transition-all duration-300 
+        className={`absolute -left-2    top-[85%]     z-10 bg-white hover:bg-black/10  rounded-full p-3 transition-all duration-300 
     ${canScrollLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         aria-label="Scroll left"
       >
@@ -79,7 +77,7 @@ export default function PostsGrid({ posts, language }: Props) {
       <button
         onClick={() => scroll('right')}
         disabled={!canScrollRight}
-        className={`absolute -right-2 md:right-4 top-[85%] md:top-[45%] md:-translate-y-1/2 z-10 bg-white/90 hover:bg-white  rounded-full p-3 transition-all duration-300 
+        className={`absolute -right-2 top-[85%] z-10 bg-white hover:bg-black/10  rounded-full p-3 transition-all duration-300 
     ${canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         aria-label="Scroll right"
       >
@@ -136,7 +134,7 @@ export default function PostsGrid({ posts, language }: Props) {
                 />
               </div>
 
-              <div className="w-full px-4 mt-4">
+              <div className="w-full px-4">
                 <h3 className="text-black font-light text-xl text-center transition-all duration-300">
                   <span className="group-hover:hidden">{title}</span>
                   <span className="hidden group-hover:inline underline underline-offset-2 font-normal text-lg tracking-tight">

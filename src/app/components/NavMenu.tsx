@@ -44,7 +44,7 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle, hideMenu = false }: 
     <nav className="fixed top-0 left-0 w-full z-50 font-roboto tracking-wide">
       {/* Desktop menu */}
       <div
-        className={`hidden md:flex items-center justify-between md:px-[5vw] lg:px-[12vw] py-[3vh] bg-white text-black ${
+        className={`hidden md:flex items-center justify-between md:px-[5vw] lg:px-[12vw] py-[4vh] bg-white text-black ${
           isHomePage ? 'hidden' : ''
         }`}
       >

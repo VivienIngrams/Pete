@@ -38,6 +38,14 @@ html, body {
   color-scheme: light only !important;
 }
 
+main {
+  padding-top: 64px; /* height of your fixed nav */
+}
+
+.portable-text p {
+  margin-bottom: 0.5rem;
+}
+
 section {
   transform: translateZ(0);
   will-change: transform;

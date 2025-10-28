@@ -204,10 +204,11 @@ const pathname = usePathname()
 
             <h2 className="text-3xl font-normal mb-4">{postTitle}</h2>
 
-            <div className="prose prose-sm md:prose-base text-base font-roboto text-justify mb-6">
+            <div className="prose prose-sm md:prose-base portable-text text-base font-roboto text-justify mb-6">
               {postExcerptBlocks && postExcerptBlocks.length ? (
+                <div className='portable-text'>
                 <PortableText key={`${activeLang}-${forceRender}`} value={postExcerptBlocks} />
-              ) : (
+              </div>) : (
                 <p>No description available.</p>
               )}
             </div>

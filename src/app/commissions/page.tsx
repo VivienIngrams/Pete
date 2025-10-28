@@ -33,11 +33,11 @@ export default async function PostsPage() {
   return (
     <>
       <NavMenu />
-        <h1 className="text-2xl xl:text-4xl text-center uppercase tracking-widest  pt-24  md:pt-32  font-light">
+        <h1 className="text-2xl xl:text-4xl text-center uppercase tracking-widest  pt-32  md:pt-40  font-light">
           Commissions
         </h1>
       <div className="min-h-[80vh] flex flex-col justify-center items-center md:px-[12vw]">
-        <div className="w-full max-w-6xl">
+        <div className="w-full">
           <CommissionsGrid posts={posts} />
         </div>
       </div>
