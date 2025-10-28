@@ -1,26 +1,26 @@
-import { defineArrayMember,defineField, defineType } from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'grid',
-  title: 'Icons on Main page',
+  title: 'Organise order of icons',
   type: 'document',
   fields: [
     defineField({
-        name: 'title',
-        title: 'Title',
-        type: 'string',
-        validation: (Rule) => Rule.required(),
-      }),
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
     defineField({
       name: 'seriesGrid',
-      title: 'Series to display on main page in grid format',
+      title: 'Series to display in icon format',
       description:
-        'These are the series that will appear on your main page. First create your series and then add to the list below. You can rearrange the display order by dragging each project.',
+        'These are the series that will appear in icon format. First create your series and then add to the list below. You can rearrange the display order by dragging each project.',
       type: 'array',
       of: [
         defineArrayMember({
           type: 'reference',
-          to: [{ type: 'post' }],
+          to: [{ type: 'post' }, { type: 'commission' }],
         }),
       ],
     }),

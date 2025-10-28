@@ -216,4 +216,88 @@ export async function getBioPage(client: SanityClient, options = {}) {
   return bioPage
 }
 
+// GROQ query to fetch posts by section
+const commissionsQuery = () => groq`
+*[_type == "commission" ]  {
+  _id,
+  _createdAt,
+  title,
+  title_en,
+  slug,
+  excerpt,
+  excerpt_en,
+  mainImage {
+    ...,
+    "aspectRatio": asset->metadata.dimensions.aspectRatio
+  },
+  layout
+}`
 
+export async function getCommissions(
+  client: SanityClient,
+    language: 'en' | 'fr' | string = 'fr',
+  options = {}
+): Promise<Post[]> {
+  try {
+    const posts = await sanityFetch<Post[]>({
+      query: commissionsQuery(),
+      qParams: { ...options },
+    });
+
+    const languagePosts = posts.map((post) => ({
+      ...post,
+      title: language === 'en' ? post.title_en || post.title : post.title,
+      excerpt: language === 'en' ? post.excerpt_en || post.excerpt : post.excerpt,
+    }));
+
+    return languagePosts;
+  } catch (error) {
+    console.error('Error fetching posts by section:', error);
+    throw error;
+  }
+}
+
+// GROQ query to fetch posts in the order defined by the series grid
+export const commissionsGridQuery = groq`
+*[_type == "grid"][0]{
+  "commissions": seriesGrid[]->{
+    _id,
+    _createdAt,
+    title,
+    title_en,
+    slug,
+    excerpt,
+    excerpt_en,
+    mainImage {
+      ...,
+      "aspectRatio": asset->metadata.dimensions.aspectRatio
+    },
+    layout
+  }
+}`
+
+export async function getCommissionsGridPosts(
+  client: SanityClient,
+  language: 'en' | 'fr' | string = 'fr',
+  options = {}
+): Promise<Post[]> {
+  try {
+    const result = await sanityFetch<{ posts: Post[] | undefined }>({
+      query: commissionsGridQuery,
+      qParams: { ...options },
+    });
+
+    const posts = result?.posts ?? []
+
+    const languagePosts = posts.map((post) => ({
+      ...post,
+      title: language === 'en' ? post.title_en || post.title : post.title,
+      excerpt: language === 'en' ? post.excerpt_en || post.excerpt : post.excerpt,
+    }));
+
+    return languagePosts
+  } catch (error) {
+    console.error('Error fetching posts from commissions grid:', error);
+    throw error;
+  }
+}

@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 import { readToken } from '~/sanity/lib/sanity.api'
 import { getClient } from '~/sanity/lib/sanity.client'
-import { getPosts, getSeriesGridPosts, type Post } from '~/sanity/lib/sanity.queries'
+import { getCommissions, getSeriesGridPosts, type Post } from '~/sanity/lib/sanity.queries'
 
 import NavMenu from '../components/NavMenu'
 import CommissionsGrid from './CommissionsGrid'
@@ -22,7 +22,7 @@ export default async function PostsPage() {
 
 const posts: Post[] = (orderedPosts.length
   ? orderedPosts
-  : await getPosts(client, language, { next: { revalidate: 600 } })
+  : await getCommissions(client, language, { next: { revalidate: 600 } })
 ).slice(0, 4);
 
   return (
