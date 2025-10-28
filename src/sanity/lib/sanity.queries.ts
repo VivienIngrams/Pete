@@ -301,3 +301,47 @@ export async function getCommissionsGridPosts(
     throw error;
   }
 }
+
+export const commissionBySlugQuery = groq`
+  *[_type == "commission" && slug.current == $slug ][0] {
+    _id,
+    title,
+    title_en,
+    slug,
+       excerpt,
+    excerpt_en,
+        images[] {
+      ...,
+      "aspectRatio": asset->metadata.dimensions.aspectRatio
+    }
+  }
+`
+
+// Function to fetch a post by its slug
+export async function getCommission(
+  client: SanityClient,
+  slug: string,
+  language: string | 'en' | 'fr' = 'fr', // default language is 'fr'
+  options = {}
+): Promise<Post> {
+  try {
+    const post = await sanityFetch<Post>({
+      query: commissionBySlugQuery,
+      qParams: { slug, ...options },
+    });
+
+    if (!post) {
+      throw new Error(`Commission with slug "${slug}" not found`);
+    }
+
+    // Return the correct language-based title and excerpt
+    return {
+      ...post,
+      title: language === 'en' ? post.title_en || post.title : post.title,
+      excerpt: language === 'en' ? post.excerpt_en || post.excerpt : post.excerpt,
+    };
+  } catch (error) {
+    console.error('Error fetching post by slug:', error);
+    throw error;
+  }
+}

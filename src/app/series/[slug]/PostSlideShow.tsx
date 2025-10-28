@@ -18,7 +18,7 @@ export default function PostSlideshow({ post }: Props) {
     <>
       <div className="hidden md:block">
         <DesktopSlideshow
-                  post={post}
+          post={post}
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
         />

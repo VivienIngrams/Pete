@@ -4,7 +4,7 @@ import { PortableText } from '@portabletext/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useEffect,useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 import { useLanguage } from '~/app/components/context/LanguageProvider'
 import LanguageSwitcher from '~/app/components/LanguageSwitcher'
@@ -33,7 +33,7 @@ export default function MobileSlideshow({
 
   // Force re-render when language changes to ensure PortableText updates
   useEffect(() => {
-    setForceRender(prev => prev + 1)
+    setForceRender((prev) => prev + 1)
   }, [activeLang])
 
   // Reset loading state when image changes
@@ -82,9 +82,6 @@ export default function MobileSlideshow({
       : post.excerpt || post.excerpt_en
   }, [activeLang, post.excerpt, post.excerpt_en])
 
-  // Early return for empty images
-  if (!images.length) return <p>No images found.</p>
-
   // --- Navigation handlers ---
   const handlePrev = () =>
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
@@ -122,13 +119,15 @@ export default function MobileSlideshow({
 
   return (
     <div className="relative w-full h-screen bg-white mt-6 flex flex-col items-center justify-center">
-      <NavMenu 
-        slideshowMode={true} 
+      <NavMenu
+        slideshowMode={true}
         onDropdownToggle={setIsDropdownOpen}
         hideMenu={isAboutOpen}
       />
       {/* Persistent top bar with close button */}
-      <div className={`fixed top-0 left-0 z-[900] bg-white flex items-center h-12 p-6 ${isDropdownOpen || isAboutOpen ? 'hidden' : 'block'}`}>
+      <div
+        className={`fixed top-0 left-0 z-[900] bg-white flex items-center h-12 p-6 ${isDropdownOpen || isAboutOpen ? 'hidden' : 'block'}`}
+      >
         <button
           onClick={handleClose}
           className="text-black text-sm tracking-wide uppercase mt-1"
@@ -145,27 +144,35 @@ export default function MobileSlideshow({
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        {current.image && (
-          <div className="relative w-auto max-h-[80vh] flex items-center justify-center">
-            {isImageLoading && (
-              <div className="absolute inset-0 flex items-center justify-center bg-white animate-pulse">
-                <div className="w-16 h-16 border-4 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
-              </div>
-            )}
+        <div className="relative w-auto max-h-[80vh] flex items-center justify-center">
+          {/* Loading state */}
+          {isImageLoading && images.length > 0 && (
+            <div className="absolute inset-0 flex items-center justify-center bg-white animate-pulse">
+              <div className="w-16 h-16 border-4 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          )}
 
-            <Image
-              src={urlForImage(current.image).url() || ''}
-              alt={currentTitle || post.title}
-              width={500}
-              height={500}
-              className={`w-auto max-h-[80vh]  object-contain transition-opacity duration-500 ${
-                isImageLoading ? 'opacity-0' : 'opacity-100'
-              }`}
-              onLoad={() => setIsImageLoading(false)}
-              priority
-            />
-          </div>
-        )}
+          {/* If there are no images, show black background */}
+          {!images.length ? (
+            <div className="w-full h-[60vh] flex items-center justify-center text-sm uppercase">
+              No images available
+            </div>
+          ) : (
+            current?.image && (
+              <Image
+                src={urlForImage(current.image).url() || ''}
+                alt={currentTitle || post.title}
+                width={500}
+                height={500}
+                className={`w-auto max-h-[80vh] object-contain transition-opacity duration-500 ${
+                  isImageLoading ? 'opacity-0' : 'opacity-100'
+                }`}
+                onLoad={() => setIsImageLoading(false)}
+                priority
+              />
+            )
+          )}
+        </div>
       </div>
 
       {/* Navigation arrows */}
@@ -189,17 +196,20 @@ export default function MobileSlideshow({
         {currentTitle && (
           <h1 className="text-xl font-normal">{currentTitle}</h1>
         )}
-          <div className=" text-sm font-roboto">
-        {currentExcerpt && (
-            <PortableText key={`${activeLang}-${forceRender}`} value={currentExcerpt} />
+        <div className=" text-sm font-roboto">
+          {currentExcerpt && (
+            <PortableText
+              key={`${activeLang}-${forceRender}`}
+              value={currentExcerpt}
+            />
           )}
-            <button
-              onClick={() => setIsAboutOpen(true)}
-              className="text-sm uppercase tracking-wide"
-            >
-              {t.about}
-            </button>
-          </div>
+          <button
+            onClick={() => setIsAboutOpen(true)}
+            className="text-sm uppercase tracking-wide"
+          >
+            {t.about}
+          </button>
+        </div>
       </div>
 
       {/* About modal */}
@@ -228,7 +238,10 @@ export default function MobileSlideshow({
             </div>
             <div className="prose prose-sm md:prose-base text-sm font-roboto text-justify ">
               {postExcerptBlocks && postExcerptBlocks.length ? (
-                <PortableText key={`${activeLang}-${forceRender}`} value={postExcerptBlocks} />
+                <PortableText
+                  key={`${activeLang}-${forceRender}`}
+                  value={postExcerptBlocks}
+                />
               ) : (
                 <p>No description available.</p>
               )}

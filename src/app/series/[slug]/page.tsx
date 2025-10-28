@@ -22,18 +22,8 @@ export default async function PostPage({
     next: { revalidate: 60 },
   })
 
-  if (!post) {
-    return <p>No post found.</p>
-  }
 
-  // Fetch related posts if needed
-  const posts: Post[] = await getPosts(client, language, {
-    next: { revalidate: 60 },
-  })
 
-  if (!posts || posts.length === 0) {
-    return <p>No related posts found.</p>
-  }
 
   return (
     <>
