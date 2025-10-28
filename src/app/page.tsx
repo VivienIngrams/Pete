@@ -37,7 +37,7 @@ export default async function HomePage() {
 
       <BannerWithAutoFallback />
 
-      <div className="flex flex-grow h-[60vh] px-4 mt-[38vh]">
+      <div className="flex flex-grow h-[50vh] px-4 mt-[45vh]">
         <PostsGrid posts={posts} />
       </div>
 

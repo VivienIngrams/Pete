@@ -6,7 +6,7 @@ export function BannerWithAutoFallback() {
   return (
     <div
       id="series-banner"
-      className="fixed top-[12vh] md:top-[15vh] left-0 right-0 z-20 bg-white"
+      className="fixed top-[14vh] md:top-[18vh] left-0 right-0 z-20 bg-white"
     >
       {/* Desktop banner */}
       <div className="hidden relative w-full h-[13vh] md:flex items-center justify-center">

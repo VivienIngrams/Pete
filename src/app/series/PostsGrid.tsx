@@ -61,12 +61,12 @@ export default function PostsGrid({ posts, language }: Props) {
   }
 
   return (
-    <section className="relative w-full mt-[8vh] md:mt-0">
+    <section className="relative w-full mt-[8vh] md:mt-[2vh]">
       <button
         onClick={() => scroll('left')}
         disabled={!canScrollLeft}
         className={`absolute -left-2 md:left-4 
-    top-[85%] md:top-1/2 md:-translate-y-1/2 
+    top-[85%] md:top-[45%] md:-translate-y-1/2 
     z-10 bg-white/90 hover:bg-white  rounded-full p-3 transition-all duration-300 
     ${canScrollLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         aria-label="Scroll left"
@@ -77,7 +77,7 @@ export default function PostsGrid({ posts, language }: Props) {
       <button
         onClick={() => scroll('right')}
         disabled={!canScrollRight}
-        className={`absolute -right-2 md:right-4 top-[85%] md:top-1/2 md:-translate-y-1/2 z-10 bg-white/90 hover:bg-white  rounded-full p-3 transition-all duration-300 
+        className={`absolute -right-2 md:right-4 top-[85%] md:top-[45%] md:-translate-y-1/2 z-10 bg-white/90 hover:bg-white  rounded-full p-3 transition-all duration-300 
     ${canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         aria-label="Scroll right"
       >
@@ -101,7 +101,7 @@ export default function PostsGrid({ posts, language }: Props) {
           const aspect = post.mainImage.aspectRatio || 1.5
 
           const height =
-            typeof window !== 'undefined' && window.innerWidth < 768 ? 40 : 50
+            typeof window !== 'undefined' && window.innerWidth < 768 ? 30 : 40
           const widthVh = aspect * height
 
           return (
@@ -128,7 +128,7 @@ export default function PostsGrid({ posts, language }: Props) {
                   alt={title}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="90vw"
+                  sizes="80vw"
                   priority={false}
                 />
               </div>
