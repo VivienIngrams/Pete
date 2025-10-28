@@ -59,6 +59,8 @@ export default function PostsGrid({ posts, language }: Props) {
   if (!mounted) {
     return null
   }
+  // Duplicate posts for looping feel
+  const repeatedPosts = [...posts, ...posts]
 
   return (
     <section className="relative w-full mt-[8vh] md:mt-[2vh]">
@@ -93,12 +95,12 @@ export default function PostsGrid({ posts, language }: Props) {
           msOverflowStyle: 'none',
         }}
       >
-        {posts.map((post) => {
+        {repeatedPosts.map((post, i) => {
           const title =
             lang === 'en'
               ? post.title_en || post.title || ''
               : post.title || post.title_en || ''
-          const aspect = post.mainImage.aspectRatio || 1.5
+          const aspect = post.mainImage?.aspectRatio || 1.5
 
           const height =
             typeof window !== 'undefined' && window.innerWidth < 768 ? 30 : 40
@@ -106,7 +108,7 @@ export default function PostsGrid({ posts, language }: Props) {
 
           return (
             <Link
-              key={post._id}
+              key={`${post._id}-${i}`} // ✅ ensures unique key across duplicates
               href={`/series/${post.slug.current}`}
               className="relative flex-shrink-0 snap-center group"
               style={{
@@ -122,8 +124,9 @@ export default function PostsGrid({ posts, language }: Props) {
               >
                 <Image
                   src={
-                    (urlForImage(post.mainImage).url() as string) ||
-                    '/placeholder.svg'
+                    (post.mainImage
+                      ? urlForImage(post.mainImage).url()
+                      : '/placeholder.svg') as string
                   }
                   alt={title}
                   fill

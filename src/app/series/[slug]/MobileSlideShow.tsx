@@ -4,6 +4,7 @@ import { PortableText } from '@portabletext/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useEffect, useMemo, useRef, useState } from 'react'
 
 import { useLanguage } from '~/app/components/context/LanguageProvider'
@@ -11,6 +12,8 @@ import LanguageSwitcher from '~/app/components/LanguageSwitcher'
 import NavMenu from '~/app/components/NavMenu'
 import { urlForImage } from '~/sanity/lib/sanity.image'
 import type { Post } from '~/sanity/lib/sanity.queries'
+
+
 
 type Props = {
   post: Post
@@ -88,11 +91,17 @@ export default function MobileSlideshow({
   const handleNext = () =>
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
 
+const pathname = usePathname()
   // --- Close handler ---
   const handleClose = () => {
-    if (document.referrer.includes('/series')) router.back()
-    else router.push(`/series#${post.slug.current}`)
+  if (pathname.startsWith('/series')) {
+    router.push('/series#' + post.slug.current)
+  } else if (pathname.startsWith('/commissions')) {
+    router.push('/commissions#' + post.slug.current)
+  } else {
+    router.push('/') // fallback
   }
+}
 
   // --- Swipe handlers ---
   const handleTouchStart = (e: React.TouchEvent) => {

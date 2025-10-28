@@ -4,6 +4,7 @@ import { PortableText } from '@portabletext/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import { useLanguage } from '~/app/components/context/LanguageProvider'
@@ -81,10 +82,17 @@ export default function DesktopSlideshow({
   const handleNext = () =>
     setCurrentIndex((prev) => (prev === post.images!.length - 1 ? 0 : prev + 1))
 
+const pathname = usePathname()
+  // --- Close handler ---
   const handleClose = () => {
-    if (document.referrer.includes('/series')) router.back()
-    else router.push(`/series#${post.slug.current}`)
+  if (pathname.startsWith('/series')) {
+    router.push('/series#' + post.slug.current)
+  } else if (pathname.startsWith('/commissions')) {
+    router.push('/commissions#' + post.slug.current)
+  } else {
+    router.push('/') // fallback
   }
+}
 
   const postExcerptBlocks =
     activeLang === 'en'
