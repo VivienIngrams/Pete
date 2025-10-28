@@ -40,22 +40,12 @@ export default function RootLayout({
       lang="en"
       className={`${roboto.variable}`}
       data-theme="light"
-      style={{ colorScheme: 'light only', backgroundColor: 'white', color: 'black' }}
     >
       <head>
         <meta name="color-scheme" content="light only" />
         <meta name="theme-color" content="#ffffff" />
-        <style dangerouslySetInnerHTML={{
-          __html: `
-            :root { color-scheme: light only !important; }
-            html, body { background-color: white !important; color: black !important; }
-          `
-        }} />
       </head>
-      <body 
-        className="h-full bg-white font-roboto"
-        style={{ backgroundColor: 'white', color: 'black' }}
-      >
+      <body className="h-full bg-white font-roboto text-black">
         <LanguageProvider>
           <ThemeProvider />
           {children}
