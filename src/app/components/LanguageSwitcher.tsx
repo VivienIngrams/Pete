@@ -10,7 +10,7 @@ const LanguageSwitcher = () => {
       <button
         onClick={toggleLanguage}
         aria-label="Toggle Language"
-        className="md:ml-3 z-50 text-sm font-light tracking-wide text-black hover:opacity-80 transition-opacity duration-300"
+        className=" z-50 text-sm font-light tracking-wide text-black hover:opacity-80 transition-opacity duration-300"
       >
         {language === 'fr' ? (
           <span>english&nbsp;|&nbsp;<span className="text-gray-600">français</span></span>

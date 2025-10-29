@@ -21,7 +21,7 @@ type Props = {
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>
 }
 
-export default function MobileSlideshow({
+export default function MobileSlideShow({
   post,
   currentIndex,
   setCurrentIndex,

@@ -4,7 +4,7 @@ import { readToken } from '~/sanity/lib/sanity.api'
 import { getClient } from '~/sanity/lib/sanity.client'
 import { getPost, getPosts, type Post } from '~/sanity/lib/sanity.queries'
 
-import PostSlideshow from './PostSlideShow'
+import SlideShow from './SlideShowPage'
 
 export default async function PostPage({
   params,
@@ -29,7 +29,7 @@ export default async function PostPage({
     <>
     
       {/* Pass post data to client component */}
-      <PostSlideshow post={post}/>
+      <SlideShow post={post}/>
     </>
   )
 }

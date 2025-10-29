@@ -33,7 +33,7 @@ export default async function PostsPage() {
   return (
     <>
       <NavMenu />
-      <div className='h-screen flex flex-col justify-evenly'>
+      <div className="h-screen flex flex-col justify-evenly">
         <div id="series-banner" className=" z-20 bg-white">
           <div className="mt-[10vh] relative w-full h-[5vh] md:h-[9vh] md:flex items-center justify-center">
             <Image
@@ -51,7 +51,12 @@ export default async function PostsPage() {
               Below a smattering of my commissioned work. Although mainly
               concentrating on personal projects these days, I&apos;m always
               delighted to work on an interesting project. Contact me at
-              studiolippmann@gmail.com
+              <a
+                href="mailto:studiolippmann@gmail.com"
+                className="underline underline-offset-2 hover:text-gray-600 transition-colors"
+              >
+                studiolippmann@gmail.com
+              </a>
             </h3>
           </div>
         </div>

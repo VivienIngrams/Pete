@@ -44,10 +44,12 @@ export default function RootLayout({
       <head>
         <meta name="color-scheme" content="light only" />
         <meta name="theme-color" content="#ffffff" />
+        <meta name="supported-color-schemes" content="light" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       </head>
       <body className="h-full bg-white font-roboto text-black">
         <LanguageProvider>
-          <ThemeProvider />
+          <ThemeProvider  />
           {children}
           <Analytics />
         </LanguageProvider>

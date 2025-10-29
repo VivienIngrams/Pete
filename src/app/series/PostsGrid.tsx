@@ -61,27 +61,8 @@ export default function PostsGrid({ posts, language }: Props) {
   const repeatedPosts = [...posts, ...posts]
 
   return (
-    <section className="relative w-full mt-[6vh] md:mt-[2vh]">
-      <button
-        onClick={() => scroll('left')}
-        disabled={!canScrollLeft}
-        className={`absolute -left-4 top-[85%] z-10 bg-white hover:bg-black/10 hover:rounded-full  p-3 transition-all duration-300 
-    ${canScrollLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-        aria-label="Scroll left"
-      >
-        <ChevronLeft className="w-8 h-8 md:w-10 md:h-10 text-black" />
-      </button>
-
-      <button
-        onClick={() => scroll('right')}
-        disabled={!canScrollRight}
-        className={`absolute -right-4 top-[85%] z-10 bg-white hover:bg-black/10 hover:rounded-full p-3 transition-all duration-300 
-    ${canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-        aria-label="Scroll right"
-      >
-        <ChevronRight className="w-8 h-8 md:w-10 md:h-10 text-black" />
-      </button>
-
+    <section className="relative w-full">
+     
       <div
         ref={scrollContainerRef}
         onScroll={updateScrollButtons}
@@ -150,6 +131,27 @@ export default function PostsGrid({ posts, language }: Props) {
           display: none;
         }
       `}</style>
+      <div className='w-full flex justify-between'>
+       <button
+        onClick={() => scroll('left')}
+        disabled={!canScrollLeft}
+        className={`z-10 -ml-4 bg-white hover:bg-black/10 hover:rounded-full  p-3 transition-all duration-300 
+    ${canScrollLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        aria-label="Scroll left"
+      >
+        <ChevronLeft className="w-8 h-8 md:w-10 md:h-10 text-black" />
+      </button>
+
+      <button
+        onClick={() => scroll('right')}
+        disabled={!canScrollRight}
+        className={` z-10 -mr-4 bg-white hover:bg-black/10 hover:rounded-full p-3 transition-all duration-300 
+    ${canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        aria-label="Scroll right"
+      >
+        <ChevronRight className="w-8 h-8 md:w-10 md:h-10 text-black" />
+      </button>
+</div>
     </section>
   )
 }

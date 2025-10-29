@@ -11,7 +11,7 @@ type Props = {
   post: Post
 }
 
-export default function PostSlideshow({ post }: Props) {
+export default function Slideshow({ post }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   return (

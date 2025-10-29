@@ -32,16 +32,16 @@ export default async function HomePage() {
 
   return (
     // PostsPage.tsx
-    <>
+    <div className="flex flex-col justify-evenly h-screen bg-white text-black">
       <NavMenu />
 
       <BannerWithAutoFallback />
 
-      <div className="flex flex-grow h-[50vh] px-4 mt-[45vh]">
+      <div className=" px-4 ">
         <PostsGrid posts={posts} />
       </div>
 
     
-    </>
+    </div>
   )
 }

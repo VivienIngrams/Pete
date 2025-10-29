@@ -3,7 +3,7 @@
 import { PortableText } from '@portabletext/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
-import { useRouter, usePathname } from 'next/navigation'
+import { usePathname,useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import { useLanguage } from '~/app/components/context/LanguageProvider'
@@ -17,7 +17,7 @@ type Props = {
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>
 }
 
-export default function DesktopSlideshow({
+export default function DesktopSlideShow({
   post,
   currentIndex,
   setCurrentIndex,

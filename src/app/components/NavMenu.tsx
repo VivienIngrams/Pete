@@ -44,20 +44,20 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle, hideMenu = false }: 
     <nav className="fixed top-0 left-0 w-full z-50 font-roboto tracking-wide">
       {/* Desktop menu */}
       <div
-        className={`hidden md:flex items-center justify-between md:px-[5vw] lg:px-[12vw] py-[4vh] bg-white text-black ${
+        className={`hidden md:flex items-center justify-between md:px-[5vw] lg:px-[12vw] pt-[4vh] bg-white text-black ${
           isHomePage ? 'hidden' : ''
         }`}
       >
         {/* Left: Logo / Title */}
         <Link
           href="/"
-          className="hover:text-gray-500 text-3xl pb-1 font-light transition  tracking-widest"
+          className="hover:text-gray-500 text-2xl xl:text-3xl pb-1 font-light transition  tracking-widest"
         >
           Peter Lippmann
         </Link>
 
         {/* Center: Menu items */}
-        <div className="flex items-center space-x-8 text-base font-light">
+        <div className="flex items-center space-x-6 text-base font-light">
           <Link
             href="/series"
             className={`block ${isHomePage ? 'hidden' : ''}`}

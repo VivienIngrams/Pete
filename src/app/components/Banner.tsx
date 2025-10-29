@@ -6,15 +6,15 @@ export function BannerWithAutoFallback() {
   return (
     <div
       id="series-banner"
-      className="fixed top-[14vh] md:top-[18vh] left-0 right-0 z-20 bg-white"
+      className="  z-20 bg-white"
     >
       {/* Desktop banner */}
-      <div className="hidden relative w-full h-[13vh] md:flex items-center justify-center">
+      <div className="hidden md:relative w-full mt-4 h-[12vh] md:flex items-center justify-center">
         <Image
           src="/shifting-ground.png"
           alt="Shifting Ground"
           fill
-          sizes="50vw"
+          sizes="40vw"
           className="object-contain"
           priority
         />
