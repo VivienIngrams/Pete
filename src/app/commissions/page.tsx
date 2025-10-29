@@ -50,7 +50,7 @@ export default async function PostsPage() {
             <h3 className="text-center md:max-w-[50%]">
               Below a smattering of my commissioned work. Although mainly
               concentrating on personal projects these days, I&apos;m always
-              delighted to work on an interesting project. Contact me at
+              delighted to work on an interesting project. Contact me at 
               <a
                 href="mailto:studiolippmann@gmail.com"
                 className="underline underline-offset-2 hover:text-gray-600 transition-colors"

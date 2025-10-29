@@ -9,7 +9,7 @@ export function BannerWithAutoFallback() {
       className="  z-20 bg-white"
     >
       {/* Desktop banner */}
-      <div className="hidden md:relative w-full mt-4 h-[12vh] md:flex items-center justify-center">
+      <div className="hidden md:relative w-full mt-8 md:mt-12 h-[12vh] md:flex items-center justify-center">
         <Image
           src="/shifting-ground.png"
           alt="Shifting Ground"
