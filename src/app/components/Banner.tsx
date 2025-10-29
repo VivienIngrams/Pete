@@ -1,8 +1,16 @@
 'use client'
 
 import Image from 'next/image'
+import { useLanguage } from './context/LanguageProvider'
 
 export function BannerWithAutoFallback() {
+  const { language } = useLanguage()
+
+  const captions = {
+    en: 'Slow photography for an accelerating world',
+    fr: 'Photographie lente pour un monde qui s’accélère',
+  }
+
   return (
     <div id="series-banner" className="z-20 bg-white dark:bg-black">
       {/* Desktop banner */}
@@ -78,7 +86,7 @@ export function BannerWithAutoFallback() {
 
       {/* Caption */}
       <div className="pb-4 md:px-8 flex justify-center -mt-1 font-light font-roboto tracking-wide text-lg md:text-xl 3xl:text-2xl text-black dark:text-white">
-        <h3>Slow photography for an accelerating world</h3>
+        <h3>{captions[language]}</h3>
       </div>
     </div>
   )

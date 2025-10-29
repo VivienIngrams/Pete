@@ -35,7 +35,7 @@ export default async function HomePage() {
     <div className="flex flex-col justify-evenly h-screen bg-white dark:bg-black  text-black">
       <NavMenu />
 
-      <BannerWithAutoFallback />
+      <BannerWithAutoFallback  />
 
       <div className=" px-4 ">
         <PostsGrid posts={posts} />
