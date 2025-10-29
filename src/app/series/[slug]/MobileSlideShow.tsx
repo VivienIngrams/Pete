@@ -127,7 +127,7 @@ const pathname = usePathname()
   }
 
   return (
-    <div className="relative w-full h-screen bg-white mt-6 flex flex-col items-center justify-center">
+    <div className="relative w-full h-screen bg-white dark:bg-black mt-6 flex flex-col items-center justify-center">
       <NavMenu
         slideshowMode={true}
         onDropdownToggle={setIsDropdownOpen}
@@ -135,11 +135,11 @@ const pathname = usePathname()
       />
       {/* Persistent top bar with close button */}
       <div
-        className={`fixed top-0 left-0 z-[900] bg-white flex items-center h-12 p-6 ${isDropdownOpen || isAboutOpen ? 'hidden' : 'block'}`}
+        className={`fixed top-0 left-0 z-[900] bg-white dark:bg-black flex items-center h-12 p-6 ${isDropdownOpen || isAboutOpen ? 'hidden' : 'block'}`}
       >
         <button
           onClick={handleClose}
-          className="text-black text-sm tracking-wide uppercase mt-1"
+          className="text-black dark:text-white text-sm tracking-wide uppercase mt-1"
         >
           {t.close}
         </button>
@@ -156,7 +156,7 @@ const pathname = usePathname()
         <div className="relative w-auto max-h-[80vh] flex items-center justify-center">
           {/* Loading state */}
           {isImageLoading && images.length > 0 && (
-            <div className="absolute inset-0 flex items-center justify-center bg-white animate-pulse">
+            <div className="absolute inset-0 flex items-center justify-center bg-white dark:bg-black animate-pulse">
               <div className="w-16 h-16 border-4 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
             </div>
           )}
@@ -224,7 +224,7 @@ const pathname = usePathname()
       {/* About modal */}
       {isAboutOpen && (
         <div
-          className="fixed inset-0 z-[1100] text-black bg-white/90 flex items-center justify-center px-4"
+          className="fixed inset-0 z-[1100] text-black dark:text-white bg-white/90 flex items-center justify-center px-4"
           onClick={() => setIsAboutOpen(false)}
         >
           <div

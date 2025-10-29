@@ -33,8 +33,8 @@ const SubscribeModal = ({ isOpen, onClose }) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
           >
-            <div className="bg-white rounded-sm shadow-xl p-8 w-[90%] max-w-md text-center">
-              <h2 className="text-2xl text-black font-light mb-4">Subscribe</h2>
+            <div className="bg-white dark:bg-black rounded-sm shadow-xl p-8 w-[90%] max-w-md text-center">
+              <h2 className="text-2xl text-black dark:text-white font-light mb-4">Subscribe</h2>
               <p className="text-gray-600 mb-6 text-sm">
                 Join our list to receive updates on new series and exhibitions.
               </p>
@@ -56,7 +56,7 @@ const SubscribeModal = ({ isOpen, onClose }) => {
               </form>
               <button
                 onClick={onClose}
-                className="mt-6 text-sm text-black underline underline-offset-2 hover:text-gray-700"
+                className="mt-6 text-sm text-black dark:text-white underline underline-offset-2 hover:text-gray-700"
               >
                 close
               </button>

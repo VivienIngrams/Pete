@@ -1,10 +1,7 @@
 import './globals.css'
-
 import { Analytics } from '@vercel/analytics/react'
-import type { Metadata } from 'next'
-import type { Viewport } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Roboto } from 'next/font/google'
-
 import { LanguageProvider } from './components/context/LanguageProvider'
 import ThemeProvider from './components/ThemeProvider'
 
@@ -12,7 +9,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   themeColor: '#ffffff',
-  colorScheme: 'light',
+  colorScheme: 'light dark',
 }
 
 const roboto = Roboto({
@@ -25,31 +22,14 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: 'Peter Lippmann',
   description: 'Art Photography',
-  other: {
-    'color-scheme': 'light only',
-  },
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${roboto.variable}`}
-      data-theme="light"
-    >
-      <head>
-        <meta name="color-scheme" content="light only" />
-        <meta name="theme-color" content="#ffffff" />
-        <meta name="supported-color-schemes" content="light" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-      </head>
-      <body className="h-full bg-white font-roboto text-black">
+    <html lang="en" className={`${roboto.variable}`}>
+      <body className="h-full font-roboto bg-white dark:bg-black  text-black dark:text-white ">
         <LanguageProvider>
-          <ThemeProvider  />
+          <ThemeProvider />
           {children}
           <Analytics />
         </LanguageProvider>

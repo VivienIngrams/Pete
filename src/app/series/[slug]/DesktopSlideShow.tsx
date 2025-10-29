@@ -3,7 +3,7 @@
 import { PortableText } from '@portabletext/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
-import { useRouter, usePathname } from 'next/navigation'
+import { usePathname,useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import { useLanguage } from '~/app/components/context/LanguageProvider'
@@ -17,7 +17,7 @@ type Props = {
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>
 }
 
-export default function DesktopSlideshow({
+export default function DesktopSlideShow({
   post,
   currentIndex,
   setCurrentIndex,
@@ -104,7 +104,7 @@ export default function DesktopSlideshow({
   }
 
   return (
-    <div className="relative w-full h-screen bg-white font-light flex items-center py-10 justify-center hide-scrollbar">
+    <div className="relative w-full h-screen bg-white dark:bg-black font-light flex items-center py-10 justify-center hide-scrollbar">
       {/* Loading spinner */}
       {isImageLoading && hasImages && (
         <div className="absolute inset-0 flex items-center justify-center bg-white">
@@ -138,7 +138,7 @@ export default function DesktopSlideshow({
       {/* Close button */}
       <button
         onClick={handleClose}
-        className="absolute text-sm text-black tracking-wide uppercase top-6 left-6 z-50 hover:font-bold"
+        className="absolute text-sm text-black dark:text-white tracking-wide uppercase top-6 left-6 z-50 hover:font-bold"
       >
         {t.close}
       </button>
@@ -186,7 +186,7 @@ export default function DesktopSlideshow({
       {/* About modal */}
       {isAboutOpen && (
         <div
-          className="fixed inset-0 z-50 text-black bg-white/85 flex items-center justify-center px-4"
+          className="fixed inset-0 z-50 text-black dark:text-white bg-white/85 flex items-center justify-center px-4"
           onClick={() => setIsAboutOpen(false)}
         >
           <button

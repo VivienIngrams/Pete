@@ -44,14 +44,14 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle, hideMenu = false }: 
     <nav className="fixed top-0 left-0 w-full z-50 font-roboto tracking-wide">
       {/* Desktop menu */}
       <div
-        className={`hidden md:flex items-center justify-between md:px-[5vw] lg:px-[12vw] pt-[4vh] bg-white text-black ${
+        className={`hidden md:flex items-center justify-between md:px-[5vw] lg:px-[12vw] pt-[4vh] bg-white dark:bg-black text-black dark:text-white ${
           isHomePage ? 'hidden' : ''
         }`}
       >
         {/* Left: Logo / Title */}
         <Link
           href="/"
-          className="hover:text-gray-500 text-2xl xl:text-3xl pb-1 font-light transition  tracking-widest"
+          className="hover:text-gray-500 dark:hover:text-gray-300  text-2xl xl:text-3xl pb-1 font-light transition  tracking-widest"
         >
           Peter Lippmann
         </Link>
@@ -64,19 +64,19 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle, hideMenu = false }: 
           >
             {menuItems.series[language] || menuItems.bio.en}
           </Link>
-          <Link href="/bio" className="hover:text-gray-500">
+          <Link href="/bio" className="hover:text-gray-500 dark:hover:text-gray-300 ">
             {menuItems.bio[language] || menuItems.bio.en}
           </Link>
-          <Link href="/commissions" className="hover:text-gray-500">
+          <Link href="/commissions" className="hover:text-gray-500 dark:hover:text-gray-300 ">
             {menuItems.commissions[language] || menuItems.commissions.en}
           </Link>
-          <Link href="/contact" className="hover:text-gray-500">
+          <Link href="/contact" className="hover:text-gray-500 dark:hover:text-gray-300 ">
             {menuItems.contact[language] || menuItems.contact.en}
           </Link>
 
           <button
             onClick={() => setIsSubscribeOpen(true)}
-            className="hover:text-gray-500"
+            className="hover:text-gray-500 dark:hover:text-gray-300 "
           >
             Subscribe
           </button>
@@ -91,13 +91,13 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle, hideMenu = false }: 
 
       {/* Mobile header */}
       <div
-        className={`md:hidden fixed top-0 left-0 w-full bg-white ${slideshowMode ? 'z-[1002]' : 'z-50'} ${hideMenu ? 'hidden' : ''}`}
+        className={`md:hidden fixed top-0 left-0 w-full bg-white dark:bg-black ${slideshowMode ? 'z-[1002]' : 'z-50'} ${hideMenu ? 'hidden' : ''}`}
       >
         <div className="flex items-center justify-between py-4 px-6">
           {!slideshowMode && (
             <Link
               href="/"
-              className="text-black text-2xl sm:text-3xl tracking-widest transition font-light"
+              className="text-black dark:text-white text-2xl sm:text-3xl tracking-widest transition font-light"
             >
               Peter Lippmann
             </Link>
@@ -108,7 +108,7 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle, hideMenu = false }: 
           <button
             onClick={toggleMenu}
             type="button"
-            className="inline-flex items-center justify-center"
+            className="inline-flex items-center justify-center text-black dark:text-white"
             aria-controls="mobile-menu"
             aria-expanded={isOpen}
           >
@@ -149,7 +149,7 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle, hideMenu = false }: 
       <div
         className={`${
           isOpen ? 'block' : 'hidden'
-        } md:hidden bg-white  pb-4 w-screen ${slideshowMode ? 'z-[1003] pt-4 mb-12' : 'py-16 z-40'}`}
+        } md:hidden bg-white dark:bg-black text-black dark:text-white pb-4 w-screen ${slideshowMode ? 'z-[1003] pt-4 mb-12' : 'py-16 z-40'}`}
         id="mobile-menu"
         onClick={toggleMenu}
       >
@@ -157,7 +157,7 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle, hideMenu = false }: 
           {slideshowMode && (
             <Link
               href="/"
-              className={`text-black text-2xl sm:text-3xl tracking-widest transition font-light z-1010 pt-12 ${slideshowMode ? 'z-[1010] block' : 'hidden'}`}
+              className={`text-black dark:text-white text-2xl sm:text-3xl tracking-widest transition font-light z-1010 pt-12 ${slideshowMode ? 'z-[1010] block' : 'hidden'}`}
             >
               Peter Lippmann
             </Link>
@@ -177,7 +177,7 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle, hideMenu = false }: 
 
           <button
             onClick={() => setIsSubscribeOpen(true)}
-            className="hover:text-gray-500"
+            className="hover:text-gray-500 dark:hover:text-gray-300 "
           >
             Subscribe
           </button>
