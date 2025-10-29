@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+
 import { useLanguage } from '../components/context/LanguageProvider'
 
 export default function CommissionsBanner() {
@@ -26,8 +27,8 @@ export default function CommissionsBanner() {
         />
         {/* Dark mode */}
         <Image
-          src="/commissions-w.png"
-          alt="Commissions (Dark)"
+          src="/commissions-white.png"
+          alt="Commissions"
           fill
           sizes="40vw"
           className="object-contain hidden dark:block"

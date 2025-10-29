@@ -65,26 +65,28 @@ export default function CommissionsGrid({ posts, language }: Props) {
             >
               <span className="sr-only">{title}</span>
 
-              {/* Text content */}
               <div className="relative font-light text-lg md:text-3xl text-white transition-transform duration-200 md:hover:scale-105 p-4 md:p-6 leading-tight">
-                {/* Title with adaptive blur */}
+                {/* Text wrapper */}
                 <span className="relative inline-block text-center">
-                  {/* Light blur backdrop that hugs text */}
+                  {/* Subtle blur background */}
                   <span
-                    className="absolute inset-[-0.3em] blur-text-background"
+                    className="absolute inset-[-0.3em] blur-text-background z-0"
                     aria-hidden="true"
                   />
 
-                  {/* One word per line */}
+                  {/* Main title words */}
                   <span
-                    className={`relative block transition-opacity duration-200 ${
+                    className={`relative z-10 block transition-opacity duration-200 ${
                       isActive
                         ? 'opacity-0'
                         : 'opacity-100 md:group-hover:opacity-0'
                     }`}
                   >
                     {title.split(' ').map((word, i) => (
-                      <span key={i} className="block leading-[0.95] uppercase tracking-wide">
+                      <span
+                        key={i}
+                        className="block leading-[0.95] uppercase tracking-wide"
+                      >
                         {word}
                       </span>
                     ))}
@@ -93,7 +95,7 @@ export default function CommissionsGrid({ posts, language }: Props) {
 
                 {/* Hover / active text */}
                 <span
-                  className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200 font-light text-base md:text-xl ${
+                  className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 transition-opacity duration-200 font-light text-base md:text-xl ${
                     isActive
                       ? 'opacity-100'
                       : 'opacity-0 md:group-hover:opacity-100'
