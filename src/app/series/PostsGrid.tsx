@@ -37,7 +37,7 @@ export default function PostsGrid({ posts, language }: Props) {
 
   useEffect(() => {
     if (!mounted) return
-    
+
     updateScrollButtons()
     window.addEventListener('resize', updateScrollButtons)
     return () => window.removeEventListener('resize', updateScrollButtons)
@@ -47,13 +47,9 @@ export default function PostsGrid({ posts, language }: Props) {
     if (!scrollContainerRef.current) return
 
     const scrollAmount = scrollContainerRef.current.clientWidth * 0.3
-    const newScrollLeft =
-      direction === 'left'
-        ? scrollContainerRef.current.scrollLeft - scrollAmount
-        : scrollContainerRef.current.scrollLeft + scrollAmount
-
-    scrollContainerRef.current.scrollTo({
-      left: newScrollLeft,
+  
+    scrollContainerRef.current.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
       behavior: 'smooth',
     })
   }
@@ -69,7 +65,7 @@ export default function PostsGrid({ posts, language }: Props) {
       <button
         onClick={() => scroll('left')}
         disabled={!canScrollLeft}
-        className={`absolute -left-2 top-[85%] z-10 bg-white hover:bg-black/10 rounded-full p-3 transition-all duration-300 
+        className={`absolute -left-4 top-[85%] z-10 bg-white hover:bg-black/10 hover:rounded-full  p-3 transition-all duration-300 
     ${canScrollLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         aria-label="Scroll left"
       >
@@ -79,7 +75,7 @@ export default function PostsGrid({ posts, language }: Props) {
       <button
         onClick={() => scroll('right')}
         disabled={!canScrollRight}
-        className={`absolute -right-2 top-[85%] z-10 bg-white hover:bg-black/10 rounded-full p-3 transition-all duration-300 
+        className={`absolute -right-4 top-[85%] z-10 bg-white hover:bg-black/10 hover:rounded-full p-3 transition-all duration-300 
     ${canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         aria-label="Scroll right"
       >
