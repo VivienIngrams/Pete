@@ -33,7 +33,7 @@ export default async function PostsPage() {
   return (
     <>
       <NavMenu />
-      <div className="h-screen flex flex-col justify-evenly">
+      <div className="h-screen flex flex-col justify-evenly bg-white text-black">
         <div id="series-banner" className=" z-20 bg-white">
           <div className="mt-[10vh] relative w-full h-[5vh] md:h-[9vh] md:flex items-center justify-center">
             <Image
