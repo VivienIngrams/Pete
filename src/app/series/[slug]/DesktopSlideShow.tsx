@@ -104,10 +104,10 @@ export default function DesktopSlideShow({
   }
 
   return (
-    <div className="relative w-full h-screen bg-white dark:bg-black font-light flex items-center py-10 justify-center hide-scrollbar">
+    <div className="relative w-full h-screen text-black dark:text-white bg-white dark:bg-black font-light flex items-center py-10 justify-center hide-scrollbar">
       {/* Loading spinner */}
       {isImageLoading && hasImages && (
-        <div className="absolute inset-0 flex items-center justify-center bg-white">
+        <div className="absolute inset-0 flex items-center justify-center bg-white dark:bg-black">
           <div className="w-16 h-16 border-4 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
@@ -148,17 +148,17 @@ export default function DesktopSlideShow({
         <>
           <button
             onClick={handlePrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 transition-transform duration-200 md:hover:scale-105 p-2 rounded-full z-50 ml-4"
+            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white dark:bg-black hover:bg-black/10 dark:hover:bg-white/10 transition-transform duration-200 md:hover:scale-105 p-2 rounded-full z-50 ml-4"
             aria-label="Previous image"
           >
-            <ChevronLeft className="w-12 h-12" />
+            <ChevronLeft className="w-12 h-12 text-black dark:text-white" />
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 transition-transform duration-200 md:hover:scale-105 p-2 rounded-full z-50 mr-4"
+            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white dark:bg-black hover:bg-black/10 dark:hover:bg-white/10  transition-transform duration-200 md:hover:scale-105 p-2 rounded-full z-50 mr-4"
             aria-label="Next image"
           >
-            <ChevronRight className="w-12 h-12" />
+            <ChevronRight className="w-12 h-12 text-black dark:text-white" />
           </button>
         </>
       )}
@@ -170,7 +170,7 @@ export default function DesktopSlideShow({
             {currentTitle}
           </h1>
         )}
-        <div className="prose prose-sm md:prose-base text-sm font-roboto max-w-[calc(15vw-24px)]">
+        <div className=" text-sm font-roboto max-w-[calc(15vw-24px)]">
           {currentExcerpt && (
             <PortableText key={`${activeLang}-${forceRender}`} value={currentExcerpt} />
           )}
@@ -186,12 +186,12 @@ export default function DesktopSlideShow({
       {/* About modal */}
       {isAboutOpen && (
         <div
-          className="fixed inset-0 z-50 text-black dark:text-white bg-white/85 flex items-center justify-center px-4"
+          className="fixed inset-0 z-50 text-black dark:text-white bg-white/85 dark:bg-black/80 flex items-center justify-center px-4"
           onClick={() => setIsAboutOpen(false)}
         >
           <button
             onClick={() => setIsAboutOpen(false)}
-            className="absolute text-base uppercase top-6 left-6 z-50 font-normal hover:font-bold tracking-wide bg-white"
+            className="absolute text-base uppercase top-6 left-6 z-50 font-normal hover:font-bold tracking-wide bg-white dark:bg-black"
           >
             {t.close}
           </button>
@@ -205,7 +205,7 @@ export default function DesktopSlideShow({
 
             <h2 className="text-3xl font-normal mb-4">{postTitle}</h2>
 
-            <div className="prose prose-sm md:prose-base portable-text text-base font-roboto text-justify mb-6">
+            <div className=" portable-text text-base font-roboto text-justify mb-6">
               {postExcerptBlocks && postExcerptBlocks.length ? (
                 <div className='portable-text'>
                   <PortableText key={`${activeLang}-${forceRender}`} value={postExcerptBlocks} />

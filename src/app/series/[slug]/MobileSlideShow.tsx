@@ -127,7 +127,7 @@ const pathname = usePathname()
   }
 
   return (
-    <div className="relative w-full h-screen bg-white dark:bg-black mt-6 flex flex-col items-center justify-center">
+    <div className="relative w-full h-screen text-black dark:text-white bg-white dark:bg-black mt-6 flex flex-col items-center justify-center">
       <NavMenu
         slideshowMode={true}
         onDropdownToggle={setIsDropdownOpen}
@@ -188,20 +188,20 @@ const pathname = usePathname()
       <div className="flex w-full justify-between px-3 mt-4 md:hidden">
         <button
           onClick={handlePrev}
-          className="rounded-full bg-white/60 active:bg-white/90 transition"
+          className="rounded-full bg-white/60 active:bg-white/90 dark:bg-black/60 active:dark:bg-black/90 transition"
         >
           <ChevronLeft className="w-8 h-8" />
         </button>
         <button
           onClick={handleNext}
-          className="rounded-full bg-white/60 active:bg-white/90 transition"
+          className="rounded-full bg-white/60 active:bg-white/90 dark:bg-black/60 active:dark:bg-black/90 transition"
         >
           <ChevronRight className="w-8 h-8" />
         </button>
       </div>
 
       {/* Caption overlay */}
-      <div className="bg-white/50 w-full px-6 py-4 min-h-[120px]">
+      <div className="bg-white/50 dark:bg-black/50 w-full px-6 py-4 min-h-[120px]">
         {currentTitle && (
           <h1 className="text-xl font-normal">{currentTitle}</h1>
         )}
@@ -224,7 +224,7 @@ const pathname = usePathname()
       {/* About modal */}
       {isAboutOpen && (
         <div
-          className="fixed inset-0 z-[1100] text-black dark:text-white bg-white/90 flex items-center justify-center px-4"
+          className="fixed inset-0 z-[1100] text-black dark:text-white bg-white/90 dark:bg-black/80 flex items-center justify-center px-4"
           onClick={() => setIsAboutOpen(false)}
         >
           <div
@@ -240,12 +240,12 @@ const pathname = usePathname()
               <h2 className="text-xl font-normal">{postTitle}</h2>
               <button
                 onClick={() => setIsAboutOpen(false)}
-                className="text-sm fixed top-4 left-4 tracking-wide uppercase bg-white"
+                className="text-sm fixed top-4 left-4 tracking-wide uppercase bg-white dark:bg-black"
               >
                 {t.close}
               </button>
             </div>
-            <div className="prose prose-sm md:prose-base text-sm font-roboto text-justify ">
+            <div className=" text-sm font-roboto text-justify ">
               {postExcerptBlocks && postExcerptBlocks.length ? (
                 <div className='portable-text'>
                 <PortableText

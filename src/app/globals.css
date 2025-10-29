@@ -75,3 +75,7 @@ img {
     rgba(0, 0, 0, 0) 35%
   );
 }
+
+.portable-text p {
+  margin-bottom: 1em;
+}
