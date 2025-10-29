@@ -13,9 +13,9 @@ const LanguageSwitcher = () => {
         className=" z-50 text-sm font-light tracking-wide text-black dark:text-white hover:opacity-80 transition-opacity duration-300"
       >
         {language === 'fr' ? (
-          <span>english&nbsp;|&nbsp;<span className="text-gray-600 dark:text-gray-500">français</span></span>
+          <span>english&nbsp;|&nbsp;<span className="text-gray-600 dark:text-gray-400">français</span></span>
         ) : (
-          <span><span className="text-gray-600 dark:text-gray-500">english</span>&nbsp; | &nbsp;français</span>
+          <span><span className="text-gray-600 dark:text-gray-400">english</span>&nbsp; | &nbsp;français</span>
         )}
       </button>
     </div>
