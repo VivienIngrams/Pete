@@ -185,31 +185,16 @@ export const bioQuery = groq`*[_type == "bioContent"]{
   _type,
   "imageUrl": image.asset->url,
   biography {
-    fr {
-      biographyText[]{
-        ... 
-      },
-      biographyText2[]{
-        ... 
-      },
-      artisticTraining,
-      organizer,
-      exhibitions
+    personal {
+      fr { title, biographyText },
+      en { title, biographyText }
     },
-    en {
-      biographyText[]{
-        ... 
-      },
-      biographyText2[]{
-        ... 
-      },
-      artisticTraining,
-      organizer,
-      exhibitions
+    critic {
+      fr { title, biographyText },
+      en { title, biographyText }
     }
   }
-}
-`
+}`
 
 export async function getBioPage(client: SanityClient, options = {}) {
   const bioPage = await client.fetch(bioQuery, options)

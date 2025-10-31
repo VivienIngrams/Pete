@@ -1,39 +1,37 @@
-import { PortableText } from '@portabletext/react'
-import { PortableTextBlock } from '@portabletext/types'
-import { cookies } from 'next/headers'
-import Image from 'next/image'
-import React from 'react'
-import { BsChevronDoubleDown } from 'react-icons/bs'
+import type { PortableTextBlock } from "@portabletext/types"
+import { cookies } from "next/headers"
 
-import { readToken } from '~/sanity/lib/sanity.api'
-import { getClient } from '~/sanity/lib/sanity.client'
-import { getBioPage } from '~/sanity/lib/sanity.queries'
+import { readToken } from "~/sanity/lib/sanity.api"
+import { getClient } from "~/sanity/lib/sanity.client"
+import { getBioPage } from "~/sanity/lib/sanity.queries"
 
-import NavMenu from '../components/NavMenu'
+import NavMenu from "../components/NavMenu"
 
 interface BiographyContent {
-  biographyText: PortableTextBlock[] // Ensure this is an array of PortableTextBlocks
-  biographyText2: PortableTextBlock[] // Ensure this is an array of PortableTextBlocks
-  artisticTraining: string[]
-  organizer: string[]
-  exhibitions: string[]
+  title: string
+  biographyText: PortableTextBlock[]
 }
 
 interface BioData {
   imageUrl: string
   biography: {
-    fr: BiographyContent
-    en: BiographyContent
+    personal: {
+      fr: BiographyContent
+      en: BiographyContent
+    }
+    critic: {
+      fr: BiographyContent
+      en: BiographyContent
+    }
   }
 }
 
 const Bio = async () => {
   const client = getClient({ token: readToken })
 
-  const cookieStore = cookies()
-  const language = cookieStore.get('language')?.value || 'fr'
+  const cookieStore = await cookies()
+  const language = (cookieStore.get("language")?.value || "fr") as "fr" | "en"
 
-  // Fetch the bio data
   const bioDataArray: BioData[] | null = await getBioPage(client, {
     next: { revalidate: 60 },
   })
@@ -42,49 +40,100 @@ const Bio = async () => {
     return <div>Error: Unable to fetch biography data.</div>
   }
 
-  const bioData = bioDataArray[0] // Access the first item in the array
+  const bioData = bioDataArray[0]
   const { imageUrl, biography } = bioData
 
   if (!biography) {
     return <div>Error: Biography data is missing.</div>
   }
 
-  const currentContent = {
-    biographyText:
-      biography[language]?.biographyText || biography['fr'].biographyText,
-    biographyText2:
-      biography[language]?.biographyText2 || biography['fr'].biographyText2,
-    artisticTraining:
-      biography[language]?.artisticTraining || biography['fr'].artisticTraining,
-    organizer: biography[language]?.organizer || biography['fr'].organizer,
-    exhibitions:
-      biography[language]?.exhibitions || biography['fr'].exhibitions,
-  }
+  const personalContent = biography.personal[language] || biography.personal.fr
+  const criticContent = biography.critic[language] || biography.critic.fr
 
-  const titles = {
-    artisticTraining:
-      language === 'fr' ? 'Formations artistiques' : 'Artistic Training',
-    organizer:
-      language === 'fr'
-        ? 'Organisateur, Animateur, Conférencier'
-        : 'Organizer, Animator, Lecturer',
-    exhibitions:
-      language === 'fr'
-        ? 'Expositions et publications'
-        : 'Exhibitions and Publications',
+  const renderPortableText = (blocks: PortableTextBlock[]) => {
+    return blocks.map((block, index) => {
+      const text = block.children?.map((child: any) => child.text).join(" ") || ""
+      if (!text.trim()) return null
+      return (
+        <p key={index} className="text-lg md:text-xl leading-relaxed mb-6 font-light text-pretty">
+          {text}
+        </p>
+      )
+    })
   }
 
   return (
     <>
       <NavMenu />
-      <div className="min-h-screen mt-6 xl:mt-24 bg-white">
-      <div className="xl:h-[90%] flex flex-col items-center justify-center mx-6 xl:w-1/3 xl:mx-auto">
-        <h1 className="text-2xl xl:text-4xl  w-full text-left font-roboto py-14">
-          About
-        </h1>
-      
+      <div className="min-h-screen my-24 md:my-40">
+        
+
+        {/* Personal Statement Section */}
+        <div className="px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            <div className="lg:col-span-4">
+              <h2 className="text-base uppercase text-center md:text-left tracking-widest font-light sticky top-32">
+                {personalContent.title}
+              </h2>
+            </div>
+            <div className="lg:col-span-8 ">
+              <div className="max-w-none ">
+              {personalContent.biographyText.map((block, index) => {
+                  const text = block.children?.map((child: any) => child.text).join(" ") || ""
+                  if (!text.trim()) return null
+                  return (
+                    <p
+                      key={index}
+                      className={`text-lg md:text-xl leading-relaxed mb-6 font-light text-pretty ${
+                        index === 0
+                          ? "first-letter:text-5xl first-letter:font-light first-letter:mr-1 first-letter:float-left first-letter:leading-none first-letter:mt-1"
+                          : ""
+                      }`}
+                    >
+                      {text}
+                    </p>
+                  )
+                })}</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="px-6 md:px-12 lg:px-24 max-w-7xl mx-auto my-12 pb-8">
+          <div className="w-full h-px bg-gray-200"></div>
+        </div>
+
+        {/* Art Critic Section */}
+        <div className="px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            <div className="lg:col-span-4">
+              <h2 className="text-base uppercase tracking-widest text-center md:text-left font-light sticky top-32">
+                {criticContent.title}
+              </h2>
+            </div>
+            <div className="lg:col-span-8 ">
+              <div className="max-w-none ">
+                {criticContent.biographyText.map((block, index) => {
+                  const text = block.children?.map((child: any) => child.text).join(" ") || ""
+                  if (!text.trim()) return null
+                  return (
+                    <p
+                      key={index}
+                      className={`text-lg md:text-xl leading-relaxed mb-6 font-light text-pretty ${
+                        index === 0
+                          ? "first-letter:text-5xl first-letter:font-light first-letter:mr-1 first-letter:float-left first-letter:leading-none first-letter:mt-1"
+                          : ""
+                      }`}
+                    >
+                      {text}
+                    </p>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
     </>
   )
 }

@@ -4,36 +4,16 @@ import { defineType } from 'sanity'
 const localizedContentSchema = {
   type: 'object',
   fields: [
-  
+    {
+      name: 'title',
+      title: 'Section title',
+      type: 'string',
+      description: 'Title for this localized biography section (e.g. "Me" / "Moi")',
+    },
     {
       name: 'biographyText',
       title: 'Text',
       type: 'blockContent',
-    },
-    {
-      name: 'biographyText2',
-      title: 'Text',
-      type: 'blockContent',
-    },
-    {
-      name: 'artisticTraining',
-      type: 'array',
-      title: 'Commissions',
-      of: [{ type: 'string' }],
-    },
-
-    {
-      name: 'organizer',
-      type: 'array',
-      title: 'Publications',
-      of: [{ type: 'string' }],
-    },
-
-    {
-      name: 'exhibitions',
-      type: 'array',
-      title: 'Exhibitions',
-      of: [{ type: 'string' }],
     },
   ],
 }
@@ -51,25 +31,56 @@ export default defineType({
       options: { hotspot: true },
       description: 'Une image liée à la biographie.',
     },
+
+    // Top-level "biography" now contains two sections: personal and critic.
+    // Each section contains localized objects for 'fr' and 'en', and each localized object
+    // uses the localizedContentSchema (title + biographyText).
     {
       name: 'biography',
       title: 'Biographie',
       type: 'object',
       fields: [
         {
-          name: 'fr',
-          title: 'Français',
+          name: 'personal',
+          title: 'Personal Section',
           type: 'object',
-          fields: localizedContentSchema.fields,
+          fields: [
+            {
+              name: 'fr',
+              title: 'Français (Personal)',
+              type: 'object',
+              fields: localizedContentSchema.fields,
+            },
+            {
+              name: 'en',
+              title: 'English (Personal)',
+              type: 'object',
+              fields: localizedContentSchema.fields,
+            },
+          ],
         },
         {
-          name: 'en',
-          title: 'English',
+          name: 'critic',
+          title: 'Critic Section',
           type: 'object',
-          fields: localizedContentSchema.fields,
+          fields: [
+            {
+              name: 'fr',
+              title: 'Français (Critic)',
+              type: 'object',
+              fields: localizedContentSchema.fields,
+            },
+            {
+              name: 'en',
+              title: 'English (Critic)',
+              type: 'object',
+              fields: localizedContentSchema.fields,
+            },
+          ],
         },
       ],
-      description: 'Text for the biography',
+      description:
+        'Two biography sections (personal and critic), each localized for fr and en. Each localized object contains a title and blockContent.',
     },
   ],
 })
