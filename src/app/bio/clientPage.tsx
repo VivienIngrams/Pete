@@ -4,6 +4,7 @@ import type { PortableTextBlock } from "@portabletext/types"
 import { useState } from "react"
 import { useLanguage } from "../components/context/LanguageProvider"
 import NavMenu from "../components/NavMenu"
+import LanguageSwitcher from "../components/LanguageSwitcher"
 
 interface BiographyContent {
   title: string
@@ -47,8 +48,11 @@ export default function BioClient({ initialBioData }: { initialBioData: BioData 
   return (
     <>
       <NavMenu />
+      <div className="w-full flex justify-end md:hidden pt-16 pr-6 z-50" >
+        <LanguageSwitcher /> 
+      </div>
 
-      <div className="min-h-screen my-24 md:my-40">
+      <div className="min-h-screen my-12 md:my-40">
         {/* Personal Section */}
         <section className="px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
