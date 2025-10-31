@@ -4,7 +4,7 @@ import { PortableText } from '@portabletext/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import { usePathname,useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 
 import { useLanguage } from '~/app/components/context/LanguageProvider'
 import LanguageSwitcher from '~/app/components/LanguageSwitcher'
@@ -63,19 +63,27 @@ export default function DesktopSlideShow({
   const hasImages = post.images && post.images.length > 0
   const current = hasImages ? post.images[currentIndex] : null
 
-  const postTitle =
-    activeLang === 'en' ? post.title_en || post.title : post.title || post.title
+  // --- Memoized titles & excerpts ---
+  const postTitle = useMemo(
+    () => (activeLang === 'en' ? post.title_en || post.title : post.title),
+    [activeLang, post.title, post.title_en],
+  )
+  const currentTitle = useMemo(() => {
+    if (!current) return ''
+    return (
+      (activeLang === 'en'
+        ? current.title_en || current.title_fr
+        : current.title_fr || current.title_en) ||
+      `${postTitle} ${currentIndex + 1}`
+    )
+  }, [activeLang, current, currentIndex, postTitle])
 
-  const currentTitle =
-    (activeLang === 'en'
-      ? current?.title_en || current?.title_fr
-      : current?.title_fr || current?.title_en) ||
-    (hasImages ? `${postTitle} ${currentIndex + 1}` : postTitle)
-
-  const currentExcerpt =
-    activeLang === 'en'
-      ? current?.excerpt_en || current?.excerpt_fr
-      : current?.excerpt_fr || current?.excerpt_en
+  const currentExcerpt = useMemo(() => {
+    if (!current) return null
+    return activeLang === 'en'
+      ? current.excerpt_en || current.excerpt_fr
+      : current.excerpt_fr || current.excerpt_en
+  }, [activeLang, current])
 
   const handlePrev = () =>
     setCurrentIndex((prev) => (prev === 0 ? post.images!.length - 1 : prev - 1))
@@ -93,10 +101,11 @@ export default function DesktopSlideShow({
     }
   }
 
-  const postExcerptBlocks =
-    activeLang === 'en'
-      ? post.excerpt_en || post.excerpt
-      : post.excerpt || post.excerpt_en
+ const postExcerptBlocks = useMemo(() => {
+  return activeLang === 'en'
+    ? post.excerpt_en || post.excerpt
+    : post.excerpt || post.excerpt_en
+}, [activeLang, post])
 
   const t = {
     about: activeLang === 'en' ? 'about' : 'à propos',
@@ -208,7 +217,7 @@ export default function DesktopSlideShow({
             <div className=" portable-text text-base font-roboto text-justify mb-6">
               {postExcerptBlocks && postExcerptBlocks.length ? (
                 <div className='portable-text'>
-                  <PortableText key={`${activeLang}-${forceRender}`} value={postExcerptBlocks} />
+                  <PortableText  key={activeLang} value={postExcerptBlocks} />
                 </div>
               ) : (
                 <p>No description available.</p>
