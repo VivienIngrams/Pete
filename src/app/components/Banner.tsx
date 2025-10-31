@@ -14,7 +14,7 @@ export function BannerWithAutoFallback() {
   return (
     <div id="series-banner" className="z-20 bg-white dark:bg-black">
       {/* Desktop banner */}
-      <div className="hidden md:relative w-full mt-8 md:mt-12 h-[12vh] md:flex items-center justify-center">
+      <div className="hidden md:relative w-full mt-8 md:mt-16 h-[12vh] md:flex items-center justify-center">
         {/* Light mode image */}
         <Image
           src="/shifting-ground.png"
