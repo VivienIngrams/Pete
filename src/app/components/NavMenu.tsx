@@ -48,7 +48,7 @@ const NavMenu = ({
     <nav className="fixed top-0 left-0 w-full z-50 font-roboto tracking-wide">
       {/* Desktop menu */}
       <div
-        className={`hidden md:flex items-center justify-between md:px-[5vw] lg:px-[12vw] pt-[4vh] bg-white dark:bg-black text-black dark:text-white ${
+        className={`hidden md:flex items-center justify-between md:px-[5vw] lg:px-[12vw] pt-[4vh] bg-black dark:bg-black text-white dark:text-white ${
           isHomePage ? 'hidden' : ''
         }`}
       >
@@ -103,13 +103,13 @@ const NavMenu = ({
 
       {/* Mobile header */}
       <div
-        className={`md:hidden fixed top-0 left-0 w-full bg-white dark:bg-black ${slideshowMode ? 'z-[1002]' : 'z-50'} ${hideMenu ? 'hidden' : ''}`}
+        className={`md:hidden fixed top-0 left-0 w-full bg-black dark:bg-black ${slideshowMode ? 'z-[1002]' : 'z-50'} ${hideMenu ? 'hidden' : ''}`}
       >
         <div className="flex items-center justify-between py-4 px-6">
           {!slideshowMode && (
             <Link
               href="/"
-              className="text-black dark:text-white text-2xl sm:text-3xl tracking-widest transition font-light"
+              className="text-white dark:text-white text-2xl sm:text-3xl tracking-widest transition font-light"
             >
               Peter Lippmann
             </Link>
@@ -120,7 +120,7 @@ const NavMenu = ({
           <button
             onClick={toggleMenu}
             type="button"
-            className="inline-flex items-center justify-center text-black dark:text-white"
+            className="inline-flex items-center justify-center text-white dark:text-white"
             aria-controls="mobile-menu"
             aria-expanded={isOpen}
           >
@@ -161,7 +161,7 @@ const NavMenu = ({
       <div
         className={`${
           isOpen ? 'block' : 'hidden'
-        } md:hidden bg-white dark:bg-black text-black dark:text-white pb-4 w-screen ${slideshowMode ? 'z-[1003] pt-4 mb-12' : 'py-16 z-40'}`}
+        } md:hidden bg-black dark:bg-black text-white dark:text-white pb-4 w-screen ${slideshowMode ? 'z-[1003] pt-4 mb-12' : 'py-16 z-40'}`}
         id="mobile-menu"
         onClick={toggleMenu}
       >
@@ -169,7 +169,7 @@ const NavMenu = ({
           {slideshowMode && (
             <Link
               href="/"
-              className={`text-black dark:text-white text-2xl sm:text-3xl tracking-widest transition font-light z-1010 pt-12 ${slideshowMode ? 'z-[1010] block' : 'hidden'}`}
+              className={`text-white dark:text-white text-2xl sm:text-3xl tracking-widest transition font-light z-1010 pt-12 ${slideshowMode ? 'z-[1010] block' : 'hidden'}`}
             >
               Peter Lippmann
             </Link>

@@ -114,7 +114,7 @@ export default function PostsGrid({ posts, language }: Props) {
               </div>
 
               <div className="w-full px-4 md:mt-1">
-                <h3 className="text-black dark:text-white  font-light text-xl text-center transition-all duration-300">
+                <h3 className="text-white dark:text-white  font-light text-xl text-center transition-all duration-300">
                   <span className="group-hover:hidden">{title}</span>
                   <span className="hidden group-hover:inline underline underline-offset-2 font-normal text-lg tracking-tight">
                     View series
@@ -135,21 +135,21 @@ export default function PostsGrid({ posts, language }: Props) {
        <button
         onClick={() => scroll('left')}
         disabled={!canScrollLeft}
-        className={`z-10 -ml-4 bg-white dark:bg-black hover:bg-black/10 dark:hover:bg-white/10 hover:rounded-full  p-3 transition-all duration-300 
+        className={`z-10 -ml-4 bg-black dark:bg-black hover:bg-black/10 dark:hover:bg-white/10 hover:rounded-full  p-3 transition-all duration-300 
     ${canScrollLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         aria-label="Scroll left"
       >
-        <ChevronLeft className="w-8 h-8 md:w-10 md:h-10 text-black dark:text-white" />
+        <ChevronLeft className="w-8 h-8 md:w-10 md:h-10 text-white dark:text-white" />
       </button>
 
       <button
         onClick={() => scroll('right')}
         disabled={!canScrollRight}
-        className={` z-10 -mr-4 bg-white dark:bg-black hover:bg-black/10 dark:hover:bg-white/10 hover:rounded-full p-3 transition-all duration-300 
+        className={` z-10 -mr-4 bg-black dark:bg-black hover:bg-black/10 dark:hover:bg-white/10 hover:rounded-full p-3 transition-all duration-300 
     ${canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         aria-label="Scroll right"
       >
-        <ChevronRight className="w-8 h-8 md:w-10 md:h-10 text-black dark:text-white" />
+        <ChevronRight className="w-8 h-8 md:w-10 md:h-10 text-white dark:text-white" />
       </button>
 </div>
     </section>

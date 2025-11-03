@@ -12,7 +12,7 @@ export function BannerWithAutoFallback() {
   }
 
   return (
-    <div id="series-banner" className="z-20 bg-white dark:bg-black">
+    <div id="series-banner" className="z-20 bg-black dark:bg-black">
       {/* Desktop banner */}
       <div className="hidden md:relative w-full mt-8 md:mt-20 h-[12vh] md:flex items-center justify-center">
         {/* Light mode image */}
@@ -21,7 +21,7 @@ export function BannerWithAutoFallback() {
           alt="Shifting Ground"
           fill
           sizes="40vw"
-          className="object-contain dark:hidden"
+          className="object-contain hidden"
           priority
         />
         {/* Dark mode image */}
@@ -30,7 +30,7 @@ export function BannerWithAutoFallback() {
           alt="Shifting Ground (Dark)"
           fill
           sizes="40vw"
-          className="object-contain hidden dark:block"
+          className="object-contain block"
           priority
         />
       </div>
@@ -61,7 +61,7 @@ export function BannerWithAutoFallback() {
         </div>
 
         {/* Light mode: Ground */}
-        <div className="w-full h-[12vh] relative -mt-[4vh] dark:hidden">
+        <div className="w-full h-[12vh] relative -mt-[4vh] hidden">
           <Image
             src="/ground.png"
             alt="Ground"
@@ -72,7 +72,7 @@ export function BannerWithAutoFallback() {
           />
         </div>
         {/* Dark mode: Ground-white */}
-        <div className="w-full h-[12vh] relative -mt-[4vh] hidden dark:block">
+        <div className="w-full h-[12vh] relative -mt-[4vh] block">
           <Image
             src="/ground-white.png"
             alt="Ground (Dark)"
@@ -85,7 +85,7 @@ export function BannerWithAutoFallback() {
       </div>
 
       {/* Caption */}
-      <div className="pb-4 md:px-8 flex justify-center -mt-1 font-light font-roboto tracking-wide text-lg md:text-xl 3xl:text-2xl text-black dark:text-white">
+      <div className="pb-4 md:px-8 flex justify-center -mt-1 font-light font-roboto tracking-wide text-lg md:text-xl 3xl:text-2xl text-white dark:text-white">
         <h3>{captions[language]}</h3>
       </div>
     </div>
