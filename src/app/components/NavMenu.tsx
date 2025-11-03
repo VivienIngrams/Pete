@@ -16,7 +16,11 @@ interface NavMenuProps {
   hideMenu?: boolean
 }
 
-const NavMenu = ({ slideshowMode = false, onDropdownToggle, hideMenu = false }: NavMenuProps) => {
+const NavMenu = ({
+  slideshowMode = false,
+  onDropdownToggle,
+  hideMenu = false,
+}: NavMenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isSubscribeOpen, setIsSubscribeOpen] = useState(false)
 
@@ -64,10 +68,16 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle, hideMenu = false }: 
           >
             {menuItems.series[language] || menuItems.bio.en}
           </Link>
-          <Link href="/bio" className="hover:text-gray-500 dark:hover:text-gray-300 ">
+          <Link
+            href="/bio"
+            className="hover:text-gray-500 dark:hover:text-gray-300 "
+          >
             {menuItems.bio[language] || menuItems.bio.en}
           </Link>
-          <Link href="/commissions" className="hover:text-gray-500 dark:hover:text-gray-300 ">
+          <Link
+            href="/commissions"
+            className="hover:text-gray-500 dark:hover:text-gray-300 "
+          >
             {menuItems.commissions[language] || menuItems.commissions.en}
           </Link>
           <Link href="/contact" className="hover:text-gray-500 dark:hover:text-gray-300 ">
@@ -80,7 +90,9 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle, hideMenu = false }: 
           >
             Subscribe
           </button>
-
+          {/* <Link href="mailto:studiolippmann@gmail.com" className="block">
+            studiolippmann@gmail.com
+          </Link> */}
           {/* Right: Socials + Language */}
           <div className="flex items-center space-x-6">
             <Socials />
@@ -183,7 +195,9 @@ const NavMenu = ({ slideshowMode = false, onDropdownToggle, hideMenu = false }: 
           </button>
 
           <Socials />
-
+          {/* <Link href="mailto:studiolippmann@gmail.com" className="block">
+            studiolippmann@gmail.com
+          </Link> */}
           {/* Language Switcher (mobile) */}
           <div onClick={(e) => e.stopPropagation()}>
             <LanguageSwitcher />

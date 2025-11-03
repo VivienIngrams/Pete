@@ -1,7 +1,11 @@
 'use client'
 
 import React, { useRef, useState, useEffect } from 'react'
+import { useLanguage } from './context/LanguageProvider'
 import ReCAPTCHA from 'react-google-recaptcha'
+
+const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''
+console.log('ReCAPTCHA site key:', siteKey)
 
 const languageTexts = {
   en: {
@@ -27,15 +31,13 @@ const languageTexts = {
       "Veuillez compléter la vérification reCAPTCHA avant d'envoyer.",
     formSuccess: 'Message envoyé avec succès',
     formError: "Erreur, veuillez réessayer d'envoyer le formulaire",
-    copyrightNotice:
-      'Toutes les images sont soumises au droit d’auteur, et toute utilisation ou reproduction nécessite une autorisation.',
   },
 }
 
-const ContactForm: React.FC<{ language: string }> = ({ language }) => {
-  const texts = languageTexts[language] || languageTexts.en
-  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''
-  const recaptchaRef = useRef<ReCAPTCHA>(null)
+const ContactForm: React.FC = () => {
+  const { language: activeLang } = useLanguage()
+  const texts = languageTexts[activeLang] || languageTexts.en
+  const recaptchaRef = useRef<ReCAPTCHA | null>(null)
   const [isVerified, setIsVerified] = useState(false)
 
   useEffect(() => {
@@ -43,30 +45,25 @@ const ContactForm: React.FC<{ language: string }> = ({ language }) => {
   }, [])
 
   const handleCaptchaChange = (token: string | null) => {
-    if (token) setIsVerified(true)
-    else setIsVerified(false)
+    setIsVerified(!!token)
   }
 
   const handleCaptchaExpired = () => setIsVerified(false)
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-
     if (!isVerified) {
       alert(texts.recaptchaError)
       return
     }
 
     const formData = new FormData(event.currentTarget)
-    const token = recaptchaRef.current?.getValue()
+    const token = recaptchaRef.current?.getValue() || null
 
     try {
       const response = await fetch('/api', {
         method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({
           token,
           name: formData.get('name'),
@@ -76,13 +73,11 @@ const ContactForm: React.FC<{ language: string }> = ({ language }) => {
         }),
       })
 
-      if (!response.ok)
-        throw new Error(`Form submission failed: ${response.status}`)
+      if (!response.ok) throw new Error(`Form submission failed: ${response.status}`)
 
-      const responseData = await response.json()
-      console.log(responseData)
       alert(texts.formSuccess)
       recaptchaRef.current?.reset()
+      setIsVerified(false)
     } catch (error) {
       console.error(error)
       alert(texts.formError)
@@ -109,7 +104,7 @@ const ContactForm: React.FC<{ language: string }> = ({ language }) => {
           required
           minLength={3}
           maxLength={150}
-          className="font-arsenal border-2 rounded border-gray-400 p-1"
+          className=" border-[1px] rounded border-gray-300 p-1"
           type="text"
         />
       </div>
@@ -125,7 +120,7 @@ const ContactForm: React.FC<{ language: string }> = ({ language }) => {
           required
           minLength={8}
           maxLength={150}
-          className="font-arsenal border-2 rounded border-gray-400 p-1"
+          className=" border-[1px] rounded border-gray-300 p-1"
           type="email"
         />
       </div>
@@ -138,7 +133,7 @@ const ContactForm: React.FC<{ language: string }> = ({ language }) => {
           id="subject"
           name="subject"
           autoComplete="off"
-          className="font-arsenal border-2 rounded border-gray-400 p-1"
+          className=" border-[1px] rounded border-gray-300 p-1"
           type="text"
         />
       </div>
@@ -154,13 +149,13 @@ const ContactForm: React.FC<{ language: string }> = ({ language }) => {
           required
           minLength={20}
           maxLength={600}
-          className="font-arsenal border-2 rounded border-gray-400 p-1"
+          className=" border-[1px] rounded border-gray-300 p-1"
           rows={5}
         />
       </div>
 
       {/* Copyright Notice */}
-      <p className=" font-arsenal pt-4">
+      <p className="  pt-4">
         {texts.copyrightNotice}
       </p>
 
@@ -176,7 +171,7 @@ const ContactForm: React.FC<{ language: string }> = ({ language }) => {
         <div className="flex md:items-start md:justify-end">
           <button
             type="submit"
-            className=" mb-20 md:mt-4 text-gray-700 hover: hover:scale-105 ease-in duration-600 border-2 border-gray-400 rounded-lg shadow-md p-2 "
+            className=" mb-20 md:mt-4 text-gray-700 hover: hover:scale-105 ease-in duration-600 border-[1px] border-gray-300 rounded-lg shadow-md p-2 "
             disabled={!isVerified}
           >
             {texts.sendMessage}
