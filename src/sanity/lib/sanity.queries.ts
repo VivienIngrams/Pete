@@ -180,10 +180,26 @@ export async function getHomePage(client: SanityClient, options = {}) {
   return homePage
 }
 
+export type bioContent = {
+  _id: string
+  _type: 'bioContent'
+  imageUrl: string
+  biography: {
+    personal: {
+      fr: { title: string; biographyText: PortableTextBlock[] }
+      en: { title: string; biographyText: PortableTextBlock[] }
+    }
+    critic: {
+      fr: { title: string; biographyText: PortableTextBlock[] } 
+      en: { title: string; biographyText: PortableTextBlock[] }
+    }
+  }
+}
+
 export const bioQuery = groq`*[_type == "bioContent"]{
   _id,
   _type,
-  "imageUrl": image.asset->url,
+  "imageUrl": image->asset->url,
   biography {
     personal {
       fr { title, biographyText },

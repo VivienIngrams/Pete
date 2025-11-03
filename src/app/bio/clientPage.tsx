@@ -5,6 +5,7 @@ import { useState } from "react"
 import { useLanguage } from "../components/context/LanguageProvider"
 import NavMenu from "../components/NavMenu"
 import LanguageSwitcher from "../components/LanguageSwitcher"
+import Image from "next/image"
 
 interface BiographyContent {
   title: string
@@ -36,7 +37,7 @@ export default function BioClient({ initialBioData }: { initialBioData: BioData 
           key={index}
           className={`text-lg md:text-xl leading-relaxed mb-6 font-light text-pretty ${
             first
-              ? "first-letter:text-5xl first-letter:font-light first-letter:mr-1 first-letter:float-left first-letter:leading-none first-letter:mt-1"
+              ? "first-letter:text-4xl md:first-letter:text-5xl first-letter:font-light first-letter:-mr-[2px] md:first-letter:-mr-0 first-letter:float-left first-letter:leading-[0.8] first-letter:-mt-[2px] md:first-letter-:mt-1"
               : ""
           }`}
         >
@@ -52,16 +53,28 @@ export default function BioClient({ initialBioData }: { initialBioData: BioData 
         <LanguageSwitcher /> 
       </div>
 
-      <div className="min-h-screen my-12 md:my-40">
+      <div className="min-h-screen my-8 md:my-40">
         {/* Personal Section */}
         <section className="px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-            <div className="lg:col-span-4">
+            <div className="lg:col-span-3">
               <h2 className="text-base uppercase text-center md:text-left tracking-widest font-light sticky top-32">
                 {personal.title}
               </h2>
             </div>
-            <div className="lg:col-span-8">{renderParagraphs(personal.biographyText)}</div>
+            <div className="lg:col-span-9">
+              <div className="relative w-full  max-w-[140px] md:max-w-[200px] aspect-[3/4] float-right ml-2 md:ml-6 mb-4  mx-auto md:mx-0">
+                <Image
+                  src="/Pete.jpg"
+                  alt="Artist portrait"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 20vw"
+                  priority
+                />
+              </div>
+              {renderParagraphs(personal.biographyText)}
+            </div>
           </div>
         </section>
 
@@ -73,12 +86,12 @@ export default function BioClient({ initialBioData }: { initialBioData: BioData 
         {/* Critic Section */}
         <section className="px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-            <div className="lg:col-span-4">
+            <div className="lg:col-span-3">
               <h2 className="text-base uppercase tracking-widest text-center md:text-left font-light sticky top-32">
                 {critic.title}
               </h2>
             </div>
-            <div className="lg:col-span-8">{renderParagraphs(critic.biographyText)}</div>
+            <div className="lg:col-span-9">{renderParagraphs(critic.biographyText)}</div>
           </div>
         </section>
       </div>
