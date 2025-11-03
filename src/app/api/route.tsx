@@ -70,6 +70,7 @@ const validateCaptcha = async (response_key: string): Promise<boolean> => {
     console.error("reCAPTCHA secret key is not defined in environment variables.");
     return false;
   }
+  
 
   const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${response_key}`;
 
