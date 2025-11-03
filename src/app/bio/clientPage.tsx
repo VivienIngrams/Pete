@@ -5,6 +5,7 @@ import { useState } from "react"
 import { useLanguage } from "../components/context/LanguageProvider"
 import NavMenu from "../components/NavMenu"
 import LanguageSwitcher from "../components/LanguageSwitcher"
+import { urlForThumbnail } from "~/sanity/lib/sanity.image"
 import Image from "next/image"
 
 interface BiographyContent {
@@ -13,7 +14,7 @@ interface BiographyContent {
 }
 
 interface BioData {
-  imageUrl: string
+  image: any
   biography: {
     personal: { fr: BiographyContent; en: BiographyContent }
     critic: { fr: BiographyContent; en: BiographyContent }
@@ -35,10 +36,10 @@ export default function BioClient({ initialBioData }: { initialBioData: BioData 
       return (
         <p
           key={index}
-          className={`text-lg md:text-xl leading-relaxed mb-6 font-light text-pretty ${
+          className={`text-lg md:text-xl mb-6 font-light ${
             first
-              ? "first-letter:text-4xl md:first-letter:text-5xl first-letter:font-light first-letter:-mr-[2px] md:first-letter:-mr-0 first-letter:float-left first-letter:leading-[0.8] first-letter:-mt-[2px] md:first-letter-:mt-1"
-              : ""
+              ? "first-letter"
+              : "first-letter"
           }`}
         >
           {text}
@@ -65,13 +66,13 @@ export default function BioClient({ initialBioData }: { initialBioData: BioData 
             <div className="lg:col-span-9">
               <div className="relative w-full  max-w-[140px] md:max-w-[200px] aspect-[3/4] float-right ml-2 md:ml-6 mb-4  mx-auto md:mx-0">
                 <Image
-                  src="/Pete.jpg"
-                  alt="Artist portrait"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 50vw, 20vw"
-                  priority
-                />
+                    src={urlForThumbnail(bioData.image)}
+                    alt="Artist portrait"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, 20vw"
+                    priority
+                  />
               </div>
               {renderParagraphs(personal.biographyText)}
             </div>

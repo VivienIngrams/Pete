@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useLanguage } from './context/LanguageProvider'
 
 interface SubscribeModalProps {
   isOpen: boolean
@@ -13,6 +14,10 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const { language: activeLang } = useLanguage()
+  const t = {
+    close: activeLang === 'en' ? 'Close' : 'Fermer',
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -48,7 +53,7 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose }) => {
       {isOpen && (
         <>
           <motion.div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
+            className="fixed inset-0 bg-gray-500/50 backdrop-blur-sm z-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -61,6 +66,14 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose }) => {
             exit={{ opacity: 0, scale: 0.95 }}
           >
             <div className="bg-white dark:bg-black rounded-sm shadow-xl p-8 w-[90%] max-w-md text-center">
+              {/* Top bar with Close */}
+              <div
+                className={`relative -top-4 -left-3 z-[900] bg-white dark:bg-black flex items-center ${'block'}`}
+              >
+                <button  onClick={onClose} className="text-black hover:font-normal dark:text-white text-xs tracking-wide uppercase font-light">
+                  {t.close}
+                </button>
+              </div>
               <h2 className="text-2xl text-black dark:text-white font-light mb-4">
                 Subscribe
               </h2>
@@ -73,7 +86,10 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose }) => {
                   ✅ Subscribed successfully!
                 </p>
               ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+                <form
+                  onSubmit={handleSubmit}
+                  className="flex flex-col space-y-4"
+                >
                   <input
                     type="email"
                     required
@@ -86,22 +102,17 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose }) => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="bg-black text-white py-2 rounded-lg text-sm hover:bg-gray-800 transition disabled:opacity-50"
+                    className="bg-black text-white py-2 rounded-lg underline underline-offset-2  text-sm hover:bg-gray-800 transition disabled:opacity-50"
                   >
                     {loading ? 'Submitting...' : 'Subscribe'}
                   </button>
                   {error && (
-                    <p className="text-red-600 dark:text-red-400 text-sm mt-1">{error}</p>
+                    <p className="text-red-600 dark:text-red-400 text-sm mt-1">
+                      {error}
+                    </p>
                   )}
                 </form>
               )}
-
-              <button
-                onClick={onClose}
-                className="mt-6 text-sm text-black dark:text-white underline underline-offset-2 hover:text-gray-700"
-              >
-                close
-              </button>
             </div>
           </motion.div>
         </>

@@ -66,7 +66,7 @@ export default function PostsGrid({ posts, language }: Props) {
       <div
         ref={scrollContainerRef}
         onScroll={updateScrollButtons}
-        className="flex gap-4 md:gap-8 overflow-x-auto scroll-smooth snap-x scrollbar-hide"
+        className="flex gap-4 md:gap-8 overflow-x-auto scroll-smooth snap-x scrollbar-hide md:pl-6"
         style={{
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
@@ -93,7 +93,7 @@ export default function PostsGrid({ posts, language }: Props) {
               }}
             >
               <div
-                className="relative overflow-hidden rounded-sm w-full"
+                className="relative overflow-hidden w-full shadow-[0_0_10px_rgba(0,0,0,0.15)] mt-4 shadow-gray-500"
                 style={{
                   height: `${height}vh`,
                   aspectRatio: aspect.toString(),
