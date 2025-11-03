@@ -4,8 +4,8 @@ import React, { useRef, useState, useEffect } from 'react'
 import { useLanguage } from './context/LanguageProvider'
 import ReCAPTCHA from 'react-google-recaptcha'
 
-const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''
-console.log('ReCAPTCHA site key:', siteKey)
+const siteKey = process.env.RECAPTCHA_SITE_KEY || ''
+
 
 const languageTexts = {
   en: {
