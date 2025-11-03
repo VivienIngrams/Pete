@@ -175,7 +175,7 @@ export default function MobileSlideShow({
                 pinch={{ step: 0.08 }}
                 onZoomStop={({ state }) => setZoomed(state.scale > 1.05)}
               >
-                <TransformComponent wrapperClass="flex items-center justify-center">
+                <TransformComponent wrapperClass="flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.1)] shadow-gray-700">
                   <Image
                     src={urlForImage(current.image).url() || ''}
                     alt={currentTitle || post.title}

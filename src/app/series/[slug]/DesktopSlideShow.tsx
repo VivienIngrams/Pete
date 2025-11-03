@@ -130,7 +130,7 @@ export default function DesktopSlideShow({
             width={1920}
             height={1080}
             sizes="70vw"
-            className={`w-auto h-full object-contain transition-opacity duration-300 max-w-[70vw] ${
+            className={`w-auto h-full object-contain transition-opacity duration-300 shadow-[0_0_15px_rgba(0,0,0,0.1)] shadow-gray-700 max-w-[70vw] ${
               isImageLoading ? 'opacity-0' : 'opacity-100'
             }`}
             onLoad={() => setIsImageLoading(false)}

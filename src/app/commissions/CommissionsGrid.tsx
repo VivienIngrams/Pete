@@ -47,7 +47,7 @@ export default function CommissionsGrid({ posts, language }: Props) {
               className=" text-center"
             >
             {/* Image */}
-            <div className="relative w-full aspect-[3/4] overflow-hidden rounded-sm shadow-[0_0_10px_rgba(0,0,0,0.15)] mt-4 shadow-gray-500">
+            <div className="relative w-full aspect-[3/4] overflow-hidden rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.1)] shadow-gray-700 mt-4">
               {post.mainImage ? (
                 <Image
                   src={urlForImage(post.mainImage).url() as string}

@@ -93,7 +93,7 @@ export default function PostsGrid({ posts, language }: Props) {
               }}
             >
               <div
-                className="relative overflow-hidden w-full shadow-[0_0_10px_rgba(0,0,0,0.15)] mt-4 shadow-gray-500"
+                className="relative overflow-hidden w-full shadow-[0_0_15px_rgba(0,0,0,0.1)] shadow-gray-700 mt-4"
                 style={{
                   height: `${height}vh`,
                   aspectRatio: aspect.toString(),
