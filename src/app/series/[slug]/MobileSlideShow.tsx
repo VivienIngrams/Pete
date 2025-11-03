@@ -3,17 +3,15 @@
 import { PortableText } from '@portabletext/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import { usePathname } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
 
 import { useLanguage } from '~/app/components/context/LanguageProvider'
 import LanguageSwitcher from '~/app/components/LanguageSwitcher'
 import NavMenu from '~/app/components/NavMenu'
 import { urlForImage } from '~/sanity/lib/sanity.image'
 import type { Post } from '~/sanity/lib/sanity.queries'
-
-
 
 type Props = {
   post: Post
@@ -27,41 +25,38 @@ export default function MobileSlideShow({
   setCurrentIndex,
 }: Props) {
   const router = useRouter()
+  const pathname = usePathname()
   const { language: activeLang } = useLanguage()
+
   const [isAboutOpen, setIsAboutOpen] = useState(false)
   const [isImageLoading, setIsImageLoading] = useState(true)
   const [forceRender, setForceRender] = useState(0)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const imageWrapperRef = useRef<HTMLDivElement>(null)
+  const [zoomed, setZoomed] = useState(false)
 
-  // Force re-render when language changes to ensure PortableText updates
+  const imageWrapperRef = useRef<HTMLDivElement>(null)
+  const touchStartX = useRef<number | null>(null)
+  const touchEndX = useRef<number | null>(null)
+
+  // --- Force re-render on language change ---
   useEffect(() => {
     setForceRender((prev) => prev + 1)
   }, [activeLang])
 
-  // Reset loading state when image changes
+  // --- Reset loading when image changes ---
   useEffect(() => {
     setIsImageLoading(true)
   }, [currentIndex])
 
-  // --- Swipe gesture refs ---
-  const touchStartX = useRef<number | null>(null)
-  const touchEndX = useRef<number | null>(null)
-
-  // Memoize images array to have a stable reference
+  // --- Data memoization ---
   const images = useMemo(() => post.images || [], [post.images])
+  const current = useMemo(() => images[currentIndex] || null, [images, currentIndex])
 
-  // Memoize current image based on currentIndex
-  const current = useMemo(
-    () => images[currentIndex] || null,
-    [images, currentIndex],
-  )
-
-  // --- Memoized titles & excerpts ---
   const postTitle = useMemo(
     () => (activeLang === 'en' ? post.title_en || post.title : post.title),
     [activeLang, post.title, post.title_en],
   )
+
   const currentTitle = useMemo(() => {
     if (!current) return ''
     return (
@@ -85,34 +80,36 @@ export default function MobileSlideShow({
       : post.excerpt || post.excerpt_en
   }, [activeLang, post.excerpt, post.excerpt_en])
 
-  // --- Navigation handlers ---
+  // --- Navigation ---
   const handlePrev = () =>
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
   const handleNext = () =>
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
 
-const pathname = usePathname()
   // --- Close handler ---
   const handleClose = () => {
-  if (pathname.startsWith('/series')) {
-    router.push('/series#' + post.slug.current)
-  } else if (pathname.startsWith('/commissions')) {
-    router.push('/commissions#' + post.slug.current)
-  } else {
-    router.push('/') // fallback
+    if (pathname.startsWith('/series')) {
+      router.push('/series#' + post.slug.current)
+    } else if (pathname.startsWith('/commissions')) {
+      router.push('/commissions#' + post.slug.current)
+    } else {
+      router.push('/') // fallback
+    }
   }
-}
 
   // --- Swipe handlers ---
   const handleTouchStart = (e: React.TouchEvent) => {
+    if (zoomed) return
     touchStartX.current = e.touches[0].clientX
   }
 
   const handleTouchMove = (e: React.TouchEvent) => {
+    if (zoomed) return
     touchEndX.current = e.touches[0].clientX
   }
 
   const handleTouchEnd = () => {
+    if (zoomed) return
     if (touchStartX.current === null || touchEndX.current === null) return
     const diff = touchStartX.current - touchEndX.current
     if (Math.abs(diff) > 50) diff > 0 ? handleNext() : handlePrev()
@@ -133,9 +130,12 @@ const pathname = usePathname()
         onDropdownToggle={setIsDropdownOpen}
         hideMenu={isAboutOpen}
       />
-      {/* Persistent top bar with close button */}
+
+      {/* Top bar with Close */}
       <div
-        className={`fixed top-0 left-0 z-[900] bg-white dark:bg-black flex items-center h-12 p-6 ${isDropdownOpen || isAboutOpen ? 'hidden' : 'block'}`}
+        className={`fixed top-0 left-0 z-[900] bg-white dark:bg-black flex items-center h-12 p-6 ${
+          isDropdownOpen || isAboutOpen ? 'hidden' : 'block'
+        }`}
       >
         <button
           onClick={handleClose}
@@ -145,46 +145,56 @@ const pathname = usePathname()
         </button>
       </div>
 
-      {/* Image + swipe area */}
+      {/* Image area with pinch zoom */}
       <div
         ref={imageWrapperRef}
-        className="relative w-full flex-shrink-0 flex items-center justify-center mt-10 touch-pan-x touch-swipe-container"
+        className="relative w-full flex-shrink-0 flex items-center justify-center mt-10 touch-pan-x"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
         <div className="relative w-auto max-h-[80vh] flex items-center justify-center">
-          {/* Loading state */}
           {isImageLoading && images.length > 0 && (
             <div className="absolute inset-0 flex items-center justify-center bg-white dark:bg-black animate-pulse">
               <div className="w-16 h-16 border-4 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
             </div>
           )}
 
-          {/* If there are no images, show black background */}
           {!images.length ? (
             <div className="w-full h-[60vh] flex items-center justify-center text-sm uppercase">
               No images available
             </div>
           ) : (
             current?.image && (
-              <Image
-                src={urlForImage(current.image).url() || ''}
-                alt={currentTitle || post.title}
-                width={500}
-                height={500}
-                className={`w-auto max-h-[80vh] object-contain transition-opacity duration-500 ${
-                  isImageLoading ? 'opacity-0' : 'opacity-100'
-                }`}
-                onLoad={() => setIsImageLoading(false)}
-                priority
-              />
+              <TransformWrapper
+                initialScale={1}
+                minScale={1}
+                maxScale={4}
+                doubleClick={{ disabled: true }}
+                wheel={{ disabled: true }}
+                pinch={{ step: 0.08 }}
+                onZoomStop={({ state }) => setZoomed(state.scale > 1.05)}
+              >
+                <TransformComponent wrapperClass="flex items-center justify-center">
+                  <Image
+                    src={urlForImage(current.image).url() || ''}
+                    alt={currentTitle || post.title}
+                    width={500}
+                    height={500}
+                    className={`w-auto max-h-[80vh] object-contain transition-opacity duration-500 ${
+                      isImageLoading ? 'opacity-0' : 'opacity-100'
+                    }`}
+                    onLoad={() => setIsImageLoading(false)}
+                    priority={currentIndex === 0}
+                  />
+                </TransformComponent>
+              </TransformWrapper>
             )
           )}
         </div>
       </div>
 
-      {/* Navigation arrows */}
+      {/* Navigation Arrows */}
       <div className="flex w-full justify-between px-3 mt-4 md:hidden">
         <button
           onClick={handlePrev}
@@ -200,28 +210,28 @@ const pathname = usePathname()
         </button>
       </div>
 
-      {/* Caption overlay */}
+      {/* Caption */}
       <div className="bg-white/50 dark:bg-black/50 w-full px-6 py-4 min-h-[120px]">
-        {currentTitle && (
-          <h1 className="text-xl font-normal">{currentTitle}</h1>
-        )}
-        <div className=" text-sm font-roboto">
+        {currentTitle && <h1 className="text-lg leading-[1.5rem]">{currentTitle}</h1>}
+        <div className="text-sm font-roboto">
           {currentExcerpt && (
             <PortableText
               key={`${activeLang}-${forceRender}`}
               value={currentExcerpt}
             />
           )}
-          <button
-            onClick={() => setIsAboutOpen(true)}
-            className="text-sm uppercase tracking-wide"
-          >
-            {t.about}
-          </button>
+          {postExcerptBlocks && (
+            <button
+              onClick={() => setIsAboutOpen(true)}
+              className="text-sm uppercase tracking-wide"
+            >
+              {t.about}
+            </button>
+          )}
         </div>
       </div>
 
-      {/* About modal */}
+      {/* About Modal */}
       {isAboutOpen && (
         <div
           className="fixed inset-0 z-[1100] text-black dark:text-white bg-white/90 dark:bg-black/80 flex items-center justify-center px-4"
@@ -231,27 +241,28 @@ const pathname = usePathname()
             className="max-w-2xl w-full max-h-[90vh] overflow-auto p-6 -mt-12"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Inline Language Switcher */}
-            <div className=" flex justify-end ">
+            <button
+              onClick={() => setIsAboutOpen(false)}
+              className="text-sm text-left fixed top-0 py-4 left-4 right-0 tracking-wide uppercase bg-white dark:bg-black"
+            >
+              {t.close}
+            </button>
+
+            <div className="flex justify-end mt-2">
               <LanguageSwitcher />
             </div>
 
-            <div className="flex justify-between items-start mb-4 ">
-              <h2 className="text-xl font-normal">{postTitle}</h2>
-              <button
-                onClick={() => setIsAboutOpen(false)}
-                className="text-sm fixed top-4 left-4 tracking-wide uppercase bg-white dark:bg-black"
-              >
-                {t.close}
-              </button>
+            <div className="flex justify-between items-start mb-4">
+              <h2 className="text-xl">{postTitle}</h2>
             </div>
-            <div className=" text-sm font-roboto text-justify ">
+
+            <div className="text-sm font-roboto text-justify">
               {postExcerptBlocks && postExcerptBlocks.length ? (
-                <div className='portable-text'>
-                <PortableText
-                  key={`${activeLang}-${forceRender}`}
-                  value={postExcerptBlocks}
-                />
+                <div className="portable-text">
+                  <PortableText
+                    key={`${activeLang}-${forceRender}`}
+                    value={postExcerptBlocks}
+                  />
                 </div>
               ) : (
                 <p>No description available.</p>

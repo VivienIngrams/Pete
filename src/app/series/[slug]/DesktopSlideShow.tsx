@@ -175,7 +175,7 @@ export default function DesktopSlideShow({
       {/* Caption */}
       <div className="absolute bottom-12 left-6">
         {currentTitle && (
-          <h1 className="text-xl md:text-2xl font-normal max-w-[calc(15vw-24px)]">
+          <h1 className="text-lg md:text-xl  max-w-[calc(15vw-24px)]">
             {currentTitle}
           </h1>
         )}
@@ -183,17 +183,20 @@ export default function DesktopSlideShow({
           {currentExcerpt && (
             <PortableText key={`${activeLang}-${forceRender}`} value={currentExcerpt} />
           )}
-          <button
+          {postExcerptBlocks && (
+             <button
             onClick={() => setIsAboutOpen(true)}
             className="text-sm uppercase tracking-wide hover:font-bold"
           >
             {t.about}
           </button>
+          )}
+         
         </div>
       </div>
 
       {/* About modal */}
-      {isAboutOpen && (
+      {postExcerptBlocks && isAboutOpen && (
         <div
           className="fixed inset-0 z-50 text-black dark:text-white bg-white/85 dark:bg-black/80 flex items-center justify-center px-4"
           onClick={() => setIsAboutOpen(false)}
