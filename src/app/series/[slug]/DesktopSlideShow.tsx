@@ -113,10 +113,10 @@ export default function DesktopSlideShow({
   }
 
   return (
-    <div className="relative w-full h-screen text-white dark:text-white bg-black dark:bg-black font-light flex items-center py-10 justify-center hide-scrollbar">
+    <div className="relative w-full h-screen text-black dark:text-black bg-white dark:bg-white font-light flex items-center py-10 justify-center hide-scrollbar">
       {/* Loading spinner */}
       {isImageLoading && hasImages && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black dark:bg-black">
+        <div className="absolute inset-0 flex items-center justify-center bg-white dark:bg-white">
           <div className="w-16 h-16 border-4 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
@@ -147,7 +147,7 @@ export default function DesktopSlideShow({
       {/* Close button */}
       <button
         onClick={handleClose}
-        className="absolute text-sm text-white dark:text-white tracking-wide uppercase top-6 left-6 z-50 hover:font-bold"
+        className="absolute text-sm text-black dark:text-black tracking-wide uppercase top-6 left-6 z-50 hover:font-bold"
       >
         {t.close}
       </button>
@@ -157,17 +157,17 @@ export default function DesktopSlideShow({
         <>
           <button
             onClick={handlePrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 bg-black dark:bg-black hover:bg-black/10 dark:hover:bg-black/10 transition-transform duration-200 md:hover:scale-105 p-2 rounded-full z-50 ml-2"
+            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white dark:bg-white hover:bg-white/10 dark:hover:bg-white/10 transition-transform duration-200 md:hover:scale-105 p-2 rounded-full z-50 ml-2"
             aria-label="Previous image"
           >
-            <ChevronLeft className="w-12 h-12 text-white dark:text-white" />
+            <ChevronLeft className="w-12 h-12 text-black dark:text-black" />
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-black dark:bg-black hover:bg-black/10 dark:hover:bg-black/10  transition-transform duration-200 md:hover:scale-105 p-2 rounded-full z-50 mr-2"
+            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white dark:bg-white hover:bg-white/10 dark:hover:bg-white/10  transition-transform duration-200 md:hover:scale-105 p-2 rounded-full z-50 mr-2"
             aria-label="Next image"
           >
-            <ChevronRight className="w-12 h-12 text-white dark:text-white" />
+            <ChevronRight className="w-12 h-12 text-black dark:text-black" />
           </button>
         </>
       )}
@@ -198,12 +198,12 @@ export default function DesktopSlideShow({
       {/* About modal */}
       {postExcerptBlocks && isAboutOpen && (
         <div
-          className="fixed inset-0 z-50 text-white dark:text-white bg-black/85 dark:bg-black/80 flex items-center justify-center px-4"
+          className="fixed inset-0 z-50 text-black dark:text-black bg-white/85 dark:bg-white/80 flex items-center justify-center px-4"
           onClick={() => setIsAboutOpen(false)}
         >
           <button
             onClick={() => setIsAboutOpen(false)}
-            className="absolute text-base uppercase top-6 left-6 z-50 font-normal hover:font-bold tracking-wide bg-black dark:bg-black"
+            className="absolute text-base uppercase top-6 left-6 z-50 font-normal hover:font-bold tracking-wide bg-white dark:bg-white"
           >
             {t.close}
           </button>

@@ -63,7 +63,7 @@ export default function CommissionsGrid({ posts, language }: Props) {
 
             {/* Text below image */}
            
-              <h3 className="text-white dark:text-white font-light text-lg transition-all duration-300">
+              <h3 className="text-black dark:text-black font-light text-lg transition-all duration-300">
                 <span className="block group-hover:hidden">{title}</span>
                 <span className="hidden group-hover:inline underline underline-offset-2 font-normal text-base tracking-tight">
                   View series

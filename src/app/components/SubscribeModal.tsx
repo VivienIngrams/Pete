@@ -65,16 +65,16 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose }) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
           >
-            <div className="bg-white dark:bg-black rounded-sm shadow-xl p-8 w-[90%] max-w-md text-center">
+            <div className="bg-white dark:bg-white rounded-sm shadow-xl p-8 w-[90%] max-w-md text-center">
               {/* Top bar with Close */}
               <div
-                className={`relative -top-4 -left-3 z-[900] bg-white dark:bg-black flex items-center ${'block'}`}
+                className={`relative -top-4 -left-3 z-[900] bg-white dark:bg-white flex items-center ${'block'}`}
               >
-                <button  onClick={onClose} className="text-black hover:font-normal dark:text-white text-xs tracking-wide uppercase font-light">
+                <button  onClick={onClose} className="text-black hover:font-normal dark:text-black text-xs tracking-wide uppercase font-light">
                   {t.close}
                 </button>
               </div>
-              <h2 className="text-2xl text-black dark:text-white font-light mb-4">
+              <h2 className="text-2xl text-black dark:text-black font-light mb-4">
                 Subscribe
               </h2>
               <p className="text-gray-600 mb-6 text-sm">
@@ -97,12 +97,12 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose }) => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={loading}
-                    className="border border-gray-300 rounded-lg py-2 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-gray-500 bg-white dark:bg-gray-800 dark:text-white"
+                    className="border border-gray-300 rounded-lg py-2 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-gray-500 bg-white dark:bg-gray-800 dark:text-black"
                   />
                   <button
                     type="submit"
                     disabled={loading}
-                    className="bg-black text-white py-2 rounded-lg underline underline-offset-2  text-sm hover:bg-gray-800 transition disabled:opacity-50"
+                    className="bg-black text-black py-2 rounded-lg underline underline-offset-2  text-sm hover:bg-gray-800 transition disabled:opacity-50"
                   >
                     {loading ? 'Submitting...' : 'Subscribe'}
                   </button>

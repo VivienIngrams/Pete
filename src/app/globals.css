@@ -9,7 +9,7 @@ html, body {
 }
 
 body {
-  @apply bg-black text-white dark:bg-black  dark:text-white;
+  @apply bg-white text-black dark:bg-white  dark:text-black;
 }
 
 img {
