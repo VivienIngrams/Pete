@@ -11,9 +11,9 @@ export default function ContactPage() {
     <>
     <NavMenu/>
 
-    <div className="min-h-screen mt- xl:mt-24 bg-white dark:bg-black ">
-      <div className="xl:h-[90%] flex flex-col items-center justify-center mx-6 xl:w-1/3 xl:mx-auto">
-        <h1 className="text-2xl xl:text-3xl  w-full text-left font-light uppercase tracking-widest pt-20  pb-10">
+    <div className="min-h-screen bg-white dark:bg-black xl:h-[90%] flex flex-col items-center justify-center">
+      <div className=" mx-6 xl:w-1/3 xl:mx-auto">
+        <h1 className="text-2xl xl:text-3xl  w-full text-left font-light uppercase tracking-widest pt-24 md:pt-12 pb-8">
           Contact
         </h1>
       

@@ -18,8 +18,6 @@ const languageTexts = {
       'Please complete the reCAPTCHA verification before submitting.',
     formSuccess: 'Message successfully sent',
     formError: 'Error, please try resubmitting the form',
-    copyrightNotice:
-      'All images are subject to copyright, and any use or reproduction requires authorization.',
   },
   fr: {
     name: 'Nom',
