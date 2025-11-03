@@ -38,7 +38,7 @@ export function BannerWithAutoFallback() {
       {/* Mobile banner */}
       <div className="md:hidden relative w-full h-auto flex flex-col items-center justify-center">
         {/* Light mode: Shifting */}
-        <div className="w-full h-[12vh] relative mr-5 dark:hidden">
+        <div className="w-full h-[12vh] relative mr-5 hidden">
           <Image
             src="/shifting.png"
             alt="Shifting"
@@ -49,7 +49,7 @@ export function BannerWithAutoFallback() {
           />
         </div>
         {/* Dark mode: Shifting-white */}
-        <div className="w-full h-[12vh] relative mr-5 hidden dark:block">
+        <div className="w-full h-[12vh] relative mr-5 block">
           <Image
             src="/shifting-white.png"
             alt="Shifting (Dark)"

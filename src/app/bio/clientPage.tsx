@@ -48,7 +48,7 @@ export default function BioClient({ initialBioData }: { initialBioData: BioData 
     })
 
   return (
-    <>
+    <div className="bg-black text-white min-h-screen">
       <NavMenu />
       <div className="w-full flex justify-end md:hidden pt-16 pr-6 z-50" >
         <LanguageSwitcher /> 
@@ -96,6 +96,6 @@ export default function BioClient({ initialBioData }: { initialBioData: BioData 
           </div>
         </section>
       </div>
-    </>
+    </div>
   )
 }

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${roboto.variable}`}>
-      <body className="h-full font-roboto bg-white dark:bg-black  text-black dark:text-white ">
+      <body className="h-full font-roboto bg-black dark:bg-black  text-white dark:text-white ">
         <LanguageProvider>
           <ThemeProvider />
           {children}
