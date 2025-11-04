@@ -8,6 +8,11 @@ module.exports = {
   ],
   darkMode: 'media', // ✅ Automatically respects device settings
   theme: {
+    lineHeight: {
+      'extratight': '0.97',
+      'supertight': '0.9',
+    },
+
     extend: {
       screens: {
         '3xl': '2220px',

@@ -3,7 +3,7 @@
 import { PortableText } from '@portabletext/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
-import { usePathname,useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState, useMemo } from 'react'
 
 import { useLanguage } from '~/app/components/context/LanguageProvider'
@@ -31,7 +31,7 @@ export default function DesktopSlideShow({
   const { language: activeLang } = useLanguage()
 
   useEffect(() => {
-    setForceRender(prev => prev + 1)
+    setForceRender((prev) => prev + 1)
   }, [activeLang])
 
   useEffect(() => {
@@ -41,10 +41,11 @@ export default function DesktopSlideShow({
   // Simple preloading of next/prev images only
   useEffect(() => {
     if (!post.images || post.images.length === 0) return
-    
+
     const nextIndex = (currentIndex + 1) % post.images.length
-    const prevIndex = (currentIndex - 1 + post.images.length) % post.images.length
-    
+    const prevIndex =
+      (currentIndex - 1 + post.images.length) % post.images.length
+
     const preloadImage = (index: number) => {
       const img = post.images[index]
       if (img?.image) {
@@ -55,7 +56,7 @@ export default function DesktopSlideShow({
         document.head.appendChild(link)
       }
     }
-    
+
     preloadImage(nextIndex)
     preloadImage(prevIndex)
   }, [currentIndex, post.images])
@@ -101,11 +102,11 @@ export default function DesktopSlideShow({
     }
   }
 
- const postExcerptBlocks = useMemo(() => {
-  return activeLang === 'en'
-    ? post.excerpt_en || post.excerpt
-    : post.excerpt || post.excerpt_en
-}, [activeLang, post])
+  const postExcerptBlocks = useMemo(() => {
+    return activeLang === 'en'
+      ? post.excerpt_en || post.excerpt
+      : post.excerpt || post.excerpt_en
+  }, [activeLang, post])
 
   const t = {
     about: activeLang === 'en' ? 'about' : 'à propos',
@@ -130,7 +131,7 @@ export default function DesktopSlideShow({
             width={1920}
             height={1080}
             sizes="70vw"
-            className={`w-auto h-full object-contain transition-opacity duration-300 shadow-[0_0_15px_rgba(0,0,0,0.1)] shadow-gray-700 max-w-[70vw] ${
+            className={`w-auto h-full object-contain transition-opacity duration-300 0_0_15px_rgba(0,0,0,0.1)]  max-w-[70vw] ${
               isImageLoading ? 'opacity-0' : 'opacity-100'
             }`}
             onLoad={() => setIsImageLoading(false)}
@@ -175,23 +176,29 @@ export default function DesktopSlideShow({
       {/* Caption */}
       <div className="absolute bottom-12 left-6">
         {currentTitle && (
-          <h1 className="text-lg md:text-xl  max-w-[calc(15vw-24px)]">
+          <h1 className="text-lg md:text-[21px] font-light tracking-tight max-w-[calc(15vw-24px)] mb-2">
             {currentTitle}
           </h1>
         )}
-        <div className=" text-sm font-roboto max-w-[calc(15vw-24px)]">
+
+        <div className=" uppercase md:text-sm tracking-wide  max-w-[calc(15vw-24px)]">
           {currentExcerpt && (
-            <PortableText key={`${activeLang}-${forceRender}`} value={currentExcerpt} />
+            <div className="mb-2 leading-extratight">
+              <PortableText
+                key={`${activeLang}-${forceRender}`}
+                value={currentExcerpt}
+              />
+            </div>
           )}
+
           {postExcerptBlocks && (
-             <button
-            onClick={() => setIsAboutOpen(true)}
-            className="text-sm uppercase tracking-wide hover:font-bold"
-          >
-            {t.about}
-          </button>
+            <button
+              onClick={() => setIsAboutOpen(true)}
+              className="block md:text-sm tracking-wide uppercase hover:font-semibold transition-all"
+            >
+              {t.about}
+            </button>
           )}
-         
         </div>
       </div>
 
@@ -217,10 +224,10 @@ export default function DesktopSlideShow({
 
             <h2 className="text-3xl font-normal mb-4">{postTitle}</h2>
 
-            <div className=" portable-text text-base font-roboto text-justify mb-6">
+            <div className=" portable-text text-base  text-justify mb-6">
               {postExcerptBlocks && postExcerptBlocks.length ? (
-                <div className='portable-text'>
-                  <PortableText  key={activeLang} value={postExcerptBlocks} />
+                <div className="portable-text">
+                  <PortableText key={activeLang} value={postExcerptBlocks} />
                 </div>
               ) : (
                 <p>No description available.</p>

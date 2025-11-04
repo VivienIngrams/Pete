@@ -148,12 +148,12 @@ export default function MobileSlideShow({
       {/* Image area with pinch zoom */}
       <div
         ref={imageWrapperRef}
-        className="relative w-full flex-shrink-0 flex items-center justify-center mt-10 touch-pan-x"
+        className="relative w-full flex-shrink-0 flex items-center justify-center mt-6 touch-pan-x"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="relative w-auto max-h-[80vh] flex items-center justify-center">
+        <div className="relative w-full overflow-hidden h-auto  scale-[1.01] flex items-center justify-center">
           {isImageLoading && images.length > 0 && (
             <div className="absolute inset-0 flex items-center justify-center bg-white dark:bg-white animate-pulse">
               <div className="w-16 h-16 border-4 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
@@ -175,13 +175,13 @@ export default function MobileSlideShow({
                 pinch={{ step: 0.08 }}
                 onZoomStop={({ state }) => setZoomed(state.scale > 1.05)}
               >
-                <TransformComponent wrapperClass="flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.1)] shadow-gray-700">
+                <TransformComponent wrapperClass="flex items-center justify-center">
                   <Image
                     src={urlForImage(current.image).url() || ''}
                     alt={currentTitle || post.title}
                     width={500}
                     height={500}
-                    className={`w-auto max-h-[80vh] object-contain transition-opacity duration-500 ${
+                    className={`w-auto h-auto object-contain block  transition-opacity duration-500 ${
                       isImageLoading ? 'opacity-0' : 'opacity-100'
                     }`}
                     onLoad={() => setIsImageLoading(false)}
@@ -212,8 +212,8 @@ export default function MobileSlideShow({
 
       {/* Caption */}
       <div className="bg-white/50 dark:bg-white/50 w-full px-6 py-4 min-h-[120px]">
-        {currentTitle && <h1 className="text-lg leading-[1.5rem]">{currentTitle}</h1>}
-        <div className="text-sm font-roboto">
+        {currentTitle && <h1 className="text-[20px] ">{currentTitle}</h1>}
+        <div className="text-sm font-roboto uppercase tracking-wide mt-1 leading-extratight">
           {currentExcerpt && (
             <PortableText
               key={`${activeLang}-${forceRender}`}
@@ -223,7 +223,7 @@ export default function MobileSlideShow({
           {postExcerptBlocks && (
             <button
               onClick={() => setIsAboutOpen(true)}
-              className="text-sm uppercase tracking-wide"
+              className="text-sm uppercase tracking-wide mt-1"
             >
               {t.about}
             </button>

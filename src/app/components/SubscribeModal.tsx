@@ -97,7 +97,7 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose }) => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={loading}
-                    className="border border-gray-300 rounded-lg py-2 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-gray-500 bg-white dark:bg-gray-800 dark:text-black"
+                    className="border border-gray-300  rounded-lg py-2 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-gray-500 bg-gray-100 dark:bg-gray-100 dark:text-black"
                   />
                   <button
                     type="submit"

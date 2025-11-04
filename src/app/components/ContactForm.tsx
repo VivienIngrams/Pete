@@ -102,7 +102,7 @@ const ContactForm: React.FC = () => {
           required
           minLength={3}
           maxLength={150}
-          className=" border-[1px] rounded border-gray-300 p-1"
+          className=" border-[1px] rounded border-gray-300 bg-gray-100 p-1"
           type="text"
         />
       </div>
@@ -118,7 +118,7 @@ const ContactForm: React.FC = () => {
           required
           minLength={8}
           maxLength={150}
-          className=" border-[1px] rounded border-gray-300 p-1"
+          className=" border-[1px] rounded border-gray-300 bg-gray-100 p-1"
           type="email"
         />
       </div>
@@ -131,7 +131,7 @@ const ContactForm: React.FC = () => {
           id="subject"
           name="subject"
           autoComplete="off"
-          className=" border-[1px] rounded border-gray-300 p-1"
+          className=" border-[1px] rounded border-gray-300 bg-gray-100 p-1"
           type="text"
         />
       </div>
@@ -147,7 +147,7 @@ const ContactForm: React.FC = () => {
           required
           minLength={20}
           maxLength={600}
-          className=" border-[1px] rounded border-gray-300 p-1"
+          className=" border-[1px] rounded border-gray-300 bg-gray-100 p-1"
           rows={5}
         />
       </div>
@@ -169,7 +169,7 @@ const ContactForm: React.FC = () => {
         <div className="flex md:items-start md:justify-end">
           <button
             type="submit"
-            className=" mb-20 md:mt-4 bg-white/50 text-gray-800 hover: hover:scale-105 ease-in duration-600 border-[1px] border-gray-300 rounded-lg shadow-md p-2 "
+            className=" mb-20 md:mt-4 bg-white/50 text-gray-800 hover: hover:scale-105 ease-in duration-600 border-[1px] border-gray-300 bg-gray-100 rounded-lg shadow-md p-2 "
             disabled={!isVerified}
           >
             {texts.sendMessage}
