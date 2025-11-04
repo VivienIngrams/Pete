@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  color-scheme: light only;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  background-color: white !important;
+  color-scheme: light only;
+}
+
+body {
+  background-color: white !important;
+  color: black !important;
+  /* Prevent any dark mode transitions */
+  transition: none !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-color: white !important;
+    color: black !important;
+  }
+}
+
 html, body {
   font-size: 14px;
   font-family: var(--font-family-roboto);
