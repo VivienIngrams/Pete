@@ -99,3 +99,6 @@ img {
     margin-bottom: -0.15rem; /* md:-mb-2 */
   }
 }
+ .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }

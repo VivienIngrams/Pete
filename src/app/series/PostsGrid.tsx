@@ -61,7 +61,7 @@ export default function PostsGrid({ posts, language }: Props) {
   const repeatedPosts = [...posts, ...posts]
 
   return (
-    <section className="relative w-full">
+    <section className="relative w-full scrollbar-hide">
      
       <div
         ref={scrollContainerRef}
