@@ -9,7 +9,7 @@ module.exports = {
   darkMode: 'media', // ✅ Automatically respects device settings
   theme: {
     lineHeight: {
-      'tighter': '1.14',
+      'tighter': '1.18',
       'extratight': '0.97',
       'supertight': '0.9',
     },

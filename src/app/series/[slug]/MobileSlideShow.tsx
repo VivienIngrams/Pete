@@ -124,7 +124,7 @@ export default function MobileSlideShow({
   }
 
   return (
-    <div className="relative w-full h-screen text-black dark:text-black bg-white dark:bg-white mt-8 flex flex-col items-center justify-center">
+    <div className="relative w-full min-h-[95vh] max-h-[99vh] text-black dark:text-black bg-white dark:bg-white mt-8 flex flex-col items-center justify-center">
       <NavMenu
         slideshowMode={true}
         onDropdownToggle={setIsDropdownOpen}
@@ -148,7 +148,7 @@ export default function MobileSlideShow({
       {/* Image area with pinch zoom */}
       <div
         ref={imageWrapperRef}
-        className="relative w-full flex-shrink-0 flex items-center justify-center mt-8 touch-pan-x"
+        className="relative w-full flex-shrink-0  px-6 flex items-center justify-center mt-4 touch-pan-x"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -211,9 +211,9 @@ export default function MobileSlideShow({
       </div>
 
       {/* Caption */}
-      <div className="bg-white/50 dark:bg-white/50 w-full px-6 py-4 min-h-[120px]">
-        {currentTitle && <h1 className="text-[20px] ">{currentTitle}</h1>}
-        <div className="text-sm font-roboto uppercase tracking-wide mt-1 leading-extratight">
+      <div className="bg-white/50 dark:bg-white/50 w-full px-6 py-2 min-h-[120px]">
+        {currentTitle && <h1 className="text-[20px] leading-tighter ">{currentTitle}</h1>}
+        <div className="text-[12px] font-roboto uppercase mt-[2px] tracking-wide leading-tighter">
           {currentExcerpt && (
             <PortableText
               key={`${activeLang}-${forceRender}`}
@@ -223,7 +223,7 @@ export default function MobileSlideShow({
           {postExcerptBlocks && (
             <button
               onClick={() => setIsAboutOpen(true)}
-              className="text-sm uppercase tracking-wide mt-1"
+              className="text-[12px] uppercase tracking-wide mt-2"
             >
               {t.about}
             </button>
@@ -248,7 +248,7 @@ export default function MobileSlideShow({
               {t.close}
             </button>
 
-            <div className="flex justify-end mt-2">
+            <div className="flex justify-end mt-8">
               <LanguageSwitcher />
             </div>
 

@@ -34,7 +34,7 @@ export function BannerWithAutoFallback() {
       {/* Mobile banner */}
       <div className="md:hidden relative w-full h-auto flex flex-col items-center justify-center">
         {/* Light mode: Shifting */}
-        <div className="w-full h-[12vh] relative mr-5  mt-20">
+        <div className="w-full h-[10vh] relative mr-5  mt-16">
           <Image
             src="/shifting.png"
             alt="Shifting"
@@ -45,7 +45,7 @@ export function BannerWithAutoFallback() {
           />
         </div>
         {/* Dark mode: Shifting-white */}
-        <div className="w-full h-[12vh] relative mr-5 hidden">
+        <div className="w-full h-[10vh] relative mr-5 hidden">
           <Image
             src="/shifting-white.png"
             alt="Shifting (Dark)"
@@ -57,7 +57,7 @@ export function BannerWithAutoFallback() {
         </div>
 
         {/* Light mode: Ground */}
-        <div className="w-full h-[12vh] relative -mt-[4vh]">
+        <div className="w-full h-[10vh] relative -mt-[3vh]">
           <Image
             src="/ground.png"
             alt="Ground"
@@ -68,7 +68,7 @@ export function BannerWithAutoFallback() {
           />
         </div>
         {/* Dark mode: Ground-white */}
-        <div className="w-full h-[12vh] relative -mt-[4vh] hidden">
+        <div className="w-full h-[10vh] relative -mt-[3vh] hidden">
           <Image
             src="/ground-white.png"
             alt="Ground (Dark)"
@@ -80,14 +80,14 @@ export function BannerWithAutoFallback() {
         </div>
       </div>
 
-   <div className="pb-4 md:px-8 flex justify-center -mt-1">
+   <div className="pb-4 md:px-8 flex justify-center -mt-2">
   <h3 className="
     text-center 
     font-light 
     font-roboto 
     tracking-wide 
-    text-[18px] 
-    md:text-[17px]
+    text-[16px] 
+    md:text-[18px]
     leading-tighter 
     text-black dark:text-black 
    

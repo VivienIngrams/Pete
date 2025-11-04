@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
 
     await transporter.sendMail({
       from: `"New Subscriber" <${process.env.USER}>`,
-      to: "studiolippmann@gmail.com",
+      to: "studiolippmannparis@gmail.com",
       subject: "New Newsletter Subscriber",
       html: `<p>New subscriber email: <strong>${email}</strong></p>`,
     });

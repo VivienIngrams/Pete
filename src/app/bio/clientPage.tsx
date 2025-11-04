@@ -54,7 +54,7 @@ export default function BioClient({ initialBioData }: { initialBioData: BioData 
         <LanguageSwitcher /> 
       </div>
 
-      <div className="min-h-screen my-8 md:my-40">
+      <div className="min-h-screen my-8 md:my-36">
         {/* Personal Section */}
         <section className="px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">

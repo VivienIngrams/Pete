@@ -176,14 +176,14 @@ export default function DesktopSlideShow({
       {/* Caption */}
       <div className="absolute bottom-12 left-6">
         {currentTitle && (
-          <h1 className=" md:text-[21px] font-light tracking-tight max-w-[calc(15vw-24px)] mb-2">
+          <h1 className=" md:text-[22px] font-light tracking-tight leading-tighter max-w-[calc(15vw-24px)]">
             {currentTitle}
           </h1>
         )}
 
         <div className=" uppercase md:text-sm tracking-wide  max-w-[calc(15vw-24px)]">
           {currentExcerpt && (
-            <div className="mb-2 leading-extratight">
+            <div className="mt-1 mb-2 leading-tighter">
               <PortableText
                 key={`${activeLang}-${forceRender}`}
                 value={currentExcerpt}

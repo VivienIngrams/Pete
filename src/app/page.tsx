@@ -33,7 +33,7 @@ export default async function HomePage() {
 
   return (
     // PostsPage.tsx
-    <div className="flex flex-col justify-evenly h-screen md:max-h-[96vh] bg-white dark:bg-white  text-black dark:text-black md:scrollbar-hide">
+    <div className="flex flex-col justify-evenly h-[95vh] md:max-h-[96vh] max-w-[99vw] bg-white dark:bg-white  text-black dark:text-black md:scrollbar-hide">
       <NavMenu />
 
       <BannerWithAutoFallback  />
@@ -42,7 +42,7 @@ export default async function HomePage() {
         <PostsGrid posts={posts} />
       </div>
 
-      <div className=" px-4 md:hidden">
+      <div className=" px-6 md:hidden">
         <PostsGridMobile posts={posts} />
       </div>
 

@@ -41,7 +41,7 @@ export default function PostsGridMobile({ posts, language }: Props) {
                   alt={title}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="100vw"
+                  sizes="90vw"
                 />
               ) : (
                 <div className="absolute inset-0 bg-gray-100" />
