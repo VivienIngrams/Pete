@@ -6,7 +6,7 @@ import BioClient from "./clientPage"
 export default async function BioPage() {
   const client = getClient({ token: readToken })
   const bioDataArray = await getBioPage(client, {
-    next: { revalidate: 1 },
+    next: { revalidate: 30 },
   })
 
   if (!bioDataArray || bioDataArray.length === 0) {

@@ -213,8 +213,8 @@ export const bioQuery = groq`*[_type == "bioContent"]{
 }`
 
 export async function getBioPage(client: SanityClient, options = {}) {
-  const bioPage = await client.fetch(bioQuery, options)
-  console.log(bioPage)
+  const bioPage = await client.fetch(bioQuery, options,  { cache: 'no-store' })
+ 
   return bioPage
 }
 

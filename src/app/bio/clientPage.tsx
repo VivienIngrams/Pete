@@ -28,24 +28,27 @@ export default function BioClient({ initialBioData }: { initialBioData: BioData 
   const personal = bioData.biography.personal[language] || bioData.biography.personal.fr
   const critic = bioData.biography.critic[language] || bioData.biography.critic.fr
 
-  const renderParagraphs = (blocks: PortableTextBlock[]) =>
-    blocks.map((block, index) => {
-      const text = block.children?.map((child: any) => child.text).join(" ") || ""
-      if (!text.trim()) return null
-      const first = index === 0
-      return (
-        <p
-          key={index}
-          className={`text-lg md:text-xl mb-6 font-light ${
-            first
-              ? "first-letter"
-              : "first-letter"
-          }`}
-        >
-          {text}
-        </p>
-      )
-    })
+ const renderParagraphs = (blocks: PortableTextBlock[]) =>
+  blocks.map((block, index) => {
+    const text = block.children
+      ?.map((child: any) => child.text)
+      .join("\n") // preserve soft line breaks
+      || ""
+
+    if (!text.trim()) return null
+
+    return (
+      <p key={index}  className={`text-lg md:text-xl mb-6 font-light first-letter   `}>
+        {text.split("\n").map((line, idx) => (
+          <span key={idx}>
+            {line}
+            <br />
+          </span>
+        ))}
+      </p>
+    )
+  })
+
 
   return (
     <div className="bg-white text-black min-h-screen">
@@ -57,9 +60,9 @@ export default function BioClient({ initialBioData }: { initialBioData: BioData 
       <div className="min-h-screen my-8 md:my-36">
         {/* Personal Section */}
         <section className="px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div className="lg:col-span-3">
-              <h2 className="text-base uppercase text-center md:text-left tracking-widest font-light sticky top-32">
+              <h2 className="text-lg uppercase text-center md:text-left font-light sticky top-32">
                 {personal.title}
               </h2>
             </div>
@@ -86,9 +89,9 @@ export default function BioClient({ initialBioData }: { initialBioData: BioData 
 
         {/* Critic Section */}
         <section className="px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div className="lg:col-span-3">
-              <h2 className="text-base uppercase tracking-widest text-center md:text-left font-light sticky top-32">
+              <h2 className="text-lg uppercase text-center md:text-left font-light sticky top-32">
                 {critic.title}
               </h2>
             </div>
