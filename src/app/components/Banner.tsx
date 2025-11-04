@@ -80,7 +80,7 @@ export function BannerWithAutoFallback() {
         </div>
       </div>
 
-   <div className="pb-4 md:px-8 flex justify-center -mt-2">
+   <div className="pb-2 md:px-8 flex justify-center -mt-2">
   <h3 className="
     text-center 
     font-light 
