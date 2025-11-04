@@ -102,7 +102,7 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose }) => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="bg-black text-black py-2 rounded-lg underline underline-offset-2  text-sm hover:bg-gray-800 transition disabled:opacity-50"
+                    className="bg-black text-white py-2 rounded-lg underline underline-offset-2  text-sm hover:bg-gray-800 transition disabled:opacity-50"
                   >
                     {loading ? 'Submitting...' : 'Subscribe'}
                   </button>
