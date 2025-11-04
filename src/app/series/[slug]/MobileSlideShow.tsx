@@ -26,6 +26,7 @@ export default function MobileSlideShow({
 }: Props) {
   const router = useRouter()
   const pathname = usePathname()
+  const isCommissionsPage = pathname.startsWith('/commissions')
   const { language: activeLang } = useLanguage()
 
   const [isAboutOpen, setIsAboutOpen] = useState(false)
@@ -50,7 +51,10 @@ export default function MobileSlideShow({
 
   // --- Data memoization ---
   const images = useMemo(() => post.images || [], [post.images])
-  const current = useMemo(() => images[currentIndex] || null, [images, currentIndex])
+  const current = useMemo(
+    () => images[currentIndex] || null,
+    [images, currentIndex],
+  )
 
   const postTitle = useMemo(
     () => (activeLang === 'en' ? post.title_en || post.title : post.title),
@@ -145,92 +149,96 @@ export default function MobileSlideShow({
         </button>
       </div>
 
-      {/* Image area with pinch zoom */}
-      <div
-        ref={imageWrapperRef}
-        className="relative w-full flex-shrink-0  px-6 flex items-center justify-center mt-4 touch-pan-x"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
-        <div className="relative w-full overflow-hidden h-auto  scale-[1.01] flex items-center justify-center">
-          {isImageLoading && images.length > 0 && (
-            <div className="absolute inset-0 flex items-center justify-center bg-white dark:bg-white animate-pulse">
-              <div className="w-16 h-16 border-4 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
-            </div>
-          )}
+      <div className="min-h-[55vh] flex flex-col justify-between space-between">
+        <div>
+        {/* Image area with pinch zoom */}
+        <div
+          ref={imageWrapperRef}
+          className="relative w-full flex-shrink-0  px-6 flex items-center justify-center mt-4 touch-pan-x"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div className="relative w-full overflow-hidden h-auto  scale-[1.01] flex items-center justify-center">
+            {isImageLoading && images.length > 0 && (
+              <div className="absolute inset-0 flex items-center justify-center bg-white dark:bg-white animate-pulse">
+                <div className="w-16 h-16 border-4 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            )}
 
-          {!images.length ? (
-            <div className="w-full h-[60vh] flex items-center justify-center text-sm uppercase">
-              No images available
-            </div>
-          ) : (
-            current?.image && (
-              <TransformWrapper
-                initialScale={1}
-                minScale={1}
-                maxScale={4}
-                doubleClick={{ disabled: true }}
-                wheel={{ disabled: true }}
-                pinch={{ step: 0.08 }}
-                onZoomStop={({ state }) => setZoomed(state.scale > 1.05)}
+            {!images.length ? (
+              <div className="w-full h-[60vh] flex items-center justify-center text-sm uppercase">
+                No images available
+              </div>
+            ) : (
+              current?.image && (
+                <TransformWrapper
+                  initialScale={1}
+                  minScale={1}
+                  maxScale={4}
+                  doubleClick={{ disabled: true }}
+                  wheel={{ disabled: true }}
+                  pinch={{ step: 0.08 }}
+                  onZoomStop={({ state }) => setZoomed(state.scale > 1.05)}
+                >
+                  <TransformComponent wrapperClass="flex items-center justify-center">
+                    <Image
+                      src={urlForImage(current.image).url() || ''}
+                      alt={currentTitle || post.title}
+                      width={500}
+                      height={500}
+                      className={`w-auto h-auto object-contain block  transition-opacity duration-500 ${
+                        isImageLoading ? 'opacity-0' : 'opacity-100'
+                      }`}
+                      onLoad={() => setIsImageLoading(false)}
+                      priority={currentIndex === 0}
+                    />
+                  </TransformComponent>
+                </TransformWrapper>
+              )
+            )}
+          </div>
+        </div>
+
+        {/* Navigation Arrows */}
+        <div className="flex w-full justify-between px-3 mt-4 md:hidden">
+          <button
+            onClick={handlePrev}
+            className="rounded-full bg-white/60 active:bg-white/90 dark:bg-white/60 active:dark:bg-white/90 transition"
+          >
+            <ChevronLeft className="w-8 h-8" />
+          </button>
+          <button
+            onClick={handleNext}
+            className="rounded-full bg-white/60 active:bg-white/90 dark:bg-white/60 active:dark:bg-white/90 transition"
+          >
+            <ChevronRight className="w-8 h-8" />
+          </button>
+        </div>
+</div>
+        {/* Caption */}
+        <div className="bg-white/50 dark:bg-white/50 w-full px-6 py-2 ">
+          {currentTitle && (
+            <h1 className="text-[20px] leading-tighter ">{currentTitle}</h1>
+          )}
+          <div className={`text-[12px] ${!isCommissionsPage && 'min-h-[100px]'} font-roboto uppercase mt-[2px] tracking-wide leading-tighter`}>
+            {currentExcerpt && (
+              <PortableText
+                key={`${activeLang}-${forceRender}`}
+                value={currentExcerpt}
+              />
+            )}
+            {postExcerptBlocks && (
+              <button
+                onClick={() => setIsAboutOpen(true)}
+                className="text-[12px] uppercase tracking-wide mt-2"
               >
-                <TransformComponent wrapperClass="flex items-center justify-center">
-                  <Image
-                    src={urlForImage(current.image).url() || ''}
-                    alt={currentTitle || post.title}
-                    width={500}
-                    height={500}
-                    className={`w-auto h-auto object-contain block  transition-opacity duration-500 ${
-                      isImageLoading ? 'opacity-0' : 'opacity-100'
-                    }`}
-                    onLoad={() => setIsImageLoading(false)}
-                    priority={currentIndex === 0}
-                  />
-                </TransformComponent>
-              </TransformWrapper>
-            )
-          )}
+                {t.about}
+              </button>
+            )}
+          </div>
         </div>
       </div>
-
-      {/* Navigation Arrows */}
-      <div className="flex w-full justify-between px-3 mt-4 md:hidden">
-        <button
-          onClick={handlePrev}
-          className="rounded-full bg-white/60 active:bg-white/90 dark:bg-white/60 active:dark:bg-white/90 transition"
-        >
-          <ChevronLeft className="w-8 h-8" />
-        </button>
-        <button
-          onClick={handleNext}
-          className="rounded-full bg-white/60 active:bg-white/90 dark:bg-white/60 active:dark:bg-white/90 transition"
-        >
-          <ChevronRight className="w-8 h-8" />
-        </button>
-      </div>
-
-      {/* Caption */}
-      <div className="bg-white/50 dark:bg-white/50 w-full px-6 py-2 min-h-[120px]">
-        {currentTitle && <h1 className="text-[20px] leading-tighter ">{currentTitle}</h1>}
-        <div className="text-[12px] font-roboto uppercase mt-[2px] tracking-wide leading-tighter">
-          {currentExcerpt && (
-            <PortableText
-              key={`${activeLang}-${forceRender}`}
-              value={currentExcerpt}
-            />
-          )}
-          {postExcerptBlocks && (
-            <button
-              onClick={() => setIsAboutOpen(true)}
-              className="text-[12px] uppercase tracking-wide mt-2"
-            >
-              {t.about}
-            </button>
-          )}
-        </div>
-      </div>
-
       {/* About Modal */}
       {isAboutOpen && (
         <div
