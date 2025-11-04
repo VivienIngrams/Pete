@@ -11,6 +11,7 @@ import {
 
 import { BannerWithAutoFallback } from './components/Banner'
 import NavMenu from './components/NavMenu'
+import PostsGridMobile from './series/PostGridMobile'
 import PostsGrid from './series/PostsGrid'
 
 
@@ -37,8 +38,12 @@ export default async function HomePage() {
 
       <BannerWithAutoFallback  />
 
-      <div className=" px-4 ">
+     <div className="hidden md:block">
         <PostsGrid posts={posts} />
+      </div>
+
+      <div className=" px-4 md:hidden">
+        <PostsGridMobile posts={posts} />
       </div>
 
     

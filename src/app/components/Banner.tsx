@@ -1,15 +1,11 @@
 'use client'
 
 import Image from 'next/image'
+
 import { useLanguage } from './context/LanguageProvider'
 
 export function BannerWithAutoFallback() {
   const { language } = useLanguage()
-
-  const captions = {
-    en: 'Slow photography for an accelerating world',
-    fr: 'Photographie lente pour un monde qui s’accélère',
-  }
 
   return (
     <div id="series-banner" className="z-20 bg-white dark:bg-white">
@@ -38,7 +34,7 @@ export function BannerWithAutoFallback() {
       {/* Mobile banner */}
       <div className="md:hidden relative w-full h-auto flex flex-col items-center justify-center">
         {/* Light mode: Shifting */}
-        <div className="w-full h-[12vh] relative mr-5  mt-8">
+        <div className="w-full h-[12vh] relative mr-5  mt-20">
           <Image
             src="/shifting.png"
             alt="Shifting"
@@ -84,10 +80,34 @@ export function BannerWithAutoFallback() {
         </div>
       </div>
 
-      {/* Caption */}
-      <div className="pb-4 md:px-8 flex justify-center -mt-1 font-light font-roboto tracking-wide text-lg md:text-xl 3xl:text-2xl text-black dark:text-black">
-        <h3>{captions[language]}</h3>
-      </div>
+   <div className="pb-4 md:px-8 flex justify-center -mt-1">
+  <h3 className="
+    text-center 
+    font-light 
+    font-roboto 
+    tracking-wide 
+    text-[18px] 
+    md:text-[17px]
+    leading-tighter 
+    text-black dark:text-black 
+   
+  ">
+    {language === 'en' ? (
+      <>
+        Slow photography
+        <br className="block md:hidden" />
+        in an accelerating world
+      </>
+    ) : (
+      <>
+        Photographie lente
+        <br className="block md:hidden" />
+        dans un monde qui s’accélère
+      </>
+    )}
+  </h3>
+</div>
+
     </div>
   )
 }

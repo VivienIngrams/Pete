@@ -124,7 +124,7 @@ export default function MobileSlideShow({
   }
 
   return (
-    <div className="relative w-full h-screen text-black dark:text-black bg-white dark:bg-white mt-6 flex flex-col items-center justify-center">
+    <div className="relative w-full h-screen text-black dark:text-black bg-white dark:bg-white mt-8 flex flex-col items-center justify-center">
       <NavMenu
         slideshowMode={true}
         onDropdownToggle={setIsDropdownOpen}
@@ -148,7 +148,7 @@ export default function MobileSlideShow({
       {/* Image area with pinch zoom */}
       <div
         ref={imageWrapperRef}
-        className="relative w-full flex-shrink-0 flex items-center justify-center mt-6 touch-pan-x"
+        className="relative w-full flex-shrink-0 flex items-center justify-center mt-8 touch-pan-x"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}

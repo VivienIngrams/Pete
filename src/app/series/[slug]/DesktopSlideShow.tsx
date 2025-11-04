@@ -176,7 +176,7 @@ export default function DesktopSlideShow({
       {/* Caption */}
       <div className="absolute bottom-12 left-6">
         {currentTitle && (
-          <h1 className="text-lg md:text-[21px] font-light tracking-tight max-w-[calc(15vw-24px)] mb-2">
+          <h1 className=" md:text-[21px] font-light tracking-tight max-w-[calc(15vw-24px)] mb-2">
             {currentTitle}
           </h1>
         )}
