@@ -30,24 +30,20 @@ export default function BioClient({ initialBioData }: { initialBioData: BioData 
 
  const renderParagraphs = (blocks: PortableTextBlock[]) =>
   blocks.map((block, index) => {
-    const text = block.children
-      ?.map((child: any) => child.text)
-      .join("\n") // preserve soft line breaks
-      || ""
-
-    if (!text.trim()) return null
+    if (block._type !== "block") return null; // skip non-text blocks
+    const text = block.children?.map((child: any) => child.text).join("") || "";
+    if (!text.trim()) return null;
 
     return (
-      <p key={index}  className={`text-lg md:text-xl mb-6 font-light first-letter   `}>
-        {text.split("\n").map((line, idx) => (
-          <span key={idx}>
-            {line}
-            <br />
-          </span>
-        ))}
+      <p
+        key={index}
+        className="text-lg md:text-xl mb-6 font-light first-letter:text-4xl  first-letter:mr-0"
+      >
+        {text}
       </p>
-    )
-  })
+    );
+  });
+
 
 
   return (
