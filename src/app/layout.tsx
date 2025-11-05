@@ -22,15 +22,8 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: 'Peter Lippmann',
   description: 'Art Photography',
-  // Force light theme metadata
-  themeColor: '#ffffff',
   manifest: '/manifest.json',
-  // Disable dark mode for Apple devices
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: 'default',
-    title: 'Peter Lippmann'
-  },
+ 
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

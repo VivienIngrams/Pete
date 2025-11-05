@@ -63,7 +63,9 @@ export default function DesktopSlideShow({
 
   const hasImages = post.images && post.images.length > 0
   const current = hasImages ? post.images[currentIndex] : null
-
+  const aspectRatio = current?.image?.asset.metadata?.dimensions?.aspectRatio 
+  const isWideImage = aspectRatio >= 1.5
+console.log({ current, aspectRatio, isWideImage })
   // --- Memoized titles & excerpts ---
   const postTitle = useMemo(
     () => (activeLang === 'en' ? post.title_en || post.title : post.title),
@@ -131,7 +133,7 @@ export default function DesktopSlideShow({
             width={1920}
             height={1080}
             sizes="70vw"
-            className={`w-auto h-full object-contain transition-opacity duration-300 0_0_15px_rgba(0,0,0,0.1)]  max-w-[70vw] ${
+            className={`w-auto h-full object-contain transition-opacity duration-300   max-w-[70vw] ${
               isImageLoading ? 'opacity-0' : 'opacity-100'
             }`}
             onLoad={() => setIsImageLoading(false)}
@@ -176,7 +178,11 @@ export default function DesktopSlideShow({
       {/* Caption */}
       <div className="absolute bottom-12 left-6">
         {currentTitle && (
-          <h1 className=" md:text-[22px] font-light tracking-tight leading-tighter max-w-[calc(15vw-24px)]">
+          <h1
+            className={`md:text-[20px] font-light tracking-tight leading-tighter ${
+              isWideImage ? 'max-w-[calc(15vw-24px)]' : 'max-w-[20vw]'
+            }`}
+          >
             {currentTitle}
           </h1>
         )}

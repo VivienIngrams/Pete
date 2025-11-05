@@ -19,7 +19,7 @@ export default async function PostPage({
 
   // Fetch the post by slug
   const post: Post | null = await getPost(client, params.slug, language, {
-    next: { revalidate: 60 },
+    next: { revalidate: 30 },
   })
 
 
