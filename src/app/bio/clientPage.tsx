@@ -52,7 +52,7 @@ export default function BioClient({
     })
 
   return (
-    <div className="bg-white text-black min-h-screen">
+    <div className="!bg-white !text-black min-h-screen">
       <NavMenu />
       <div className="w-full flex justify-end md:hidden pt-16 pr-6 z-50">
         <LanguageSwitcher />

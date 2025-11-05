@@ -24,7 +24,7 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: 'Peter Lippmann',
-  description: 'Discover the poetic photography of Peter Lippmann — blending nature, luxury, and time in timeless still-life compositions that reveal beauty in decay.',
+  description: 'Discover the poetic photography of Peter Lippmann — timeless still-life compositions that reveal beauty in decay, nature and the ordinary',
   manifest: '/manifest.json',
  
 }
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${roboto.variable}`}>
-      <body className="h-full font-roboto bg-white dark:bg-white  text-black dark:text-black ">
+      <body className="h-full font-roboto !bg-white dark:!bg-white  !text-black dark:!text-black ">
         <LanguageProvider>
           <ScrollPositionProvider>
           <ThemeProvider />

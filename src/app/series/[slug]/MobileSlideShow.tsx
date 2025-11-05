@@ -118,7 +118,7 @@ export default function MobileSlideShow({
   }
 
   return (
-    <div className="relative w-full min-h-[95vh] max-h-[99vh] text-black bg-white mt-12 flex flex-col items-center justify-center">
+    <div className="relative w-full min-h-[95vh] max-h-[99vh] !text-black !bg-white mt-12 flex flex-col items-center justify-center">
       <NavMenu
         slideshowMode
         onDropdownToggle={setIsDropdownOpen}
@@ -127,13 +127,13 @@ export default function MobileSlideShow({
 
       {/* Top bar */}
       <div
-        className={`fixed top-0 left-0 z-[900] bg-white flex items-center h-12 p-6 ${
+        className={`fixed top-0 left-0 z-[900] !bg-white flex items-center h-12 p-6 ${
           isDropdownOpen || isAboutOpen ? 'hidden' : 'block'
         }`}
       >
         <button
           onClick={handleClose}
-          className="text-black text-sm tracking-wide uppercase mt-2"
+          className="!text-black text-sm tracking-wide uppercase mt-2"
         >
           {t.close}
         </button>
@@ -152,7 +152,7 @@ export default function MobileSlideShow({
           >
             <div className="relative w-full overflow-hidden flex items-center justify-center">
               {isImageLoading && images.length > 0 && (
-                <div className="absolute inset-0 flex items-center justify-center bg-white animate-pulse">
+                <div className="absolute inset-0 flex items-center justify-center !bg-white animate-pulse">
                   <div className="w-16 h-16 border-4 border-gray-400 border-t-transparent rounded-full animate-spin" />
                 </div>
               )}
@@ -195,13 +195,13 @@ export default function MobileSlideShow({
           <div className="flex w-full justify-between px-3 mt-4 md:hidden">
             <button
               onClick={handlePrev}
-              className="rounded-full bg-white/60 active:bg-white/90 transition"
+              className="rounded-full !bg-white/60 active:!bg-white/90 transition"
             >
               <ChevronLeft className="w-8 h-8" />
             </button>
             <button
               onClick={handleNext}
-              className="rounded-full bg-white/60 active:bg-white/90 transition"
+              className="rounded-full !bg-white/60 active:!bg-white/90 transition"
             >
               <ChevronRight className="w-8 h-8" />
             </button>
@@ -209,7 +209,7 @@ export default function MobileSlideShow({
         </div>
 
         {/* Caption */}
-        <div className="bg-white/50 w-full px-6 py-2">
+        <div className="!bg-white/50 w-full px-6 py-2">
           {currentTitle && <h1 className="text-lg leading-tighter">{currentTitle}</h1>}
           <div
             className={`text-[12px] ${
@@ -234,7 +234,7 @@ export default function MobileSlideShow({
       {/* About Modal */}
       {isAboutOpen && (
         <div
-          className="fixed inset-0 z-[1100] text-black bg-white/90 flex items-center justify-center px-4"
+          className="fixed inset-0 z-[1100] !text-black !bg-white/90 flex items-center justify-center px-4"
           onClick={() => setIsAboutOpen(false)}
         >
           <div
@@ -244,7 +244,7 @@ export default function MobileSlideShow({
           >
             <button
               onClick={() => setIsAboutOpen(false)}
-              className="text-sm text-left fixed top-0 py-4 left-4 right-0 tracking-wide uppercase bg-white"
+              className="text-sm text-left fixed top-0 py-4 left-4 right-0 tracking-wide uppercase !bg-white"
             >
               {t.close}
             </button>

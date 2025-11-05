@@ -33,7 +33,7 @@ export default async function PostsPage() {
   return (
     <>
       <NavMenu />
-      <div className="h-screen flex flex-col justify-evenly bg-white dark:bg-white text-black dark:text-black">
+      <div className="h-screen flex flex-col justify-evenly !bg-white dark:!bg-white !text-black dark:!text-black">
         <CommissionsBanner />
 
         <div className="flex flex-col justify-center items-center md:px-[12vw]">

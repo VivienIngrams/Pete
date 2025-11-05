@@ -40,7 +40,7 @@ export default function Socials() {
       {socialLinks.map(({ label, Icon, href }) => (
         <Link
           aria-label={label}
-          className=" rounded-md  transition-all duration-300 hover:text-black"
+          className=" rounded-md  transition-all duration-300 hover:!text-black"
           href={href}
           key={label}
           target="_blank"

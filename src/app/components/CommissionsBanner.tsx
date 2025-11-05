@@ -13,7 +13,7 @@ export default function CommissionsBanner() {
   }
 
   return (
-    <div id="series-banner" className="z-20 bg-white dark:bg-white">
+    <div id="series-banner" className="z-20 !bg-white dark:!bg-white">
       {/* Desktop / common banner */}
       <div className="mt-[8vh] relative h-[8vh] w-[70vw] md:w-[40vw] mx-auto md:flex items-center justify-center">
         {/* Light mode */}
@@ -36,7 +36,7 @@ export default function CommissionsBanner() {
         />
       </div>
 
-      <div className="py-2 px-6 md:px-8 flex justify-center font-light font-roboto leading-none tracking-wide text-sm md:text-base 3xl:text-lg text-black dark:text-black">
+      <div className="py-2 px-6 md:px-8 flex justify-center font-light font-roboto leading-none tracking-wide text-sm md:text-base 3xl:text-lg !text-black dark:!text-black">
         <h3 className="text-center md:max-w-[50%]">
           {captions[language]}
           <a

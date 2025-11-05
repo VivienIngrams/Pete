@@ -90,7 +90,7 @@ export default function PostsGridMobile({ posts, language }: Props) {
             </div>
 
             <div className="text-center mt-2">
-              <h3 className="text-black dark:text-black font-light text-lg transition-all duration-300">
+              <h3 className="!text-black dark:!text-black font-light text-lg transition-all duration-300">
                 <span className="group-hover:hidden">{title}</span>
                 <span className="hidden group-hover:inline underline underline-offset-2 font-normal tracking-tight">
                   View series
