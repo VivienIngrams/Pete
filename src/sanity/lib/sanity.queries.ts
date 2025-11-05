@@ -94,18 +94,46 @@ export async function getSeriesGridPosts(
 
 // Query to fetch a single post by slug
 export const postBySlugQuery = groq`
-  *[_type == "post" && slug.current == $slug ][0] {
-    _id,
-    title,
-    title_en,
-    slug,
-       excerpt,
-    excerpt_en,
-        images[] {
-      ...,
-      "aspectRatio": asset->metadata.dimensions.aspectRatio
+ *[_type == "post" && slug.current == $slug][0]{
+  _id,
+  _type,
+  title,
+  title_en,
+  excerpt,
+  excerpt_en,
+  slug,
+  mainImage{
+    _type,
+    asset->{
+      _id,
+      url,
+      metadata{
+        dimensions{
+          aspectRatio
+        }
+      }
     }
+  },
+  images[]{
+    _key,
+    image{
+      _type,
+      asset->{
+        _id,
+        url,
+        metadata{
+          dimensions{
+            aspectRatio
+          }
+        }
+      }
+    },
+    title_fr,
+    title_en,
+    excerpt_fr,
+    excerpt_en
   }
+}
 `
 
 // Function to fetch a post by its slug

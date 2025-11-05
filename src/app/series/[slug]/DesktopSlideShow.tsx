@@ -64,7 +64,7 @@ export default function DesktopSlideShow({
   const hasImages = post.images && post.images.length > 0
   const current = hasImages ? post.images[currentIndex] : null
   const aspectRatio = current?.image?.asset.metadata?.dimensions?.aspectRatio 
-  const isWideImage = aspectRatio >= 1.5
+  const isWideImage = aspectRatio >= 1.3
 console.log({ current, aspectRatio, isWideImage })
   // --- Memoized titles & excerpts ---
   const postTitle = useMemo(
