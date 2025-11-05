@@ -242,7 +242,7 @@ export default function MobileSlideShow({
       {/* About Modal */}
       {isAboutOpen && (
         <div
-          className="fixed inset-0 z-[1100] text-black dark:text-black bg-white/90 dark:bg-white/80 flex items-center justify-center px-4"
+          className="fixed inset-0 z-[1100] text-black dark:text-black bg-white/90 dark:bg-white/90 flex items-center justify-center px-4"
           onClick={() => setIsAboutOpen(false)}
         >
           <div
