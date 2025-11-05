@@ -219,7 +219,7 @@ export default function MobileSlideShow({
         {/* Caption */}
         <div className="bg-white/50 dark:bg-white/50 w-full px-6 py-2 ">
           {currentTitle && (
-            <h1 className="text-[20px] leading-tighter ">{currentTitle}</h1>
+            <h1 className="text-lg leading-tighter ">{currentTitle}</h1>
           )}
           <div className={`text-[12px] ${!isCommissionsPage && 'min-h-[100px]'} font-roboto uppercase mt-[2px] tracking-wide leading-tighter`}>
             {currentExcerpt && (

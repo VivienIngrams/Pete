@@ -4,7 +4,7 @@ import { PortableText } from '@portabletext/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
-import { useEffect, useMemo,useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { useLanguage } from '~/app/components/context/LanguageProvider'
 import LanguageSwitcher from '~/app/components/LanguageSwitcher'
@@ -186,9 +186,13 @@ export default function DesktopSlideShow({
       <div className="absolute bottom-12 left-6">
         {currentTitle && (
           <h1
-            className={`md:text-lg font-light tracking-tight leading-tighter ${titleWidthClass}`}
+            className={`md:text-lg font-light tracking-tight  ${titleWidthClass}`}
           >
-            {currentTitle}
+            {currentTitle.split(' - ').map((part, index) => (
+              <span key={index} className="block leading-extratight">
+                {part}
+              </span>
+            ))}
           </h1>
         )}
 
