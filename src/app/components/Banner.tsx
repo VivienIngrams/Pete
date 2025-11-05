@@ -24,7 +24,7 @@ export function BannerWithAutoFallback() {
       <div className="hidden md:relative w-full md:mt-28 h-[12vh] md:flex items-center justify-center">
         {/* Light mode image */}
         <Image
-          src={forceDark ? "/shifting-ground-w.png" : "/shifting-ground.png"}
+          src={forceDark ? '/shifting-ground-w.png' : '/shifting-ground.png'}
           alt="Shifting Ground"
           fill
           sizes="40vw"
@@ -38,7 +38,7 @@ export function BannerWithAutoFallback() {
         {/* Light mode: Shifting */}
         <div className="w-full h-[10vh] relative mr-7  mt-16">
           <Image
-            src={forceDark ? "/shifting-white.png" : "/shifting.png"}
+            src={forceDark ? '/shifting-white.png' : '/shifting.png'}
             alt="Shifting"
             fill
             sizes="70vw"
@@ -46,11 +46,11 @@ export function BannerWithAutoFallback() {
             priority
           />
         </div>
-      
+
         {/* Light mode: Ground */}
         <div className="w-full h-[10vh] relative -mt-[3vh] ml-2">
           <Image
-            src={forceDark ? "ground-white.png" : "/ground.png"}
+            src={forceDark ? 'ground-white.png' : '/ground.png'}
             alt="Ground"
             fill
             sizes="70vw"
@@ -58,7 +58,6 @@ export function BannerWithAutoFallback() {
             priority
           />
         </div>
-       
       </div>
 
       <div className="pb-2 md:px-8 flex justify-center -mt-2 md:mt-0">
