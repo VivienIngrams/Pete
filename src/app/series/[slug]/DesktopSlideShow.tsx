@@ -186,10 +186,10 @@ export default function DesktopSlideShow({
       <div className="absolute bottom-12 left-6">
         {currentTitle && (
           <h1
-            className={`md:text-lg font-light tracking-tight  ${titleWidthClass}`}
+            className={`md:text-[19px] font-light tracking-tight  ${titleWidthClass}`}
           >
             {currentTitle.split(' - ').map((part, index) => (
-              <span key={index} className="block leading-extratight">
+              <span key={index} className="block leading-tighter">
                 {part}
               </span>
             ))}
