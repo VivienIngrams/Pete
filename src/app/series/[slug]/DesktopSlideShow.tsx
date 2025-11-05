@@ -26,13 +26,9 @@ export default function DesktopSlideShow({
   const pathname = usePathname()
   const [isAboutOpen, setIsAboutOpen] = useState(false)
   const [isImageLoading, setIsImageLoading] = useState(true)
-  const [forceRender, setForceRender] = useState(0)
+
 
   const { language: activeLang } = useLanguage()
-
-  useEffect(() => {
-    setForceRender((prev) => prev + 1)
-  }, [activeLang])
 
   useEffect(() => {
     setIsImageLoading(true)
@@ -73,20 +69,21 @@ export default function DesktopSlideShow({
     titleWidthClass = 'max-w-[calc(15vw-24px)]' // very wide landscape
   }
 
-  // --- Memoized titles & excerpts ---
-  const postTitle = useMemo(
-    () => (activeLang === 'en' ? post.title_en || post.title : post.title),
-    [activeLang, post.title, post.title_en],
-  )
-  const currentTitle = useMemo(() => {
-    if (!current) return ''
-    return (
-      (activeLang === 'en'
-        ? current.title_en || current.title_fr
-        : current.title_fr || current.title_en) ||
-      `${postTitle} ${currentIndex + 1}`
-    )
-  }, [activeLang, current, currentIndex, postTitle])
+  const postExcerptBlocks =
+    activeLang === 'en'
+      ? post.excerpt_en || post.excerpt
+      : post.excerpt || post.excerpt_en
+
+  const postTitleLang =
+    activeLang === 'en'
+      ? post.title_en || post.title
+      : post.title || post.title_en
+
+  const currentTitleLang = current
+    ? activeLang === 'en'
+      ? current.title_en || current.title_fr
+      : current.title_fr || current.title_en
+    : `${postTitleLang} ${currentIndex + 1}`
 
   const currentExcerpt = useMemo(() => {
     if (!current) return null
@@ -111,12 +108,6 @@ export default function DesktopSlideShow({
     }
   }
 
-  const postExcerptBlocks = useMemo(() => {
-    return activeLang === 'en'
-      ? post.excerpt_en || post.excerpt
-      : post.excerpt || post.excerpt_en
-  }, [activeLang, post])
-
   const t = {
     about: activeLang === 'en' ? 'about' : 'à propos',
     close: activeLang === 'en' ? 'close' : 'fermer',
@@ -136,7 +127,7 @@ export default function DesktopSlideShow({
         current?.image && (
           <Image
             src={urlForSlideshow(current.image, 1920)}
-            alt={currentTitle || post.title}
+            alt={currentTitleLang || post.title}
             width={1920}
             height={1080}
             sizes="70vw"
@@ -184,11 +175,11 @@ export default function DesktopSlideShow({
 
       {/* Caption */}
       <div className="absolute bottom-12 left-6">
-        {currentTitle && (
+        {currentTitleLang && (
           <h1
-            className={`md:text-[19px] font-light tracking-tight  ${titleWidthClass}`}
+            className={`md:text- font-light tracking-tight  ${titleWidthClass}`}
           >
-            {currentTitle.split(' - ').map((part, index) => (
+            {currentTitleLang.split(' - ').map((part, index) => (
               <span key={index} className="block leading-tighter">
                 {part}
               </span>
@@ -200,7 +191,7 @@ export default function DesktopSlideShow({
           {currentExcerpt && (
             <div className="mt-1 mb-2 leading-tighter">
               <PortableText
-                key={`${activeLang}-${forceRender}`}
+                 key={`${activeLang}-${post.slug.current}`}
                 value={currentExcerpt}
               />
             </div>
@@ -230,6 +221,7 @@ export default function DesktopSlideShow({
             {t.close}
           </button>
           <div
+            key={`${activeLang}-${post.slug.current}`} // 👈 this forces full remount
             className="relative max-w-2xl w-full max-h-[80vh] overflow-auto hide-scrollbar"
             onClick={(e) => e.stopPropagation()}
           >
@@ -237,12 +229,15 @@ export default function DesktopSlideShow({
               <LanguageSwitcher />
             </div>
 
-            <h2 className="text-3xl font-normal mb-4">{postTitle}</h2>
+            <h2 className="text-3xl font-normal mb-4">{postTitleLang}</h2>
 
-            <div className=" portable-text text-base  text-justify mb-6">
+            <div className="portable-text text-base text-justify mb-6">
               {postExcerptBlocks && postExcerptBlocks.length ? (
-                <div className="portable-text">
-                  <PortableText key={activeLang} value={postExcerptBlocks} />
+                <div key={activeLang}  className="portable-text">
+                  <PortableText
+                    key={`${activeLang}-${post.slug.current}`} // 👈 ensure this key changes on switch
+                    value={postExcerptBlocks}
+                  />
                 </div>
               ) : (
                 <p>No description available.</p>
