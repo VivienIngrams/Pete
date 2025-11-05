@@ -1,13 +1,15 @@
 'use client'
 
 import type { PortableTextBlock } from '@portabletext/types'
-import { useState } from 'react'
-import { useLanguage } from '../components/context/LanguageProvider'
-import NavMenu from '../components/NavMenu'
-import LanguageSwitcher from '../components/LanguageSwitcher'
-import { urlForThumbnail } from '~/sanity/lib/sanity.image'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
+
+import { urlForThumbnail } from '~/sanity/lib/sanity.image'
+
+import { useLanguage } from '../components/context/LanguageProvider'
+import LanguageSwitcher from '../components/LanguageSwitcher'
+import NavMenu from '../components/NavMenu'
 interface BiographyContent {
   title: string
   biographyText: PortableTextBlock[]
@@ -44,7 +46,7 @@ export default function BioClient({
       return (
         <p
           key={index}
-          className="text-lg md:text-xl mb-6 font-light first-letter:text-4xl  first-letter:mr-0"
+          className="text-lg md:text-xl mb-5 font-light first-letter:text-4xl  first-letter:mr-0"
         >
           {text}
         </p>
