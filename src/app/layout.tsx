@@ -21,7 +21,7 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: 'Peter Lippmann',
-  description: 'Art Photography',
+  description: 'Discover the poetic photography of Peter Lippmann — blending nature, luxury, and time in timeless still-life compositions that reveal beauty in decay.',
   manifest: '/manifest.json',
  
 }

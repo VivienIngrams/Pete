@@ -186,7 +186,7 @@ export default function DesktopSlideShow({
       <div className="absolute bottom-12 left-6">
         {currentTitle && (
           <h1
-            className={`md:text-[20px] font-light tracking-tight leading-tighter ${titleWidthClass}`}
+            className={`md:text-lg font-light tracking-tight leading-tighter ${titleWidthClass}`}
           >
             {currentTitle}
           </h1>
