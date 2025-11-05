@@ -1,14 +1,25 @@
 'use client'
 
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 
 import { useLanguage } from './context/LanguageProvider'
 
 export function BannerWithAutoFallback() {
   const { language } = useLanguage()
+  const [forceDark, setForceDark] = useState(false)
+
+  useEffect(() => {
+    const el = document.getElementById('bg-tester')
+    const bgColor = window.getComputedStyle(el).backgroundColor
+    setForceDark(bgColor !== 'rgb(255, 255, 255)')
+  }, [])
 
   return (
     <div id="series-banner" className="z-20 !bg-white dark:!bg-white">
+      {/* Test for forced dark bg */}
+      <div id="bg-tester" style={{ background: 'white', display: 'none' }} />
+
       {/* Desktop banner */}
       <div className="hidden md:relative w-full md:mt-28 h-[12vh] md:flex items-center justify-center">
         {/* Light mode image */}
@@ -80,8 +91,9 @@ export function BannerWithAutoFallback() {
         </div>
       </div>
 
-   <div className="pb-2 md:px-8 flex justify-center -mt-2 md:mt-0">
-  <h3 className="
+      <div className="pb-2 md:px-8 flex justify-center -mt-2 md:mt-0">
+        <h3
+          className="
     text-center 
     font-light 
     font-roboto 
@@ -91,23 +103,21 @@ export function BannerWithAutoFallback() {
     leading-tighter 
     !text-black dark:!text-black 
    
-  ">
-    {language === 'en' ? (
-      <>
-        Slow photography {' '}
-        <br className="block md:hidden" />
-        in an accelerating world
-      </>
-    ) : (
-      <>
-        Photographie lente {' '}
-        <br className="block md:hidden" />
-        dans un monde qui s’accélère
-      </>
-    )}
-  </h3>
-</div>
-
+  "
+        >
+          {language === 'en' ? (
+            <>
+              Slow photography <br className="block md:hidden" />
+              in an accelerating world
+            </>
+          ) : (
+            <>
+              Photographie lente <br className="block md:hidden" />
+              dans un monde qui s’accélère
+            </>
+          )}
+        </h3>
+      </div>
     </div>
   )
 }

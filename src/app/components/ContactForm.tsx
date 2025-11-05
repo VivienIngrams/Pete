@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useRef, useState, useEffect } from 'react'
-import { useLanguage } from './context/LanguageProvider'
+import React, { useEffect,useRef, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
+
+import { useLanguage } from './context/LanguageProvider'
 
 const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''
 

@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
+
 import { useLanguage } from '~/app/components/context/LanguageProvider'
 import { useScrollPosition } from '~/app/components/context/ScrollPositionProvider'
 import { urlForThumbnail } from '~/sanity/lib/sanity.image'

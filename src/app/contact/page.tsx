@@ -1,8 +1,8 @@
 import { cookies } from 'next/headers'
+import Link from 'next/link'
 
 import ContactForm from '../components/ContactForm'
 import NavMenu from '../components/NavMenu'
-import Link from 'next/link'
 
 export default function ContactPage() {
   const cookieStore = cookies()

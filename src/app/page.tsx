@@ -1,5 +1,4 @@
 import { cookies } from 'next/headers'
-import Image from 'next/image'
 
 import { readToken } from '~/sanity/lib/sanity.api'
 import { getClient } from '~/sanity/lib/sanity.client'

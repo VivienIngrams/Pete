@@ -1,7 +1,8 @@
 'use client'
 
+import { AnimatePresence,motion } from 'framer-motion'
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+
 import { useLanguage } from './context/LanguageProvider'
 
 interface SubscribeModalProps {
