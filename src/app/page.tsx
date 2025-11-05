@@ -33,7 +33,7 @@ export default async function HomePage() {
 
   return (
     // PostsPage.tsx
-    <div className="flex flex-col justify-evenly h-[95vh] md:max-h-[96vh] max-w-[99vw] bg-white dark:bg-white  text-black dark:text-black md:scrollbar-hide">
+    <div className="flex flex-col justify-evenly h-screen md:max-h-[96vh] max-w-[99vw] bg-white dark:bg-white  text-black dark:text-black md:scrollbar-hide">
       <NavMenu />
 
       <BannerWithAutoFallback  />

@@ -3,9 +3,9 @@
 import { PortableText } from '@portabletext/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
-import { useRouter, usePathname } from 'next/navigation'
+import { usePathname,useRouter } from 'next/navigation'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
+import { TransformComponent,TransformWrapper } from 'react-zoom-pan-pinch'
 
 import { useLanguage } from '~/app/components/context/LanguageProvider'
 import LanguageSwitcher from '~/app/components/LanguageSwitcher'
@@ -128,7 +128,7 @@ export default function MobileSlideShow({
   }
 
   return (
-    <div className="relative w-full min-h-[95vh] max-h-[99vh] text-black dark:text-black bg-white dark:bg-white mt-8 flex flex-col items-center justify-center">
+    <div className="relative w-full min-h-[95vh] max-h-[99vh] text-black dark:text-black bg-white dark:bg-white mt-12 flex flex-col items-center justify-center">
       <NavMenu
         slideshowMode={true}
         onDropdownToggle={setIsDropdownOpen}
@@ -143,7 +143,7 @@ export default function MobileSlideShow({
       >
         <button
           onClick={handleClose}
-          className="text-black dark:text-black text-sm tracking-wide uppercase mt-1"
+          className="text-black dark:text-black text-sm tracking-wide uppercase mt-2"
         >
           {t.close}
         </button>
@@ -246,7 +246,7 @@ export default function MobileSlideShow({
           onClick={() => setIsAboutOpen(false)}
         >
           <div
-            className="max-w-2xl w-full max-h-[90vh] overflow-auto p-6 -mt-12"
+            className="max-w-2xl w-full max-h-[90vh] overflow-auto p-4 -mt-10"
             onClick={(e) => e.stopPropagation()}
           >
             <button

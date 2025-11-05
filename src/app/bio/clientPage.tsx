@@ -104,7 +104,7 @@ export default function BioClient({
       </div>
       <div className="hidden md:block">
         <Link
-          href="https://peterlippmann.vercel.app/studio"
+          href="https://peterlippmann.com/studio"
           className="-center m-6 text-sm md:text-base text-gray-400 pb-4"
         >
           studio

@@ -105,7 +105,7 @@ const NavMenu = ({
       <div
         className={`md:hidden fixed top-0 left-0 w-full bg-white dark:bg-white ${slideshowMode ? 'z-[1002]' : 'z-50'} ${hideMenu ? 'hidden' : ''}`}
       >
-        <div className="flex items-center justify-between py-4 px-6">
+        <div className="flex items-center justify-between py-4 px-6 h-14">
           {!slideshowMode && (
             <Link
               href="/"

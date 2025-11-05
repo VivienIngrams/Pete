@@ -4,7 +4,7 @@ import { PortableText } from '@portabletext/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useMemo,useState } from 'react'
 
 import { useLanguage } from '~/app/components/context/LanguageProvider'
 import LanguageSwitcher from '~/app/components/LanguageSwitcher'
@@ -63,9 +63,16 @@ export default function DesktopSlideShow({
 
   const hasImages = post.images && post.images.length > 0
   const current = hasImages ? post.images[currentIndex] : null
-  const aspectRatio = current?.image?.asset.metadata?.dimensions?.aspectRatio 
-  const isWideImage = aspectRatio >= 1.3
-console.log({ current, aspectRatio, isWideImage })
+  const aspectRatio =
+    current?.image?.asset?.metadata?.dimensions?.aspectRatio || 1
+  let titleWidthClass = 'max-w-none' // default for portraits or undefined
+
+  if (aspectRatio >= 1 && aspectRatio < 1.7) {
+    titleWidthClass = 'max-w-[20vw]' // moderate landscape
+  } else if (aspectRatio >= 1.7) {
+    titleWidthClass = 'max-w-[calc(15vw-24px)]' // very wide landscape
+  }
+
   // --- Memoized titles & excerpts ---
   const postTitle = useMemo(
     () => (activeLang === 'en' ? post.title_en || post.title : post.title),
@@ -179,9 +186,7 @@ console.log({ current, aspectRatio, isWideImage })
       <div className="absolute bottom-12 left-6">
         {currentTitle && (
           <h1
-            className={`md:text-[20px] font-light tracking-tight leading-tighter ${
-              isWideImage ? 'max-w-[calc(15vw-24px)]' : 'max-w-[20vw]'
-            }`}
+            className={`md:text-[20px] font-light tracking-tight leading-tighter ${titleWidthClass}`}
           >
             {currentTitle}
           </h1>
