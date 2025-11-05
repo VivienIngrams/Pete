@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { useLanguage } from '~/app/components/context/LanguageProvider'
+import { useScrollPosition } from '~/app/components/context/ScrollPositionProvider'
 import { urlForThumbnail } from '~/sanity/lib/sanity.image'
 import type { Post } from '~/sanity/lib/sanity.queries'
 
@@ -16,12 +17,14 @@ type Props = {
 
 export default function PostsGrid({ posts, language }: Props) {
   const { language: activeLang } = useLanguage()
+  const { saveScrollPosition, getScrollPosition } = useScrollPosition()
   const lang = language || activeLang || 'en'
 
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
   const [mounted, setMounted] = useState(false)
+  const hasRestoredScroll = useRef(false)
 
   useEffect(() => {
     setMounted(true)
@@ -34,6 +37,24 @@ export default function PostsGrid({ posts, language }: Props) {
     setCanScrollLeft(scrollLeft > 0)
     setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10)
   }, [])
+
+  // Restore scroll position on mount
+// In PostsGrid.tsx, update the restoration useEffect:
+useEffect(() => {
+  if (!mounted || !scrollContainerRef.current || hasRestoredScroll.current) return
+
+  const savedPosition = getScrollPosition('series-grid')
+  if (savedPosition && typeof savedPosition === 'number') {
+    // Use setTimeout to ensure DOM is ready
+    setTimeout(() => {
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.scrollLeft = savedPosition
+        updateScrollButtons()
+      }
+    }, 100)
+  }
+  hasRestoredScroll.current = true
+}, [mounted, getScrollPosition, updateScrollButtons])
 
   useEffect(() => {
     if (!mounted) return
@@ -52,6 +73,13 @@ export default function PostsGrid({ posts, language }: Props) {
       left: direction === 'left' ? -scrollAmount : scrollAmount,
       behavior: 'smooth',
     })
+  }
+
+  // Save scroll position before navigating
+  const handleLinkClick = () => {
+    if (scrollContainerRef.current) {
+      saveScrollPosition('series-grid', scrollContainerRef.current.scrollLeft)
+    }
   }
 
   if (!mounted) {
@@ -91,6 +119,7 @@ export default function PostsGrid({ posts, language }: Props) {
               style={{
                 width: `${widthVh}vh`,
               }}
+              onClick={handleLinkClick}
             >
               <div
                 className="relative overflow-hidden w-full  mt-4"

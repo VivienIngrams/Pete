@@ -29,7 +29,7 @@ export default async function HomePage() {
 
   const posts: Post[] = orderedPosts.length
     ? orderedPosts
-    : await getPosts(client, language, { next: { revalidate: 600 } })
+    : await getPosts(client, language, { next: { revalidate: 600 } }) || []
 
   return (
     // PostsPage.tsx

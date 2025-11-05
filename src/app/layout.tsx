@@ -1,8 +1,11 @@
 import './globals.css'
+
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata, Viewport } from 'next'
 import { Roboto } from 'next/font/google'
+
 import { LanguageProvider } from './components/context/LanguageProvider'
+import { ScrollPositionProvider } from './components/context/ScrollPositionProvider'
 import ThemeProvider from './components/ThemeProvider'
 
 export const viewport: Viewport = {
@@ -31,8 +34,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${roboto.variable}`}>
       <body className="h-full font-roboto bg-white dark:bg-white  text-black dark:text-black ">
         <LanguageProvider>
+          <ScrollPositionProvider>
           <ThemeProvider />
           {children}
+          </ScrollPositionProvider>
           <Analytics />
         </LanguageProvider>
       </body>
