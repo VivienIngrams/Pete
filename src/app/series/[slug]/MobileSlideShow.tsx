@@ -183,6 +183,7 @@ export default function MobileSlideShow({
                         }`}
                         onLoad={() => setIsImageLoading(false)}
                         priority={currentIndex === 0}
+                        unoptimized
                       />
                     </TransformComponent>
                   </TransformWrapper>

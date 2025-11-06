@@ -137,6 +137,7 @@ export default function DesktopSlideShow({
             onLoad={() => setIsImageLoading(false)}
             priority={currentIndex === 0}
             quality={85}
+            unoptimized
           />
         )
       ) : (
