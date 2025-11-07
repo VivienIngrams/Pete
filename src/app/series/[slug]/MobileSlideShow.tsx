@@ -144,9 +144,7 @@ export default function MobileSlideShow({
 
       {/* Main content */}
       <div
-        className={`min-h-[95vh] flex flex-col justify-evenly w-full ${
-          currentIndex === 1 ? 'px-[2px]' : ''
-        }`}
+        className={`min-h-[95vh] flex flex-col justify-evenly w-full px-1`}
       >
         {' '}
         <div>
