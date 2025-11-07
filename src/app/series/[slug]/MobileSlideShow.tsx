@@ -45,7 +45,10 @@ export default function MobileSlideShow({
 
   // --- Data memoization ---
   const images = useMemo(() => post.images || [], [post.images])
-  const current = useMemo(() => images[currentIndex] || null, [images, currentIndex])
+  const current = useMemo(
+    () => images[currentIndex] || null,
+    [images, currentIndex],
+  )
 
   const postTitle = useMemo(
     () => (activeLang === 'en' ? post.title_en || post.title : post.title),
@@ -140,12 +143,12 @@ export default function MobileSlideShow({
       </div>
 
       {/* Main content */}
-      <div className="min-h-[55vh] flex flex-col justify-between">
+      <div className="min-h-[95vh] flex flex-col justify-evenly w-full">
         <div>
           {/* Image area with pinch zoom */}
           <div
             ref={imageWrapperRef}
-            className="relative w-full px-6 flex items-center justify-center mt-4 touch-pan-x"
+            className="relative w-full  flex items-center justify-center mt-4 touch-pan-x"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
@@ -193,7 +196,7 @@ export default function MobileSlideShow({
           </div>
 
           {/* Navigation Arrows */}
-          <div className="flex w-full justify-between px-3 mt-4 md:hidden">
+          <div className="flex w-full justify-between px-6 mt-4 md:hidden">
             <button
               onClick={handlePrev}
               className="rounded-full !bg-white/60 active:!bg-white/90 transition"
@@ -210,24 +213,31 @@ export default function MobileSlideShow({
         </div>
 
         {/* Caption */}
-        <div className="!bg-white/50 w-full px-6 py-2">
-          {currentTitle && <h1 className="text-lg leading-tighter">{currentTitle}</h1>}
-          <div
-            className={`text-[12px] ${
-              !isCommissionsPage && 'min-h-[100px]'
-            } font-roboto uppercase mt-[2px] tracking-wide leading-tighter`}
-          >
-            {currentExcerpt && (
-              <PortableText key={`${activeLang}-${post.slug.current}`} value={currentExcerpt} />
+        <div className="!bg-white w-full px-6 py-2 h-full flex flex-col justify-center">
+          <div>
+            {currentTitle && (
+              <h1 className="text-lg leading-tighter">{currentTitle}</h1>
             )}
-            {postExcerptBlocks && (
-              <button
-                onClick={() => setIsAboutOpen(true)}
-                className="text-[12px] uppercase tracking-wide mt-2"
-              >
-                {t.about}
-              </button>
-            )}
+            <div
+              className={`text-[12px] ${
+                !isCommissionsPage && 'min-h-[70px]'
+              } font-roboto uppercase mt-[2px] tracking-wide leading-tighter`}
+            >
+              {currentExcerpt && (
+                <PortableText
+                  key={`${activeLang}-${post.slug.current}`}
+                  value={currentExcerpt}
+                />
+              )}
+              {postExcerptBlocks && (
+                <button
+                  onClick={() => setIsAboutOpen(true)}
+                  className="text-[12px] uppercase tracking-wide mt-2"
+                >
+                  {t.about}
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -260,7 +270,7 @@ export default function MobileSlideShow({
 
             <div className="text-sm font-roboto text-justify">
               {postExcerptBlocks && postExcerptBlocks.length ? (
-                <div key={activeLang}  className="portable-text">
+                <div key={activeLang} className="portable-text">
                   <PortableText
                     key={`${activeLang}-${post.slug.current}`}
                     value={postExcerptBlocks}
