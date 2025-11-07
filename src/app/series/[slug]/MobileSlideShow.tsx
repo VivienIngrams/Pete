@@ -143,7 +143,12 @@ export default function MobileSlideShow({
       </div>
 
       {/* Main content */}
-      <div className="min-h-[95vh] flex flex-col justify-evenly w-full">
+      <div
+        className={`min-h-[95vh] flex flex-col justify-evenly w-full ${
+          currentIndex === 1 ? 'px-[2px]' : ''
+        }`}
+      >
+        {' '}
         <div>
           {/* Image area with pinch zoom */}
           <div
@@ -211,7 +216,6 @@ export default function MobileSlideShow({
             </button>
           </div>
         </div>
-
         {/* Caption */}
         <div className="!bg-white w-full px-6 py-2 h-full flex flex-col justify-center">
           <div>
