@@ -196,7 +196,7 @@ export default function MobileSlideShow({
           </div>
 
           {/* Navigation Arrows */}
-          <div className="flex w-full justify-between px-6 mt-4 md:hidden">
+          <div className="flex w-full justify-between px-10 mt-[2vh] md:hidden">
             <button
               onClick={handlePrev}
               className="rounded-full !bg-white/60 active:!bg-white/90 transition"
@@ -220,7 +220,7 @@ export default function MobileSlideShow({
             )}
             <div
               className={`text-[12px] ${
-                !isCommissionsPage && 'min-h-[70px]'
+                !isCommissionsPage && 'min-h-[60px]'
               } font-roboto uppercase mt-[2px] tracking-wide leading-tighter`}
             >
               {currentExcerpt && (
