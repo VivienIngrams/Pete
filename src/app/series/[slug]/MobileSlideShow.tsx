@@ -153,7 +153,7 @@ export default function MobileSlideShow({
           {/* Image area with pinch zoom */}
           <div
             ref={imageWrapperRef}
-            className="relative w-full  flex items-center justify-center mt-4 touch-pan-x"
+            className="relative w-full scale-101 flex items-center justify-center mt-4 touch-pan-x"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
