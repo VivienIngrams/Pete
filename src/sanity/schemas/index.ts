@@ -2,10 +2,10 @@ import { SchemaTypeDefinition } from 'sanity'
 
 import bio from './bio'
 import blockContent from './blockContent'
+import commission from './commission'
 import home from './homePage'
 import post from './post'
 import grid from './seriesGrid'
-import commission from './commission'
 
 
 export const schemaTypes = [post, blockContent]

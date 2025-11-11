@@ -13,7 +13,6 @@ import NavMenu from './components/NavMenu'
 import PostsGridMobile from './series/PostGridMobile'
 import PostsGrid from './series/PostsGrid'
 
-
 export default async function HomePage() {
   const client = getClient({ token: readToken })
 

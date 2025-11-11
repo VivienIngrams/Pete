@@ -143,15 +143,13 @@ export default function MobileSlideShow({
       </div>
 
       {/* Main content */}
-      <div
-        className={`min-h-[95vh] flex flex-col justify-evenly w-full px-1`}
-      >
+      <div className={`h-[calc(100vh-150px)] flex flex-col justify-center w-full px-2 mb-[100px]`}>
         {' '}
         <div>
           {/* Image area with pinch zoom */}
           <div
             ref={imageWrapperRef}
-            className="relative w-full scale-101 flex items-center justify-center mt-4 touch-pan-x"
+            className="relative w-full scale-101 flex items-center justify-center mt-2 touch-pan-x"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
@@ -214,32 +212,60 @@ export default function MobileSlideShow({
             </button>
           </div>
         </div>
-        {/* Caption */}
-        <div className="!bg-white w-full px-6 py-2 h-full flex flex-col justify-center">
-          <div>
-            {currentTitle && (
-              <h1 className="text-lg leading-tighter">{currentTitle}</h1>
+      </div>
+      {/* Caption */}
+      <div className="!bg-white fixed bottom-0 left-0 w-full px-6 py-2 flex flex-col justify-start">
+        <div>
+          {currentTitle && (
+            <h1 className="text-lg leading-tighter">{currentTitle}</h1>
+          )}
+          <div
+            className={`text-[12px] ${
+              !isCommissionsPage && 'min-h-[60px]'
+            } font-roboto uppercase mt-[2px] tracking-wide leading-tighter`}
+          >
+            {currentExcerpt && (
+              <PortableText
+                key={`${activeLang}-${post.slug.current}`}
+                value={currentExcerpt}
+              />
             )}
-            <div
-              className={`text-[12px] ${
-                !isCommissionsPage && 'min-h-[60px]'
-              } font-roboto uppercase mt-[2px] tracking-wide leading-tighter`}
-            >
-              {currentExcerpt && (
-                <PortableText
-                  key={`${activeLang}-${post.slug.current}`}
-                  value={currentExcerpt}
-                />
-              )}
-              {postExcerptBlocks && (
-                <button
-                  onClick={() => setIsAboutOpen(true)}
-                  className="text-[12px] uppercase tracking-wide mt-2"
-                >
-                  {t.about}
-                </button>
-              )}
-            </div>
+            {postExcerptBlocks && (
+              <button
+                onClick={() => setIsAboutOpen(true)}
+                className="text-[12px] uppercase tracking-wide mt-2"
+              >
+                {t.about}
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+      {/* Caption */}
+      <div className="!bg-white fixed bottom-0 left-0 w-full px-6 py-2 flex flex-col justify-start">
+        <div>
+          {currentTitle && (
+            <h1 className="text-lg leading-tighter">{currentTitle}</h1>
+          )}
+          <div
+            className={`text-[12px] ${
+              !isCommissionsPage && 'min-h-[60px]'
+            } font-roboto uppercase mt-[2px] tracking-wide leading-tighter`}
+          >
+            {currentExcerpt && (
+              <PortableText
+                key={`${activeLang}-${post.slug.current}`}
+                value={currentExcerpt}
+              />
+            )}
+            {postExcerptBlocks && (
+              <button
+                onClick={() => setIsAboutOpen(true)}
+                className="text-[12px] uppercase tracking-wide mt-2"
+              >
+                {t.about}
+              </button>
+            )}
           </div>
         </div>
       </div>

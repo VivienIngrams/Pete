@@ -18,13 +18,13 @@ export const urlForImage = (source: Image) => {
 }
 
 // Optimized for grid/thumbnail images - smaller and faster
-export const urlForThumbnail = (source: Image, width: number = 600) => {
+export const urlForThumbnail = (source: Image, width: number = 800) => {
   return imageBuilder
     .image(source)
     .width(width)
     .auto('format')
-    .quality(75)
-    .fit('max')
+    .quality(70) // was 75 → slightly smaller file
+    .fit('crop') // ensures tighter fit; avoids oversize
     .url()
 }
 

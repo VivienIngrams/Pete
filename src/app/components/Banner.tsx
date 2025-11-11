@@ -21,12 +21,12 @@ export function BannerWithAutoFallback() {
       <div id="bg-tester" style={{ background: 'white', display: 'none' }} />
 
       {/* Desktop banner */}
-      <div className="hidden md:relative w-full md:mt-28 h-[12vh] md:flex items-center justify-center">
+      <div className="hidden relative  w-full md:mt-28 h-[12vh] md:flex items-center justify-center">
         {/* Light mode image */}
         <Image
           src={forceDark ? '/shifting-ground-w.png' : '/shifting-ground.png'}
           alt="Shifting Ground"
-          fill
+         fill
           sizes="40vw"
           className="object-contain"
           priority
@@ -40,7 +40,7 @@ export function BannerWithAutoFallback() {
           <Image
             src={forceDark ? '/shifting-white.png' : '/shifting.png'}
             alt="Shifting"
-            fill
+           fill
             sizes="70vw"
             className="object-contain"
             priority
@@ -52,7 +52,7 @@ export function BannerWithAutoFallback() {
           <Image
             src={forceDark ? 'ground-white.png' : '/ground.png'}
             alt="Ground"
-            fill
+           fill
             sizes="70vw"
             className="object-contain"
             priority

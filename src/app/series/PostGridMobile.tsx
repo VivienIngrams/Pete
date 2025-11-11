@@ -31,6 +31,7 @@ export default function PostsGridMobile({ posts, language }: Props) {
   useEffect(() => {
     if (!mounted || !scrollContainerRef.current || hasRestoredScroll.current) return
 
+
     const savedPosition = getScrollPosition('series-mobile-scroll')
     if (savedPosition && typeof savedPosition === 'number') {
       setTimeout(() => {
@@ -47,6 +48,9 @@ export default function PostsGridMobile({ posts, language }: Props) {
   const handleLinkClick = () => {
     if (scrollContainerRef.current) {
       saveScrollPosition('series-mobile-scroll', scrollContainerRef.current.scrollTop)
+
+
+
     }
   }
 
@@ -64,6 +68,10 @@ export default function PostsGridMobile({ posts, language }: Props) {
             ? post.title_en || post.title || ''
             : post.title || post.title_en || ''
 
+
+
+
+
         return (
           <Link
             key={`${post._id}-${i}`}
@@ -79,11 +87,15 @@ export default function PostsGridMobile({ posts, language }: Props) {
             >
               {post.mainImage ? (
                 <Image
-                  src={urlForThumbnail(post.mainImage, 1200)}
+                  src={urlForThumbnail(post.mainImage, 800)}
                   alt={title}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                   sizes="90vw"
+
+
+
+
                 />
               ) : (
                 <div className="absolute inset-0 bg-gray-100" />
