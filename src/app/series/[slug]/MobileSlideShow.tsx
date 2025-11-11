@@ -185,7 +185,7 @@ export default function MobileSlideShow({
                   >
                     <TransformComponent wrapperClass="flex items-center justify-center">
                       <Image
-                        src={urlForThumbnail(current.image, 500) || ''}
+                        src={urlForThumbnail(current.image, 600) || ''}
                         alt={currentTitle || post.title}
                         width={500}
                         height={500}
