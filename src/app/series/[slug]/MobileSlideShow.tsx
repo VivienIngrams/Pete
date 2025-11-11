@@ -202,7 +202,7 @@ export default function MobileSlideShow({
           </div>
 
           {/* Navigation Arrows */}
-          <div className="flex w-full justify-between px-10 mt-[2vh] md:hidden">
+          <div className="flex w-full justify-between px-10 my-[2vh] md:hidden">
             <button
               onClick={handlePrev}
               className="rounded-full !bg-white/60 active:!bg-white/90 transition"
