@@ -115,40 +115,60 @@ export default function PostsGrid({ posts, language }: Props) {
             <Link
               key={`${post._id}-${i}`}
               href={`/series/${post.slug.current}`}
-              className="relative flex-shrink-0 snap-center group"
-              style={{
-                width: `${widthVh}vh`,
-              }}
               onClick={handleLinkClick}
+              className="relative flex-shrink-0 snap-center group cursor-pointer transform transition-transform duration-300"
+              style={{ width: `${widthVh}vh` }}
             >
               <div
-                className="relative overflow-hidden w-full  mt-4"
+                className="relative overflow-hidden w-full mt-4"
                 style={{
                   height: `${height}vh`,
                   aspectRatio: aspect.toString(),
                 }}
               >
-                {post.mainImage ? (
-                  <Image
-                    src={urlForThumbnail(post.mainImage, 600)}
-                    alt={title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 768px) 50vw, 30vw"
-                    loading={i < 4 ? 'eager' : 'lazy'}
-                  />
-                ) : (
-                  <div className="absolute inset-0 bg-gray-100" />
-                )}
+                {/* Image */}
+                <Image
+                  src={urlForThumbnail(post.mainImage, 600)}
+                  alt={title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 768px) 50vw, 30vw"
+                />
               </div>
 
-              <div className="w-full text-center  md:mt-1">
-                <h3 className="!text-black dark:!text-black tracking-tight font-light text-xl transition-all duration-300 inline-flex justify-center items-center group-hover:font-normal ">
-                  <span className=" max-w-0 overflow-hidden opacity-0 group-hover:max-w-xs group-hover:opacity-100 transition-all duration-300 whitespace-nowrap ">
-                    {activeLang === 'en' ? 'View' : 'Voir'}
-                  </span>
-                  <span className="ml-2">{title}</span>
-                </h3>
+              {/* Fading Text */}
+              <div className="relative text-center mt-1 mb-2 h-6 transition-all duration-300 group-hover:scale-110 group-hover:font-medium ">
+                <span
+                  className="absolute inset-0 transition-opacity duration-1000 group-hover:underline"
+                  style={{
+                    animation:
+                      'fadeTitle 5s cubic-bezier(0.45, 0, 0.55, 1) infinite',
+                  }}
+                >
+                  {title}
+                </span>
+                <span
+                  className="absolute inset-0 text-gray-600 transition-opacity duration-1000 group-hover:underline"
+                  style={{
+                    animation:
+                      'fadeView 5s cubic-bezier(0.45, 0, 0.55, 1) infinite',
+                  }}
+                >
+                  {activeLang === 'en' ? 'View Series' : 'Voir la série'}
+                </span>
+
+                <style global>{`
+      @keyframes fadeTitle {
+        0%, 20% { opacity: 1; }
+        35%, 70% { opacity: 0; }
+        85%, 100% { opacity: 1; }
+      }
+      @keyframes fadeView {
+        0%, 20% { opacity: 0; }
+        35%, 70% { opacity: 1; }
+        85%, 100% { opacity: 0; }
+      }
+    `}</style>
               </div>
             </Link>
           )
@@ -168,7 +188,7 @@ export default function PostsGrid({ posts, language }: Props) {
     ${canScrollLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
           aria-label="Scroll left"
         >
-          <ChevronLeft className="w-8 h-8 md:w-10 md:h-10 !text-black dark:!text-black" />
+          <ChevronLeft className="w-8 h-8 md:w-10 md:h-10 !text-gray-600 dark:!text-gray-600" />
         </button>
 
         <button
@@ -178,7 +198,7 @@ export default function PostsGrid({ posts, language }: Props) {
     ${canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
           aria-label="Scroll right"
         >
-          <ChevronRight className="w-8 h-8 md:w-10 md:h-10 !text-black dark:!text-black" />
+          <ChevronRight className="w-8 h-8 md:w-10 md:h-10 !text-gray-600 dark:!gray-600" />
         </button>
       </div>
     </section>

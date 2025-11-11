@@ -94,13 +94,39 @@ export default function PostsGridMobile({ posts, language }: Props) {
               )}
             </div>
 
-            <div className="text-center mt-2 group">
-              <h3 className="!text-black dark:!text-black font-light text-lg transition-all duration-300 inline-flex justify-center items-center group-hover:font-normal ">
-                <span className=" max-w-0 overflow-hidden opacity-0 group-hover:max-w-xs group-hover:opacity-100 transition-all duration-300 whitespace-nowrap ">
-                 {activeLang === 'en' ? 'View series' : 'Voir la série'}
-                </span>
-                <span className="ml-2">{title}</span>
-              </h3>
+            {/* Fading Text */}
+            <div className="relative text-center mt-1 mb-2 h-6 transition-all duration-300 group-hover:scale-110 group-hover:font-medium ">
+              <span
+                className="absolute inset-0 transition-opacity duration-1000 group-hover:underline"
+                style={{
+                  animation:
+                    'fadeTitle 5s cubic-bezier(0.45, 0, 0.55, 1) infinite',
+                }}
+              >
+                {title}
+              </span>
+              <span
+                className="absolute inset-0 text-gray-600 transition-opacity duration-1000 group-hover:underline"
+                style={{
+                  animation:
+                    'fadeView 5s cubic-bezier(0.45, 0, 0.55, 1) infinite',
+                }}
+              >
+                {activeLang === 'en' ? 'View Series' : 'Voir la série'}
+              </span>
+
+              <style global>{`
+      @keyframes fadeTitle {
+        0%, 20% { opacity: 1; }
+        35%, 70% { opacity: 0; }
+        85%, 100% { opacity: 1; }
+      }
+      @keyframes fadeView {
+        0%, 20% { opacity: 0; }
+        35%, 70% { opacity: 1; }
+        85%, 100% { opacity: 0; }
+      }
+    `}</style>
             </div>
           </Link>
         )

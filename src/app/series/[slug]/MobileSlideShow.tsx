@@ -207,13 +207,13 @@ export default function MobileSlideShow({
               onClick={handlePrev}
               className="rounded-full !bg-white/60 active:!bg-white/90 transition"
             >
-              <ChevronLeft className="w-8 h-8" />
+              <ChevronLeft className="w-8 h-8 text-gray-500" />
             </button>
             <button
               onClick={handleNext}
               className="rounded-full !bg-white/60 active:!bg-white/90 transition"
             >
-              <ChevronRight className="w-8 h-8" />
+              <ChevronRight className="w-8 h-8 text-gray-500" />
             </button>
           </div>
         </div>
