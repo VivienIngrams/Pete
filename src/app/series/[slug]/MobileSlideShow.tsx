@@ -143,7 +143,9 @@ export default function MobileSlideShow({
       </div>
 
       {/* Main content */}
-      <div className={`h-[calc(100vh-155px)] flex flex-col justify-center w-full px-2 mb-[100px]`}>
+      <div
+        className={`h-[calc(100vh-155px)] flex flex-col justify-center w-full px-2 mb-[100px]`}
+      >
         {' '}
         <div>
           {/* Image area with pinch zoom */}
@@ -173,7 +175,8 @@ export default function MobileSlideShow({
                     maxScale={4}
                     doubleClick={{ disabled: true }}
                     wheel={{ disabled: true }}
-                    pinch={{ step: 0.08 }}
+                    pinch={{ step: 0.08, disabled: zoomed ? false : true }} // enable pinch only if zoomed
+                    panning={{ disabled: !zoomed }} // allow pan only when zoomed
                     onZoomStop={({ state }) => setZoomed(state.scale > 1.05)}
                   >
                     <TransformComponent wrapperClass="flex items-center justify-center">
