@@ -144,7 +144,7 @@ export default function MobileSlideShow({
 
       {/* Main content */}
       <div
-        className={`h-[calc(100vh-155px)] flex flex-col justify-center w-full px-2 mb-[100px]`}
+        className={`h-[calc(100vh-135px)] flex flex-col justify-center w-full px-2 mb-[120px]`}
       >
         {' '}
         <div>
