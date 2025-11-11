@@ -39,22 +39,23 @@ export default function PostsGrid({ posts, language }: Props) {
   }, [])
 
   // Restore scroll position on mount
-// In PostsGrid.tsx, update the restoration useEffect:
-useEffect(() => {
-  if (!mounted || !scrollContainerRef.current || hasRestoredScroll.current) return
+  // In PostsGrid.tsx, update the restoration useEffect:
+  useEffect(() => {
+    if (!mounted || !scrollContainerRef.current || hasRestoredScroll.current)
+      return
 
-  const savedPosition = getScrollPosition('series-grid')
-  if (savedPosition && typeof savedPosition === 'number') {
-    // Use setTimeout to ensure DOM is ready
-    setTimeout(() => {
-      if (scrollContainerRef.current) {
-        scrollContainerRef.current.scrollLeft = savedPosition
-        updateScrollButtons()
-      }
-    }, 100)
-  }
-  hasRestoredScroll.current = true
-}, [mounted, getScrollPosition, updateScrollButtons])
+    const savedPosition = getScrollPosition('series-grid')
+    if (savedPosition && typeof savedPosition === 'number') {
+      // Use setTimeout to ensure DOM is ready
+      setTimeout(() => {
+        if (scrollContainerRef.current) {
+          scrollContainerRef.current.scrollLeft = savedPosition
+          updateScrollButtons()
+        }
+      }, 100)
+    }
+    hasRestoredScroll.current = true
+  }, [mounted, getScrollPosition, updateScrollButtons])
 
   useEffect(() => {
     if (!mounted) return
@@ -68,7 +69,7 @@ useEffect(() => {
     if (!scrollContainerRef.current) return
 
     const scrollAmount = scrollContainerRef.current.clientWidth * 0.3
-  
+
     scrollContainerRef.current.scrollBy({
       left: direction === 'left' ? -scrollAmount : scrollAmount,
       behavior: 'smooth',
@@ -90,7 +91,6 @@ useEffect(() => {
 
   return (
     <section className="relative w-full scrollbar-hide">
-     
       <div
         ref={scrollContainerRef}
         onScroll={updateScrollButtons}
@@ -142,12 +142,12 @@ useEffect(() => {
                 )}
               </div>
 
-              <div className="w-full px-4 md:mt-1">
-                <h3 className="!text-black dark:!text-black  font-light text-xl text-center transition-all duration-300">
-                  <span className="group-hover:hidden">{title}</span>
-                  <span className="hidden group-hover:inline underline underline-offset-2 font-normal text-lg tracking-tight">
-                    View series
+              <div className="w-full text-center  md:mt-1">
+                <h3 className="!text-black dark:!text-black tracking-tight font-light text-xl transition-all duration-300 inline-flex justify-center items-center group-hover:font-normal ">
+                  <span className=" max-w-0 overflow-hidden opacity-0 group-hover:max-w-xs group-hover:opacity-100 transition-all duration-300 whitespace-nowrap ">
+                    {activeLang === 'en' ? 'View' : 'Voir'}
                   </span>
+                  <span className="ml-2">{title}</span>
                 </h3>
               </div>
             </Link>
@@ -160,27 +160,27 @@ useEffect(() => {
           display: none;
         }
       `}</style>
-      <div className='w-full flex justify-between  '>
-       <button
-        onClick={() => scroll('left')}
-        disabled={!canScrollLeft}
-        className={`z-10 -ml-4 !bg-white dark:!bg-white hover:!bg-white/10 dark:hover:!bg-white/10 hover:rounded-full  p-3 transition-all duration-300 
+      <div className="w-full flex justify-between  ">
+        <button
+          onClick={() => scroll('left')}
+          disabled={!canScrollLeft}
+          className={`z-10 -ml-4 !bg-white dark:!bg-white hover:!bg-white/10 dark:hover:!bg-white/10 hover:rounded-full  p-3 transition-all duration-300 
     ${canScrollLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-        aria-label="Scroll left"
-      >
-        <ChevronLeft className="w-8 h-8 md:w-10 md:h-10 !text-black dark:!text-black" />
-      </button>
+          aria-label="Scroll left"
+        >
+          <ChevronLeft className="w-8 h-8 md:w-10 md:h-10 !text-black dark:!text-black" />
+        </button>
 
-      <button
-        onClick={() => scroll('right')}
-        disabled={!canScrollRight}
-        className={` z-10 -mr-4 !bg-white dark:!bg-white hover:!bg-white/10 dark:hover:!bg-white/10 hover:rounded-full p-3 transition-all duration-300 
+        <button
+          onClick={() => scroll('right')}
+          disabled={!canScrollRight}
+          className={` z-10 -mr-4 !bg-white dark:!bg-white hover:!bg-white/10 dark:hover:!bg-white/10 hover:rounded-full p-3 transition-all duration-300 
     ${canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-        aria-label="Scroll right"
-      >
-        <ChevronRight className="w-8 h-8 md:w-10 md:h-10 !text-black dark:!text-black" />
-      </button>
-</div>
+          aria-label="Scroll right"
+        >
+          <ChevronRight className="w-8 h-8 md:w-10 md:h-10 !text-black dark:!text-black" />
+        </button>
+      </div>
     </section>
   )
 }

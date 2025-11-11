@@ -29,7 +29,8 @@ export default function PostsGridMobile({ posts, language }: Props) {
 
   // ✅ Restore scroll position when component mounts
   useEffect(() => {
-    if (!mounted || !scrollContainerRef.current || hasRestoredScroll.current) return
+    if (!mounted || !scrollContainerRef.current || hasRestoredScroll.current)
+      return
 
     const savedPosition = getScrollPosition('series-mobile-scroll')
     if (savedPosition && typeof savedPosition === 'number') {
@@ -46,7 +47,10 @@ export default function PostsGridMobile({ posts, language }: Props) {
   // ✅ Save scroll position before navigating away
   const handleLinkClick = () => {
     if (scrollContainerRef.current) {
-      saveScrollPosition('series-mobile-scroll', scrollContainerRef.current.scrollTop)
+      saveScrollPosition(
+        'series-mobile-scroll',
+        scrollContainerRef.current.scrollTop,
+      )
     }
   }
 
@@ -90,12 +94,12 @@ export default function PostsGridMobile({ posts, language }: Props) {
               )}
             </div>
 
-            <div className="text-center mt-2">
-              <h3 className="!text-black dark:!text-black font-light text-lg transition-all duration-300">
-                <span className="group-hover:hidden">{title}</span>
-                <span className="hidden group-hover:inline underline underline-offset-2 font-normal tracking-tight">
-                  View series
+            <div className="text-center mt-2 group">
+              <h3 className="!text-black dark:!text-black font-light text-lg transition-all duration-300 inline-flex justify-center items-center group-hover:font-normal ">
+                <span className=" max-w-0 overflow-hidden opacity-0 group-hover:max-w-xs group-hover:opacity-100 transition-all duration-300 whitespace-nowrap ">
+                 {activeLang === 'en' ? 'View series' : 'Voir la série'}
                 </span>
+                <span className="ml-2">{title}</span>
               </h3>
             </div>
           </Link>

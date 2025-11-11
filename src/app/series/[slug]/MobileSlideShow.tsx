@@ -130,7 +130,7 @@ export default function MobileSlideShow({
 
       {/* Top bar */}
       <div
-        className={`fixed top-0 left-0 z-[900] !bg-white flex items-center h-12 p-6 ${
+        className={`fixed top-0 left-0 z-[900] !bg-white flex items-center h-12 p-4 ${
           isDropdownOpen || isAboutOpen ? 'hidden' : 'block'
         }`}
       >
@@ -144,7 +144,7 @@ export default function MobileSlideShow({
 
       {/* Main content */}
       <div
-        className={`flex flex-col justify-center w-full px-2 mb-[120px] ${
+        className={`flex flex-col justify-center w-full px-4 mb-[120px] ${
           isCommissionsPage ? 'h-[100vh]' : 'h-[calc(100vh-135px)]'
         }`}
       >
@@ -219,7 +219,7 @@ export default function MobileSlideShow({
         </div>
       </div>
       {/* Caption */}
-      <div className="!bg-white fixed bottom-0 left-0 w-full px-6 py-2 flex flex-col justify-start">
+      <div className="!bg-white fixed bottom-0 left-0 w-full px-4 py-2 flex flex-col justify-start">
         <div>
           {currentTitle && (
             <h1 className="text-lg leading-tighter">{currentTitle}</h1>

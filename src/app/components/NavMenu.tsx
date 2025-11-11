@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
@@ -105,7 +104,7 @@ const NavMenu = ({
       <div
         className={`md:hidden fixed top-0 left-0 w-full !bg-white dark:!bg-white ${slideshowMode ? 'z-[1002]' : 'z-50'} ${hideMenu ? 'hidden' : ''}`}
       >
-        <div className="flex items-center justify-between py-4 px-6 h-14">
+        <div className="flex items-center justify-between py-4 px-4 h-14">
           {!slideshowMode && (
             <Link
               href="/"

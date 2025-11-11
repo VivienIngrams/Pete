@@ -41,7 +41,7 @@ export default async function HomePage() {
         <PostsGrid posts={posts} />
       </div>
 
-      <div className=" px-6 md:hidden">
+      <div className=" px-4 md:hidden">
         <PostsGridMobile posts={posts} />
       </div>
 
