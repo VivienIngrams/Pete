@@ -145,7 +145,7 @@ export default function MobileSlideShow({
       {/* Main content */}
       <div
         className={`flex flex-col justify-center w-full px-4 mb-[120px] ${
-          isCommissionsPage ? 'h-[100vh]' : 'h-[calc(100vh-135px)]'
+          isCommissionsPage ? 'h-[100vh]' : 'h-[calc(100vh-145px)]'
         }`}
       >
         {' '}
@@ -265,7 +265,7 @@ export default function MobileSlideShow({
               {t.close}
             </button>
 
-            <div className="flex justify-end mt-8">
+            <div className="flex justify-end mt-10">
               <LanguageSwitcher />
             </div>
 
