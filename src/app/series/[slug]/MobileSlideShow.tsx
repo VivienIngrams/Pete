@@ -177,8 +177,10 @@ export default function MobileSlideShow({
                     maxScale={4}
                     doubleClick={{ disabled: true }}
                     wheel={{ disabled: true }}
-                    pinch={{ step: 0.08, disabled: zoomed ? false : true }} // enable pinch only if zoomed
-                    panning={{ disabled: !zoomed }} // allow pan only when zoomed
+                    pinch={{ step: 0.08, disabled: false }} // always allow pinch
+                    panning={{ disabled: !zoomed }} // pan only after zoom
+                    limitToBounds={true}
+                    centerOnInit={true}
                     onZoomStop={({ state }) => setZoomed(state.scale > 1.05)}
                   >
                     <TransformComponent wrapperClass="flex items-center justify-center">

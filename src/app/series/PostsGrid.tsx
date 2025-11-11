@@ -157,7 +157,7 @@ export default function PostsGrid({ posts, language }: Props) {
                   {activeLang === 'en' ? 'View Series' : 'Voir la série'}
                 </span>
 
-                <style global>{`
+                <style global={true}>{`
       @keyframes fadeTitle {
         0%, 20% { opacity: 1; }
         35%, 70% { opacity: 0; }
