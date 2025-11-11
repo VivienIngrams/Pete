@@ -10,7 +10,7 @@ import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 import { useLanguage } from '~/app/components/context/LanguageProvider'
 import LanguageSwitcher from '~/app/components/LanguageSwitcher'
 import NavMenu from '~/app/components/NavMenu'
-import { urlForImage } from '~/sanity/lib/sanity.image'
+import { urlForThumbnail } from '~/sanity/lib/sanity.image'
 import type { Post } from '~/sanity/lib/sanity.queries'
 
 type Props = {
@@ -185,7 +185,7 @@ export default function MobileSlideShow({
                   >
                     <TransformComponent wrapperClass="flex items-center justify-center">
                       <Image
-                        src={urlForImage(current.image).url() || ''}
+                        src={urlForThumbnail(current.image, 500) || ''}
                         alt={currentTitle || post.title}
                         width={500}
                         height={500}

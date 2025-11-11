@@ -83,7 +83,7 @@ export default function PostsGridMobile({ posts, language }: Props) {
             >
               {post.mainImage ? (
                 <Image
-                  src={urlForThumbnail(post.mainImage, 1200)}
+                  src={urlForThumbnail(post.mainImage, 500)}
                   alt={title}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
