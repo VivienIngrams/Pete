@@ -144,7 +144,9 @@ export default function MobileSlideShow({
 
       {/* Main content */}
       <div
-        className={`h-[calc(100vh-135px)] flex flex-col justify-center w-full px-2 mb-[120px]`}
+        className={`flex flex-col justify-center w-full px-2 mb-[120px] ${
+          isCommissionsPage ? 'h-[100vh]' : 'h-[calc(100vh-135px)]'
+        }`}
       >
         {' '}
         <div>
@@ -224,7 +226,7 @@ export default function MobileSlideShow({
           )}
           <div
             className={`text-[12px] ${
-              !isCommissionsPage && 'min-h-[60px]'
+              !isCommissionsPage ? 'min-h-[60px]' : 'mb-4'
             } font-roboto uppercase mt-[2px] tracking-wide leading-tighter`}
           >
             {currentExcerpt && (
