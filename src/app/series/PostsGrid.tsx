@@ -140,7 +140,7 @@ export default function PostsGrid({ posts, language }: Props) {
                     {title}
                   </h3>
                   <div className="flex items-center 
-                   gap-1.5  text-gray-500 shrink-0">
+                   gap-1  text-gray-500 shrink-0">
                     <span className="group-hover:underline text-[15px]">
                       {activeLang === "en" ? "View Series" : "Voir la série"}
                     </span>
