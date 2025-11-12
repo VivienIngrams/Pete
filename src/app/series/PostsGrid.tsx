@@ -117,7 +117,7 @@ export default function PostsGrid({ posts, language }: Props) {
               className="relative flex-shrink-0 snap-center group cursor-pointer active:scale-[0.98] transition-transform duration-150"
               style={{ width: `${widthVh}vh` }}
             >
-              <div className="border border-border rounded-sm shadow-sm overflow-hidden mt-4">
+              <div className=" overflow-hidden mt-4">
                 <div
                   className="relative overflow-hidden w-full"
                   style={{
@@ -135,8 +135,8 @@ export default function PostsGrid({ posts, language }: Props) {
                   />
                 </div>
 
-                <div className="px-2 py-2.5 flex justify-start items-center gap-3">
-                  <h3 className="text-base text-gray-500 leading-snug transition-transform duration-300 group-hover:scale-105">
+                <div className="group-hover:pl-1 dark:group-hover:bg-neutral-800 font-light py-1 flex justify-between items-center gap-3">
+                  <h3 className="text-lg text-gray-500 leading-snug transition-transform duration-300 group-hover:scale-105">
                     {title}
                   </h3>
                   <div className="flex items-center 
