@@ -63,7 +63,7 @@ export default function CommissionsGrid({ posts, language }: Props) {
                   <h3 className="text-sm  md:text-base text-gray-500 leading-snug transition-transform duration-300 group-hover:scale-105">
                     {title}
                   </h3>
-                  <div className="flex items-center gap-1text-xs md:text-sm text-gray-500 ">
+                  <div className="flex items-center gap-1 text-xs md:text-sm text-gray-500 ">
                     <span className="group-hover:underline">
                       {activeLang === "en" ? "See more" : "Voir plus"}
                     </span>

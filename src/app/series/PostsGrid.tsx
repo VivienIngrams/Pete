@@ -141,7 +141,7 @@ export default function PostsGrid({ posts, language }: Props) {
                   </h3>
                   <div className="flex items-center 
                    gap-1.5  text-gray-500 shrink-0">
-                    <span className="group-hover:underline text-sm">
+                    <span className="group-hover:underline text-[15px]">
                       {activeLang === "en" ? "View Series" : "Voir la série"}
                     </span>
                     <svg
