@@ -94,40 +94,19 @@ export default function PostsGridMobile({ posts, language }: Props) {
               )}
             </div>
 
-            {/* Fading Text */}
-            <div className="relative text-center mt-1 mb-2 h-6 transition-all duration-300 group-hover:scale-110 group-hover:font-medium ">
-              <span
-                className="absolute inset-0 transition-opacity duration-1000 group-hover:underline"
-                style={{
-                  animation:
-                    'fadeTitle 5s cubic-bezier(0.45, 0, 0.55, 1) infinite',
-                }}
-              >
-                {title}
-              </span>
-              <span
-                className="absolute inset-0 text-gray-600 transition-opacity duration-1000 group-hover:underline"
-                style={{
-                  animation:
-                    'fadeView 5s cubic-bezier(0.45, 0, 0.55, 1) infinite',
-                }}
-              >
-                {activeLang === 'en' ? 'View Series' : 'Voir la série'}
-              </span>
-
-              <style global={true}>{`
-      @keyframes fadeTitle {
-        0%, 20% { opacity: 1; }
-        35%, 70% { opacity: 0; }
-        85%, 100% { opacity: 1; }
-      }
-      @keyframes fadeView {
-        0%, 20% { opacity: 0; }
-        35%, 70% { opacity: 1; }
-        85%, 100% { opacity: 0; }
-      }
-    `}</style>
-            </div>
+          {/* Alternating blinking text */}
+<div className="relative text-center mt-1 mb-2 h-6 transition-all duration-300 group-hover:scale-110 group-hover:font-medium">
+  <span
+    className="absolute inset-0 animate-textCycle group-hover:underline"
+  >
+    {title}
+  </span>
+  <span
+    className="absolute inset-0 animate-textCycleAlt group-hover:underline text-gray-600"
+  >
+    {activeLang === 'en' ? 'View Series' : 'Voir la série'}
+  </span>
+</div>
           </Link>
         )
       })}

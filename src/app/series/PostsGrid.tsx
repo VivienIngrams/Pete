@@ -90,14 +90,17 @@ export default function PostsGrid({ posts, language }: Props) {
   const repeatedPosts = [...posts, ...posts]
 
   return (
-    <section className="relative w-full scrollbar-hide">
+    <section className="relative w-full scrollbar-hide overflow-hidden">
       <div
         ref={scrollContainerRef}
         onScroll={updateScrollButtons}
-        className="flex gap-4 md:gap-8 overflow-x-auto scroll-smooth snap-x scrollbar-hide md:pl-6"
+        className="flex gap-4 md:gap-8 overflow-x-scroll scroll-smooth snap-x "
         style={{
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none',
+          scrollbarWidth: 'none', // Firefox
+          msOverflowStyle: 'none', // IE
+          overflowY: 'hidden',
+          paddingRight: 0,
+          marginRight: 0,
         }}
       >
         {repeatedPosts.map((post, i) => {
@@ -136,59 +139,35 @@ export default function PostsGrid({ posts, language }: Props) {
                 />
               </div>
 
-              {/* Fading Text */}
-              <div className="relative text-center mt-1 mb-2 h-6 transition-all duration-300 group-hover:scale-110 group-hover:font-medium ">
-                <span
-                  className="absolute inset-0 transition-opacity duration-1000 group-hover:underline"
-                  style={{
-                    animation:
-                      'fadeTitle 5s cubic-bezier(0.45, 0, 0.55, 1) infinite',
-                  }}
-                >
-                  {title}
-                </span>
-                <span
-                  className="absolute inset-0 text-gray-600 transition-opacity duration-1000 group-hover:underline"
-                  style={{
-                    animation:
-                      'fadeView 5s cubic-bezier(0.45, 0, 0.55, 1) infinite',
-                  }}
-                >
-                  {activeLang === 'en' ? 'View Series' : 'Voir la série'}
-                </span>
+             {/* Alternating blinking text */}
+<div className="relative text-center mt-1 mb-2 h-6 transition-all duration-300 group-hover:scale-110 group-hover:font-medium">
+  <span
+    className="absolute inset-0 animate-textCycle group-hover:underline"
+  >
+    {title}
+  </span>
+  <span
+    className="absolute inset-0 animate-textCycleAlt group-hover:underline text-gray-600"
+  >
+    {activeLang === 'en' ? 'View Series' : 'Voir la série'}
+  </span>
+</div>
 
-                <style global={true}>{`
-      @keyframes fadeTitle {
-        0%, 20% { opacity: 1; }
-        35%, 70% { opacity: 0; }
-        85%, 100% { opacity: 1; }
-      }
-      @keyframes fadeView {
-        0%, 20% { opacity: 0; }
-        35%, 70% { opacity: 1; }
-        85%, 100% { opacity: 0; }
-      }
-    `}</style>
-              </div>
+
             </Link>
           )
         })}
       </div>
 
-      <style jsx>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
       <div className="w-full flex justify-between  ">
         <button
           onClick={() => scroll('left')}
           disabled={!canScrollLeft}
-          className={`z-10 -ml-4 !bg-white dark:!bg-white hover:!bg-white/10 dark:hover:!bg-white/10 hover:rounded-full  p-3 transition-all duration-300 
+          className={`z-10 !bg-white dark:!bg-white hover:!bg-white/10 dark:hover:!bg-white/10 hover:rounded-full  p-3 transition-all duration-300 
     ${canScrollLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
           aria-label="Scroll left"
         >
-          <ChevronLeft className="w-8 h-8 md:w-10 md:h-10 !text-gray-600 dark:!text-gray-600" />
+          <ChevronLeft className="w-8 h-8 md:w-10 md:h-10 !text-gray-400  dark:!text-gray-400 " />
         </button>
 
         <button
@@ -198,7 +177,7 @@ export default function PostsGrid({ posts, language }: Props) {
     ${canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
           aria-label="Scroll right"
         >
-          <ChevronRight className="w-8 h-8 md:w-10 md:h-10 !text-gray-600 dark:!gray-600" />
+          <ChevronRight className="w-8 h-8 md:w-10 md:h-10 !text-gray-400  dark:!gray-400" />
         </button>
       </div>
     </section>

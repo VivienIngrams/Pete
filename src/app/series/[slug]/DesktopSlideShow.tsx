@@ -114,7 +114,7 @@ export default function DesktopSlideShow({
   }
 
   return (
-    <div className="relative w-full h-screen !text-black dark:!text-black !bg-white dark:!bg-white font-light flex items-center py-10 justify-center hide-scrollbar">
+    <div className="relative w-full h-screen !text-black dark:!text-black !bg-white dark:!bg-white font-light flex items-center py-10 justify-center scrollbar-hide">
       {/* Loading spinner */}
       {isImageLoading && hasImages && (
         <div className="absolute inset-0 flex items-center justify-center !bg-white dark:!bg-white">
@@ -162,14 +162,14 @@ export default function DesktopSlideShow({
             className="absolute left-0 top-1/2 -translate-y-1/2 !bg-white dark:!bg-white hover:!bg-white/10 dark:hover:!bg-white/10 transition-transform duration-200 md:hover:scale-105 p-2 rounded-full z-50 ml-2"
             aria-label="Previous image"
           >
-            <ChevronLeft className="w-12 h-12 !text-gray-500 dark:!text-gray-500" />
+            <ChevronLeft className="w-12 h-12 !text-gray-300  dark:!text-gray-300 " />
           </button>
           <button
             onClick={handleNext}
             className="absolute right-0 top-1/2 -translate-y-1/2 !bg-white dark:!bg-white hover:!bg-white/10 dark:hover:!bg-white/10  transition-transform duration-200 md:hover:scale-105 p-2 rounded-full z-50 mr-2"
             aria-label="Next image"
           >
-            <ChevronRight className="w-12 h-12 !text-gray-500 dark:!text-gray-500" />
+            <ChevronRight className="w-12 h-12 !text-gray-300  dark:!text-gray-300 " />
           </button>
         </>
       )}
@@ -223,7 +223,7 @@ export default function DesktopSlideShow({
           </button>
           <div
             key={`${activeLang}-${post.slug.current}`} // 👈 this forces full remount
-            className="relative max-w-2xl w-full max-h-[80vh] overflow-auto hide-scrollbar"
+            className="relative max-w-2xl w-full max-h-[80vh] overflow-auto scrollbar-hide"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-end">
