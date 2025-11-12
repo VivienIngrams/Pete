@@ -75,10 +75,10 @@ img {
 }
 
 .animate-textCycle {
-  animation: textCycle 5s ease-in-out infinite;
+  animation: textCycle 4s ease-in-out infinite;
 }
 
 .animate-textCycleAlt {
-  animation: textCycleAlt 5s ease-in-out infinite;
+  animation: textCycleAlt 4s ease-in-out infinite;
 }
 
