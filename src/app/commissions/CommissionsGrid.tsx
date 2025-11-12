@@ -1,12 +1,12 @@
-'use client'
+"use client"
 
-import Image from 'next/image'
-import Link from 'next/link'
-import { useState } from 'react'
+import Image from "next/image"
+import Link from "next/link"
+import { useState } from "react"
 
-import { useLanguage } from '~/app/components/context/LanguageProvider'
-import { urlForImage } from '~/sanity/lib/sanity.image'
-import type { Post } from '~/sanity/lib/sanity.queries'
+import { useLanguage } from "~/app/components/context/LanguageProvider"
+import { urlForImage } from "~/sanity/lib/sanity.image"
+import type { Post } from "~/sanity/lib/sanity.queries"
 
 type Props = {
   posts: Post[]
@@ -15,7 +15,7 @@ type Props = {
 
 export default function CommissionsGrid({ posts, language }: Props) {
   const { language: activeLang } = useLanguage()
-  const lang = language || activeLang || 'en'
+  const lang = language || activeLang || "en"
   const [activeOverlay, setActiveOverlay] = useState<string | null>(null)
 
   const handleClick = (slug: string) => {
@@ -29,50 +29,59 @@ export default function CommissionsGrid({ posts, language }: Props) {
   }
 
   return (
-    <div className="p-8 md:p-0 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 overflow-hidden">
+    <section className="p-6 md:p-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
       {posts.map((post) => {
         const title =
-          lang === 'en'
-            ? post.title_en || post.title || ''
-            : post.title || post.title_en || ''
+          lang === "en" ? post.title_en || post.title || "" : post.title || post.title_en || ""
 
         return (
           <div
             key={post._id}
-            className="flex flex-col cursor-pointer group md:px-2"
+            className="group cursor-pointer active:scale-[0.98] transition-transform duration-150"
             onClick={() => handleClick(post.slug.current)}
           >
-             <Link
-              href={`/commissions/${post.slug.current}`}
-              className=" text-center"
-            >
-            {/* Image */}
-            <div className="relative w-full aspect-[3/4] overflow-hidden rounded-sm  mt-4">
-              {post.mainImage ? (
-                <Image
-                  src={urlForImage(post.mainImage).url() as string}
-                  alt={title}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              ) : (
-                <div className="absolute inset-0 bg-gray-200" />
-              )}
-            </div>
+            <Link href={`/commissions/${post.slug.current}`} className="block">
+              {/* Card Container */}
+              <div className="border border-border rounded-sm shadow-sm overflow-hidden bg-white dark:bg-neutral-50 hover:shadow-md transition-shadow duration-300">
+                {/* Image */}
+                <div className="relative w-full aspect-[3/4] overflow-hidden">
+                  {post.mainImage ? (
+                    <Image
+                      src={urlForImage(post.mainImage).url() as string}
+                      alt={title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 25vw"
+                      className="object-cover transition-transform duration-300 group-hover:scale-105 group-active:brightness-95"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 bg-gray-200" />
+                  )}
+                </div>
 
-            {/* Text below image */}
-           
-              <h3 className="!text-black dark:!text-black font-light text-lg transition-all duration-300">
-                <span className="block group-hover:hidden">{title}</span>
-                <span className="hidden group-hover:inline underline underline-offset-2 font-normal text-base tracking-tight">
-                  View series
-                </span>
-              </h3>
+                {/* Text section */}
+                <div className="px-3 py-2.5 flex  justify-center items-center text-center">
+                  <h3 className="text-sm md:text-base text-gray-700 leading-snug transition-transform duration-300 group-hover:scale-105">
+                    {title}
+                  </h3>
+                  <div className="flex items-center gap-1.5 ml-4 text-xs md:text-sm text-gray-500 ">
+                    <span className="group-hover:underline">
+                      {activeLang === "en" ? "View series" : "Voir la série"}
+                    </span>
+                    <svg
+                      className="w-3 h-3 md:w-4 md:h-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
             </Link>
           </div>
         )
       })}
-    </div>
+    </section>
   )
 }
