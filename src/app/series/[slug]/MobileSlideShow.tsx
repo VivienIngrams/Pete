@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 
 import { useLanguage } from '~/app/components/context/LanguageProvider'
 import LanguageSwitcher from '~/app/components/LanguageSwitcher'
@@ -31,6 +32,7 @@ export default function MobileSlideShow({
   const [isAboutOpen, setIsAboutOpen] = useState(false)
   const [isImageLoading, setIsImageLoading] = useState(true)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [zoomed, setZoomed] = useState(false)
 
   const imageWrapperRef = useRef<HTMLDivElement>(null)
   const touchStartX = useRef<number | null>(null)
@@ -94,14 +96,17 @@ export default function MobileSlideShow({
 
   // --- Swipe handlers ---
   const handleTouchStart = (e: React.TouchEvent) => {
+    if (zoomed) return
     touchStartX.current = e.touches[0].clientX
   }
 
   const handleTouchMove = (e: React.TouchEvent) => {
+    if (zoomed) return
     touchEndX.current = e.touches[0].clientX
   }
 
   const handleTouchEnd = () => {
+    if (zoomed) return
     if (touchStartX.current === null || touchEndX.current === null) return
     const diff = touchStartX.current - touchEndX.current
     if (Math.abs(diff) > 50) diff > 0 ? handleNext() : handlePrev()
@@ -143,8 +148,9 @@ export default function MobileSlideShow({
           isCommissionsPage ? 'h-[100vh]' : 'h-[calc(100vh-145px)]'
         }`}
       >
+        {' '}
         <div>
-          {/* Image area (no zoom, same layout) */}
+          {/* Image area with pinch zoom */}
           <div
             ref={imageWrapperRef}
             className="relative w-full scale-101 flex items-center justify-center mt-2 touch-pan-x"
@@ -165,18 +171,33 @@ export default function MobileSlideShow({
                 </div>
               ) : (
                 current?.image && (
-                  <Image
-                    src={urlForThumbnail(current.image, 800) || ''}
-                    alt={currentTitle || post.title}
-                    width={800}
-                    height={800}
-                    className={`w-auto h-auto object-contain block transition-opacity duration-500 ${
-                      isImageLoading ? 'opacity-0' : 'opacity-100'
-                    }`}
-                    onLoad={() => setIsImageLoading(false)}
-                    priority={currentIndex < 2}
-                    unoptimized
-                  />
+                  <TransformWrapper
+                    initialScale={1}
+                    minScale={1}
+                    maxScale={4}
+                    doubleClick={{ disabled: true }}
+                    wheel={{ disabled: true }}
+                    pinch={{ step: 0.08, disabled: false }} // always allow pinch
+                    panning={{ disabled: !zoomed }} // pan only after zoom
+                    limitToBounds={true}
+                    centerOnInit={true}
+                    onZoomStop={({ state }) => setZoomed(state.scale > 1.05)}
+                  >
+                    <TransformComponent wrapperClass="flex items-center justify-center">
+                      <Image
+                        src={urlForThumbnail(current.image, 600) || ''}
+                        alt={currentTitle || post.title}
+                        width={500}
+                        height={500}
+                        className={`w-auto h-auto object-contain block transition-opacity duration-500 ${
+                          isImageLoading ? 'opacity-0' : 'opacity-100'
+                        }`}
+                        onLoad={() => setIsImageLoading(false)}
+                        priority={currentIndex < 2}
+                        unoptimized
+                      />
+                    </TransformComponent>
+                  </TransformWrapper>
                 )
               )}
             </div>
@@ -199,7 +220,6 @@ export default function MobileSlideShow({
           </div>
         </div>
       </div>
-
       {/* Caption */}
       <div className="!bg-white fixed bottom-0 left-0 w-full px-4 py-2 flex flex-col justify-start">
         <div>
