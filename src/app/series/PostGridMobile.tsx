@@ -87,6 +87,7 @@ export default function PostsGridMobile({ posts, language }: Props) {
                     fill
                     className="object-cover transition-all duration-300 group-active:brightness-95"
                     sizes="90vw"
+                    unoptimized
                   />
                 ) : (
                   <div className="absolute inset-0 bg-gray-100" />
