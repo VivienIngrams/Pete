@@ -35,13 +35,13 @@ export default async function HomePage() {
     <div className="flex flex-col justify-evenly h-screen md:max-h-[96vh] max-w-screen !bg-white dark:!bg-white  !text-black dark:!text-black md:scrollbar-hide">
       <NavMenu />
 
-      <BannerWithAutoFallback  />
 
      <div className="px-4 hidden md:block">
+      <BannerWithAutoFallback  />
         <PostsGrid posts={posts} />
       </div>
 
-      <div className=" px-4 md:hidden">
+      <div className=" md:hidden">
         <PostsGridMobile posts={posts} />
       </div>
 

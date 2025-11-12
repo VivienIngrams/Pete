@@ -34,7 +34,7 @@ export function BannerWithAutoFallback() {
       </div>
 
       {/* Mobile banner */}
-      <div className="md:hidden relative w-full h-auto flex flex-col items-center justify-center">
+      <div className="md:hidden relative w-screen h-auto flex flex-col items-center justify-center">
         {/* Light mode: Shifting */}
         <div className="w-full h-[10vh] relative mr-7  mt-16">
           <Image

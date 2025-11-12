@@ -4,10 +4,12 @@ import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 
+import {BannerWithAutoFallback} from "~/app/components/Banner"
 import { useLanguage } from "~/app/components/context/LanguageProvider"
 import { useScrollPosition } from "~/app/components/context/ScrollPositionProvider"
 import { urlForThumbnail } from "~/sanity/lib/sanity.image"
 import type { Post } from "~/sanity/lib/sanity.queries"
+
 
 type Props = {
   posts: Post[]
@@ -53,11 +55,14 @@ export default function PostsGridMobile({ posts, language }: Props) {
   if (!mounted) return null
 
   return (
-    <section
+   <section
       ref={scrollContainerRef}
-      className="md:hidden w-full flex flex-col items-center gap-6 py-6 overflow-y-auto scrollbar-hide"
+      className="md:hidden w-full flex flex-col items-center overflow-y-auto scrollbar-hide"
       style={{ maxHeight: "100vh", WebkitOverflowScrolling: "touch" }}
     >
+      <BannerWithAutoFallback />
+
+      <div className="w-full flex flex-col items-center gap-6 py-6 px-4">
       {posts.map((post, i) => {
         const title = lang === "en" ? post.title_en || post.title || "" : post.title || post.title_en || ""
 
@@ -107,6 +112,7 @@ export default function PostsGridMobile({ posts, language }: Props) {
           </Link>
         )
       })}
+      </div>
     </section>
   )
 }
