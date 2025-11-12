@@ -29,7 +29,7 @@ export default function CommissionsGrid({ posts, language }: Props) {
   }
 
   return (
-    <section className="p-6 md:p-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
+    <section className="p-4 md:p-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
       {posts.map((post) => {
         const title =
           lang === "en" ? post.title_en || post.title || "" : post.title || post.title_en || ""
@@ -59,16 +59,16 @@ export default function CommissionsGrid({ posts, language }: Props) {
                 </div>
 
                 {/* Text section */}
-                <div className="px-3 py-2.5 flex  justify-center items-center text-center">
+                <div className="px-2 py-2 flex justify-between md:justify-center items-center text-center">
                   <h3 className="text-sm md:text-base text-gray-700 leading-snug transition-transform duration-300 group-hover:scale-105">
                     {title}
                   </h3>
-                  <div className="flex items-center gap-1.5 ml-4 text-xs md:text-sm text-gray-500 ">
+                  <div className="flex items-center gap-1 ml-2  md:ml-4 text-xs md:text-sm text-gray-500 ">
                     <span className="group-hover:underline">
-                      {activeLang === "en" ? "View series" : "Voir la série"}
+                      {activeLang === "en" ? "See more" : "Voir plus"}
                     </span>
                     <svg
-                      className="w-3 h-3 md:w-4 md:h-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                      className="w-4 h-3 md:w-4 md:h-4 transition-transform duration-300 group-hover:translate-x-0.5"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
