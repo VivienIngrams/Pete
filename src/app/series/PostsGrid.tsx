@@ -136,7 +136,7 @@ export default function PostsGrid({ posts, language }: Props) {
                 </div>
 
                 <div className="px-3 py-2.5 flex justify-center items-center gap-3">
-                  <h3 className="text-sm md:text-base  leading-snug transition-transform duration-300 group-hover:scale-105">
+                  <h3 className="text-sm md:text-base text-gray-700 leading-snug transition-transform duration-300 group-hover:scale-105">
                     {title}
                   </h3>
                   <div className="flex items-center pl-1
