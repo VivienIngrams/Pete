@@ -94,9 +94,9 @@ export default function PostsGridMobile({ posts, language }: Props) {
 
               </div>
 
-              <div className="px-2 py-2 flex justify-between ">
-                <h3 className="text-base    text-gray-500">{title}</h3>
-                <div className="flex items-center gap-1.5 pl-1 text-gray-500 text-sm">
+              <div className="px-2 py-2 flex justify-start ">
+                <h3 className="text-base    text-gray-500">{title},</h3>
+                <div className="flex items-center gap-1.5 pl-3 -mb-[1px] text-gray-500 text-sm">
                   <span>{activeLang === "en" ? "View Series" : "Voir la série"}</span>
                   <svg
                     className="w-4 h-4 transition-transform duration-300 group-active:translate-x-0.5"

@@ -59,8 +59,8 @@ export default function CommissionsGrid({ posts, language }: Props) {
                 </div>
 
                 {/* Text section */}
-                <div className="px-2 py-2 flex justify-between md:justify-center items-center text-center">
-                  <h3 className="text-sm md:text-base text-gray-700 leading-snug transition-transform duration-300 group-hover:scale-105">
+                <div className="px-2 py-2 flex justify-between  items-center text-center">
+                  <h3 className="text-sm md:pl-1 md:text-base text-gray-500 leading-snug transition-transform duration-300 group-hover:scale-105">
                     {title}
                   </h3>
                   <div className="flex items-center gap-1 ml-2  md:ml-4 text-xs md:text-sm text-gray-500 ">
