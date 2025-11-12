@@ -37,7 +37,7 @@ export default async function HomePage() {
 
       <BannerWithAutoFallback  />
 
-     <div className="hidden md:block">
+     <div className="px-4 hidden md:block">
         <PostsGrid posts={posts} />
       </div>
 
