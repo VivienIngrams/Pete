@@ -136,12 +136,12 @@ export default function PostsGrid({ posts, language }: Props) {
                 </div>
 
                 <div className="px-2 py-2.5 flex justify-between items-center gap-3">
-                  <h3 className="text-sm md:text-base text-gray-600 leading-snug transition-transform duration-300 group-hover:scale-105">
+                  <h3 className="text-base text-gray-500 leading-snug transition-transform duration-300 group-hover:scale-105">
                     {title}
                   </h3>
                   <div className="flex items-center 
                    gap-1.5  text-gray-500 shrink-0">
-                    <span className="group-hover:underline">
+                    <span className="group-hover:underline text-sm">
                       {activeLang === "en" ? "View Series" : "Voir la série"}
                     </span>
                     <svg
