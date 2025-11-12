@@ -1,8 +1,9 @@
 import { cookies } from 'next/headers'
 
+import { readToken } from '~/sanity/lib/sanity.api'
 import { getClient } from '~/sanity/lib/sanity.client'
 import { getPost, getPosts } from '~/sanity/lib/sanity.queries'
-import { readToken } from '~/sanity/lib/sanity.api'
+
 import SlideShow from './SlideShowPage'
 
 export const revalidate = 60 // regenerate every 60s (ISR)
