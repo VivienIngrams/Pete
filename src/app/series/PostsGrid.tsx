@@ -135,11 +135,12 @@ export default function PostsGrid({ posts, language }: Props) {
                   />
                 </div>
 
-                <div className="px-3 py-2.5 flex justify-between items-center gap-3">
+                <div className="px-3 py-2.5 flex justify-center items-center gap-3">
                   <h3 className="text-sm md:text-base  leading-snug transition-transform duration-300 group-hover:scale-105">
                     {title}
                   </h3>
-                  <div className="flex items-center gap-1.5 text-xs md:text-sm text-gray-500 shrink-0">
+                  <div className="flex items-center pl-1
+                   gap-1.5 text-xs md:text-sm text-gray-500 shrink-0">
                     <span className="group-hover:underline">
                       {activeLang === "en" ? "View Series" : "Voir la série"}
                     </span>
