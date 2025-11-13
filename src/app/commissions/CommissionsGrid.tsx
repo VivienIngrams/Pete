@@ -42,7 +42,7 @@ export default function CommissionsGrid({ posts, language }: Props) {
           >
             <Link href={`/commissions/${post.slug.current}`} className="block">
               {/* Card Container */}
-              <div className=" overflow-hidden bg-white dark:bg-neutral-50  duration-300">
+              <div className=" overflow-hidden bg-white dark:bg-white  duration-300">
                 {/* Image */}
                 <div className="relative w-full aspect-[3/4] overflow-hidden">
                   {post.mainImage ? (
@@ -60,10 +60,10 @@ export default function CommissionsGrid({ posts, language }: Props) {
 
                 {/* Text section */}
                 <div className=" py-1 flex justify-between group-hover:px-1 font-light items-center text-center">
-                  <h3 className="text-sm  md:text-base text-gray-500 leading-snug transition-transform duration-300 group-hover:scale-105">
+                  <h3 className="text-base md:text-lg text-gray-500 leading-snug transition-transform duration-300 group-hover:scale-105">
                     {title}
                   </h3>
-                  <div className="flex items-center gap-1 text-xs md:text-sm text-gray-500 ">
+                  <div className="flex items-center gap-1 text-sm md:text-[15px] text-gray-500 ">
                     <span className="group-hover:underline">
                       {activeLang === "en" ? "See more" : "Voir plus"}
                     </span>

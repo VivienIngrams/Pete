@@ -63,7 +63,7 @@ const NavMenu = ({
         <div className="flex items-center space-x-6 text-base font-light">
           <Link
             href="/series"
-            className={`block ${isHomePage ? 'hidden' : ''}`}
+            className={`block ${isHomePage ? 'hidden' : ''} hover:text-gray-500 dark:hover:text-gray-300`}
           >
             {menuItems.series[language] || menuItems.bio.en}
           </Link>

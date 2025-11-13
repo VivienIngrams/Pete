@@ -117,7 +117,7 @@ export default function PostsGrid({ posts, language }: Props) {
               className="relative flex-shrink-0 snap-center group cursor-pointer active:scale-[0.98] transition-transform duration-150"
               style={{ width: `${widthVh}vh` }}
             >
-              <div className=" overflow-hidden mt-4">
+              <div className=" overflow-hidden mt-8">
                 <div
                   className="relative overflow-hidden w-full"
                   style={{
