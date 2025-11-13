@@ -130,13 +130,13 @@ export default function PostsGrid({ posts, language }: Props) {
                     src={urlForThumbnail(post.mainImage, 600) || "/placeholder.svg"}
                     alt={title}
                     fill
-                    className="object-cover transition-all duration-300 group-hover:scale-105 group-active:brightness-95"
+                    className="object-cover transition-all duration-300 group-hover:scale-105 "
                     sizes="(max-width: 768px) 50vw, 30vw"
                   />
                 </div>
 
-                <div className="group-hover:pl-1 dark:group-hover:bg-neutral-800 font-light py-1 flex justify-between items-center gap-3">
-                  <h3 className="text-lg text-gray-500 leading-snug transition-transform duration-300 group-hover:scale-105">
+                <div className="  font-light py-1 flex justify-between items-center gap-3">
+                  <h3 className="text-lg text-gray-500 leading-snug transition-transform duration-300 ">
                     {title}
                   </h3>
                   <div className="flex items-center 
