@@ -15,7 +15,7 @@ export default function CommissionsBanner() {
   return (
     <div id="series-banner" className="z-20 !bg-white dark:!bg-white">
       {/* Desktop / common banner */}
-      <div className="mt-[8vh] relative h-[8vh] w-[70vw] md:w-[40vw] mx-auto md:flex items-center justify-center">
+      <div className="mt-[8vh] relative h-[8vh] md:h-[10vh] w-[70vw] md:w-[45vw] mx-auto md:flex items-center justify-center">
         {/* Light mode */}
         <Image
           src="/commissions-b.png"
