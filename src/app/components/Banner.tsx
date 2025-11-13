@@ -21,7 +21,7 @@ export function BannerWithAutoFallback() {
       <div id="bg-tester" style={{ background: 'white', display: 'none' }} />
 
       {/* Desktop banner */}
-      <div className="hidden md:relative w-full md:mt-28 h-[12vh] md:flex items-center justify-center">
+      <div className="hidden md:relative w-full md:mt-28 h-[14vh] md:flex items-center justify-center">
         {/* Light mode image */}
         <Image
           src={forceDark ? '/shifting-ground-w.png' : '/shifting-ground.png'}

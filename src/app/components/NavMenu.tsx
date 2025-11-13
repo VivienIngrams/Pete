@@ -47,7 +47,7 @@ const NavMenu = ({
     <nav className="fixed top-0 left-0 w-full z-50 font-roboto tracking-wide">
       {/* Desktop menu */}
       <div
-        className={`hidden md:flex items-center justify-between md:px-[5vw] lg:px-[12vw] pt-[4vh] !bg-white dark:!bg-white !text-black dark:!text-black ${
+        className={`hidden md:flex items-center justify-between md:px-[3vw]  pt-[4vh] !bg-white dark:!bg-white !text-black dark:!text-black ${
           isHomePage ? 'hidden' : ''
         }`}
       >
