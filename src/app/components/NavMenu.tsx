@@ -65,7 +65,7 @@ const NavMenu = ({
             href="/series"
             className={`block ${isHomePage ? 'hidden' : ''} hover:text-gray-500 dark:hover:text-gray-300`}
           >
-            {menuItems.series[language] || menuItems.bio.en}
+            {menuItems.series[language] || menuItems.series.en}
           </Link>
           <Link
             href="/bio"

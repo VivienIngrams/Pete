@@ -131,7 +131,7 @@ export default function DesktopSlideShow({
             width={1920}
             height={1080}
             sizes="70vw"
-            className={`w-auto h-full object-contain transition-opacity duration-300   max-w-[70vw] ${
+            className={`w-auto h-full object-contain transition-opacity duration-300   max-w-[80vw] ${
               isImageLoading ? 'opacity-0' : 'opacity-100'
             }`}
             onLoad={() => setIsImageLoading(false)}
@@ -188,7 +188,7 @@ export default function DesktopSlideShow({
           </h1>
         )}
 
-        <div className=" uppercase md:text-sm tracking-wide  max-w-[calc(15vw-24px)]">
+        <div className=" uppercase md:text-sm tracking-wide  max-w-[calc(10vw-24px)]">
           {currentExcerpt && (
             <div className="mt-1 mb-2 leading-tighter">
               <PortableText
