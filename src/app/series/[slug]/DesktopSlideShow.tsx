@@ -162,14 +162,14 @@ export default function DesktopSlideShow({
             className="absolute left-0 top-1/2 -translate-y-1/2 !bg-white dark:!bg-white hover:!bg-white/10 dark:hover:!bg-white/10 transition-transform duration-200 md:hover:scale-105 p-2 rounded-full z-50 ml-2"
             aria-label="Previous image"
           >
-            <ChevronLeft className="w-12 h-12 !text-gray-300  dark:!text-gray-300 " />
+            <ChevronLeft className="w-12 h-12 !text-gray-400  dark:!text-gray-400 " />
           </button>
           <button
             onClick={handleNext}
             className="absolute right-0 top-1/2 -translate-y-1/2 !bg-white dark:!bg-white hover:!bg-white/10 dark:hover:!bg-white/10  transition-transform duration-200 md:hover:scale-105 p-2 rounded-full z-50 mr-2"
             aria-label="Next image"
           >
-            <ChevronRight className="w-12 h-12 !text-gray-300  dark:!text-gray-300 " />
+            <ChevronRight className="w-12 h-12 !text-gray-400  dark:!text-gray-400 " />
           </button>
         </>
       )}
