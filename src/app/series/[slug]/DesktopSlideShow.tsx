@@ -114,7 +114,7 @@ export default function DesktopSlideShow({
   }
 
   return (
-    <div className="relative w-full h-screen !text-black dark:!text-black !bg-white dark:!bg-white font-light flex items-center py-10 justify-center scrollbar-hide">
+    <div className="relative w-full h-screen !text-black dark:!text-black !bg-white dark:!bg-white font-light flex items-center py-20 2xl:py-24 3xl:py-28 justify-center scrollbar-hide">
       {/* Loading spinner */}
       {isImageLoading && hasImages && (
         <div className="absolute inset-0 flex items-center justify-center !bg-white dark:!bg-white">
@@ -149,7 +149,7 @@ export default function DesktopSlideShow({
       {/* Close button */}
       <button
         onClick={handleClose}
-        className="absolute text-sm !text-black dark:!text-black tracking-wide uppercase top-6 left-6 z-50 hover:font-bold"
+        className="absolute text-sm !text-black dark:!text-black tracking-wide uppercase top-6 left-8 z-50 hover:font-bold"
       >
         {t.close}
       </button>
@@ -175,7 +175,7 @@ export default function DesktopSlideShow({
       )}
 
       {/* Caption */}
-      <div className="absolute bottom-12 left-6">
+      <div className="absolute bottom-12 left-8">
         {currentTitleLang && (
           <h1
             className={`md:text-lg font-light tracking-tight  ${titleWidthClass}`}
