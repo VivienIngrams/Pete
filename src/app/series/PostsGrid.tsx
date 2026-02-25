@@ -1,14 +1,14 @@
-"use client"
+'use client'
 
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { ArrowLeft, ArrowRight } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { useLanguage } from "~/app/components/context/LanguageProvider"
-import { useScrollPosition } from "~/app/components/context/ScrollPositionProvider"
-import { urlForThumbnail } from "~/sanity/lib/sanity.image"
-import type { Post } from "~/sanity/lib/sanity.queries"
+import { useLanguage } from '~/app/components/context/LanguageProvider'
+import { useScrollPosition } from '~/app/components/context/ScrollPositionProvider'
+import { urlForThumbnail } from '~/sanity/lib/sanity.image'
+import type { Post } from '~/sanity/lib/sanity.queries'
 
 type Props = {
   posts: Post[]
@@ -18,13 +18,21 @@ type Props = {
 export default function PostsGrid({ posts, language }: Props) {
   const { language: activeLang } = useLanguage()
   const { saveScrollPosition, getScrollPosition } = useScrollPosition()
-  const lang = language || activeLang || "en"
+  const lang = language || activeLang || 'en'
 
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
   const [mounted, setMounted] = useState(false)
   const hasRestoredScroll = useRef(false)
+  const [highlightArrows, setHighlightArrows] = useState(true)
+
+  useEffect(() => {
+  if (!mounted) return
+  const timer = setTimeout(() => setHighlightArrows(false), 2500)
+  return () => clearTimeout(timer)
+}, [mounted])
+
 
   useEffect(() => {
     setMounted(true)
@@ -41,10 +49,11 @@ export default function PostsGrid({ posts, language }: Props) {
   // Restore scroll position on mount
   // In PostsGrid.tsx, update the restoration useEffect:
   useEffect(() => {
-    if (!mounted || !scrollContainerRef.current || hasRestoredScroll.current) return
+    if (!mounted || !scrollContainerRef.current || hasRestoredScroll.current)
+      return
 
-    const savedPosition = getScrollPosition("series-grid")
-    if (savedPosition && typeof savedPosition === "number") {
+    const savedPosition = getScrollPosition('series-grid')
+    if (savedPosition && typeof savedPosition === 'number') {
       // Use setTimeout to ensure DOM is ready
       setTimeout(() => {
         if (scrollContainerRef.current) {
@@ -60,25 +69,25 @@ export default function PostsGrid({ posts, language }: Props) {
     if (!mounted) return
 
     updateScrollButtons()
-    window.addEventListener("resize", updateScrollButtons)
-    return () => window.removeEventListener("resize", updateScrollButtons)
+    window.addEventListener('resize', updateScrollButtons)
+    return () => window.removeEventListener('resize', updateScrollButtons)
   }, [mounted, updateScrollButtons])
 
-  const scroll = (direction: "left" | "right") => {
+  const scroll = (direction: 'left' | 'right') => {
     if (!scrollContainerRef.current) return
 
-    const scrollAmount = scrollContainerRef.current.clientWidth * 0.3
+    const scrollAmount = scrollContainerRef.current.clientWidth * 0.5
 
     scrollContainerRef.current.scrollBy({
-      left: direction === "left" ? -scrollAmount : scrollAmount,
-      behavior: "smooth",
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth',
     })
   }
 
   // Save scroll position before navigating
   const handleLinkClick = () => {
     if (scrollContainerRef.current) {
-      saveScrollPosition("series-grid", scrollContainerRef.current.scrollLeft)
+      saveScrollPosition('series-grid', scrollContainerRef.current.scrollLeft)
     }
   }
 
@@ -86,27 +95,31 @@ export default function PostsGrid({ posts, language }: Props) {
     return null
   }
 
-  const repeatedPosts = [...posts, ...posts]
+  // const repeatedPosts = [...posts, ...posts]
 
   return (
     <section className="relative w-full scrollbar-hide overflow-hidden">
       <div
         ref={scrollContainerRef}
         onScroll={updateScrollButtons}
-        className="flex gap-4 md:gap-8 overflow-x-scroll scroll-smooth snap-x "
+        className="flex gap-4 md:gap-8 overflow-x-scroll scroll-smooth snap-x md:cursor-grab"
         style={{
-          scrollbarWidth: "none", // Firefox
-          msOverflowStyle: "none", // IE
-          overflowY: "hidden",
+          scrollbarWidth: 'none', // Firefox
+          msOverflowStyle: 'none', // IE
+          overflowY: 'hidden',
           paddingRight: 0,
           marginRight: 0,
         }}
       >
-        {repeatedPosts.map((post, i) => {
-          const title = lang === "en" ? post.title_en || post.title || "" : post.title || post.title_en || ""
+        {posts.map((post, i) => {
+          const title =
+            lang === 'en'
+              ? post.title_en || post.title || ''
+              : post.title || post.title_en || ''
           const aspect = post.mainImage?.aspectRatio || 1.5
 
-          const height = typeof window !== "undefined" && window.innerWidth < 768 ? 30 : 40
+          const height =
+            typeof window !== 'undefined' && window.innerWidth < 768 ? 30 : 40
           const widthVh = aspect * height
 
           return (
@@ -127,7 +140,9 @@ export default function PostsGrid({ posts, language }: Props) {
                 >
                   {/* Image */}
                   <Image
-                    src={urlForThumbnail(post.mainImage, 600) || "/placeholder.svg"}
+                    src={
+                      urlForThumbnail(post.mainImage, 600) || '/placeholder.svg'
+                    }
                     alt={title}
                     fill
                     className="object-cover transition-all duration-300 group-hover:scale-105 "
@@ -139,10 +154,12 @@ export default function PostsGrid({ posts, language }: Props) {
                   <h3 className="text-lg text-gray-500 leading-snug transition-transform duration-300 ">
                     {title}
                   </h3>
-                  <div className="flex items-center 
-                   gap-1  text-gray-500 shrink-0">
+                  <div
+                    className="flex items-center 
+                   gap-1  text-gray-500 shrink-0"
+                  >
                     <span className="group-hover:underline text-[15px]">
-                      {activeLang === "en" ? "View Series" : "Voir la série"}
+                      {activeLang === 'en' ? 'View Series' : 'Voir la série'}
                     </span>
                     <svg
                       className="w-3 h-3 md:w-4 md:h-4 transition-transform duration-300 group-hover:translate-x-0.5"
@@ -150,7 +167,12 @@ export default function PostsGrid({ posts, language }: Props) {
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
                     </svg>
                   </div>
                 </div>
@@ -162,25 +184,78 @@ export default function PostsGrid({ posts, language }: Props) {
 
       <div className="w-full flex justify-between  ">
         <button
-          onClick={() => scroll("left")}
+          onClick={() => scroll('left')}
           disabled={!canScrollLeft}
-          className={`z-10 !bg-white dark:!bg-white hover:!bg-white/10 dark:hover:!bg-white/10 hover:rounded-full  p-3 transition-all duration-300 
-    ${canScrollLeft ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+          className={`z-10 !bg-white dark:!bg-white hover:!bg-white/10 dark:hover:!bg-white/10 hover:rounded-full  p-5 transition-all duration-300 
+    ${canScrollLeft ? 'opacity-100' : 'opacity-30 pointer-events-none'}`}
           aria-label="Scroll left"
         >
-          <ChevronLeft className="w-8 h-8 md:w-10 md:h-10 !text-gray-400  dark:!text-gray-400 " />
+          <ArrowLeft
+            className={`
+              w-8 h-8 md:w-12 md:h-12 !text-gray-500 dark:!text-gray-500
+              ${highlightArrows ? 'animate-arrow-left' : ''}
+            `}
+          />{' '}
         </button>
 
         <button
-          onClick={() => scroll("right")}
+          onClick={() => scroll('right')}
           disabled={!canScrollRight}
-          className={` z-10 -mr-4 !bg-white dark:!bg-white hover:!bg-white/10 dark:hover:!bg-white/10 hover:rounded-full p-3 transition-all duration-300 
-    ${canScrollRight ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+          className={` z-10 !bg-white dark:!bg-white hover:!bg-white/10 dark:hover:!bg-white/10 hover:rounded-full p-5 transition-all duration-300 
+    ${canScrollRight ? 'opacity-100' : 'opacity-30 pointer-events-none'}`}
           aria-label="Scroll right"
         >
-          <ChevronRight className="w-8 h-8 md:w-10 md:h-10 !text-gray-400  dark:!gray-400" />
+          <ArrowRight
+            className={`
+              w-8 h-8 md:w-12 md:h-12 !text-gray-500 dark:!text-gray-500
+              ${highlightArrows ? 'animate-arrow-right' : ''}
+            `}
+          />{' '}
         </button>
       </div>
+      <style jsx>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+
+        @keyframes arrowPulseLeft {
+          0% {
+            transform: translateX(0);
+            opacity: 1;
+          }
+          50% {
+            transform: translateX(-25px);
+            opacity: 1;
+          }
+          100% {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+
+        @keyframes arrowPulseRight {
+          0% {
+            transform: translateX(0);
+            opacity: 1;
+          }
+          50% {
+            transform: translateX(25px);
+            opacity: 1;
+          }
+          100% {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+
+        .animate-arrow-left {
+          animation: arrowPulseLeft 2s ease-in-out 1;
+        }
+
+        .animate-arrow-right {
+          animation: arrowPulseRight 2s ease-n-out 1;
+        }
+      `}</style>
     </section>
   )
 }

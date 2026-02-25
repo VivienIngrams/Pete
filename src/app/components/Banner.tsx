@@ -50,7 +50,7 @@ export function BannerWithAutoFallback() {
         {/* Light mode: Ground */}
         <div className="w-full h-[10vh] relative -mt-[3vh] ml-2">
           <Image
-            src={forceDark ? 'ground-white.png' : '/ground.png'}
+            src={forceDark ? '/ground-white.png' : '/ground.png'}
             alt="Ground"
             fill
             sizes="70vw"

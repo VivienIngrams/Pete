@@ -47,9 +47,7 @@ const NavMenu = ({
     <nav className="fixed top-0 left-0 w-full z-50 font-roboto tracking-wide">
       {/* Desktop menu */}
       <div
-        className={`hidden md:flex items-center justify-between md:px-[3vw]  pt-[4vh] !bg-white dark:!bg-white !text-black dark:!text-black ${
-          isHomePage ? 'hidden' : ''
-        }`}
+        className={`hidden md:flex items-center justify-between md:px-[3vw]  pt-[4vh] !bg-white dark:!bg-white !text-black dark:!text-black`}
       >
         {/* Left: Logo / Title */}
         <Link
@@ -174,7 +172,7 @@ const NavMenu = ({
             </Link>
           )}
           <Link href="/series" className="block">
-            {menuItems.series[language] || menuItems.bio.en}
+            {menuItems.series[language] || menuItems.series.en}
           </Link>
           <Link href="/bio" className="block">
             {menuItems.bio[language] || menuItems.bio.en}
