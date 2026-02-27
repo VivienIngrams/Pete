@@ -267,7 +267,7 @@ export default function MobileSlideShow({
               {t.close}
             </button>
 
-            <div className="flex justify-end mt-10">
+            <div className="flex justify-end mt-12">
               <LanguageSwitcher />
             </div>
 

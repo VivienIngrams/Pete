@@ -28,11 +28,10 @@ export default function PostsGrid({ posts, language }: Props) {
   const [highlightArrows, setHighlightArrows] = useState(true)
 
   useEffect(() => {
-  if (!mounted) return
-  const timer = setTimeout(() => setHighlightArrows(false), 2500)
-  return () => clearTimeout(timer)
-}, [mounted])
-
+    if (!mounted) return
+    const timer = setTimeout(() => setHighlightArrows(false), 2500)
+    return () => clearTimeout(timer)
+  }, [mounted])
 
   useEffect(() => {
     setMounted(true)
@@ -99,6 +98,27 @@ export default function PostsGrid({ posts, language }: Props) {
 
   return (
     <section className="relative w-full scrollbar-hide overflow-hidden">
+      {/* Left gradient overlay */}
+      <div
+        className={`absolute left-0 top-0 bottom-12 w-12  z-10 pointer-events-none transition-opacity duration-500 ${
+          canScrollLeft ? 'opacity-100' : 'opacity-0'
+        }`}
+        style={{
+          background:
+            'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0) 100%)',
+        }}
+      />
+
+      {/* Right gradient overlay */}
+      <div
+        className={`absolute right-0 top-0 bottom-12 w-12  z-10 pointer-events-none transition-opacity duration-500 ${
+          canScrollRight ? 'opacity-100' : 'opacity-0'
+        }`}
+        style={{
+          background:
+            'linear-gradient(to left, rgba(255,255,255,1) 0%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0) 100%)',
+        }}
+      />
       <div
         ref={scrollContainerRef}
         onScroll={updateScrollButtons}
@@ -161,7 +181,8 @@ export default function PostsGrid({ posts, language }: Props) {
                     <span className="group-hover:underline text-[15px]">
                       {activeLang === 'en' ? 'View Series' : 'Voir la série'}
                     </span>
-                    <svg
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 text-gray-400 transition-transform duration-300 group-hover:translate-x-0.5" />
+                    {/* <svg
                       className="w-3 h-3 md:w-4 md:h-4 transition-transform duration-300 group-hover:translate-x-0.5"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -173,7 +194,7 @@ export default function PostsGrid({ posts, language }: Props) {
                         strokeWidth={2}
                         d="M9 5l7 7-7 7"
                       />
-                    </svg>
+                    </svg> */}
                   </div>
                 </div>
               </div>
@@ -181,7 +202,34 @@ export default function PostsGrid({ posts, language }: Props) {
           )
         })}
       </div>
+      {/* Centered navigation: arrow - explore text - arrow */}
+      <div className="w-full flex items-center justify-center gap-3 mt-8">
+        <button
+          onClick={() => scroll('left')}
+          disabled={!canScrollLeft}
+          className={`z-20 p-2 transition-all duration-300 hover:bg-neutral-50 hover:rounded-full ${
+            canScrollLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+          aria-label="Scroll left"
+        >
+          <ArrowLeft className="w-6 h-6 md:w-7 md:h-7 text-gray-400" />
+        </button>
+        <span className="text-xl tracking-[0.15em] uppercase text-black select-none animate-scroll-hint">
+          {activeLang === 'en' ? 'Explore' : 'Explorez'}
+        </span>
 
+        <button
+          onClick={() => scroll('right')}
+          disabled={!canScrollRight}
+          className={`z-20 p-2 transition-all duration-300 hover:bg-neutral-50 hover:rounded-full ${
+            canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+          aria-label="Scroll right"
+        >
+          <ArrowRight className="w-6 h-6 md:w-7 md:h-7 text-gray-400" />
+        </button>
+      </div>
+      {/* 
       <div className="w-full flex justify-between  ">
         <button
           onClick={() => scroll('left')}
@@ -190,7 +238,7 @@ export default function PostsGrid({ posts, language }: Props) {
     ${canScrollLeft ? 'opacity-100' : 'opacity-30 pointer-events-none'}`}
           aria-label="Scroll left"
         >
-          <ArrowLeft
+          <ChevronLeft
             className={`
               w-8 h-8 md:w-12 md:h-12 !text-gray-500 dark:!text-gray-500
               ${highlightArrows ? 'animate-arrow-left' : ''}
@@ -205,57 +253,14 @@ export default function PostsGrid({ posts, language }: Props) {
     ${canScrollRight ? 'opacity-100' : 'opacity-30 pointer-events-none'}`}
           aria-label="Scroll right"
         >
-          <ArrowRight
+          <ChevronRight
             className={`
               w-8 h-8 md:w-12 md:h-12 !text-gray-500 dark:!text-gray-500
               ${highlightArrows ? 'animate-arrow-right' : ''}
             `}
           />{' '}
         </button>
-      </div>
-      <style jsx>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-
-        @keyframes arrowPulseLeft {
-          0% {
-            transform: translateX(0);
-            opacity: 1;
-          }
-          50% {
-            transform: translateX(-25px);
-            opacity: 1;
-          }
-          100% {
-            transform: translateX(0);
-            opacity: 1;
-          }
-        }
-
-        @keyframes arrowPulseRight {
-          0% {
-            transform: translateX(0);
-            opacity: 1;
-          }
-          50% {
-            transform: translateX(25px);
-            opacity: 1;
-          }
-          100% {
-            transform: translateX(0);
-            opacity: 1;
-          }
-        }
-
-        .animate-arrow-left {
-          animation: arrowPulseLeft 2s ease-in-out 1;
-        }
-
-        .animate-arrow-right {
-          animation: arrowPulseRight 2s ease-n-out 1;
-        }
-      `}</style>
+      </div> */}
     </section>
   )
 }
