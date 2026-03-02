@@ -24,18 +24,22 @@ export default function PostsGridMobile({ posts, language }: Props) {
   const [mounted, setMounted] = useState(false)
   const hasRestoredScroll = useRef(false)
 
- 
 useEffect(() => {
+  if (!mounted) return
+  const el = scrollContainerRef.current
+  if (!el) return
+
   const handleScroll = () => {
-    setShowScrollHint(false)
+    if (el.scrollTop > 0) {
+      setShowScrollHint(false)
+    }
   }
 
-  window.addEventListener('scroll', handleScroll, { passive: true })
+  el.addEventListener('scroll', handleScroll, { passive: true })
+  return () => el.removeEventListener('scroll', handleScroll, handleScroll as any)
+}, [mounted])
 
-  return () => {
-    window.removeEventListener('scroll', handleScroll)
-  }
-}, [])
+
   useEffect(() => {
     setMounted(true)
   }, [])
@@ -149,10 +153,10 @@ useEffect(() => {
       >
         {/* Gradient */}
         <div
-          className="w-full h-36"
+          className="w-full h-24"
           style={{
             background:
-              'linear-gradient(to top, rgba(255,255,255,1) 0%,  rgba(255,255,255,0) 100%)',
+              'linear-gradient(to top, rgba(255,255,255,1) 0%,  rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%)',
           }}
         />
 
