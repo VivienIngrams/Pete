@@ -212,6 +212,7 @@ export default function DesktopSlideShow({
       {/* About modal */}
       {postExcerptBlocks && isAboutOpen && (
         <div
+          key={`${activeLang}-${post.slug.current}`}
           className="fixed inset-0 z-50 !text-black dark:!text-black !bg-white/85 dark:!bg-white/80 flex items-center justify-center px-4"
           onClick={() => setIsAboutOpen(false)}
         >
@@ -222,7 +223,6 @@ export default function DesktopSlideShow({
             {t.close}
           </button>
           <div
-            key={`${activeLang}-${post.slug.current}`} // 👈 this forces full remount
             className="relative max-w-2xl w-full max-h-[80vh] overflow-auto scrollbar-hide"
             onClick={(e) => e.stopPropagation()}
           >
