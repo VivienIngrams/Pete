@@ -14,17 +14,16 @@ export async function POST(req: NextRequest) {
       host: "smtp.gmail.com",
       port: 465,
       secure: true,
-      tls: { rejectUnauthorized: false },
       auth: {
-        user: process.env.USER,
-        pass: process.env.PASS,
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASS,
       },
     });
 
     await transporter.sendMail({
-      from: `"New Subscriber" <${process.env.USER}>`,
+      from: `"New Subscriber" <${process.env.GMAIL_USER}>`,
       to: "studiolippmannparis@gmail.com",
-      subject: "New Newsletter Subscriber",
+          subject: "New Newsletter Subscriber",
       html: `<p>New subscriber email: <strong>${email}</strong></p>`,
     });
 
